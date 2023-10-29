@@ -1,0 +1,80 @@
+
+        /* Styles pour diviser la page en deux colonnes */
+        .container {
+            display: flex;
+        }
+
+        .right-column {
+            flex: 4; /* Partie gauche occupe 4/5 de la largeur */
+            background-color: #f0f0f0; /* Couleur de fond pour la partie gauche */
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .left-column {
+            flex: 1; /* Partie droite occupe 1/5 de la largeur */
+            background-color: #c0c0c0; /* Couleur de fond pour la partie droite */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fixed-banner {
+            height: 50px; /* Hauteur fixe de 50 pixels pour le bandeau */
+            background-color: #0077b6; /* Couleur de fond du bandeau */
+            color: #fff; /* Couleur du texte dans le bandeau */
+            display: flex;
+        }
+
+        .banner-left {
+            flex: 1; /* Partie gauche du bandeau (50% de la largeur) */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .banner-right {
+            flex: 1; /* Partie droite du bandeau (50% de la largeur) */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center ;
+            gap: 10px;
+			
+        }
+		.contenu {
+            display: flex; 
+			flex-direction: column;
+            justify-content: center ;
+            padding: 20px;
+			margin: 5px;
+			
+		}
+
+        .square {
+            width: 350px;
+            height: 350px;
+            background-color: #4caf50;
+            margin: 5px;
+        }
+		.formulaire {
+            background-color: #d2d2d2; /* Couleur de fond pour la partie droite */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+			margin: 5px;
+            justify-content: center ;	
+        }
+		.centered {
+            justify-content: center ;	
+		}
+		
+		
+		
+	
