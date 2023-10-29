@@ -8,9 +8,23 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
+            <!-- Contenu de la partie gauche --> 
+			 <p>recherche par catégorie</p>
+			<form method="post" action="index.php"> 
+
+			<label for="categories">Sélectionnez une catégorie :</label>
+			<select name="categorie" id="categories">
+				<option value="Agriculteur">Agriculteur</option>
+				<option value="Vigneron">Vigneron</option>
+				<option value="Maraîcher">Maraîcher</option>
+				<option value="Apiculteur">Apiculteur</option>
+				<option value="Éleveur de volaille">Éleveur de volaille</option>
+				<option value="Viticulteur">Viticulteur</option>
+				<option value="Pépiniériste">Pépiniériste</option>
+			</select>
+			<input type="submit" value="Aller à la catégorie">
+			</form>
+			
         </div>
         <div class="right-column">
             <div class="fixed-banner">
@@ -45,8 +59,48 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 				<div class="gallery-container">
-					<div class="square"></div>
-					<div class="square"></div>
+				<div class="square">
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["categorie"])) {
+            $categorie = $_POST["categorie"];
+
+            // Connexion à la base de données
+            $utilisateur = "root";
+            $serveur = "localhost";
+            $basededonnees = "sae3";
+            $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+
+            // Vérifiez la connexion
+            if ($connexion->connect_error) {
+                die("Erreur de connexion : " . $connexion->connect_error);
+            }
+
+            // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+            $requete = 'SELECT producteur.Prof_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+            $stmt = $connexion->prepare($requete);
+            $stmt->bind_param("s", $categorie); // "s" indique que la valeur est une chaîne de caractères
+
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                    echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
+                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                }
+            } else {
+                echo "Aucun résultat trouvé pour la catégorie : $categorie";
+            }
+
+            $stmt->close();
+            $connexion->close();
+        }
+    }
+    ?>
+</div>
+					<div class="square"><?php echo "$result";?></div>
 					<div class="square"></div>
 					<div class="square"></div>
 					<div class="square"></div>

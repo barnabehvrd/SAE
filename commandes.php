@@ -8,24 +8,7 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
-            <p>recherche par catégorie</p>
-			<form method="post" action="search_by_categories.php"> <!-- Vous pouvez spécifier le fichier de traitement PHP ici -->
-
-			<label for="categories">Sélectionnez une catégorie :</label>
-			<select name="categorie" id="categories">
-				<option value="categorie1">Catégorie 1</option>
-				<option value="categorie2">Catégorie 2</option>
-				<option value="categorie3">Catégorie 3</option>
-				<option value="categorie4">Catégorie 4</option>
-				<option value="categorie5">Catégorie 5</option>
-				<option value="categorie6">Catégorie 6</option>
-			</select>
-
-    <input type="submit" value="Aller à la catégorie">
-</form>
+          
         </div>
         <div class="right-column">
             <div class="fixed-banner">
