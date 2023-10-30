@@ -86,9 +86,11 @@
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+                    echo '<div class="square"> ';
                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                     echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                    echo '</div> ';
                 }
             } else {
                 echo "Aucun résultat trouvé pour la catégorie : $categorie";
@@ -101,11 +103,9 @@
     ?>
 </div>
 					<div class="square"><?php echo "$result";?></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
+                    
+                    </div>
+					
 					<div class="square"></div>
 				</div>
 			</div>
