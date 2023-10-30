@@ -57,7 +57,7 @@
             </div>
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
-            <h1>Partie droite (1/5)</h1>
+            <h1> PRODUCTEURS : </h1>
 				<div class="gallery-container">
                         <?php
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
