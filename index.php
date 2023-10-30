@@ -105,7 +105,6 @@
 					
 				
 			</div>
-		</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
 					<label for="mail">mail :</label>
