@@ -101,10 +101,7 @@
         }
     }
     ?>
-</div>
-					<div class="square"><?php echo "$result";?></div>
-                    
-                    </div>
+</div>                    
 					
 					<div class="square"></div>
 				</div>
