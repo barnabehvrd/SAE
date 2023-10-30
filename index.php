@@ -59,53 +59,53 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 				<div class="gallery-container">
-				<div class="square">
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST["categorie"])) {
-            $categorie = $_POST["categorie"];
+                        <?php
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            if (isset($_POST["categorie"])) {
+                                $categorie = $_POST["categorie"];
 
-            // Connexion à la base de données
-            $utilisateur = "root";
-            $serveur = "localhost";
-            $basededonnees = "sae3";
-            $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+                                // Connexion à la base de données
+                                $utilisateur = "root";
+                                $serveur = "localhost";
+                                $basededonnees = "sae3";
+                                $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
 
-            // Vérifiez la connexion
-            if ($connexion->connect_error) {
-                die("Erreur de connexion : " . $connexion->connect_error);
-            }
+                                // Vérifiez la connexion
+                                if ($connexion->connect_error) {
+                                    die("Erreur de connexion : " . $connexion->connect_error);
+                                }
 
-            // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-            $requete = 'SELECT producteur.Prof_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
-            $stmt = $connexion->prepare($requete);
-            $stmt->bind_param("s", $categorie); // "s" indique que la valeur est une chaîne de caractères
+                                // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                                $requete = 'SELECT producteur.Prof_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+                                $stmt = $connexion->prepare($requete);
+                                $stmt->bind_param("s", $categorie); // "s" indique que la valeur est une chaîne de caractères
 
-            $stmt->execute();
-            $result = $stmt->get_result();
+                                $stmt->execute();
+                                $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="square"> ';
-                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                    echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
-                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                    echo '</div> ';
-                }
-            } else {
-                echo "Aucun résultat trouvé pour la catégorie : $categorie";
-            }
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<div class="square"> ';
+                                        echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                        echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
+                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                        echo '</div> ';
+                                    }
+                                } else {
+                                    echo "Aucun résultat trouvé pour la catégorie : $categorie";
+                                }
 
-            $stmt->close();
-            $connexion->close();
-        }
-    }
-    ?>
-</div>                    
+                                $stmt->close();
+                                $connexion->close();
+                            }
+                        }
+                        ?>
+                    
+                </div>
 					
-					<div class="square"></div>
-				</div>
+				
 			</div>
+		</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
 					<label for="mail">mail :</label>
