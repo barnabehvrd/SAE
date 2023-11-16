@@ -10,6 +10,7 @@
         <div class="left-column">
             <!-- Contenu de la partie gauche --> 
 			 <p>recherche par catégorie</p>
+             
 			<form method="post" action="index.php"> 
 
 			<label for="categories">Sélectionnez une catégorie :</label>
@@ -39,16 +40,19 @@
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-					<a class="fixed-size-button" href="form_sign_in.php" >
-					<?php if (!isset($_SESSION)) {
-						
-					session_start();
-					echo "connection";
-					}
-					else {
+					
+					<?php 
+                    
+                    session_start();
+                    if (isset($_SESSION['Mail_Uti'])) {  
+                    echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 
 					}
-						
+					else {
+                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
+					echo "connection";
+					}
+					
 					?>
 					
 					
@@ -58,12 +62,15 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1> PRODUCTEURS : </h1>
+            <?php
+            
+             echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
+             ?> 
 				<div class="gallery-container">
                         <?php
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["categorie"])) {
                                 $categorie = $_POST["categorie"];
-
                                 // Connexion à la base de données
                                 $utilisateur = "root";
                                 $serveur = "localhost";

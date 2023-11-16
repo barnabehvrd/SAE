@@ -36,7 +36,8 @@
 						<input type="text" name="message" id="message" required><br><br>
 						<input type="submit" value="Envoyer">
 				</form>
-			
+				
+				<a class="fixed-size-button" href="form_sign_up.php" >  vous n'avez pas encore de compte? </a>
 			</div>
 		</div>
     </div>

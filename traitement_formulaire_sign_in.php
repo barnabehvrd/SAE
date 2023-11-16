@@ -10,10 +10,8 @@ $pwd = $_POST['pwd'];
 $Mail_Uti = $_POST['mail'];
 
 
-$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+$connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
 //check pwd procedure 
-$requete = "SELECT Mail_Uti FROM utilisateur";
-$Mail_Uti = $connexion->query($requete);
 
 // Création de la session
 session_start();
@@ -25,5 +23,5 @@ $_SESSION['Mail_Uti'] = $Mail_Uti;
 // Fermeture de la connexion
 $connexion->close();
 header('Location: index.php');
-
+echo $_SESSION['Mail_Uti'];
 ?>

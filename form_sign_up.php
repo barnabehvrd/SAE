@@ -47,6 +47,8 @@
 					<input type="text" name="message" id="message" required><br><br>
 					<input type="submit" value="Envoyer">
 			</form>
+			
+			<a class="fixed-size-button" href="form_sign_in.php" >  vous avez déjà de compte? </a>
 		</div>
     </div>
 </body>
