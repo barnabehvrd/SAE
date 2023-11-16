@@ -38,10 +38,7 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-					
 					?>
-					
-					
 					</a>
                 </div>
             </div>
@@ -60,35 +57,45 @@
                                 if ($connexion->connect_error) {
                                     die("Erreur de connexion : " . $connexion->connect_error);  
                                 }
-
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                $requete = 'SELECT * FROM utilisateur WHERE utilisateur.Mail_Uti=?';
-                                echo ($requete);
+                                $requete = 'SELECT * FROM info_utilisateur WHERE info_utilisateur.Mail_Uti=?';
                                 $stmt = $connexion->prepare($requete);
-                                
-                                $_SESSION['Mail_Uti'] = 'johndoe1@gmail.com';
-                                
                                 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
                                 $result = $stmt->get_result();
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<div class="square"> ';
-                                        echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                        echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
-                                        echo '</div> ';
+                                    ?>
+                                        <form action="update_user_info.php" method="post">
+                                         
+                                        <!--  Set default values to current user information -->
+                                        <label for="new_nom">Nouveau Nom :</label>
+                                         <input type="text" name="new_nom" value=<?php echo ($row["Nom_Uti"]) ?>><br>
+
+                                         <label for="new_prenom">Nouveau Prénom :</label>
+                                         <input type="text" name="new_prenom" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
+                                        
+                                         <label for="new_mail">Nouvelle Adresse mail :</label>
+                                         <input type="email" name="new_mail" value=<?php echo ($row["Mail_Uti"]) ?>><br>
+                                        
+                                        <label for="new_adr">Nouvelle Adresse postale :</label>
+                                         <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>"><br>
+                                        
+                                        <!-- Add the submit button -->
+                                          <input type="submit" value="Modifier">
+                                        </form>
+                                        <?php
+                                        var_dump($row["Adr_Uti"]);
                                     }
                                 } else {
-                                    echo "Aucun résultat trouvé pour votre compte contacter le support ";
+                                    ?>
+                                        <p>Aucun résultat trouvé pour votre compte, veuillez contacter le support.</p>
+                                    <?php
                                 }
-
                                 $stmt->close();
                                 $connexion->close();
                         ?>
-                    
                 </div>
-					
-				
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
