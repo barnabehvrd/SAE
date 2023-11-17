@@ -98,6 +98,57 @@
                         ?>
                         </div>
                 </div>
+                <div class="square">
+                        <?php
+                                // Connexion à la base de données
+                                //attention a utiliser le role update pwd et les propriété approprié
+                                $utilisateur = "root";
+                                $serveur = "localhost";
+                                $basededonnees = "sae3";
+                                $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+
+                                // Vérifiez la connexion
+                                if ($connexion->connect_error) {
+                                    die("Erreur de connexion : " . $connexion->connect_error);  
+                                }
+                                // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                                $requete = 'UPDATE utilisateurs
+                                SET mot_de_passe = "NouveauMotDePasse"
+                                WHERE id_utilisateur = 1;
+                                ?';
+                                $stmt = $connexion->prepare($requete);
+                                $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                        <form action="update_pwd_info.php" method="post">
+                                         
+                                        <!--  Set default values to current user information -->
+                                        <label for="new_nom">nouveau mot de passe :</label><br>
+                                         <input type="text" name="new_pwd1" value=<?php echo ($row["Nom_Uti"]) ?>><br>
+
+                                         <label for="new_prenom">ressaisissez le nouveau mot de passe :</label><br>
+                                         <input type="text" name="new_pwd2" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
+                                        
+                                        
+                                        <!-- Add the submit button -->
+                                          <input type="submit" value="Modifier">
+                                        </form>
+                                        <?php
+                                        //var_dump($row["Adr_Uti"]);
+                                    }
+                                } else {
+                                    ?>
+                                        <p>Aucun résultat trouvé pour votre compte, veuillez contacter le support.</p>
+                                    <?php
+                                }
+                                $stmt->close();
+                                $connexion->close();
+                        ?>
+                        </div>
+                </div>
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
