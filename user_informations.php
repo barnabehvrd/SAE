@@ -45,6 +45,7 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
 				<div class="gallery-container">
+                    <div class="square">
                         <?php
                                 // Connexion à la base de données
                                 //attention a utiliser la vu approprié
@@ -58,7 +59,7 @@
                                     die("Erreur de connexion : " . $connexion->connect_error);  
                                 }
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                $requete = 'SELECT * FROM info_utilisateur WHERE info_utilisateur.Mail_Uti=?';
+                                $requete = 'SELECT * FROM utilisateur WHERE utilisateur.Mail_Uti=?';
                                 $stmt = $connexion->prepare($requete);
                                 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
@@ -69,23 +70,23 @@
                                         <form action="update_user_info.php" method="post">
                                          
                                         <!--  Set default values to current user information -->
-                                        <label for="new_nom">Nouveau Nom :</label>
+                                        <label for="new_nom">Nom :</label><br>
                                          <input type="text" name="new_nom" value=<?php echo ($row["Nom_Uti"]) ?>><br>
 
-                                         <label for="new_prenom">Nouveau Prénom :</label>
+                                         <label for="new_prenom">Prénom :</label><br>
                                          <input type="text" name="new_prenom" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
                                         
-                                         <label for="new_mail">Nouvelle Adresse mail :</label>
+                                         <label for="new_mail">Adresse mail :</label><br>
                                          <input type="email" name="new_mail" value=<?php echo ($row["Mail_Uti"]) ?>><br>
                                         
-                                        <label for="new_adr">Nouvelle Adresse postale :</label>
+                                        <label for="new_adr">Adresse postale :</label><br>
                                          <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>"><br>
                                         
                                         <!-- Add the submit button -->
                                           <input type="submit" value="Modifier">
                                         </form>
                                         <?php
-                                        var_dump($row["Adr_Uti"]);
+                                        //var_dump($row["Adr_Uti"]);
                                     }
                                 } else {
                                     ?>
@@ -95,6 +96,7 @@
                                 $stmt->close();
                                 $connexion->close();
                         ?>
+                        </div>
                 </div>
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
