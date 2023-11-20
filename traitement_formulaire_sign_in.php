@@ -2,48 +2,45 @@
 // Connexion à la base de données 
 $utilisateur = "root";
 $serveur = "localhost";
-//$motdepasse = "";
+$motdepasse = "";
 $basededonnees = "sae3";
 
 // Récupération des données du formulaire
 $pwd = $_POST['pwd'];
 $Mail_Uti = $_POST['mail'];
 
-
-$connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
-//check pwd procedure 
-
 // Création de la session
 session_start();
 
+$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+
+// Vérification de la connexion
+if ($connexion->connect_error) {
+    die("Connection failed: " . $connexion->connect_error);
+}
+
 // Stockage de l'adresse mail dans la session
-$_SESSION['Mail_Uti'] = $Mail_Uti;$requete = 'SELECT Id_Uti FROM utilisateur WHERE utilisateur.Mail_Uti=?';
+$_SESSION['Mail_Uti'] = $Mail_Uti;
+
+// Récupération de l'ID utilisateur
+$requete = 'SELECT Id_Uti FROM utilisateur WHERE utilisateur.Mail_Uti=?';
 $stmt = $connexion->prepare($requete);
 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
 $stmt->execute();
-// Récupérez le résultat
-$result = $stmt->get_result();
-if ($result->num_rows > 0) {
-    // Fetch the result as an associative array
-    $row = $result->fetch_assoc();
+$stmt->bind_result($Id_Uti);
+$stmt->fetch();
+$stmt->close();
 
-    $_SESSION['Id_Uti'] = $row['Id_Uti'];
-}
-
-// Préparation de la requête
-$sql = "CALL verifMotDePasse(:mdpAVerifier, :id_Uti, @result)";
+// Appel de la procédure stockée
+$sql = "CALL verifMotDePasse(?, ?)";
 $stmt = $connexion->prepare($sql);
-
-// Liaison des paramètres
-$stmt->bindParam(':mdpAVerifier', $pwd, PDO::PARAM_STR);
-$stmt->bindParam(':id_Uti', $Id_Uti, PDO::PARAM_INT);
-
-// Exécution de la requête
+$stmt->bind_param("si", $pwd, $Id_Uti); // "si" indique que le premier paramètre est une chaîne de caractères et le deuxième est un entier
 $stmt->execute();
+$stmt->close();
 
 // Récupération du résultat
 $selectResult = $connexion->query('SELECT @result as result');
-$result = $selectResult->fetch(PDO::FETCH_ASSOC)['result'];
+$result = $selectResult->fetch_assoc()['result'];
 
 // Utilisation du résultat dans votre application
 if ($result == 1) {
