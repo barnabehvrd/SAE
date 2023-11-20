@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
 // Préparation de la requête
 $sql = "CALL verifMotDePasse(:mdpAVerifier, :id_Uti, @result)";
-$stmt = $conn->prepare($sql);
+$stmt = $connexion->prepare($sql);
 
 // Liaison des paramètres
 $stmt->bindParam(':mdpAVerifier', $pwd, PDO::PARAM_STR);
@@ -42,7 +42,7 @@ $stmt->bindParam(':id_Uti', $Id_Uti, PDO::PARAM_INT);
 $stmt->execute();
 
 // Récupération du résultat
-$selectResult = $conn->query('SELECT @result as result');
+$selectResult = $connexion->query('SELECT @result as result');
 $result = $selectResult->fetch(PDO::FETCH_ASSOC)['result'];
 
 // Utilisation du résultat dans votre application
