@@ -28,15 +28,15 @@
 					<label for="prenom">Prénom :</label>
 					<input type="text" name="prenom" id="prenom" required><br><br>
 					
-					<label for="adresse">Adresse :</label>
+					<label for="adresse">Adresse postale:</label>
 					<input type="text" name="adresse" id="adresse" required><br><br>
 					
 					<label for="pwd">password :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
 										
 					<label for="mail">mail :</label>   
-					<input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
-   					<small>Format attendu : user@example.com</small>
+					<input type="mail" id="mail" name="mail"  required>
+					<br>
 					<input type="submit" value="Envoyer">
 				</form>
 				
