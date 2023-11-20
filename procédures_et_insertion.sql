@@ -489,6 +489,25 @@ DELIMITER ;
 -- CALL verifMotDePasse(1, 'password125');
 
 
+
+-- procedure pour envoyer un message 👍😁
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE envoyerMessage(
+  IN emetteur INT,
+  IN destinataire INT,
+  IN contenuMsg VARCHAR(4096)
+)
+BEGIN
+	DECLARE nb INT;
+	SET nb = (SELECT MAX(Id_Msg) FROM MESSAGE) + 1;
+    INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
+    VALUES (nb, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, destinataire);
+
+  
+END $$
+
+
 -- ###########################################################################################################################################################
 
 
