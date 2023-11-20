@@ -2,7 +2,7 @@
 // Connexion à la base de données 
 $utilisateur = "root";
 $serveur = "localhost";
-//$motdepasse = "root";
+//$motdepasse = "";
 $basededonnees = "sae3";
 
 // Récupération des données du formulaire
