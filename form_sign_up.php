@@ -34,8 +34,9 @@
 					<label for="pwd">password :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
 										
-					<label for="mail">mail :</label>
-					<input type="text" name="mail" id="mail" required><br><br>
+					<label for="mail">mail :</label>   
+					<input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+   					<small>Format attendu : user@example.com</small>
 					<input type="submit" value="Envoyer">
 				</form>
 				
