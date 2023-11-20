@@ -96,8 +96,9 @@
                                         echo '<div class="square"> ';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
-                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="' . $row["Id_Prod"]  . ".png" . '" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";echo '<img src="SAE/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img src="SAE/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+
                                         echo '</div> ';
                                     }
                                 } else {
