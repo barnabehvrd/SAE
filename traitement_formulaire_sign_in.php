@@ -20,7 +20,6 @@ if ($connexion->connect_error) {
 }
 
 // Stockage de l'adresse mail dans la session
-$_SESSION['Mail_Uti'] = $Mail_Uti;
 
 // Récupération de l'ID utilisateur
 $requete = 'SELECT Id_Uti FROM utilisateur WHERE utilisateur.Mail_Uti=?';
@@ -45,12 +44,15 @@ $result = $selectResult->fetch_assoc()['result'];
 // Utilisation du résultat dans votre application
 if ($result == 1) {
     echo "Le mot de passe correspond.";
+    header('Location: index.php');
+    $_SESSION['Mail_Uti'] = $Mail_Uti;
+    $_SESSION['Id_Uti'] = $Id_Uti;
+echo 
 } else {
     echo "Le mot de passe ne correspond pas.";
+    header('Location: form_sign_in.php');
 }
 
 // Fermeture de la connexion
 $connexion->close();
-header('Location: index.php');
-echo $_SESSION['Mail_Uti'];
 ?>
