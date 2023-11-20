@@ -45,12 +45,12 @@ $result = $selectResult->fetch_assoc()['result'];
 // Utilisation du résultat dans votre application
 if ($result == 1) {
     echo "Le mot de passe correspond.";
+    header('Location: index.php');
 } else {
     echo "Le mot de passe ne correspond pas.";
 }
 
 // Fermeture de la connexion
 $connexion->close();
-header('Location: index.php');
 echo $_SESSION['Mail_Uti'];
 ?>
