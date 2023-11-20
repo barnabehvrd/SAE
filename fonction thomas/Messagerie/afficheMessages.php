@@ -11,6 +11,8 @@ function afficheMessages($id_user, $id_other_people){
     }
 }
 
+var_dump($_SESSION['Id_Uti']);
+
 if (isset($_SESSION['Id_Uti'])){
     if (isset($_POST['Id_Interlocuteur'])){
         afficheMessages($_SESSION['Id_Uti'], $POST['Id_Interlocuteur']);

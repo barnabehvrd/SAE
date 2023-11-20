@@ -35,7 +35,11 @@ function afficherContact($contact){
     <?php
 }
 
+echo(1);
+var_dump($_SESSION['Id_Uti']);
+
 if (isset($_SESSION['Id_Uti'])){
+    echo(1);
     afficheContacts($_SESSION['Id_Uti']);
 }
     
