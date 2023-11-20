@@ -684,10 +684,10 @@ VALUES
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
-    ('21', '2023-10-27 13:00:00', '2024-04-27 13:00:00', 'Bonjour, je recherche des ufs frais de poule. En avez-vous en stock ?', '3', '8'),
-    ('22', '2023-10-27 13:05:00', '2024-04-27 13:05:00', 'Bonjour ! Oui, nous avons des ufs frais de poule. Combien de douzaines souhaitez-vous ?', '8', '3'),
-    ('23', '2023-10-27 13:10:00', '2024-04-27 13:10:00', "Je prendrais 2 douzaines d'ufs frais de poule. Pouvez-vous me donner le prix ?', '3', '8'),
-    ('24', '2023-10-27 13:15:00', '2024-04-27 13:15:00', 'Certainement ! Le prix par douzaine d'ufs frais de poule est de 3 . Voulez-vous que je les livre ?", '8', '3'),
+    ('21', '2023-10-27 13:00:00', '2024-04-27 13:00:00', 'Bonjour, je recherche des oeufs frais de poule. En avez-vous en stock ?', '3', '8'),
+    ('22', '2023-10-27 13:05:00', '2024-04-27 13:05:00', 'Bonjour ! Oui, nous avons des oeufs frais de poule. Combien de douzaines souhaitez-vous ?', '8', '3'),
+    ('23', '2023-10-27 13:10:00', '2024-04-27 13:10:00', "Je prendrais 2 douzaines d'oeufs frais de poule. Pouvez-vous me donner le prix ?', '3', '8'),
+    ('24', '2023-10-27 13:15:00', '2024-04-27 13:15:00', 'Certainement ! Le prix par douzaine d'oeufs frais de poule est de 3 . Voulez-vous que je les livre ?", '8', '3'),
     ('25', '2023-10-27 13:20:00', '2024-04-27 13:20:00', "D'accord, je suis d'accord pour la livraison. Merci !", '3', '8');
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
@@ -707,8 +707,8 @@ VALUES
     
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
-    ('132', '2023-10-30 16:00:00', '2024-04-30 16:00:00', 'Le prix de vos ufs de poule est trop élevé. Pouvez-vous réduire le prix ?', '2', '7'),
-    ('7564', '2023-10-30 16:05:00', '2024-04-30 16:05:00', 'Nous vendons des ufs de haute qualité. Le prix reflète la qualité de nos produits. Nous ne pouvons pas réduire davantage.', '7', '2');
+    ('132', '2023-10-30 16:00:00', '2024-04-30 16:00:00', 'Le prix de vos oeufs de poule est trop élevé. Pouvez-vous réduire le prix ?', '2', '7'),
+    ('7564', '2023-10-30 16:05:00', '2024-04-30 16:05:00', 'Nous vendons des oeufs de haute qualité. Le prix reflète la qualité de nos produits. Nous ne pouvons pas réduire davantage.', '7', '2');
     
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
@@ -782,7 +782,7 @@ VALUES
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
 (18, 'Poulet entier', 6, 9, '5', 1, '6.00', 1),
-(19, 'ufs de poule', 7, 9, '30', 1, '0.50', 1);
+(19, 'oeufs de poule', 7, 9, '30', 1, '0.50', 1);
 
 -- Pour un viticulteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
