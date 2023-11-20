@@ -45,17 +45,9 @@
             </div>
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
-            <h1>Partie droite (1/5)</h1>
-				<div class="gallery-container">
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-				</div>
+            <?php
+			require 'fonction thomas/Messagerie/afficheMessages.php';
+			?>
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
