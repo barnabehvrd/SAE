@@ -11,7 +11,7 @@
         <div class="left-column">
             <!-- Contenu de la partie gauche -->
             
-            <p>Contacts récents</p>
+            <p>Contacts récents :</p>
 			<?php
 			require 'fonction thomas/Messagerie/afficheContacts.php';
 			?>
@@ -39,7 +39,7 @@
 					}
 						
 					?>
-					
+
 					
 					</a>
                 </div>
@@ -49,6 +49,15 @@
             <?php
 			require 'fonction thomas/Messagerie/afficheMessages.php';
 			?>
+			<form method="post">
+				<input type="text" name="content">
+				<input type="submit" img="img/paper plane.svg">
+				<?php
+				require 'fonction thomas/Messagerie/envoyerMessage.php';
+				?>
+			</div>
+			</form>
+			
 			</div>
 			
 			

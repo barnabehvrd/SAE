@@ -25,8 +25,8 @@ function afficheMessage($message){
 $_SESSION['Id_Uti'] = 2;
 
 if (isset($_SESSION['Id_Uti'])){
-    if (isset($_POST['Id_Interlocuteur'])){
-        afficheMessages($_SESSION['Id_Uti'], $_POST['Id_Interlocuteur']);
+    if (isset($_GET['Id_Interlocuteur'])){
+        afficheMessages($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur']);
     }else {
         echo('Veuillez selectionner une conversation.');
     }
