@@ -15,6 +15,7 @@
 
 			<label for="categories">Sélectionnez une catégorie :</label>
 			<select name="categorie" id="categories">
+                <option value="Tout">Tout</option>
 				<option value="Agriculteur">Agriculteur</option>
 				<option value="Vigneron">Vigneron</option>
 				<option value="Maraîcher">Maraîcher</option>
