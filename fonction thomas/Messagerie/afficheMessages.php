@@ -12,13 +12,14 @@ function afficheMessages($id_user, $id_other_people){
 }
 
 function afficheMessage($message){
-    $str = $message['Contenu_Msg'];
-    ?>
-    <form method="post">
-        <input type="submit" value="<?php echo($str);?>">
-        <input type="hidden" name="Id_Interlocuteur" value="<?php echo($message['Id_Uti'])?>">
-    </form>
-    <?php
+    $contenu = $message['Contenu_Msg'];
+    $date = $message['Date_Msg'];
+    if ($message['Emetteur']==$_SESSION['Id_Uti']){
+        echo('<a class=messageEnvoye>'.$contenu.'</a>');
+    }else {
+        echo('<a class=messageRecu>'.$contenu.'</a>');
+    }
+    
 }
 
 $_SESSION['Id_Uti'] = 2;
