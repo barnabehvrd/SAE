@@ -85,7 +85,7 @@
                                 }
 
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                $requete = 'SELECT producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+                                $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
                                 $stmt = $connexion->prepare($requete);
                                 $stmt->bind_param("s", $categorie); // "s" indique que la valeur est une chaîne de caractères
                                 
@@ -94,16 +94,26 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<div class="square"> ';
+                                        echo '<a href="page_produit.php?'. $row["Id_Uti"] . '" class="square"  >';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";echo '<img src="/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                        echo '</div> ';
+
+                                        echo '</a> ';
+
+
+
+                                        
                                     }
                                 } else {
                                     echo "Aucun résultat trouvé pour la catégorie : $categorie";
                                 }
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
 
+                                        
+                                    }
+                                }
                                 $stmt->close();
                                 $connexion->close();
                             }

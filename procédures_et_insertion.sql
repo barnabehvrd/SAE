@@ -584,7 +584,7 @@ DELIMITER ;
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
     ('1', 'John', 'Doe', 'johndoe1@gmail.com', '7 rue des Fleurs, 37000 TOURS', 'password123'),
-    ('2', 'Alice', 'Smith', 'alicesmith2@gmail.com', '36 rue du Dôme, 92100 BOULOGNE BILLANCOURT', 'securepass'),
+    ('2', 'Alice', 'Smith', 'alicesmith2@gmail.com', '36 rue du Dome, 92100 BOULOGNE BILLANCOURT', 'securepass'),
     ('3', 'Maria', 'Garcia', 'mariagarcia3@gmail.com', '9 Place Comte de Bendern, 78170 LA CELLE ST CLOUD', 'securepassword'),
     ('4', 'David', 'Wilson', 'davidwilson4@gmail.com', '98/108 Rue Petit, 75019 PARIS', 'strongpass123'),
     ('5', 'Sophie', 'Brown', 'sophiebrown5@gmail.com', '16 Avenue Vauban, 83000 TOULON ', 'userpass567'),
