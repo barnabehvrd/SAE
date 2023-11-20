@@ -2,9 +2,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-
-
- function dbConnect(){
+function dbConnect(){
     $host = 'localhost';
     $dbname = 'sae3';
     $user = 'root';
@@ -12,21 +10,24 @@ ini_set("display_errors", 1);
 
     $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
     return $bdd;
- }
+}
 
 function afficheContacts($id_user){
     $bdd = dbConnect();
-    $query = $bdd->query(('CALL listeContact('.$id_user.');'));;
+    $query = $bdd->query(('CALL listeContact('.$id_user.');'));
     $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
-    foreach($contacts as $contact){
+    if (count($contacts)==0){
+        echo('Vous n\'avez pas de conversation engagée pour le moment 😓');
+    }else{
+        foreach($contacts as $contact){
         echo($contact['Prenom_Uti'].' '.$contact['Nom_Uti'].'</br>');
     }
+    }
+    
 }
 
 if (isset($_SESSION['Id_Uti'])){
     afficheContacts($_SESSION['Id_Uti']);
 }
     
-
-
 ?>
