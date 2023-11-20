@@ -12,7 +12,7 @@
             <h1>Partie gauche (4/5)</h1>
             <p>Ceci est la partie gauche de la page web.</p>
 			<?php
-			require 'fonction thomas/messagerie.php';
+			require 'fonction thomas/afficheContacts.php';
 			?>
         </div>
         <div class="right-column">
