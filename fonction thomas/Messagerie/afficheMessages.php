@@ -4,18 +4,28 @@ ini_set("display_errors", 1);
 
 function afficheMessages($id_user, $id_other_people){
     $bdd = dbConnect();
-    $query = $bdd->query(('CALL listeMessage('.$id_user.', '.$id_other_people.');'));
+    $query = $bdd->query(('CALL conversation('.$id_user.', '.$id_other_people.');'));
     $messages = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach($messages as $message){
-        echo('untruc');
+        afficheMessage($message);
     }
 }
 
-var_dump($_SESSION['Id_Uti']);
+function afficheMessage($message){
+    $str = $message['Contenu_Msg'];
+    ?>
+    <form method="post">
+        <input type="submit" value="<?php echo($str);?>">
+        <input type="hidden" name="Id_Interlocuteur" value="<?php echo($message['Id_Uti'])?>">
+    </form>
+    <?php
+}
+
+$_SESSION['Id_Uti'] = 2;
 
 if (isset($_SESSION['Id_Uti'])){
     if (isset($_POST['Id_Interlocuteur'])){
-        afficheMessages($_SESSION['Id_Uti'], $POST['Id_Interlocuteur']);
+        afficheMessages($_SESSION['Id_Uti'], $_POST['Id_Interlocuteur']);
     }else {
         echo('Veuillez selectionner une conversation.');
     }

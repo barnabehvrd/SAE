@@ -9,8 +9,8 @@
     <div class="container">
         <div class="left-column">
             <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
+            
+            <p>Contacts récents</p>
 			<?php
 			require 'fonction thomas/Messagerie/afficheContacts.php';
 			?>
@@ -49,14 +49,7 @@
 			require 'fonction thomas/Messagerie/afficheMessages.php';
 			?>
 			</div>
-			<form class="formulaire" action="bug_report.php" method="post">
-					<p class= "centered">report a bug</p>
-					<label for="mail">mail :</label>
-					<input type="text" name="mail" id="mail" required><br><br>
-					<label for="pwd">message : </label>
-					<input type="text" name="message" id="message" required><br><br>
-					<input type="submit" value="Envoyer">
-			</form>
+			
 			
 		</div>
     </div>

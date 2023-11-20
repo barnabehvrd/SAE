@@ -16,7 +16,6 @@ function afficheContacts($id_user){
     $bdd = dbConnect();
     $query = $bdd->query(('CALL listeContact('.$id_user.');'));
     $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($contacts);
     if (count($contacts)==0){
         echo('Vous n\'avez pas de conversation engagée pour le moment 😓');
     }else{
@@ -27,19 +26,19 @@ function afficheContacts($id_user){
 }
 
 function afficherContact($contact){
+    $str = $contact['Prenom_Uti'].' '.$contact['Nom_Uti'];
     ?>
     <form method="post">
-        <label><?php $contact['Prenom_Uti'].' '.$contact['Nom_Uti']?></label>
-        <input type="hidden" id="Id_Interlocuteur" value="<?php $contact['Id_Uti']?>">
+        <input type="submit" value="<?php echo($str);?>">
+        <input type="hidden" name="Id_Interlocuteur" value="<?php echo($contact['Id_Uti'])?>">
     </form>
     <?php
 }
 
-echo(1);
-var_dump($_SESSION['Id_Uti']);
+
+$_SESSION['Id_Uti'] = 2;
 
 if (isset($_SESSION['Id_Uti'])){
-    echo(1);
     afficheContacts($_SESSION['Id_Uti']);
 }
     
