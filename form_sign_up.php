@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <head>
     <title>Fenêtre Pop-up</title>
