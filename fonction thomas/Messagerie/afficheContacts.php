@@ -8,7 +8,7 @@ function dbConnect(){
     $user = 'root';
     $password = '';
 
-    $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+    $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
     return $bdd;
 }
 
