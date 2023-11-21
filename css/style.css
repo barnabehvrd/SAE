@@ -72,15 +72,30 @@
 			margin: 5px;
             justify-content: center ;	
         }
-		.centered {
-            justify-content: center ;	
-		}
 
-        .contenuDeMail {
-            background: #fff;
-            display: flex; 
-            padding: 20px;
-			margin: 5px;
-			
-		}
+
+
+
+.content-container {
+    display: flex; /* Utiliser Flexbox pour les éléments "product" et "map" */
+}
+
+.product {
+    flex: 2; /* Partie gauche occupe 50% de la largeur */
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.map {
+    flex: 1; /* Partie droite occupe 50% de la largeur */
+    background-color: #c0c0c0;
+    padding: 20px;
+}
+
+.map-frame {
+    width: 100%;
+    height: 100%;
+}
+
+
 
