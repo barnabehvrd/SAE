@@ -27,20 +27,7 @@
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-					
-					<?php 
-                    
-                    session_start();
-                    if (isset($_SESSION['Mail_Uti'])) {  
-                    echo '<a class="fixed-size-button" href="user_informations.php" >';
-					echo $_SESSION['Mail_Uti']; 
-					}
-					else {
-                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
-					echo "connection";
-					}
-					?>
-					</a>
+                <button class="button"><a href="log_out.php">déconexion</a></button>
                 </div>
             </div>
 			<div class="contenu">
