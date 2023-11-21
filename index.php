@@ -106,11 +106,7 @@
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo '<img src="/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                        echo '</a> ';
-
-
-
-                                        
+                                        echo '</a> ';                                        
                                     }
                                 } else {
                                     echo "Aucun résultat trouvé pour la catégorie : $categorie";
