@@ -88,9 +88,9 @@
 
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                                 if ($_POST["categorie"]=="Tout"){
-                                    $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti';
+                                    $requete = 'SELECT Id_Uti, Prof_Prod, Prenom_Uti, Id_Prod, Nom_Uti, Adr_Uti FROM tout_les_producteurs';
                                 }else{
-                                    $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+                                    $requete = 'SELECT Id_Uti, Prof_Prod, Prenom_Uti, Id_Prod, Nom_Uti, Adr_Uti FROM tout_les_producteurs WHERE producteur.Prof_Prod = ?';
                                     $stmt->bind_param("s", $categorie);
                                 }
                                 $stmt = $connexion->prepare($requete);
