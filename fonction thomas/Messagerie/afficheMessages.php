@@ -25,14 +25,17 @@ function afficheMessage($message){
 
 if (isset($_SESSION['Id_Uti'])){
     if (isset($_GET['Id_Interlocuteur'])){
-        
         afficheMessages($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur']);
+        $formDisabled=false;
     }else {
         echo('Veuillez selectionner une conversation.');
+        $formDisabled=true;
     }
 }else{
     echo('Vous n\'êtes pas connecté, vous ne devriez pas avoir accès à cette page.</br>
             Veuillez contacter un administrateur au plus tôt.');
+    $formDisabled=true;
 }
-    
+
+$_SESSION['Id_Uti']=2;
 ?>
