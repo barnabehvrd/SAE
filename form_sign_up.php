@@ -15,8 +15,6 @@
         </div>
         <div class="right-column">
             <div class="fixed-banner">
-                <!-- Partie gauche du bandeau -->
-                <!-- Partie droite du bandeau -->
             </div>
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
@@ -32,12 +30,24 @@
 					<input type="text" name="pwd" id="pwd" required><br><br>
 					<label for="mail">mail :</label>
 					<input type="mail" id="mail" name="mail"  required><br><br>
-					<label for="producteur_box">je suis producteur<input type="checkbox" name="producteur_box" id="producteur_box" ></label><br><br>
-					<br>
-					<input type="submit" value="Envoyer">
+					<label for="producteur_box">Je suis producteur<input type="checkbox" name="producteur_box" id="producteur_box"></label><br><br>
+					<div id="professionDiv" style="display:none;">
+					<label for="profession">Profession :</label>
+					<input type="text" name="profession" id="profession">
+					<br><br>
+					</div>
+				<input type="submit" value="Envoyer">
 				</form>
-			</div>
-					<form class="formulaire" action="bug_report.php" method="post">
+				<script>
+				function toggleProfessionField() {
+					var professionDiv = document.getElementById("professionDiv");
+					var producteurCheckbox = document.getElementById("producteur_box");
+					professionDiv.style.display = producteurCheckbox.checked ? "block" : "none";
+				}
+				var producteurCheckbox = document.getElementById("producteur_box");
+				producteurCheckbox.addEventListener("change", toggleProfessionField);
+				</script>
+				<form class="formulaire" action="bug_report.php" method="post">
 					<p>report a bug</p>
 					<label for="mail">mail :</label>
 					<input type="text" name="mail" id="mail" required><br><br>
