@@ -45,8 +45,8 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
 				<div class="gallery-container">
 					<div>  
-						<p>PRODUITS
-
+						<p>
+							PRODUITS
 						</p>
 					</div>
 					<div>  
@@ -67,7 +67,7 @@
 							$address = str_replace(" ", "+", $address);
 					?>
 
-					<iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
+					<iframe src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
 						width="100%" height="100%" 
 					></iframe>
 
