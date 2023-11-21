@@ -51,7 +51,7 @@
 
 						</p>
 					</div>
-					<div class="map">  
+					<div>  
 					<?php
 						$host = 'localhost';
 						$dbname = 'sae3';
