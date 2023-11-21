@@ -76,4 +76,12 @@
             justify-content: center ;	
 		}
 
-        
+        .contenuDeMail {
+            background: #fff;
+            display: flex; 
+            padding: 20px;
+			margin: 5px;
+			
+		}
+
+
