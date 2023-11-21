@@ -59,14 +59,15 @@
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
-                        <img class="img-test" src="/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
-				</div>
+                        	<img class="img-test" src="/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
+						</div>
 						<div class="text-info">
                             <?php
-                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong>';
+                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address;
                             ?>
                         </div>
                     </div>
+					<button class="button"><a href="message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>">Envoyer un message</a></button>
                     <?php
                         if (isset($address)) {
                             $address = str_replace(" ", "+", $address);
