@@ -680,7 +680,7 @@ VALUES
     ('6', '2023-10-24 10:00:00', '2024-04-24 10:00:00', 'Bonjour, avez-vous des fraises en ce moment ?', '4', '5'),
     ('7', '2023-10-24 10:05:00', '2024-04-24 10:05:00', 'Bonjour ! Oui, nous avons des fraises fraîches en stock. Combien de kilos souhaitez-vous ?', '5', '4'),
     ('8', '2023-10-24 10:10:00', '2024-04-24 10:10:00', 'Je voudrais 3 kg de fraises. Pouvez-vous les livrer demain ?', '4', '5'),
-    ('9', '2023-10-24 10:15:00', '2024-04-24 10:15:00', 'Bien sûr ! La livraison sera planifiée pour demain. Les frais de livraison sont de 5 . Acceptez-vous ?', '5', '4'),
+    ('9', '2023-10-24 10:15:00', '2024-04-24 10:15:00', 'Bien sûr ! La livraison sera planifiée pour demain. Les frais de livraison sont de 5€. Acceptez-vous ?', '5', '4'),
     ('10', '2023-10-24 10:20:00', '2024-04-24 10:20:00', "D'accord, je suis d'accord pour la livraison. Merci !", '4', '5');
 
 
@@ -689,7 +689,7 @@ VALUES
     ('11', '2023-10-25 11:00:00', '2024-04-25 11:00:00', 'Bonjour, je cherche des pommes biologiques. En avez-vous ?', '8', '7'),
     ('12', '2023-10-25 11:05:00', '2024-04-25 11:05:00', 'Bonjour ! Oui, nous avons des pommes biologiques. Combien en voulez-vous ?', '7', '8'),
     ('13', '2023-10-25 11:10:00', '2024-04-25 11:10:00', 'Je prendrais 5 kg de pommes biologiques. Pouvez-vous me donner le prix ?', '8', '7'),
-    ('14', '2023-10-25 11:15:00', '2024-04-25 11:15:00', 'Certainement ! Le prix des pommes biologiques est de 2,5  par kg. Voulez-vous que je les réserve pour vous ?', '7', '8'),
+    ('14', '2023-10-25 11:15:00', '2024-04-25 11:15:00', 'Certainement ! Le prix des pommes biologiques est de 2,5€ par kg. Voulez-vous que je les réserve pour vous ?', '7', '8'),
     ('15', '2023-10-25 11:20:00', '2024-04-25 11:20:00', "Oui, s'il vous plaît, réservez-les pour moi. Je passerai les chercher demain.", '8', '7');
 
 -- Conversation 4 entre un client et un maraîcher
@@ -698,7 +698,7 @@ VALUES
     ('16', '2023-10-26 12:00:00', '2024-04-26 12:00:00', 'Bonjour, je suis à la recherche de miel local. En avez-vous ?', '10', '6'),
     ('17', '2023-10-26 12:05:00', '2024-04-26 12:05:00', 'Bonjour ! Oui, nous produisons du miel local de haute qualité. Combien de pots souhaitez-vous ?', '6', '10'),
     ('18', '2023-10-26 12:10:00', '2024-04-26 12:10:00', 'Je prendrais 3 pots de miel local. Pouvez-vous me donner le prix ?', '10', '6'),
-    ('19', '2023-10-26 12:15:00', '2024-04-26 12:15:00', 'Bien sûr ! Le prix par pot de miel local est de 10 . Puis-je organiser la livraison ?', '6', '10'),
+    ('19', '2023-10-26 12:15:00', '2024-04-26 12:15:00', 'Bien sûr ! Le prix par pot de miel local est de 10€. Puis-je organiser la livraison ?', '6', '10'),
     ('20', '2023-10-26 12:20:00', '2024-04-26 12:20:00', "D'accord, organisez la livraison. Merci !", '10', '6');
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
@@ -706,7 +706,7 @@ VALUES
     ('21', '2023-10-27 13:00:00', '2024-04-27 13:00:00', 'Bonjour, je recherche des oeufs frais de poule. En avez-vous en stock ?', '3', '8'),
     ('22', '2023-10-27 13:05:00', '2024-04-27 13:05:00', 'Bonjour ! Oui, nous avons des oeufs frais de poule. Combien de douzaines souhaitez-vous ?', '8', '3'),
     ('23', '2023-10-27 13:10:00', '2024-04-27 13:10:00', "Je prendrais 2 douzaines d'oeufs frais de poule. Pouvez-vous me donner le prix ?', '3', '8'),
-    ('24', '2023-10-27 13:15:00', '2024-04-27 13:15:00', 'Certainement ! Le prix par douzaine d'oeufs frais de poule est de 3 . Voulez-vous que je les livre ?", '8', '3'),
+    ('24', '2023-10-27 13:15:00', '2024-04-27 13:15:00', 'Certainement ! Le prix par douzaine d'oeufs frais de poule est de 3€. Voulez-vous que je les livre ?", '8', '3'),
     ('25', '2023-10-27 13:20:00', '2024-04-27 13:20:00', "D'accord, je suis d'accord pour la livraison. Merci !", '3', '8');
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
