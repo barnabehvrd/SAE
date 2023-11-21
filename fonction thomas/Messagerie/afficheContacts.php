@@ -8,8 +8,7 @@ function dbConnect(){
     $user = 'root';
     $password = '';
 
-    $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
-    return $bdd;
+    return new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
 }
 
 function afficheContacts($id_user){
@@ -35,8 +34,6 @@ function afficherContact($contact){
     <?php
 }
 
-
-$_SESSION['Id_Uti'] = 2;
 
 if (isset($_SESSION['Id_Uti'])){
     afficheContacts($_SESSION['Id_Uti']);
