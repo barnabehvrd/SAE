@@ -19,6 +19,9 @@ $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
 $query = $bdd->query(('SELECT Id_Uti FROM utilisateur WHERE utilisateur.Mail_Uti=\''.$Mail_Uti.'\';'));
 $Id_Uti = $query->fetchAll(PDO::FETCH_ASSOC);
 $Id_Uti=($Id_Uti[0]["Id_Uti"]);
+if ($Id_Uti == NULL){
+    unset($Id_Uti);
+}
 if(isset($Id_Uti)){
     echo('CALL verifMotDePasse('.$Id_Uti.',\''. $pwd . '\');');
     $query = $bdd->query(('CALL verifMotDePasse(  '.$Id_Uti.',\''. $pwd . '\');'));
