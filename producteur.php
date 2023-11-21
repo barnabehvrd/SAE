@@ -51,13 +51,14 @@
 
 						</p>
 					</div>
-					<div class="map">  
+					<div>  
 					<?php
 						$host = 'localhost';
 						$dbname = 'sae3';
 						$user = 'root';
 						$password = '';
 						$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+						echo "test";
 
 						$Id_Prod = $_GET["Id_Prod"];
 						$query = $bdd->query(('SELECT utilisateur.Adr_Uti FROM utilisateur 

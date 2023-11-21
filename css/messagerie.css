@@ -1,7 +1,26 @@
 .messageEnvoye{
-
+    border-radius: 23px 23px 0px 23px;
+    border: 1px solid #4E7730;
+    background: #71B340;
+    text-align: right;
 }
 
 .messageRecu{
-    
+    border-radius: 23px 23px 23px 0px;
+    border: 2px solid #71B340;
+    background: #EBF4EC;
+    text-align: left;
+}
+
+.boutonEnvoyerMessage{
+    padding: 12px;
+    background: url('../../img/paper plane.svg') no-repeat;
+    background-position: calc(50% - 3px) center;;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    fill: #FFF;
+    stroke-width: 1px;
+    stroke: #575757;
+    filter: drop-shadow(0px 0px 5px rgba(190, 190, 190, 0.25));
 }

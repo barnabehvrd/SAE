@@ -30,7 +30,9 @@
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
 					<a class="fixed-size-button" href="form_sign_in.php" >
-					<?php if (!isset($_SESSION)) {
+					<?php 
+					$_SESSION['Id_Uti']=2;
+					if (!isset($_SESSION)) {
 						
 					session_start();
 					echo "connection";
@@ -50,9 +52,9 @@
             <?php
 			require 'fonction thomas/Messagerie/afficheMessages.php';
 			?>
-			<form method="post">
-				<input type="text" name="content">
-				<input type="submit" img="img/paper plane.svg">
+			<form method="post" >
+				<input type="text" name="content" <?php if ($formDisabled) { echo 'disabled';} ?>>
+				<input type="submit" value="" class="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
 				<?php
 				require 'fonction thomas/Messagerie/envoyerMessage.php';
 				?>
