@@ -24,26 +24,18 @@
 					<h1>Formulaire d'Inscription</h1>
 					<label for="nom">Nom :</label>
 					<input type="text" name="nom" id="nom" required><br><br>
-					
 					<label for="prenom">Prénom :</label>
 					<input type="text" name="prenom" id="prenom" required><br><br>
-					
 					<label for="adresse">Adresse postale:</label>
 					<input type="text" name="adresse" id="adresse" required><br><br>
-					
 					<label for="pwd">password :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
-										
 					<label for="mail">mail :</label>
 					<input type="mail" id="mail" name="mail"  required><br><br>
-
 					<label for="producteur_box">je suis producteur<input type="checkbox" name="producteur_box" id="producteur_box" ></label><br><br>
 					<br>
 					<input type="submit" value="Envoyer">
-
-
 				</form>
-				
 			</div>
 					<form class="formulaire" action="bug_report.php" method="post">
 					<p>report a bug</p>
@@ -53,7 +45,6 @@
 					<input type="text" name="message" id="message" required><br><br>
 					<input type="submit" value="Envoyer">
 			</form>
-			
 			<a class="fixed-size-button" href="form_sign_in.php" >  vous avez déjà de compte? </a>
 		</div>
     </div>
