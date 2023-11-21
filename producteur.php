@@ -37,11 +37,11 @@
             </div>
             <div class="content-container">
                 <div class="product">
-                    <!-- partie de gauche-->
+                    <!-- partie de gauche avec les produits-->
                     <p>PRODUITS</p>
                 </div>
-                <div class="map">    
-                    <!-- partie de droite-->
+                <div class="producteur">    
+                    <!-- partie de droite avec les infos producteur-->
                     <?php
                         $host = 'localhost';
                         $dbname = 'sae3';
@@ -49,12 +49,20 @@
                         $password = '';
                         $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
                         $Id_Prod = $_GET["Id_Prod"];
-                        $query = $bdd->query(('SELECT utilisateur.Adr_Uti FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
-                        $address = $query->fetchAll(PDO::FETCH_ASSOC);
-                        $address=$address[0]["Adr_Uti"];
+                        $query = $bdd->query(('SELECT utilisateur.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
+                        $returnQuery = $query->fetchAll(PDO::FETCH_ASSOC);
+						// recupération des paramètres de la requête qui contient 1 élément
+                        $address=$returnQuery[0]["Adr_Uti"];
+						$nom=$returnQuery[0]["Nom_Uti"];
+						$prenom=$returnQuery[0]["Prenom_Uti"];
+						$profession=$returnQuery[0]["Prof_Prod"];
+
+						echo $prenom.'</br>'.$nom.'</br>'.$profession;
+
                             if (isset($address)) {
                                 $address = str_replace(" ", "+", $address);
                         ?>
+
                         <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
                             width="100%" height="100%" 
                         ></iframe>

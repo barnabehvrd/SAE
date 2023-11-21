@@ -86,7 +86,7 @@
     padding: 20px;
 }
 
-.map {
+.producteur {
     flex: 1; /* Partie droite occupe 50% de la largeur */
     background-color: #c0c0c0;
     padding: 20px;
@@ -94,7 +94,7 @@
 
 .map-frame {
     width: 100%;
-    height: 100%;
+    height: 80%;
 }
 
 
