@@ -67,6 +67,6 @@ if (isset($profession)){
 
 $connexion->close();
 $connexion1->close();
-header('Location: index.php');
+header('Location: form_sign_in.php');
 
 ?>
