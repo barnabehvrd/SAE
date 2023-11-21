@@ -15,9 +15,9 @@ function afficheMessage($message){
     $contenu = $message['Contenu_Msg'];
     $date = $message['Date_Msg'];
     if ($message['Emetteur']==$_SESSION['Id_Uti']){
-        echo('<a class=messageEnvoye>'.$contenu.'</a>');
+        echo('<div><div class="messageEnvoye message"><a>'.$contenu.'</a></div></div>');
     }else {
-        echo('<a class=messageRecu>'.$contenu.'</a>');
+        echo('<div><div class="messageRecu message"><a>'.$contenu.'</a></div></div>');
     }
     
 }

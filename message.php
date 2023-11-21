@@ -47,7 +47,7 @@
 					</a>
                 </div>
             </div>
-			<div class="contenu">
+			<div class="contenuMessagerie">
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <?php
 			require 'fonction thomas/Messagerie/afficheMessages.php';
