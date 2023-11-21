@@ -38,7 +38,7 @@
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
-                    <p>PRODUITS</p>
+                    <p><center>Produits proposés</center></p>
                 </div>
                 <div class="producteur">
                     <!-- partie de droite avec les infos producteur -->
