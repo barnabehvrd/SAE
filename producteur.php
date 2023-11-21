@@ -23,6 +23,7 @@
 						<button class="button"><a href="commandes.php">commandes</a></button>
                     </div>
                 </div>
+			
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
 					<a class="fixed-size-button" href="form_sign_in.php" >
@@ -34,47 +35,37 @@
 					else {
 					echo $_SESSION['Mail_Uti']; 
 					}
-						
 					?>
-
-					
 					</a>
                 </div>
-            </div>
-			<div class="contenuDeMail">
-            <!-- Contenu de la partie droite (sous le bandeau) -->
-				<div class="gallery-container">
-					<div>  
-						<p>PRODUITS
-
-						</p>
+			</div>
+				<div class="map"> 
+					<div>
+						<!-- partie de gauche-->
+						<p>PRODUITS</p>
 					</div>
-					<div>  
-					<?php
-						$host = 'localhost';
-						$dbname = 'sae3';
-						$user = 'root';
-						$password = '';
-						$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-
-						$Id_Prod = $_GET["Id_Prod"];
-						$query = $bdd->query(('SELECT utilisateur.Adr_Uti FROM utilisateur 
-						INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti
-						WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
-						$address = $query->fetchAll(PDO::FETCH_ASSOC);
-						$address=$address[0]["Adr_Uti"];
-						if (isset($address)) {
-							$address = str_replace(" ", "+", $address);
-					?>
-
-					<iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
-						width="100%" height="100%" 
-					></iframe>
-
-					<?php } ?>
+					<div>	
+						<!-- partie de droite-->
+						<?php
+							$host = 'localhost';
+							$dbname = 'sae3';
+							$user = 'root';
+							$password = '';
+							$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+							$Id_Prod = $_GET["Id_Prod"];
+							$query = $bdd->query(('SELECT utilisateur.Adr_Uti FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
+							$address = $query->fetchAll(PDO::FETCH_ASSOC);
+							$address=$address[0]["Adr_Uti"];
+								if (isset($address)) {
+									$address = str_replace(" ", "+", $address);
+							?>
+							<iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
+								width="100%" height="100%" 
+							></iframe>
+							<?php } 
+						?>
 					</div>
 				</div>
-			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
 					<label for="mail">mail :</label>

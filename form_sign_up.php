@@ -34,10 +34,14 @@
 					<label for="pwd">password :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
 										
-					<label for="mail">mail :</label>   
-					<input type="mail" id="mail" name="mail"  required>
+					<label for="mail">mail :</label>
+					<input type="mail" id="mail" name="mail"  required><br><br>
+
+					<label for="producteur_box">je suis producteur<input type="checkbox" name="producteur_box" id="producteur_box" ></label><br><br>
 					<br>
 					<input type="submit" value="Envoyer">
+
+
 				</form>
 				
 			</div>

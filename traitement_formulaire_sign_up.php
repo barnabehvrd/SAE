@@ -12,7 +12,11 @@ $prenom = $_POST['prenom'];
 $adresse = $_POST['adresse'];
 $pwd = $_POST['pwd'];
 $Mail_Uti = $_POST['mail'];
-
+$producteur_check = isset($_POST['producteur_box']) ? $_POST['producteur_box'] : '';
+if ($producteur_check=='on'){
+    $_SESSION["is_producteur"]= true;
+}
+var_dump($producteur_check);
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 // Récupération de la valeur maximum de Id_Uti
 $requete = "SELECT MAX(Id_Uti) AS id_max FROM utilisateur";
@@ -37,6 +41,6 @@ if ($connexion->query($insertion) === TRUE) {
 
 // Fermeture de la connexion
 $connexion->close();
-header('Location: index.php');
+//header('Location: index.php');
 
 ?>
