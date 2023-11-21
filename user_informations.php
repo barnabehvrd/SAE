@@ -100,36 +100,26 @@
                         </div>
                 </div>
                 <div class="square">
-                                        <form action="update_pwd_info.php" method="post">
-                                         
-                                        <!--  Set default values to current user information -->
-                                        <label for="new_nom">nouveau mot de passe :</label><br>
-                                         <input type="text" name="new_pwd1" value=<?php echo ($row["Nom_Uti"]) ?>><br>
-
-                                         <label for="new_prenom">ressaisissez le nouveau mot de passe :</label><br>
-                                         <input type="text" name="new_pwd2" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
+                                   <form action="update_pwd_info.php" method="post">
+                                        <label for="new_mdp1">nouveau mot de passe :</label><br>
+                                        <input type="text" name="new_pwd1"> <br>
+                                        <label for="new_mdp2">ressaisissez le nouveau mot de passe :</label><br>
+                                        <input type="text" name="new_pwd2"> <br>
+                                        <input type="submit" value="Modifier">
+                                   </form>
                                         
-                                        
-                                        <!-- Add the submit button -->
-                                          <input type="submit" value="Modifier">
-                                        </form>
-                                        <p>Aucun résultat trouvé pour votre compte, veuillez contacter le support.</p>
-                                    <?php
-                                
-                                $stmt->close();
-                                $connexion->close();
-                        ?>
                         </div>
                 </div>
-			</div>
-			<form class="formulaire" action="bug_report.php" method="post">
+                <form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
 					<label for="mail">mail :</label>
 					<input type="text" name="mail" id="mail" required><br><br>
 					<label for="pwd">message : </label>
 					<input type="text" name="message" id="message" required><br><br>
 					<input type="submit" value="Envoyer">
-			</form>
+			    </form>
+			</div>
+
 			
 		</div>
     </div>
