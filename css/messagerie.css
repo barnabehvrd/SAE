@@ -20,9 +20,9 @@
     margin: 10px;
 }
 
-.boutonEnvoyerMessage{
+#boutonEnvoyerMessage{
     padding: 12px;
-    background: url('../../img/paper plane.svg') no-repeat;
+    background: url('../../img/paper plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
     width: 42px;
     height: 42px;
@@ -31,6 +31,8 @@
     stroke-width: 1px;
     stroke: #575757;
     filter: drop-shadow(0px 0px 5px rgba(190, 190, 190, 0.25));
+    margin-top: 24px;
+    
 }
 
 .contenuMessagerie {
@@ -43,4 +45,21 @@
 
 .contenuMessagerie > a {
     width: auto;
+}
+
+#zoneDEnvoi{
+    margin-top: 10px;
+    background-color: #71B340;
+    display: grid;
+    grid-template-columns:auto 47px;
+    width: 100%;
+}
+
+#zoneDeTexte{
+    border-radius: 17;
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    height: 30px;
 }
