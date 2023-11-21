@@ -559,8 +559,32 @@ CALL broadcast_Admin(7, 'ceci est un bogue');
 
 DELIMITER $$
 
-CREATE OR REPLACE TRIGGER trigger_verif_cryptage 
-	BEFORE INSERT 
+CREATE OR REPLACE TRIGGER trigger_insert_verif_cryptage 
+	BEFORE INSERT
+    ON UTILISATEUR
+	FOR EACH ROW
+BEGIN
+  DECLARE Id_Uti_temp INT;
+  DECLARE Pwd_Uti_temp VARCHAR(50);
+
+  -- Récupérer les valeurs insérées dans la table
+  SET Id_Uti_temp = NEW.Id_Uti;
+  SET Pwd_Uti_temp = NEW.Pwd_Uti;
+
+  -- Appeler la procédure de chiffrement
+  CALL chiffrementV(Id_Uti_temp, Pwd_Uti_temp);
+  
+  SET NEW.Pwd_Uti = Pwd_Uti_temp;
+  
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE OR REPLACE TRIGGER trigger_update_verif_cryptage 
+	BEFORE UPDATE
     ON UTILISATEUR
 	FOR EACH ROW
 BEGIN
