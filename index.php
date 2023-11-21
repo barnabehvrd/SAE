@@ -85,7 +85,11 @@
                                 }
 
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                                if ($_POST["categorie"]=="Tout"){
+                                    $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti ';
+                                }else{
                                 $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+                                }
                                 $stmt = $connexion->prepare($requete);
                                 $stmt->bind_param("s", $categorie); // "s" indique que la valeur est une chaîne de caractères
                                 
