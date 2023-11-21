@@ -18,10 +18,9 @@
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
-                        <button class="button">Bouton 1</button>
-                        <button class="button">Bouton 2</button>                   
+						<button class="button"><a href="index.php">accueil</a></button>
+                        <button class="button"><a href="message.php">messagerie</a></button>                 
 						<button class="button"><a href="commandes.php">commandes</a></button>
-
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
@@ -58,7 +57,6 @@
 						$user = 'root';
 						$password = '';
 						$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-						echo "test";
 
 						$Id_Prod = $_GET["Id_Prod"];
 						$query = $bdd->query(('SELECT utilisateur.Adr_Uti FROM utilisateur 
