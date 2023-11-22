@@ -75,7 +75,7 @@
                                     echo "Type : " . $typeProduit . "<br>";
                                     echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                     echo '<img class="img-produit" src="/img_produit/' . $nomProduit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
-                                    echo '<input type="number" name="'.$nomProduit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" value="0"> '.$unitePrixProduit;
+                                    echo '<input type="number" name="'.$nomProduit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                     echo '</div> '; 
                                     $i++;
                                 }
