@@ -89,6 +89,7 @@
                         $nom = $returnQueryInfoProd[0]["Nom_Uti"];
                         $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
                         $profession = $returnQueryInfoProd[0]["Prof_Prod"];
+                        echo($Id_Prod);
 
 
                     ?>
