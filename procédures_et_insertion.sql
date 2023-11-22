@@ -208,7 +208,7 @@ DROP VIEW IF EXISTS tout_les_producteurs;
 -- Utilisation lors de l'affichage et la recherche de producteurs
 CREATE VIEW tout_les_producteurs
 	AS 
-	SELECT PRODUCTEUR.Id_Uti, PRODUCTEUR.Id_Prod, Nom_Uti, Prenom_Uti, Prof_Prod, Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti;
+	SELECT PRODUCTEUR.Id_Uti, Nom_Uti, Prenom_Uti, Prof_Prod, Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti;
 
 SELECT * FROM tout_les_producteurs;
 
