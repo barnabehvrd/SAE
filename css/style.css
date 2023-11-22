@@ -64,13 +64,6 @@
 	margin: 5px;
 }
 
-.square {
-    width: 350px;
-    height: 350px;
-    background-color: #4caf50;
-    margin: 5px;
-}
-
 .formulaire {
     background-color: #d2d2d2; /* Couleur de fond pour la partie droite */
     padding: 20px;

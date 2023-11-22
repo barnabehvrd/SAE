@@ -43,7 +43,6 @@
                         <div class="square"></div>
 					    <div class="square"></div>
 					    <div class="square"></div>
-					    <div class="square"></div>
                     </div>
                 </div>
                 <div class="producteur">
