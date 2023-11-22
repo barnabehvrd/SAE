@@ -40,9 +40,10 @@
                     <!-- partie de gauche avec les produits -->
                     <p><center>Produits proposés</center></p>
                     <div class="gallery-container">
-                        <div class="square"></div>
-					    <div class="square"></div>
-					    <div class="square"></div>
+                        <div class="squareProduct"></div>
+					    <div class="squareProduct"></div>
+					    <div class="squareProduct"></div>
+                        <div class="squareProduct"></div>
                     </div>
                 </div>
                 <div class="producteur">
