@@ -55,13 +55,13 @@
                         $password = '';
                         $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
                         $Id_Prod = $_GET["Id_Prod"];
-                        $query = $bdd->query(('SELECT utilisateur.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
-                        $returnQuery = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $queryInfoProd = $bdd->query(('SELECT utilisateur.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
+                        $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
                         // recupération des paramètres de la requête qui contient 1 élément
-                        $address = $returnQuery[0]["Adr_Uti"];
-                        $nom = $returnQuery[0]["Nom_Uti"];
-                        $prenom = $returnQuery[0]["Prenom_Uti"];
-                        $profession = $returnQuery[0]["Prof_Prod"];
+                        $address = $returnQueryInfoProd[0]["Adr_Uti"];
+                        $nom = $returnQueryInfoProd[0]["Nom_Uti"];
+                        $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
+                        $profession = $returnQueryInfoProd[0]["Prof_Prod"];
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
