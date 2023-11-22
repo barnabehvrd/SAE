@@ -39,6 +39,12 @@
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
                     <p><center>Produits proposés</center></p>
+                    <div class="gallery-container">
+                        <div class="square"></div>
+					    <div class="square"></div>
+					    <div class="square"></div>
+					    <div class="square"></div>
+                    </div>
                 </div>
                 <div class="producteur">
                     <!-- partie de droite avec les infos producteur -->
