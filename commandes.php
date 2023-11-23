@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <div class="left-column">
+			<img class="logo" src="img/logo.png">
         </div>
         <div class="right-column">
             <div class="fixed-banner">

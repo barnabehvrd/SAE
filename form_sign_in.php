@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <!-- Contenu de la partie gauche -->
+			<img class="logo" src="img/logo.png">
             <h1>Partie gauche (4/5)</h1>
             <p>Ceci est la partie gauche de la page web.</p>
         </div>

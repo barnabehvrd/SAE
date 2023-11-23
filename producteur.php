@@ -18,6 +18,7 @@
     ?>
     <div class="container">
         <div class="left-column">
+            <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <h1>Partie gauche (4/5)</h1>
             <p>Ceci est la partie gauche de la page web.</p>

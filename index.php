@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <!-- Contenu de la partie gauche --> 
+            <img class="logo" src="img/logo.png">
 			 <p>recherche par catégorie</p>
              
 			<form method="post" action="index.php"> 
