@@ -38,6 +38,7 @@
 					</div>
 				<input type="submit" value="Envoyer">
 				</form>
+				<!--
 				<script>
 				function toggleProfessionField() {
 					var professionDiv = document.getElementById("professionDiv");
@@ -46,7 +47,7 @@
 				}
 				var producteurCheckbox = document.getElementById("producteur_box");
 				producteurCheckbox.addEventListener("change", toggleProfessionField);
-				</script>
+				</script>-->
 				<form class="formulaire" action="bug_report.php" method="post">
 					<p>report a bug</p>
 					<label for="mail">mail :</label>
