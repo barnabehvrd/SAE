@@ -1,6 +1,6 @@
 .messageEnvoye{
     float: right;
-    border-radius: 23px 23px 0px 23px;
+    border-radius: 15px 15px 0px 15px;
     border: 1px solid #4E7730;
     background: #71B340;
     text-align: right;
@@ -8,7 +8,7 @@
 
 .messageRecu{
     float: left;
-    border-radius: 23px 23px 23px 0px;
+    border-radius: 15px 15px 15px 0px;
     border: 2px solid #71B340;
     background: #EBF4EC;
     text-align: left;
@@ -62,4 +62,10 @@
     margin-bottom: 10px;
     margin-right: 10px;
     height: 30px;
+    padding-left: 10px;
+}
+
+.logo {
+    width: 100%;
+    box-shadow: 1px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }

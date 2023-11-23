@@ -10,8 +10,8 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <!-- Contenu de la partie gauche -->
-            
+			<img class="logo" src="img/logo.png">
+			
             <p>Contacts récents :</p>
 			<?php
 			require 'fonction thomas/Messagerie/afficheContacts.php';

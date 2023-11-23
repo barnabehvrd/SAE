@@ -12,7 +12,6 @@
 .left-column {
     flex: 1;
     background-color: #669D31;
-    padding: 20px;
     display: flex;
     flex-direction: column;
 }
