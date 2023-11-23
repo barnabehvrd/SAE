@@ -37,8 +37,8 @@
                 <div class="banner-right">
                     <a class="fixed-size-button" href="form_sign_in.php" >
                     <?php 
+                    session_start();
                     if (!isset($_SESSION)) {
-                        session_start();
                         echo "connection";
                     } else {
                         echo $_SESSION['Mail_Uti']; 
