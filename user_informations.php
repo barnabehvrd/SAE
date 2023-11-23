@@ -48,7 +48,7 @@
                                     die("Erreur de connexion : " . $connexion->connect_error);  
                                 }
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                $requete = 'SELECT * FROM utilisateur WHERE utilisateur.Mail_Uti=?';
+                                $requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
                                 $stmt = $connexion->prepare($requete);
                                 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();

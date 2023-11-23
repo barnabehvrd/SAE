@@ -18,7 +18,7 @@ if ($pwd_new !== $pwd_confirm) {
 
 // Récupération de l'identifiant de l'utilisateur
 // Mise à jour du mot de passe
-$requete = "UPDATE utilisateur SET Pwd_Uti='$pwd_new' WHERE Id_Uti='$uti'";
+$requete = "UPDATE UTILISATEUR SET Pwd_Uti='$pwd_new' WHERE Id_Uti='$uti'";
 $connexion->query($requete);
 
 // Fermeture de la connexion
