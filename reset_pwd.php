@@ -2,7 +2,7 @@
 // Connexion à la base de données (remplacez ces valeurs par les vôtres)
 
 $utilisateur = "inf2pj02";
-$serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+$serveur = "localhost";
 $motdepasse = "ahV4saerae";
 $basededonnees = "inf2pj_02";
 

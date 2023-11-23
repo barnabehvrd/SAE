@@ -12,7 +12,7 @@ if (!isset($_SESSION['test_pwd'])) {
 
 
 $utilisateur = "inf2pj02";
-$serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+$serveur = "localhost";
 $motdepasse = "ahV4saerae";
 $basededonnees = "inf2pj_02";
 $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);

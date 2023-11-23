@@ -76,7 +76,7 @@
                             if (isset($_POST["categorie"])) {
                                 $categorie = $_POST["categorie"];
                                 $utilisateur = "inf2pj02";
-                                $serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+                                $serveur = "localhost";
                                 $motdepasse = "ahV4saerae";
                                 $basededonnees = "inf2pj_02";
                                 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);

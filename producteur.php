@@ -8,7 +8,7 @@
     <?php
      function dbConnect(){
         $utilisateur = "inf2pj02";
-        $serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+        $serveur = "localhost";
         $motdepasse = "ahV4saerae";
         $basededonnees = "inf2pj_02";
         return new PDO('mysql:host='.$serveur.';dbname='.$basededonnees,$utilisateur,$motdepasse);
