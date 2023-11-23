@@ -47,7 +47,7 @@
 			<div class="surContenu">
 				<div class="interlocuteur" <?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>>
 				<?php 
-				require "afficherInterlocuteur.php";
+				require "fonction thomas/Messagerie/afficherInterlocuteur.php";
 				?>
 				</div>
 				<div class="contenuMessagerie">
