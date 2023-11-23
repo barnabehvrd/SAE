@@ -57,7 +57,7 @@ try {
             header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
         }
     }else {
-        header('Location: form_sign_in.php?pwd=vous avez épuisé toutes vos tentatives de connection ');
+        header('Location: form_sign_in.php?pwd=vous avez épuisé toutes vos tentatives de connection');
     }
     }
 } catch (Exception $e) {

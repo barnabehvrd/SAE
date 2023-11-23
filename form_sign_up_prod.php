@@ -36,23 +36,13 @@
 					?>
 					<label for="mail">mail :</label>
 					<input type="mail" id="mail" name="mail"  required><br><br>
+					<label for="profession">profession :</label>
+					<input type="profession" id="profession" name="profession"  required><br><br>
 					<input type="submit" value="Envoyer">
 				</form>
-				<label for="btn-producteur">Je suis producteur</label>
-				<input type="button" onclick="window.location.href='form_sign_up_prod.php'" id="btn-producteur" action="form_sign_up_producteur.php" value="je suis producteur">
 				
 				
 				
-				<!--
-				<script>
-				function toggleProfessionField() {
-					var professionDiv = document.getElementById("professionDiv");
-					var producteurCheckbox = document.getElementById("producteur_box");
-					professionDiv.style.display = producteurCheckbox.checked ? "block" : "none";
-				}
-				var producteurCheckbox = document.getElementById("producteur_box");
-				producteurCheckbox.addEventListener("change", toggleProfessionField);
-				</script>-->
 				<form class="formulaire" action="bug_report.php" method="post">
 					<p>report a bug</p>
 					<label for="mail">mail :</label>

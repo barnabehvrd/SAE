@@ -37,6 +37,7 @@
                         <?php
                                 // Connexion à la base de données
                                 //attention a utiliser la vu approprié
+                                session_start();
                                 $utilisateur = "inf2pj02";
                                 $serveur = "localhost";
                                 $motdepasse = "ahV4saerae";
