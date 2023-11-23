@@ -71,7 +71,9 @@
 				<div class="gallery-container">
                         <?php
                         $_SERVER["REQUEST_METHOD"] = "POST";
-                        $_POST["categorie"] = "Tout";
+                        if (!isset($_POST["categorie"])){
+                            $_POST["categorie"] = "Tout";
+                        }
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["categorie"])) {
                                 $categorie = $_POST["categorie"];

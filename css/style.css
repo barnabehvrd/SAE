@@ -30,7 +30,7 @@ body {
 }
 
 .fixed-banner {
-    height: 70px;
+    height: 7%;
     background-color: #fff;
     display: flex;
 }
@@ -71,8 +71,10 @@ body {
     display: flex; 
 	flex-direction: column;
     justify-content: center ;
-    padding: 20px;
-	margin: 5px;
+	margin-top: 4%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 85%;
 }
 
 
