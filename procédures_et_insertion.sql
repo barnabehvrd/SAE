@@ -72,7 +72,7 @@ CREATE TABLE MESSAGE(
 );
 
 CREATE TABLE COMMANDE(
-   Id_Commande VARCHAR(50),
+   Id_Commande INT,
    Id_Statut INT NOT NULL,
    Id_Prod INT NOT NULL,
    Id_Uti INT NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE PRODUIT(
 );
 
 CREATE TABLE CONTENU(
-   Id_Commande VARCHAR(50),
+   Id_Commande INT,
    Id_Produit INT,
    Qte_Produit_Commande INT NOT NULL,
    Num_Produit_Commande INT NOT NULL,
