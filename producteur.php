@@ -47,7 +47,7 @@
                     </a>
                 </div>
             </div>
-            <form method="get" action="commandes.php">
+            <form method="get" action="insert_commande.php">
 
             <div class="content-container">
                 <div class="product">
