@@ -71,10 +71,8 @@ body {
     display: flex; 
 	flex-direction: column;
     justify-content: center ;
-	margin-top: 4%;
-    margin-left: 5%;
-    margin-right: 5%;
-    height: 85%;
+    padding: 20px;
+	margin: 5px;
 }
 
 

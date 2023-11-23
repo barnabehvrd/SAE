@@ -3,7 +3,6 @@
     border-radius: 15px 15px 0px 15px;
     border: 1px solid #4E7730;
     background: #71B340;
-    text-align: right;
 }
 
 .messageRecu{
@@ -11,7 +10,7 @@
     border-radius: 15px 15px 15px 0px;
     border: 2px solid #71B340;
     background: #EBF4EC;
-    text-align: left;
+    
 }
 
 .message{
@@ -21,11 +20,12 @@
     margin-left: 30px;
     margin-right: 30px;
     align-items: flex-end;
+    text-align: left;
 }
 
 #boutonEnvoyerMessage{
     padding: 12px;
-    background: url('../../img/paper plane.svg') no-repeat #FFFFFF;
+    background: url('../img/paper plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
     width: 42px;
     height: 42px;
@@ -39,11 +39,12 @@
 }
 
 .surContenu {
-    background-color: #fff;
+    background: url('../img/fond_messagerie.svg') no-repeat #fff;
+    background-position: center;
     display: flex; 
 	flex-direction: column;
     justify-content: end;
-	margin-top: 4%;
+	margin-top: 3%;
     margin-left: 5%;
     margin-right: 5%;
     height: 85%;
@@ -51,7 +52,6 @@
 }
 
 .contenuMessagerie {
-    background-color: #fff;
     display: grid;
     height: max-content;
     max-height: 100%;
@@ -79,5 +79,9 @@
     margin-right: 10px;
     height: 30px;
     padding-left: 10px;
+}
+
+.interlocuteur {
+    
 }
 
