@@ -7,6 +7,15 @@
 
 </head>
 <body>
+	<?php
+    	function dbConnect(){
+        $host = 'localhost';
+        $dbname = 'sae3';
+        $user = 'root';
+        $password = '';
+        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+      }
+    ?>
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
@@ -43,12 +52,7 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
-				<div class="gallery-container">
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-				</div>
+					ddd
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
