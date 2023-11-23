@@ -18,7 +18,7 @@ if ($producteur_check=='on'){
 }else {
     $_SESSION["is_producteur"]= false;
 }
-$profession = isset($_POST['profession']) ? $_POST['profession'] : '';
+
 
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 // Récupération de la valeur maximum de Id_Uti
@@ -28,45 +28,47 @@ $id_max = $resultat->fetch_assoc()['id_max'];
 
 // Incrémentation de la valeur de $iduti
 $iduti = $id_max + 1;
-// Requête SQL d'insertion
-$insertion = "INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES ('$iduti', '$prenom', '$nom', '$adresse', '$pwd', '$Mail_Uti');";
 
-$connexion1 = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+// Vérification de l'existence de l'adresse mail
+$requete2 = "SELECT COUNT(*) AS nb FROM UTILISATEUR WHERE Mail_Uti = '$Mail_Uti'";
+$resultat2 = $connexion->query($requete2);
+$nb = $resultat2->fetch_assoc()['nb'];
+// Exécution de la requête d'insertion si l'adresse mail n'est pas déjà utilisée
+if ($nb == 0) {
+    $insertion = "INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES ('$iduti', '$prenom', '$nom', '$adresse', '$pwd', '$Mail_Uti');";
 
-// Exécution de la requête
-if ($connexion1->query($insertion) === TRUE) {
-    echo "Enregistrement réussi.";
-} else {
-    echo "Erreur : " . $insertion . "<br>" . $connexion1->error;
-}
-if (isset($profession)){
-    $requete1 = "SELECT MAX(Id_Prod) AS id_max1 FROM PRODUCTEUR";
-    var_dump($requete1);
-    echo("<br>");
-    $resultat1 = $connexion1->query($requete1);
-    
-    var_dump($resultat1);
-    echo("<br>");
-    $id_max_prod = $resultat1->fetch_assoc()['id_max1'];
-    var_dump($id_max_prod);
-    echo("<br>");
-    $id_max_prod++;
-    var_dump($id_max_prod);
-    echo("<br>");
-    $insertion1 = "INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES ('$iduti', '$id_max_prod', '$profession');";
-    
-    var_dump($insertion1);
-    echo("<br>");
-    if ($connexion1->query($insertion1) === TRUE) {
+    $connexion1 = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+
+    // Exécution de la requête
+    if ($connexion1->query($insertion) === TRUE) {
         echo "Enregistrement réussi.";
     } else {
-        echo "Erreur : " . $insertion1 . "<br>" . $connexion1->error;
+        echo "Erreur : " . $insertion . "<br>" . $connexion1->error;
     }
+
+    // création producteur
+    if (isset($_POST['profession'])){
+        $profession = isset($_POST['profession']) ? $_POST['profession'] : '';
+        $requete1 = "SELECT MAX(Id_Prod) AS id_max1 FROM PRODUCTEUR";
+        $resultat1 = $connexion1->query($requete1);
+        $id_max_prod = $resultat1->fetch_assoc()['id_max1'];
+        $id_max_prod++;
+        $insertion1 = "INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES ('$iduti', '$id_max_prod', '$profession');";
+        if ($connexion1->query($insertion1) === TRUE) {
+            echo "Enregistrement réussi.";
+        } else {
+            echo "Erreur : " . $insertion1 . "<br>" . $connexion1->error;
+        }
+    }
+    $connexion1->close();
+    
+    header('Location: form_sign_in.php');
+    
+} else {            
+    header('Location: form_sign_up.php?mail=adresse mail déjà utilisé');    
 }
 // Fermeture de la connexion
 
 $connexion->close();
-$connexion1->close();
-header('Location: form_sign_in.php');
 
 ?>

@@ -11,7 +11,8 @@
         <div class="left-column">
             <!-- Contenu de la partie gauche --> 
 			 <p>recherche par catégorie</p>
-             
+
+                            
 			<form method="post" action="index.php"> 
 
 			<label for="categories">Sélectionnez une catégorie :</label>
@@ -58,14 +59,15 @@
 					?>
 					
 					
-					</a>
+					</a>    
                 </div>
             </div>
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1> PRODUCTEURS : </h1>
             <?php
-            
+            echo("php version debug<br>");
+            echo phpversion();
              echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
              ?> 
 				<div class="gallery-container">
@@ -105,14 +107,15 @@
                                     ';
                                     $stmt->bind_param("s", $categorie);
                                 }
-                                echo("requete<br>");
-                                var_dump($stmt);
+                               
                                 
                                 echo("requete<br>");
                                 echo($requete);
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
 
+                                 echo("stmt<br>");
+                                 var_dump($stmt);
                                  echo("fin stmt<br>");
                                 $stmt->execute();
                                 $result = $stmt->get_result();

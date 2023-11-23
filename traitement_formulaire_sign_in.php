@@ -2,7 +2,7 @@
 //traitement formulaire sin in php
 
 // Error handling with try-catch block
-try {
+//try {
     // Retrieve form data
     $pwd = $_POST['pwd'];
     $Mail_Uti = $_POST['mail'];
@@ -33,14 +33,14 @@ try {
         unset($Id_Uti);
         header('Location: form_sign_in.php?mail=adresse mail invalide');
         exit();
-    }
+    } else {
 
     // Extract user ID
-    $Id_Uti = $Id_Uti[0]["Id_Uti"];
-
+    $Id_uti = $Id_Uti[0]["Id_Uti"];
+    
     // Verify password using stored procedure
-    echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
-    $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
+    echo('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\');');
+    $query = $bdd->query('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\')');
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle password verification
@@ -59,8 +59,9 @@ try {
             header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
         }
     }
+    }/*
 } catch (Exception $e) {
     // Handle any exceptions
     echo "An error occurred: " . $e->getMessage();
     exit();
-}
+}*/

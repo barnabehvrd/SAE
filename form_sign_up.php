@@ -28,6 +28,12 @@
 					<input type="text" name="adresse" id="adresse" required><br><br>
 					<label for="pwd">password :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
+					<?php
+					if (isset($_GET['mail'])) {
+ 					  	 $mail = $_GET['mail'];
+   						 echo " $mail <br>";
+						}
+					?>
 					<label for="mail">mail :</label>
 					<input type="mail" id="mail" name="mail"  required><br><br>
 					<label for="producteur_box">Je suis producteur<input type="checkbox" name="producteur_box" id="producteur_box"></label><br><br>
@@ -38,7 +44,6 @@
 					</div>
 				<input type="submit" value="Envoyer">
 				</form>
-				<!--
 				<script>
 				function toggleProfessionField() {
 					var professionDiv = document.getElementById("professionDiv");
@@ -47,7 +52,7 @@
 				}
 				var producteurCheckbox = document.getElementById("producteur_box");
 				producteurCheckbox.addEventListener("change", toggleProfessionField);
-				</script>-->
+				</script>
 				<form class="formulaire" action="bug_report.php" method="post">
 					<p>report a bug</p>
 					<label for="mail">mail :</label>
