@@ -17,6 +17,8 @@
     width: fit-content;
     padding: 5px;
     margin: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
     align-items: flex-end;
     text-align: left;
 }
@@ -41,8 +43,7 @@
     background: url('../img/fond_messagerie.svg') no-repeat #fff;
     background-position: center;
     display: flex; 
-	flex-direction: column;
-    justify-content: end;
+    flex-direction: column;
 	margin-top: 3%;
     margin-left: 5%;
     margin-right: 5%;
@@ -51,11 +52,12 @@
 }
 
 .contenuMessagerie {
+    align-self: end;
     display: grid;
-    background: #fff;
-    padding: 20px;
     height: max-content;
-    vertical-align: bottom;
+    max-height: 100%;
+    overflow-y: scroll;
+    width: 100%;
     
 }
 
@@ -82,6 +84,11 @@
 }
 
 .interlocuteur {
-    
+    align-self: flex-start;
+    background-color: #A3E373;
+    padding: 4px;
+    border-radius: 0px 0px 15px 0px;
+    border: 1px solid rgba(78, 119, 48, 1);
+    width: 250px;
 }
 

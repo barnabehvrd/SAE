@@ -507,6 +507,24 @@ BEGIN
   
 END $$
 
+-- procedure pour savoir si l'utilisateur est un producteur et nous renvoie sa profession si oui 👍😁
+
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE isProducteur(
+	IN Id_Uti INT
+)
+BEGIN
+	IF Id_Uti IN (SELECT Id_Uti FROM producteur) THEN
+    	SELECT concat(' - ', (SELECT Prof_Prod FROM producteur WHERE producteur.Id_Uti=Id_Uti)) as result;
+    ELSE
+    	SELECT '';
+    END IF;
+    
+END $$
+
+DELIMITER ;
+
 
 -- ###########################################################################################################################################################
 
