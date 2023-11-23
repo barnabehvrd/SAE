@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <div class="left-column">
-          
         </div>
         <div class="right-column">
             <div class="fixed-banner">
@@ -44,10 +43,6 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 				<div class="gallery-container">
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
-					<div class="square"></div>
 					<div class="square"></div>
 					<div class="square"></div>
 					<div class="square"></div>
