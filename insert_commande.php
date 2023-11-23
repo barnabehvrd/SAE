@@ -20,14 +20,14 @@
     $returnqueryNbCommandes = $queryNbCommandes->fetchAll(PDO::FETCH_ASSOC);
     $nbCommandes = $returnqueryNbCommandes[0]["MAX(Id_Commande)"]+1;
     $insertionCommande = "INSERT INTO COMMANDE (Id_Commande, Id_Statut, Id_Prod, Id_Uti) VALUES ($nbCommandes, 1, $Id_Prod, $Id_Uti);";
-    echo $insertionCommande;
 
     $bdd->query($insertionCommande);
 
     foreach ($Url as $produit => $quantite) {
         $insertionProduit = "INSERT INTO CONTENU (Id_Commande, Id_Produit, Qte_Produit_Commande, Num_Produit_Commande) VALUES ($nbCommandes, $produit, $quantite, $i);";
-        echo $insertionProduit;
         $bdd->query($insertionProduit);
+        $updateProduit="UPDATE PRODUIT SET Qte_Produit = Qte_Produit-".$quantite." WHERE Id_Produit = ".$produit .";";
+        $bdd->exec($updateProduit);
         $i++;
     }
     

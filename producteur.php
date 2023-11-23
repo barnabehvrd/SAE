@@ -73,13 +73,15 @@
                                     $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
 
-                                    echo '<div class="squareProduct" >';
-                                    echo "Produit : " . $nomProduit . "<br>";
-                                    echo "Type : " . $typeProduit . "<br>";
-                                    echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                    echo '<img class="img-produit" src="/img_produit/' . $nomProduit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
-                                    echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
-                                    echo '</div> '; 
+                                    if ($QteProduit>0){
+                                        echo '<div class="squareProduct" >';
+                                        echo "Produit : " . $nomProduit . "<br>";
+                                        echo "Type : " . $typeProduit . "<br>";
+                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
+                                        echo '<img class="img-produit" src="/img_produit/' . $nomProduit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
+                                        echo '</div> '; 
+                                    }
                                     $i++;
                                 }
                             }
