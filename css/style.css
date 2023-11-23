@@ -30,7 +30,7 @@ body {
 }
 
 .fixed-banner {
-    height: 7%;
+    height: 70px;
     background-color: #fff;
     display: flex;
 }

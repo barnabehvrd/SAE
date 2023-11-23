@@ -55,15 +55,14 @@
             		<?php
 					require 'fonction thomas/Messagerie/afficheMessages.php';
 					?>
-					
+					<form method="post" id="zoneDEnvoi">
+						<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
+						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
+					</form>
+					<?php
+					require 'fonction thomas/Messagerie/envoyerMessage.php';
+					?>
 				</div>
-				<form method="post" id="zoneDEnvoi">
-					<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
-					<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
-				</form>
-				<?php
-				require 'fonction thomas/Messagerie/envoyerMessage.php';
-				?>
 			</div>
 		</div>
     </div>
