@@ -52,7 +52,28 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
-					ddd
+			<?php
+                $bdd=dbConnect();
+				$utilisateur=$_SESSION["Id_Uti"];
+                $queryGetCommande = $bdd->query(('SELECT Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod WHERE COMMANDE.Id_Uti=\''.$utilisateur.'\';'));
+                $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
+                $i=0;
+                if(count($returnQueryGetCommande)==0){
+                    echo "Aucune commande pour le moment";
+                }
+                else{
+                    while ($i<count($returnQueryGetCommande)){
+						$Nom_Prod = $returnQueryGetCommande[$i]["Nom_Uti"];
+						$Nom_Prod = strtoupper($Nom_Prod);
+						$Prenom_Prod = $returnQueryGetCommande[$i]["Prenom_Uti"];
+						$Adr_Uti = $returnQueryGetCommande[$i]["Adr_Uti"];
+                        echo '<div class="commande" >';
+                        echo "Commande n°" . $i+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
+                        echo '</div> '; 
+                        $i++;
+                    }
+                }
+            ?>
 			</div>
 			<form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
