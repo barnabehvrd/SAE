@@ -1,9 +1,10 @@
 
 <?php
-$utilisateur = "root";
-$serveur = "localhost";
-$basededonnees = "sae3";
-$connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+$utilisateur = "inf2pj02";
+$serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+$motdepasse = "ahV4saerae";
+$basededonnees = "inf2pj_02";
+$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 // Vérifiez la connexion
 if ($connexion->connect_error) {
 die("Erreur de connexion : " . $connexion->connect_error);  

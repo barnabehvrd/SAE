@@ -1,9 +1,9 @@
 <?php
 // Connexion à la base de données (remplacez ces valeurs par les vôtres)
-$utilisateur = "root";
-$serveur = "localhost";
-//$motdepasse = "root";
-$basededonnees = "sae3";
+    $utilisateur = "inf2pj02";
+    $serveur = "https://la-projets.univ-lemans.fr/pj-pma/";
+    $motdepasse = "ahV4saerae";
+    $basededonnees = "inf2pj_02";
 
 
 // Récupération des données du formulaire
