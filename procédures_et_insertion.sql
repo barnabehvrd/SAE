@@ -141,7 +141,7 @@ DROP VIEW IF EXISTS info_producteur;
 -- Utilisation lors de l'affichage des informations d'un producteur
 CREATE VIEW info_producteur
 	AS 
-	SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod
+	SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Id_Prod, Prof_Prod
 	FROM UTILISATEUR 
 	JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti=PRODUCTEUR.Id_Uti;
 
