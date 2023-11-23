@@ -66,9 +66,6 @@
                                          <label for="new_prenom">Prénom :</label><br>
                                          <input type="text" name="new_prenom" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
                                         
-                                         <label for="new_mail">Adresse mail :</label><br>
-                                         <input type="email" name="new_mail" value=<?php echo ($row["Mail_Uti"]) ?>><br>
-                                        
                                         <label for="new_adr">Adresse postale :</label><br>
                                          <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>"><br>
                                         
