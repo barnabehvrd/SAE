@@ -55,22 +55,40 @@
 			<?php
                 $bdd=dbConnect();
 				$utilisateur=$_SESSION["Id_Uti"];
-                $queryGetCommande = $bdd->query(('SELECT Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod WHERE COMMANDE.Id_Uti=\''.$utilisateur.'\';'));
+                $queryGetCommande = $bdd->query(('SELECT Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
-                $i=0;
+                $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
                     echo "Aucune commande pour le moment";
                 }
                 else{
-                    while ($i<count($returnQueryGetCommande)){
-						$Nom_Prod = $returnQueryGetCommande[$i]["Nom_Uti"];
+                    while ($iterateurCommande<count($returnQueryGetCommande)){
+						$Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
+						$Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
 						$Nom_Prod = strtoupper($Nom_Prod);
-						$Prenom_Prod = $returnQueryGetCommande[$i]["Prenom_Uti"];
-						$Adr_Uti = $returnQueryGetCommande[$i]["Adr_Uti"];
+						$Prenom_Prod = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
+						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
                         echo '<div class="commande" >';
-                        echo "Commande n°" . $i+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
-                        echo '</div> '; 
-                        $i++;
+                        echo "Commande n°" . $iterateurCommande+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
+						echo '</br>';
+
+						$total=0;
+						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
+						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+						$iterateurProduit=0;
+						while ($iterateurProduit<count($returnQueryGetProduitCommande)){
+							$Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
+							$Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+							$Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
+							$Prix_Produit_Unitaire=$returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
+							echo "- " . $Nom_Produit ." - ".$Qte_Produit_Commande.' '.$Nom_Unite_Prix.' * '.$Prix_Produit_Unitaire.'€ = '.intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande).'€';
+							echo "</br>";
+							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
+							$iterateurProduit++;
+						}
+                        $iterateurCommande++;
+						echo '<div class="aDroite">Total : '.$total.'€</div>';
+						echo '</div> '; 
                     }
                 }
             ?>
