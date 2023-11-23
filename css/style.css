@@ -16,7 +16,7 @@ body {
 
 .right-column {
     flex: 4;
-    background-color: #f0f0f0;
+    background-color: #EBF4EC;
     justify-content: center;
     height: 100%;
 }
@@ -30,9 +30,8 @@ body {
 }
 
 .fixed-banner {
-    height: 50px;
-    background-color: #0077b6;
-    color: #fff;
+    height: 70px;
+    background-color: #fff;
     display: flex;
 }
 

@@ -223,7 +223,7 @@ DROP VIEW IF EXISTS Produits_d_un_producteur;
 -- utilisation lors de l'affichage des differents produits d'un producteur
 CREATE VIEW Produits_d_un_producteur
 	AS 
-	SELECT Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
+	SELECT Id_Prod, Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
 	FROM PRODUIT 
 	JOIN TYPE_DE_PRODUIT ON PRODUIT.Id_Type_Produit=TYPE_DE_PRODUIT.Id_Type_Produit
 	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
@@ -687,7 +687,7 @@ INSERT INTO UNITE (Id_Unite, Nom_Unite)
 VALUES (1, 'Kg'),
  (2, 'l'),
  (3, 'm²'),
- (4, 'unité'); 
+ (4, 'piece'); 
 
 
 
@@ -803,17 +803,17 @@ VALUES
 -- Pour un vigneron
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(14, 'Vin rouge', 7, 7, '10', 1, '15.00', 1),
-(15, 'Vin blanc', 7, 7, '8', 1, '12.00', 1);
+(14, 'Vin rouge', 7, 7, '10', 4, '15.00', 4),
+(15, 'Vin blanc', 7, 7, '8', 4, '12.00', 4);
 
 -- Pour un maraîcher
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
 (5, 'Tomates', 5, 4, '20', 1, '2.00', 1),
 (6, 'Poivrons', 5, 4, '10', 1, '1.50', 1),
-(7, 'Courgettes', 5, 4, '15', 1, '1.75', 1),
+(7, 'Courgettes', 5, 4, '15', 1, '1.75', 4),
 (8, 'Carottes', 2, 4, '18', 1, '1.40', 1),
-(9, 'Aubergines', 5, 4, '12', 1, '2.25', 1);
+(9, 'Aubergines', 5, 4, '12', 1, '2.25', 4);
 
 -- Pour un apiculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
@@ -824,20 +824,20 @@ VALUES
 -- Pour un éleveur de volaille
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(18, 'Poulet entier', 6, 9, '5', 1, '6.00', 1),
-(19, 'oeufs de poule', 7, 9, '30', 1, '0.50', 1);
+(18, 'Poulet entier', 6, 9, '5', 4, '6.00', 4),
+(19, 'oeufs de poule', 7, 9, '30', 4, '0.50', 4);
 
 -- Pour un viticulteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(20, 'Chardonnay', 7, 10, '12', 1, '18.00', 1),
-(21, 'Merlot', 7, 10, '15', 1, '16.00', 1);
+(20, 'Chardonnay', 7, 10, '12', 2, '18.00', 2),
+(21, 'Merlot', 7, 10, '15', 2, '16.00', 2);
 
 -- Pour un pépiniériste
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(22, 'Rosiers', 5, 1, '10', 1, '7.50', 1),
-(23, 'Sapins', 5, 1, '8', 1, '9.00', 1);
+(22, 'Rosiers', 5, 1, '10', 4, '7.50', 4),
+(23, 'Sapins', 5, 1, '8', 1, '9.00', 4);
 
 
 INSERT INTO CONTENU (Id_Commande, Id_Produit, Qte_Produit_Commande, Num_Produit_Commande) VALUES ('1', '16', '12', '2'), ('1', '13', '320', '3'), ('2', '9', '560', '1'), ('2', '17', '12', '7'), ('4', '21', '36', '8'), ('5', '20', '21', '9'), ('7', '15', '12', '11'), ('12', '12', '1250', '12'), ('12', '6', '3', '14'), ('8', '5', '1', '16');
