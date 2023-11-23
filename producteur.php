@@ -48,6 +48,7 @@
                 </div>
             </div>
             <form method="get" action="insert_commande.php">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
 
             <div class="content-container">
                 <div class="product">
@@ -56,7 +57,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -65,6 +66,7 @@
                             }
                             else{
                                 while ($i<count($returnQueryGetProducts)){
+                                    $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
                                     $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];
                                     $typeProduit = $returnQueryGetProducts[$i]["Desc_Type_Produit"];
                                     $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
@@ -76,7 +78,7 @@
                                     echo "Type : " . $typeProduit . "<br>";
                                     echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                     echo '<img class="img-produit" src="/img_produit/' . $nomProduit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
-                                    echo '<input type="number" name="'.$nomProduit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
+                                    echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                     echo '</div> '; 
                                     $i++;
                                 }
@@ -98,8 +100,6 @@
                         $nom = $returnQueryInfoProd[0]["Nom_Uti"];
                         $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
                         $profession = $returnQueryInfoProd[0]["Prof_Prod"];
-
-
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
