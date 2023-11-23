@@ -47,23 +47,21 @@
 					</a>
                 </div>
             </div>
-			<div class="contenuMessagerie">
-            <!-- Contenu de la partie droite (sous le bandeau) -->
-            <?php
-			require 'fonction thomas/Messagerie/afficheMessages.php';
-			?>
-			<form method="post" id="zoneDEnvoi">
-				<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
-				<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
-				<?php
-				require 'fonction thomas/Messagerie/envoyerMessage.php';
-				?>
+			<div class="contenu">
+				<div class="contenuMessagerie">
+            	
+            		<?php
+					require 'fonction thomas/Messagerie/afficheMessages.php';
+					?>
+					<form method="post" id="zoneDEnvoi">
+						<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
+						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
+					</form>
+					<?php
+					require 'fonction thomas/Messagerie/envoyerMessage.php';
+					?>
+				</div>
 			</div>
-			</form>
-			
-			</div>
-			
-			
 		</div>
     </div>
 </body>
