@@ -1,16 +1,17 @@
 
 <?php
-$utilisateur = "root";
+$utilisateur = "inf2pj02";
 $serveur = "localhost";
-$basededonnees = "sae3";
-$connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+$motdepasse = "ahV4saerae";
+$basededonnees = "inf2pj_02";
+$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 // Vérifiez la connexion
 if ($connexion->connect_error) {
 die("Erreur de connexion : " . $connexion->connect_error);  
 }
 session_start();
 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-$requete = 'SELECT Id_Uti FROM utilisateur WHERE utilisateur.Mail_Uti=?';
+$requete = 'SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
 $stmt = $connexion->prepare($requete);
 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
 $stmt->execute();

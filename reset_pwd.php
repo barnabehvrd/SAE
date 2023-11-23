@@ -1,9 +1,10 @@
 <?php
 // Connexion à la base de données (remplacez ces valeurs par les vôtres)
-$utilisateur = "root";
+
+$utilisateur = "inf2pj02";
 $serveur = "localhost";
-//$motdepasse = "root";
-$basededonnees = "sae3";
+$motdepasse = "ahV4saerae";
+$basededonnees = "inf2pj_02";
 
 // Récupération des données du formulaire
 $pwd_new = $_POST['pwd_new'];
@@ -16,9 +17,8 @@ if ($pwd_new !== $pwd_confirm) {
 }
 
 // Récupération de l'identifiant de l'utilisateur
-$uti=1 // a modifier une fois les session mise en place
 // Mise à jour du mot de passe
-$requete = "UPDATE utilisateur SET Pwd_Uti='$pwd_new' WHERE Id_Uti='$uti'";
+$requete = "UPDATE UTILISATEUR SET Pwd_Uti='$pwd_new' WHERE Id_Uti='$uti'";
 $connexion->query($requete);
 
 // Fermeture de la connexion

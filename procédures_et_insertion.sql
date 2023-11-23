@@ -118,15 +118,12 @@ CREATE TABLE CONTENU(
 
 -- #############################################################################################################################################################
 
- 
--- I - RÔLES : 
+ -- 1) rôle permettant de modifier ses informations personnelles
 
--- 1) Rôle permettant de modifier ses informations personnelles
+-- drop role if exists modif_info_perso;
+create or replace role modif_info_perso;
 
--- DROP ROLE IF EXISTS modif_info_perso;
-CREATE OR REPLACE ROLE modif_info_perso;
-
-GRANT SELECT, UPDATE ON UTILISATEUR TO modif_info_perso;
+grant select, update on utilisateur to modif_info_perso;
 
 
 -- #############################################################################################################################################################
