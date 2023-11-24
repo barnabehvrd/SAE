@@ -22,7 +22,7 @@
     
 
     if ($reponse==NULL){
-        //echo 'non producteur';
+        echo 'non producteur';
         $bdd=dbConnect();
         $queryGetProduitCommande = $bdd->query(('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti ='.$utilisateur.';'));
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
@@ -32,14 +32,15 @@
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
           $updateProduit="UPDATE PRODUIT SET Qte_Produit = Qte_Produit+".$Qte_Produit_Commande." WHERE Id_Produit = ".$Id_Produit .";";
-          //$bdd->exec($updateProduit);
-          echo $updateProduit;
-  
+          $bdd->exec($updateProduit);
+          //echo $updateProduit;
+          echo 'DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';';
+          $test=$bdd->query(('DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';'));
           $iterateurProduit++;
       }
   
-        //$bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
-        //$bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
+        
+        $bdd->query(('DELETE FROM COMMANDE WHERE Id_Uti='.$utilisateur.';'));
     }
     else{
         //echo ' producteur';

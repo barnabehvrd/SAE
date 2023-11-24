@@ -114,7 +114,7 @@ CREATE TABLE CONTENU(
 -- II - Vues
 -- III - Procédures Stockées
 -- IV - Déclencheurs
-
+/*
 
 -- #############################################################################################################################################################
 
@@ -130,7 +130,7 @@ GRANT SELECT, UPDATE ON UTILISATEUR TO modif_info_perso;
 
 
 -- #############################################################################################################################################################
-
+*/
 
 -- II - VUES : 
 
@@ -515,8 +515,8 @@ CREATE OR REPLACE PROCEDURE isProducteur(
 	IN Id_Uti INT
 )
 BEGIN
-	IF Id_Uti IN (SELECT Id_Uti FROM producteur) THEN
-    	SELECT concat(' - ', (SELECT Prof_Prod FROM producteur WHERE producteur.Id_Uti=Id_Uti)) as result;
+	IF Id_Uti IN (SELECT Id_Uti FROM PRODUCTEUR) THEN
+    	SELECT concat(' - ', (SELECT Prof_Prod FROM PRODUCTEUR WHERE PRODUCTEUR.Id_Uti=Id_Uti)) as result;
     ELSE
     	SELECT '';
     END IF;
@@ -679,6 +679,7 @@ VALUES
     ('53', 'Amelia', 'Garcia', 'ameliagarcia35@gmail.com', '10 Route de Garnay, 28500 ALLAINVILLE', 'ameliapass567'),
     ('54', 'Elijah', 'Davis', 'elijahdavis4@gmail.com', '12 Rue Amoreau, 28100 DREUX', 'elijahpassword'),
     ('55', 'Luna', 'Smith', 'lunasmith5@gmail.com', '1 Miton, 18160 TOUCHAY', 'lunapass123'),
+    ('56', 'Killian', 'Lehénaff', 'killian.lehenaff@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'k123LH'),
     ('57', 'Thomas ', 'Glet', 'tglet100@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'test'),
     ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234'),
     ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567'),
