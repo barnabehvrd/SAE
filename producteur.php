@@ -7,11 +7,13 @@
 <body>
     <?php
      function dbConnect(){
-        $host = 'localhost';
-        $dbname = 'sae3';
-        $user = 'root';
-        $password = '';
-        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+        $utilisateur = "inf2pj02";
+        $serveur = "localhost";
+        $motdepasse = "ahV4saerae";
+        $basededonnees = "inf2pj_02";
+    
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
@@ -57,7 +59,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -78,7 +80,7 @@
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                         echo '</div> '; 
                                     }
@@ -94,7 +96,7 @@
                         $bdd=dbConnect();
                         
 
-                        $queryInfoProd = $bdd->query(('SELECT utilisateur.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
+                        $queryInfoProd = $bdd->query(('SELECT UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod=\''.$Id_Prod.'\';'));
                         $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
 
                         // recupération des paramètres de la requête qui contient 1 élément
@@ -105,7 +107,7 @@
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
-                        	<img class="img-test" src="/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
+                        	<img class="img-test" src="/~inf2pj02/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
 						</div>
 						<div class="text-info">
                             <?php

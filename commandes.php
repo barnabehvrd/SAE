@@ -9,11 +9,13 @@
 <body>
 	<?php
     	function dbConnect(){
-        $host = 'localhost';
-        $dbname = 'sae3';
-        $user = 'root';
-        $password = '';
-        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+    $utilisateur = "inf2pj02";
+    $serveur = "localhost";
+    $motdepasse = "ahV4saerae";
+    $basededonnees = "inf2pj_02";
+
+    // Connect to database
+    return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
 	  $bdd=dbConnect();
 	  session_start();
