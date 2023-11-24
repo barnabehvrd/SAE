@@ -93,19 +93,11 @@
                                 if ($_GET["categorie"]=="Tout"){
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                                 }else{
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod = ?';
-                                    $stmt->bind_param("s", $categorie);
+                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
+                                    //$stmt->bind_param("s", $categorie);
                                 }
-                               
-                                
-                                echo("requete<br>");
-                                echo($requete);
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
-
-                                 echo("stmt<br>");
-                                 var_dump($stmt);
-                                 echo("fin stmt<br>");
                                 $stmt->execute();
                                 $result = $stmt->get_result();
 
