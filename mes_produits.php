@@ -14,7 +14,7 @@
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
       session_start();
-      $utilisateur=$_SESSION["Id_Uti"][0]["Id_Uti"];
+      $utilisateur=$_SESSION["Id_Uti"][0];
     ?>
     <div class="container">
         <div class="left-column">

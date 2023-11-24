@@ -25,22 +25,24 @@ try {
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
     // Check if user email exists
-    $query = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
-    $Id_Uti = $query->fetchAll(PDO::FETCH_ASSOC);
+    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
+    $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle invalid email
-    if ($Id_Uti == NULL) {
+    if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
         header('Location: form_sign_in.php?mail=adresse mail invalide');
         exit();
     } else {
 
     // Extract user ID
-    $Id_uti = $Id_Uti[0]["Id_Uti"];
+    $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
+    echo $Id_Uti;
+    echo '<Br>';
     
     // Verify password using stored procedure
-    //echo('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\');');
-    $query = $bdd->query('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\')');
+    //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
+    $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
 
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -50,23 +52,20 @@ try {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            echo '</br>';
-            //echo($_SESSION["Id_Uti"][0]["Id_Uti"]);
-            $Id_Uti=$_SESSION["Id_Uti"][0]["Id_Uti"];
-            echo '</br>';
-            
-            $isProducteur = $bdd->query('CALL isProducteur('.$Id_Uti.');');
+            echo $_SESSION['Id_Uti'];
+
+            $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+            $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
+            echo '<br>';
+            var_dump($isProducteur);
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            echo '<br>';
+            var_dump($returnIsProducteur);
             $reponse=$returnIsProducteur[0]["result"];
-            echo '</br>';
-            echo $reponse;
             if ($reponse!=NULL){
                 echo 'producteur';
                 $_SESSION["isProd"]=true;
                 var_dump($_SESSION);
-            }
-            else{
-                $_SESSION["isProd"]=false;
             }
             header('Location: index.php');
         } else {
