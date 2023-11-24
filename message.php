@@ -18,29 +18,35 @@
 			?>
         </div>
         <div class="right-column">
-            <div class="fixed-banner">
+		<div class="fixed-banner">
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
                         <button class="button"><a href="index.php">accueil</a></button>
-                        <button class="button"><a href="message.php">messagerie</a></button>
-                        <button class="button"><a href="commandes.php">commandes</a></button>
+                        <button class="button"><a href="message.php">messagerie</a></button>                 
+						<button class="button"><a href="commandes.php">commandes</a></button>
+
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-					<a class="fixed-size-button" href="form_sign_in.php" >
-					<?php
-					session_start();
-					$_SESSION['Id_Uti']=2;
-					if (!isset($_SESSION)) {
-					echo "connection";
-					}
-					else {
+					
+					<?php 
+                    
+                    session_start();
+                    if (isset($_SESSION['Mail_Uti'])) {  
+                    echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 
 					}
+					else {
+                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
+					echo "connection";
+					}
+					
 					?>
-					</a>
+					
+					
+					</a>    
                 </div>
             </div>
 			<div class="surContenu">

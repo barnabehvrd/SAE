@@ -42,19 +42,24 @@
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
-                <div class="banner-right">
-					<a class="fixed-size-button" href="form_sign_in.php" >
-					<?php if (!isset($_SESSION)) {
-					echo "connection";
-					}
-					else {
+				<div class="banner-right">
+					
+					<?php 
+                    
+                    session_start();
+                    if (isset($_SESSION['Mail_Uti'])) {  
+                    echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 
 					}
-						
+					else {
+                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
+					echo "connection";
+					}
+					
 					?>
 					
 					
-					</a>
+					</a>    
                 </div>
             </div>
 			<div class="contenu">

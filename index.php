@@ -13,7 +13,7 @@
 			 <p>recherche par catégorie</p>
 
                             
-			<form method="post" action="index.php"> 
+			<form method="get" action="index.php"> 
 
 			<label for="categories">Sélectionnez une catégorie :</label>
 			<select name="categorie" id="categories">
@@ -72,11 +72,9 @@
              ?> 
 				<div class="gallery-container">
                         <?php
-                        $_SERVER["REQUEST_METHOD"] = "POST";
-                        $_POST["categorie"] = "Tout";
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            if (isset($_POST["categorie"])) {
-                                $categorie = $_POST["categorie"];
+                        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                            if (isset($_GET["categorie"])) {
+                                $categorie = $_GET["categorie"];
                                 // Connexion à la base de données 
                                 $utilisateur = "inf2pj02";
                                 $serveur = "localhost";
@@ -89,7 +87,7 @@
                                 }
 
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                if ($_POST["categorie"]=="Tout"){
+                                if ($_GET["categorie"]=="Tout"){
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                                 }else{
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod = ?';
