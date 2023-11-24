@@ -46,14 +46,23 @@ try {
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
-        if ($test[0][1] == 1) {
-            // Successful login
-            echo "Le mot de passe correspond. Vous allez etre redirigé vers la page d'accueil";
+        if ($test[0][1] == 1 ) {
+            echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
+
+
+            $isProducteur = $bdd->query('CALL isProducteur('.intval($Id_Uti).');');
+            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($returnIsProducteur);
+            $reponse=$returnIsProducteur[0]["result"];
+            if ($reponse!=NULL){
+                echo 'producteur';
+                $_SESSION["isProd"]=true;
+                var_dump($_SESSION);
+            }
             header('Location: index.php');
         } else {
-            // Incorrect password
             $_SESSION['test_pwd']--;
             header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
         }

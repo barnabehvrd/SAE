@@ -66,6 +66,9 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1> PRODUCTEURS : </h1>
             <?php
+            
+            echo('la tu vois si il est producteur');
+            var_dump($_SESSION["isProd"]);
             echo("php version debug<br>");
             echo phpversion();
              echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
