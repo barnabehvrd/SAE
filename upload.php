@@ -1,16 +1,11 @@
 <?php
 
-// Vérifier si le dossier "/img/" existe, sinon le créer
-if (!file_exists('img')) {
-    mkdir('img', 0777, true);
-}
-
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
         // Spécifier le chemin du dossier de destination
-        $targetDir = "img/";
+        $targetDir = "home/inf2pj02/public_html/img/";
 
         // Obtenir le nom du fichier téléchargé
         $fileName = basename($_FILES["image"]["name"]);
