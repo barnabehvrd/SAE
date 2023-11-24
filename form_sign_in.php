@@ -44,7 +44,7 @@
 						<p>report a bug</p>
 						<label for="mail">mail :</label>
 						<input type="text" name="mail" id="mail" required><br><br>
-						<label for="pwd">message : </label>
+						<label for="message">message : </label>
 						<input type="text" name="message" id="message" required><br><br>
 						<input type="submit" value="Envoyer">
 				</form>
