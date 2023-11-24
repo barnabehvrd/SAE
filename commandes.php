@@ -8,7 +8,9 @@
 </head>
 <body>
 	<?php
-    	function dbConnect(){
+	
+	session_start();
+    function dbConnect(){
     $utilisateur = "inf2pj02";
     $serveur = "localhost";
     $motdepasse = "ahV4saerae";
@@ -18,7 +20,6 @@
     return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
 	  $bdd=dbConnect();
-	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
     ?>
     <div class="container">
