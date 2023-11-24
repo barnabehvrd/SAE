@@ -22,9 +22,9 @@
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
-                        <button class="button"><a href="index.php">accueil</a></button>
-                        <button class="button"><a href="message.php">messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">commandes</a></button>
+						<button class="button"><a href="index.php">Accueil</a></button>
+                        <button class="button"><a href="message.php">Messagerie</a></button>                 
+						<button class="button"><a href="commandes.php">Commandes</a></button>
                         <?php
 							session_start();
                             if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){

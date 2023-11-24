@@ -36,9 +36,9 @@
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
-                        <button class="button"><a href="index.php">accueil</a></button>
-                        <button class="button"><a href="message.php">messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">commandes</a></button>
+                        <button class="button"><a href="index.php">Accueil</a></button>
+                        <button class="button"><a href="message.php">Messagerie</a></button>                 
+						<button class="button"><a href="commandes.php">Commandes</a></button>
                         <?php
                             if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                                 echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
@@ -49,7 +49,6 @@
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-					
 					<?php 
                     if (isset($_SESSION['Mail_Uti'])) {  
                     echo '<a class="fixed-size-button" href="user_informations.php" >';
@@ -59,10 +58,7 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-					
 					?>
-					
-					
 					</a>
                 </div>
             </div>
