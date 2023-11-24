@@ -20,5 +20,3 @@ if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
 }
     
 ?>
-
-BITE</a><img src="https://i.etsystatic.com/25272370/r/il/61a8e1/3840343796/il_570xN.3840343796_ja1h.jpg"><a>🖕
