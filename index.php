@@ -7,6 +7,9 @@
 
 </head>
 <body>
+    <?php
+        session_start();
+    ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
@@ -27,7 +30,6 @@
 			</select>
 			<input type="submit" value="Aller à la catégorie">
 			</form>
-			
         </div>
         <div class="right-column">
             <div class="fixed-banner">
@@ -37,6 +39,12 @@
                         <button class="button"><a href="index.php">accueil</a></button>
                         <button class="button"><a href="message.php">messagerie</a></button>                 
 						<button class="button"><a href="commandes.php">commandes</a></button>
+                        <?php
+                            var_dump($_SESSION["isProd"]);
+                            if ($_SESSION["isProd"]==true){
+                                echo '<button class="button"><a href="mesProduits.php">Mes produits</a></button>';
+                            }
+                        ?>
 
                     </div>
                 </div>
@@ -44,8 +52,6 @@
                 <div class="banner-right">
 					
 					<?php 
-                    
-                    session_start();
                     if (isset($_SESSION['Mail_Uti'])) {  
                     echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 

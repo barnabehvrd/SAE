@@ -33,16 +33,18 @@ if(isset($Id_Uti)){
             $_SESSION['Id_Uti'] = $Id_Uti;
 
 
-            $isProducteur = $bdd->query('CALL isProducteur('.$Id_Uti.');');
+            $isProducteur = $bdd->query('CALL isProducteur('.intval($Id_Uti).');');
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
             $reponse=$returnIsProducteur[0]["result"];
+            echo '</br>';
             var_dump($reponse);
+            echo '</br>';
             if ($reponse!=NULL){
-                echo 'producteur';
+                //echo 'producteur';       
                 $_SESSION["isProd"]=true;
-                var_dump($_SESSION);
             }
-            //header('Location: index.php');
+            var_dump($_SESSION["isProd"]);
+            header('Location: index.php');
         } else {
             $_SESSION['test_pwd']--;
             header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes '.$_SESSION['test_pwd']. ' tentative(s)');
