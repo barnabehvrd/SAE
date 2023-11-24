@@ -3,9 +3,10 @@
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
-   if (isset($_FILES["image"])) {
+    if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
-        $targetDir = "home/inf2pj02/public_html/img/";
+        $targetDir = __DIR__ . "/img_producteur/";
+
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "inf2pj02";
         $serveur = "localhost";
@@ -13,23 +14,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $basededonnees = "inf2pj_02";
         session_start();
         // Connect to database
-        $Id_Uti=$_SESSION[0]["Id_Uti"];
-        var_dump($Id_Uti);
         $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Id_Uti='.$Id_Uti;
+        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";';
         echo ($requete);
-        $Id_Prod = $bdd->query(('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Id_Uti='.$Id_Uti.';'));
-        $fileName = $Id_Prod;
-        // Créer le chemin complet du fichier de destination
-        $targetPath = $targetDir . $fileName;
-        // Déplacer le fichier téléchargé vers le dossier de destination
-            move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath);
-            echo "L'image a été téléchargée avec succès.";
+        $queryIdProd = $bdd->query(('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";'));
+        $returnqueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+        $Id_Prod=$returnqueryIdProd[0]["Id_Prod"];
 
-   } else {
-        echo "Veuillez sélectionner une image.";
+        // Obtenir l'extension du fichier
+        $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+
+        // Utiliser l'extension dans le nouveau nom du fichier
+        $newFileName = $Id_Prod . '.' . $extension;
+
+        // Créer le chemin complet du fichier de destination
+        $targetPath = $targetDir . $newFileName;
+
+        // Déplacer le fichier téléchargé vers le dossier de destination
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
+            echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
+        } else {
+            echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
+        }
+
+    } else {
+        echo "Veuillez sélectionner une image.<br>";
     }
+    header('Location: user_informations.php');    
+
 }
 
 ?>
-

@@ -71,7 +71,7 @@
             var_dump($_SESSION["isProd"]);
             echo("php version debug<br>");
             echo phpversion();
-             echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
+            echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
              ?> 
 				<div class="gallery-container">
                         <?php
@@ -131,6 +131,9 @@
                                 $connexion->close();
                             }
                         }
+                        var_dump($_SESSION["Id_Uti"]);
+                        echo("<br>");
+                        var_dump($_SESSION["Mail_Uti"]);
                         ?>
                     
                 </div>
