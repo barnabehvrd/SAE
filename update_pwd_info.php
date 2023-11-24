@@ -12,7 +12,6 @@ if ($pwd1==$pwd2 && $pwd1!==null){
     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
     $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
     echo ($update);
-        $bdd->exec($update);
     $bdd->exec($update);
 //header('Location: user_informations.php');
 }

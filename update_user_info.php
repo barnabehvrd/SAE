@@ -6,11 +6,12 @@ $serveur = "localhost";
 $motdepasse = "ahV4saerae";
 $basededonnees = "inf2pj_02";
 $bdd = new PDO('mysql:host='.$serveur.';dbname='.$basededonnees,$utilisateur,$motdepasse);
-    session_start();
-    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-    $update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$_POST["new_adr"]."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
-    
-    echo ($update);
-    $bdd->exec($update);
-    header('Location: update_user_info.php');    
+session_start();
+// Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+
+$update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$_POST["new_adr"]."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
+
+echo ($update);
+$bdd->exec($update);
+header('Location: user_informations.php');    
 ?>
