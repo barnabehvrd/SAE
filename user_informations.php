@@ -102,10 +102,10 @@
 				
                 </div>
                 <div class="square">
-                    <form action="upload_image.php" method="post" enctype="multipart/form-data">
-                        <label for="image">Select an image:</label>
-                        <input type="file" name="image" id="image" required>
-                        <input type="submit" value="Upload">
+                    <h2>Uploader une image</h2>
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <input type="file" name="image" accept="image/*" required>
+                        <button type="submit">Envoyer</button>
                     </form>
                 </div>
             </div>
