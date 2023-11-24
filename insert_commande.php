@@ -24,11 +24,12 @@
     $bdd->query($insertionCommande);
 
     foreach ($Url as $produit => $quantite) {
+      if ($quantite>0){        
         $insertionProduit = "INSERT INTO CONTENU (Id_Commande, Id_Produit, Qte_Produit_Commande, Num_Produit_Commande) VALUES ($nbCommandes, $produit, $quantite, $i);";
         $bdd->query($insertionProduit);
         $updateProduit="UPDATE PRODUIT SET Qte_Produit = Qte_Produit-".$quantite." WHERE Id_Produit = ".$produit .";";
         $bdd->exec($updateProduit);
-        $i++;
+        $i++;}
     }
     
     header('Location: commandes.php?Id_Prod=314');

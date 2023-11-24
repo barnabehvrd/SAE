@@ -68,15 +68,20 @@
 						$Nom_Prod = strtoupper($Nom_Prod);
 						$Prenom_Prod = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
 						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
-                        echo '<div class="commande" >';
-                        echo "Commande n°" . $iterateurCommande+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
-						echo '</br>';
 
 						$total=0;
 						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
 						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 						$iterateurProduit=0;
-						while ($iterateurProduit<count($returnQueryGetProduitCommande)){
+						$nbProduit=count($returnQueryGetProduitCommande);
+
+						if ($nbProduit>0){
+							echo '<div class="commande" >';
+							echo "Commande n°" . $iterateurCommande+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
+							echo '</br>';
+						}
+
+						while ($iterateurProduit<$nbProduit){
 							$Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
 							$Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
 							$Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
@@ -87,8 +92,10 @@
 							$iterateurProduit++;
 						}
                         $iterateurCommande++;
-						echo '<div class="aDroite">Total : '.$total.'€</div>';
-						echo '</div> '; 
+						if ($nbProduit>0){
+							echo '<div class="aDroite">Total : '.$total.'€</div>';
+							echo '</div> '; 
+						}
                     }
                 }
             ?>
