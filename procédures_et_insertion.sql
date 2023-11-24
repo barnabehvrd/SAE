@@ -515,8 +515,8 @@ CREATE OR REPLACE PROCEDURE isProducteur(
 	IN Id_Uti INT
 )
 BEGIN
-	IF Id_Uti IN (SELECT Id_Uti FROM producteur) THEN
-    	SELECT concat(' - ', (SELECT Prof_Prod FROM producteur WHERE producteur.Id_Uti=Id_Uti)) as result;
+	IF Id_Uti IN (SELECT Id_Uti FROM PRODUCTEUR) THEN
+    	SELECT concat(' - ', (SELECT Prof_Prod FROM PRODUCTEUR WHERE PRODUCTEUR.Id_Uti=Id_Uti)) as result;
     ELSE
     	SELECT '';
     END IF;

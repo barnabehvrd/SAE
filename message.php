@@ -30,11 +30,10 @@
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
 					<a class="fixed-size-button" href="form_sign_in.php" >
-					<?php 
+					<?php
+					session_start();
 					$_SESSION['Id_Uti']=2;
 					if (!isset($_SESSION)) {
-						
-					session_start();
 					echo "connection";
 					}
 					else {

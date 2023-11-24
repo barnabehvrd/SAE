@@ -3,6 +3,9 @@
 
 
 // Récupération des données du formulaire
+session_start();
+
+$_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $adresse = $_POST['adresse'];
