@@ -40,9 +40,8 @@
                         <button class="button"><a href="message.php">messagerie</a></button>                 
 						<button class="button"><a href="commandes.php">commandes</a></button>
                         <?php
-                            var_dump($_SESSION["isProd"]);
-                            if ($_SESSION["isProd"]==true){
-                                echo '<button class="button"><a href="mesProduits.php">Mes produits</a></button>';
+                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
                             }
                         ?>
 

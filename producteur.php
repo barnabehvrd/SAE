@@ -13,6 +13,7 @@
         $password = '';
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
+      session_start();
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
     ?>
@@ -24,27 +25,34 @@
             <p>Ceci est la partie gauche de la page web.</p>
         </div>
         <div class="right-column">
-            <div class="fixed-banner">
+        <div class="fixed-banner">
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
                         <button class="button"><a href="index.php">accueil</a></button>
                         <button class="button"><a href="message.php">messagerie</a></button>                 
-                        <button class="button"><a href="commandes.php">commandes</a></button>
+						<button class="button"><a href="commandes.php">commandes</a></button>
+                        <?php
+                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
+                            }
+                        ?>
+
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-                    <a class="fixed-size-button" href="form_sign_in.php" >
-                    <?php 
-                    session_start();
-                    if (!isset($_SESSION)) {
-                        echo "connection";
-                    } else {
-                        echo $_SESSION['Mail_Uti']; 
-                    }
-                    ?>
-                    </a>
+					<?php 
+                    if (isset($_SESSION['Mail_Uti'])) {  
+                    echo '<a class="fixed-size-button" href="user_informations.php" >';
+					echo $_SESSION['Mail_Uti']; 
+					}
+					else {
+                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
+					echo "connection";
+					}
+					?>
+					</a>
                 </div>
             </div>
             <form method="get" action="insert_commande.php">

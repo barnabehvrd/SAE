@@ -15,7 +15,7 @@
 
 
     
-    $isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
+  $isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
 	$returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
 	$reponse=$returnIsProducteur[0]["result"];
     //var_dump($reponse);
@@ -58,6 +58,7 @@
         $bdd->query(('DELETE FROM MESSAGE WHERE Emetteur='.$utilisateur.' OR Destinataire='.$utilisateur.';'));
         $bdd->query(('DELETE FROM PRODUCTEUR WHERE Id_Uti='.$utilisateur.';'));
         $bdd->query(('DELETE FROM UTILISATEUR WHERE Id_Uti='.$utilisateur.';'));
+
     }
 
     header('Location: log_out.php');
