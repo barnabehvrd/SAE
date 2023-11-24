@@ -1,5 +1,5 @@
 <?php
-//traitement formulaire sin in php
+
 
 // Error handling with try-catch block
 try {
@@ -41,6 +41,7 @@ try {
     // Verify password using stored procedure
     //echo('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\');');
     $query = $bdd->query('CALL verifMotDePasse(' . $Id_uti . ', \'' . $pwd . '\')');
+
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle password verification

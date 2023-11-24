@@ -12,3 +12,5 @@ $bdd = new PDO('mysql:host='.$serveur.';dbname='.$basededonnees,$utilisateur,$mo
     
     echo ($update);
     $bdd->exec($update);
+    header('Location: update_user_info.php');    
+?>
