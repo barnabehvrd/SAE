@@ -31,7 +31,7 @@
                         <button class="button"><a href="index.php">accueil</a></button>
                         <button class="button"><a href="message.php">messagerie</a></button>           
 						<button class="button"><a href="commandes.php">commandes</a></button>
-						<button class="button"><a href="commandes.php">commandes</a></button>
+						<button class="button"><a href="commandes.php">PAS TOUCHER EN COURS</a></button>
 						<?php 
 							//$isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
 							//$returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);

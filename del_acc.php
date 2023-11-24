@@ -10,9 +10,9 @@
 
     // Start session
     session_start();
-    // forcé à 7 ATTENTION
-    //$utilisateur=$_SESSION["Id_Uti"];
-    $utilisateur=12;
+
+    $utilisateur=$_SESSION["Id_Uti"];
+
 
     
     $isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
@@ -34,16 +34,19 @@
           $updateProduit="UPDATE PRODUIT SET Qte_Produit = Qte_Produit+".$Qte_Produit_Commande." WHERE Id_Produit = ".$Id_Produit .";";
           $bdd->exec($updateProduit);
           //echo $updateProduit;
-          echo 'DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';';
           $test=$bdd->query(('DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';'));
           $iterateurProduit++;
       }
   
         
         $bdd->query(('DELETE FROM COMMANDE WHERE Id_Uti='.$utilisateur.';'));
+        $bdd->query(('DELETE FROM MESSAGE WHERE Emetteur='.$utilisateur.' OR Destinataire='.$utilisateur.';'));
+        $bdd->query(('DELETE FROM UTILISATEUR WHERE Id_Uti='.$utilisateur.';'));
     }
     else{
         //echo ' producteur';
     }
+
+    header('Location: log_out.php');
     
 ?>
