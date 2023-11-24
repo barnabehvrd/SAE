@@ -72,7 +72,7 @@ CREATE TABLE MESSAGE(
 );
 
 CREATE TABLE COMMANDE(
-   Id_Commande VARCHAR(50),
+   Id_Commande INT,
    Id_Statut INT NOT NULL,
    Id_Prod INT NOT NULL,
    Id_Uti INT NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE PRODUIT(
 );
 
 CREATE TABLE CONTENU(
-   Id_Commande VARCHAR(50),
+   Id_Commande INT,
    Id_Produit INT,
    Qte_Produit_Commande INT NOT NULL,
    Num_Produit_Commande INT NOT NULL,
@@ -114,20 +114,23 @@ CREATE TABLE CONTENU(
 -- II - Vues
 -- III - Procédures Stockées
 -- IV - Déclencheurs
-
-
--- #############################################################################################################################################################
-
- -- 1) rôle permettant de modifier ses informations personnelles
-
--- drop role if exists modif_info_perso;
-create or replace role modif_info_perso;
-
-grant select, update on utilisateur to modif_info_perso;
-
+/*
 
 -- #############################################################################################################################################################
 
+ 
+-- I - RÔLES : 
+
+-- 1) Rôle permettant de modifier ses informations personnelles
+
+-- DROP ROLE IF EXISTS modif_info_perso;
+CREATE OR REPLACE ROLE modif_info_perso;
+
+GRANT SELECT, UPDATE ON UTILISATEUR TO modif_info_perso;
+
+
+-- #############################################################################################################################################################
+*/
 
 -- II - VUES : 
 
@@ -138,7 +141,7 @@ DROP VIEW IF EXISTS info_producteur;
 -- Utilisation lors de l'affichage des informations d'un producteur
 CREATE VIEW info_producteur
 	AS 
-	SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod
+	SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Id_Prod, Prof_Prod
 	FROM UTILISATEUR 
 	JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti=PRODUCTEUR.Id_Uti;
 
@@ -186,7 +189,7 @@ DROP VIEW IF EXISTS produits_commandes;
 -- Utilisation lors de l'affichage des commandes
 CREATE VIEW produits_commandes
 	AS 
-	SELECT COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
+	SELECT PRODUIT.Id_Produit, COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
 	FROM CONTENU JOIN PRODUIT ON CONTENU.Id_Produit=PRODUIT.Id_Produit
 	JOIN COMMANDE ON CONTENU.Id_Commande=COMMANDE.Id_Commande
 	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
@@ -220,7 +223,7 @@ DROP VIEW IF EXISTS Produits_d_un_producteur;
 -- utilisation lors de l'affichage des differents produits d'un producteur
 CREATE VIEW Produits_d_un_producteur
 	AS 
-	SELECT Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
+	SELECT Id_Prod, Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
 	FROM PRODUIT 
 	JOIN TYPE_DE_PRODUIT ON PRODUIT.Id_Type_Produit=TYPE_DE_PRODUIT.Id_Type_Produit
 	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
@@ -504,6 +507,24 @@ BEGIN
   
 END $$
 
+-- procedure pour savoir si l'utilisateur est un producteur et nous renvoie sa profession si oui 👍😁
+
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE isProducteur(
+	IN Id_Uti INT
+)
+BEGIN
+	IF Id_Uti IN (SELECT Id_Uti FROM producteur) THEN
+    	SELECT concat(' - ', (SELECT Prof_Prod FROM producteur WHERE producteur.Id_Uti=Id_Uti)) as result;
+    ELSE
+    	SELECT '';
+    END IF;
+    
+END $$
+
+DELIMITER ;
+
 
 -- ###########################################################################################################################################################
 
@@ -658,7 +679,11 @@ VALUES
     ('53', 'Amelia', 'Garcia', 'ameliagarcia35@gmail.com', '10 Route de Garnay, 28500 ALLAINVILLE', 'ameliapass567'),
     ('54', 'Elijah', 'Davis', 'elijahdavis4@gmail.com', '12 Rue Amoreau, 28100 DREUX', 'elijahpassword'),
     ('55', 'Luna', 'Smith', 'lunasmith5@gmail.com', '1 Miton, 18160 TOUCHAY', 'lunapass123'),
-    ('56', 'Benjamin', 'Martinez', 'benjaminmartinez6@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567');
+    ('56', 'Killian', 'Lehénaff', 'killian.lehenaff@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'k123LH');
+  --  ('57', 'Thomas ', 'Glet', 'tglet100@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'test');
+    ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234');
+    ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567');
+    ('59', 'test', 'test', 'test', 'test', 'test');
 
 INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
@@ -684,7 +709,7 @@ INSERT INTO UNITE (Id_Unite, Nom_Unite)
 VALUES (1, 'Kg'),
  (2, 'l'),
  (3, 'm²'),
- (4, 'unité'); 
+ (4, 'piece'); 
 
 
 
@@ -800,17 +825,17 @@ VALUES
 -- Pour un vigneron
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(14, 'Vin rouge', 7, 7, '10', 1, '15.00', 1),
-(15, 'Vin blanc', 7, 7, '8', 1, '12.00', 1);
+(14, 'Vin rouge', 7, 7, '10', 4, '15.00', 4),
+(15, 'Vin blanc', 7, 7, '8', 4, '12.00', 4);
 
 -- Pour un maraîcher
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
 (5, 'Tomates', 5, 4, '20', 1, '2.00', 1),
 (6, 'Poivrons', 5, 4, '10', 1, '1.50', 1),
-(7, 'Courgettes', 5, 4, '15', 1, '1.75', 1),
+(7, 'Courgettes', 5, 4, '15', 1, '1.75', 4),
 (8, 'Carottes', 2, 4, '18', 1, '1.40', 1),
-(9, 'Aubergines', 5, 4, '12', 1, '2.25', 1);
+(9, 'Aubergines', 5, 4, '12', 1, '2.25', 4);
 
 -- Pour un apiculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
@@ -821,20 +846,20 @@ VALUES
 -- Pour un éleveur de volaille
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(18, 'Poulet entier', 6, 9, '5', 1, '6.00', 1),
-(19, 'oeufs de poule', 7, 9, '30', 1, '0.50', 1);
+(18, 'Poulet entier', 6, 9, '5', 4, '6.00', 4),
+(19, 'oeufs de poule', 7, 9, '30', 4, '0.50', 4);
 
 -- Pour un viticulteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(20, 'Chardonnay', 7, 10, '12', 1, '18.00', 1),
-(21, 'Merlot', 7, 10, '15', 1, '16.00', 1);
+(20, 'Chardonnay', 7, 10, '12', 2, '18.00', 2),
+(21, 'Merlot', 7, 10, '15', 2, '16.00', 2);
 
 -- Pour un pépiniériste
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(22, 'Rosiers', 5, 1, '10', 1, '7.50', 1),
-(23, 'Sapins', 5, 1, '8', 1, '9.00', 1);
+(22, 'Rosiers', 5, 1, '10', 4, '7.50', 4),
+(23, 'Sapins', 5, 1, '8', 1, '9.00', 4);
 
 
 INSERT INTO CONTENU (Id_Commande, Id_Produit, Qte_Produit_Commande, Num_Produit_Commande) VALUES ('1', '16', '12', '2'), ('1', '13', '320', '3'), ('2', '9', '560', '1'), ('2', '17', '12', '7'), ('4', '21', '36', '8'), ('5', '20', '21', '9'), ('7', '15', '12', '11'), ('12', '12', '1250', '12'), ('12', '6', '3', '14'), ('8', '5', '1', '16');
