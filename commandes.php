@@ -15,6 +15,9 @@
         $password = '';
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
+	  $bdd=dbConnect();
+	  session_start();
+	  $utilisateur=$_SESSION["Id_Uti"];
     ?>
     <div class="container">
         <div class="left-column">
@@ -28,15 +31,18 @@
                         <button class="button"><a href="index.php">accueil</a></button>
                         <button class="button"><a href="message.php">messagerie</a></button>           
 						<button class="button"><a href="commandes.php">commandes</a></button>
-
+						<button class="button"><a href="commandes.php">commandes</a></button>
+						<?php 
+							//$isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
+							//$returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+							//var_dump($returnIsProducteur[0]["result"]);
+						?>
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
 					<a class="fixed-size-button" href="form_sign_in.php" >
 					<?php if (!isset($_SESSION)) {
-						
-					session_start();
 					echo "connection";
 					}
 					else {
@@ -53,8 +59,6 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $bdd=dbConnect();
-				$utilisateur=$_SESSION["Id_Uti"];
                 $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
