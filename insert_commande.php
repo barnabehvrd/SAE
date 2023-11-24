@@ -32,5 +32,5 @@
         $i++;}
     }
     
-    header('Location: commandes.php?Id_Prod=314');
+    header('Location: commandes.php');
 ?>
