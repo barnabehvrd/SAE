@@ -22,7 +22,7 @@
     
 
     if ($reponse==NULL){
-        echo 'non producteur';
+        //echo 'non producteur';
         $bdd=dbConnect();
         $queryGetProduitCommande = $bdd->query(('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti ='.$utilisateur.';'));
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
@@ -37,14 +37,27 @@
           $test=$bdd->query(('DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';'));
           $iterateurProduit++;
       }
-  
-        
         $bdd->query(('DELETE FROM COMMANDE WHERE Id_Uti='.$utilisateur.';'));
         $bdd->query(('DELETE FROM MESSAGE WHERE Emetteur='.$utilisateur.' OR Destinataire='.$utilisateur.';'));
         $bdd->query(('DELETE FROM UTILISATEUR WHERE Id_Uti='.$utilisateur.';'));
     }
     else{
         //echo ' producteur';
+        $bdd=dbConnect();
+        $queryGetProduitCommande = $bdd->query(('SELECT Id_Produit FROM produits_commandes WHERE Id_Prod ='.$utilisateur.';'));
+        $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+        $iterateurProduit=0;
+        $nbProduit=count($returnQueryGetProduitCommande);
+        while ($iterateurProduit<$nbProduit){
+          $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
+          //echo $updateProduit;
+          $test=$bdd->query(('DELETE FROM CONTENU WHERE Id_Produit='.$Id_Produit.';'));
+          $iterateurProduit++;
+      }
+        $bdd->query(('DELETE FROM COMMANDE WHERE Id_Uti='.$utilisateur.';'));
+        $bdd->query(('DELETE FROM MESSAGE WHERE Emetteur='.$utilisateur.' OR Destinataire='.$utilisateur.';'));
+        $bdd->query(('DELETE FROM PRODUCTEUR WHERE Id_Uti='.$utilisateur.';'));
+        $bdd->query(('DELETE FROM UTILISATEUR WHERE Id_Uti='.$utilisateur.';'));
     }
 
     header('Location: log_out.php');
