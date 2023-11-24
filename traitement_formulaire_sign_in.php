@@ -50,16 +50,23 @@ try {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-
-
-            $isProducteur = $bdd->query('CALL isProducteur('.intval($Id_Uti).');');
+            echo '</br>';
+            //echo($_SESSION["Id_Uti"][0]["Id_Uti"]);
+            $Id_Uti=$_SESSION["Id_Uti"][0]["Id_Uti"];
+            echo '</br>';
+            
+            $isProducteur = $bdd->query('CALL isProducteur('.$Id_Uti.');');
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($returnIsProducteur);
             $reponse=$returnIsProducteur[0]["result"];
+            echo '</br>';
+            echo $reponse;
             if ($reponse!=NULL){
                 echo 'producteur';
                 $_SESSION["isProd"]=true;
                 var_dump($_SESSION);
+            }
+            else{
+                $_SESSION["isProd"]=false;
             }
             header('Location: index.php');
         } else {
