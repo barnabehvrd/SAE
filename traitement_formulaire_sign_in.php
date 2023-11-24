@@ -28,13 +28,22 @@ if(isset($Id_Uti)){
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1 ) {
         if ($test[0][1] == 1 ) {
-            session_start();
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            header('Location: index.php');
+
+
+            $isProducteur = $bdd->query('CALL isProducteur('.$Id_Uti.');');
+            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            $reponse=$returnIsProducteur[0]["result"];
+            var_dump($reponse);
+            if ($reponse!=NULL){
+                echo 'producteur';
+                $_SESSION["isProd"]=true;
+                var_dump($_SESSION);
+            }
+            //header('Location: index.php');
         } else {
-             session_start();
             $_SESSION['test_pwd']--;
             header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes '.$_SESSION['test_pwd']. ' tentative(s)');
         }
