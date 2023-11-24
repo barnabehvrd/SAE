@@ -1,9 +1,5 @@
 <?php
-// Connexion à la base de données (remplacez ces valeurs par les vôtres)
-    $utilisateur = "inf2pj02";
-    $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
+
 
 
 // Récupération des données du formulaire
@@ -19,7 +15,11 @@ if ($producteur_check=='on'){
     $_SESSION["is_producteur"]= false;
 }
 
-
+// Connexion à la base de données 
+$utilisateur = "inf2pj02";
+$serveur = "localhost";
+$motdepasse = "ahV4saerae";
+$basededonnees = "inf2pj_02";
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 // Récupération de la valeur maximum de Id_Uti
 $requete = "SELECT MAX(Id_Uti) AS id_max FROM UTILISATEUR";

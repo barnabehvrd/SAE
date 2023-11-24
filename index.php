@@ -77,12 +77,12 @@
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["categorie"])) {
                                 $categorie = $_POST["categorie"];
-                                // Connexion à la base de données
-                                $utilisateur = "root";
+                                // Connexion à la base de données 
+                                $utilisateur = "inf2pj02";
                                 $serveur = "localhost";
-                                $basededonnees = "sae3";
-                                $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
-
+                                $motdepasse = "ahV4saerae";
+                                $basededonnees = "inf2pj_02";
+                                $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
                                 // Vérifiez la connexion
                                 if ($connexion->connect_error) {
                                     die("Erreur de connexion : " . $connexion->connect_error);
@@ -90,9 +90,9 @@
 
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                                 if ($_POST["categorie"]=="Tout"){
-                                    $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti';
+                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                                 }else{
-                                    $requete = 'SELECT utilisateur.Id_Uti, producteur.Prof_Prod, producteur.Id_Prod, utilisateur.Prenom_Uti, utilisateur.Nom_Uti, utilisateur.Adr_Uti FROM producteur JOIN utilisateur ON producteur.Id_Uti = utilisateur.Id_Uti WHERE producteur.Prof_Prod = ?';
+                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod = ?';
                                     $stmt->bind_param("s", $categorie);
                                 }
                                
@@ -114,7 +114,7 @@
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                         echo '</a> ';                                        
                                     }
                                 } else {
