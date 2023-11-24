@@ -79,10 +79,10 @@
 							echo '<div class="commande" >';
 							echo "Commande n°" . $iterateurCommande+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
 							echo '</br>';
-							echo '<form action="commandes.php" method="post">';
+							echo '<form action="delete_commande.php" method="post">';
 							echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
 
-							echo '<button type="submit">Envoyer</button>';
+							echo '<button type="submit">Annuler commande</button>';
 							echo '</form>';
 						}
 

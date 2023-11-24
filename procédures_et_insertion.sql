@@ -189,7 +189,7 @@ DROP VIEW IF EXISTS produits_commandes;
 -- Utilisation lors de l'affichage des commandes
 CREATE VIEW produits_commandes
 	AS 
-	SELECT COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
+	SELECT PRODUIT.Id_Produit, COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
 	FROM CONTENU JOIN PRODUIT ON CONTENU.Id_Produit=PRODUIT.Id_Produit
 	JOIN COMMANDE ON CONTENU.Id_Commande=COMMANDE.Id_Commande
 	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
