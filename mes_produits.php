@@ -14,14 +14,55 @@
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
       session_start();
-      $utilisateur=$_SESSION["Id_Uti"][0];
+      $utilisateur=$_SESSION["Id_Uti"];
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
+            <center><p><strong>Ajouter un produit</strong></p>
+            <form action="mes_produits.php" method="post">
+                <label for="pwd">Produit : </label>
+                <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
+
+                <select name="categorie">
+                    <option value="Animaux">Animaux</option>
+                    <option value="Fruit">Fruit</option>
+                    <option value="Graine">Graine</option>
+                    <option value="Légume">Légume</option>
+                    <option value="Planche">Planche</option>
+                    <option value="Viande">Viande</option>
+                    <option value="Vin">Vin</option>
+			    </select>
+                <br>
+                <br>Prix : 
+                <input style="width: 50px;" type="number" min="0" name="prix" required>€
+                <label>
+                    <input type="radio" name="unitPrix" value="Kg"> le kilo
+                </label>
+                <label>
+                    <input type="radio" name="unitPrix" value="pièce"> la pièce
+                </label>
+                <br>
+                <br>Stock : 
+                <input type="number" style="width: 50px;" min="0" name="quantite" required>
+                <label>
+                    <input type="radio" name="unitQuantite" value="Kg"> Kg
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="l"> L
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="m²"> m²
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="pièce"> Pièce
+                </label>
+                <br>
+                <br>
+                <input type="submit" value="Envoyer">
+            </form>
+            </center>
         </div>
         <div class="right-column">
         <div class="fixed-banner">
