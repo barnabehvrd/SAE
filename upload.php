@@ -1,27 +1,30 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $uploadDir = 'https://la-projets.univ-lemans.fr/~inf2pj02/img/';
-    $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-    $response = array();
 
-    // Vérifier si le fichier est une image
-    $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
-    $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
-    if (!in_array($imageFileType, $allowedExtensions)) {
-        $response['message'] = 'Seules les images de type JPG, JPEG, PNG et GIF sont autorisées.';
-    } else {
-        // Déplacer le fichier vers le répertoire d'upload
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            $response['message'] = 'L\'image a été téléchargée avec succès.';
-            // Vous pouvez également enregistrer le chemin de l'image dans une base de données si nécessaire.
+// Vérifier si le dossier "/img/" existe, sinon le créer
+if (!file_exists('img')) {
+    mkdir('img', 0777, true);
+}
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérifier si le fichier a été correctement téléchargé
+    if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+        // Spécifier le chemin du dossier de destination
+        $targetDir = "img/";
+
+        // Obtenir le nom du fichier téléchargé
+        $fileName = basename($_FILES["image"]["name"]);
+
+        // Créer le chemin complet du fichier de destination
+        $targetPath = $targetDir . $fileName;
+
+        // Déplacer le fichier téléchargé vers le dossier de destination
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
+            echo "L'image a été téléchargée avec succès.";
         } else {
-            $response['message'] = 'Erreur lors du téléchargement de l\'image.';
+            echo "Une erreur s'est produite lors du téléchargement de l'image.";
         }
+    } else {
+        echo "Veuillez sélectionner une image.";
     }
-
-    echo $response['message'];
-} else {
-    http_response_code(405); // Méthode non autorisée
-    echo 'Méthode non autorisée';
 }
 ?>
