@@ -101,7 +101,14 @@
 				                        <input type="button" onclick="window.location.href='del_acc.php'" id="del_acc_button" value="supprimer">
 				
                 </div>
+                <div class="square">
+                    <form action="upload_image.php" method="post" enctype="multipart/form-data">
+                        <label for="image">Select an image:</label>
+                        <input type="file" name="image" id="image" required>
+                        <input type="submit" value="Upload">
+                    </form>
                 </div>
+            </div>
                 <form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
 					<label for="mail">mail :</label>
