@@ -57,7 +57,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -93,7 +93,6 @@
                     <?php
                         $bdd=dbConnect();
                         
-
                         $queryInfoProd = $bdd->query(('SELECT utilisateur.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM utilisateur INNER JOIN producteur ON utilisateur.Id_Uti = producteur.Id_Uti WHERE producteur.Id_Prod=\''.$Id_Prod.'\';'));
                         $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
 
@@ -113,7 +112,7 @@
                             ?>
                         </div>
                     </div>
-					<button class="button"><a href="message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>">Envoyer un message</a></button>
+                    <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
                     <?php
                         if (isset($address)) {
                             $address = str_replace(" ", "+", $address);
@@ -123,10 +122,11 @@
                     ></iframe>
                     <?php } 
                     ?>
-                <button type="submit">Passer commande (renvoie juste sur la page commande pour le moment)</button>
+                <button type="submit">Passer commande</button>
             </form>
                 </div>
             </div>
+
             <form class="formulaire" action="bug_report.php" method="post">
                 <p class="centered">report a bug</p>
                 <label for="mail">mail :</label>
@@ -135,6 +135,7 @@
                 <input type="text" name="message" id="message" required><br><br>
                 <input type="submit" value="Envoyer">
             </form>
+
         </div>
     </div>
 </body>
