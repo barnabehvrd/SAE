@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche --> 
+            <img class="logo" src="img/logo.png">
              
 			
 			
@@ -38,17 +38,19 @@
                         <?php
                                 // Connexion à la base de données
                                 //attention a utiliser la vu approprié
+                                session_start();
                                 $utilisateur = "root";
                                 $serveur = "localhost";
+                                $motdepasse = "";
                                 $basededonnees = "sae3";
-                                $connexion = new mysqli($serveur, $utilisateur, "", $basededonnees);
+                                $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 
                                 // Vérifiez la connexion
                                 if ($connexion->connect_error) {
                                     die("Erreur de connexion : " . $connexion->connect_error);  
                                 }
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                $requete = 'SELECT * FROM utilisateur WHERE utilisateur.Mail_Uti=?';
+                                $requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
                                 $stmt = $connexion->prepare($requete);
                                 $stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
@@ -64,9 +66,6 @@
 
                                          <label for="new_prenom">Prénom :</label><br>
                                          <input type="text" name="new_prenom" value=<?php echo ($row["Prenom_Uti"]) ?>><br>
-                                        
-                                         <label for="new_mail">Adresse mail :</label><br>
-                                         <input type="email" name="new_mail" value=<?php echo ($row["Mail_Uti"]) ?>><br>
                                         
                                         <label for="new_adr">Adresse postale :</label><br>
                                          <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>"><br>
@@ -96,7 +95,12 @@
                                         <input type="submit" value="Modifier">
                                    </form>
                                         
-                        </div>
+                </div>
+                <div class="square">
+                                     <label for="btn-producteur">Je souhaite supprimer mon compte</label>
+				                        <input type="button" onclick="window.location.href='del_acc.php'" id="del_acc_button" value="supprimer">
+				
+                </div>
                 </div>
                 <form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>
