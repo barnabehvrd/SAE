@@ -94,7 +94,12 @@
                                         <input type="submit" value="Modifier">
                                    </form>
                                         
-                        </div>
+                </div>
+                <div class="square">
+                                     <label for="btn-producteur">Je souhaite supprimer mon compte</label>
+				                        <input type="button" onclick="window.location.href='del_acc.php'" id="del_acc_button" value="supprimer">
+				
+                </div>
                 </div>
                 <form class="formulaire" action="bug_report.php" method="post">
 					<p class= "centered">report a bug</p>

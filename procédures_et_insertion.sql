@@ -679,11 +679,11 @@ VALUES
     ('53', 'Amelia', 'Garcia', 'ameliagarcia35@gmail.com', '10 Route de Garnay, 28500 ALLAINVILLE', 'ameliapass567'),
     ('54', 'Elijah', 'Davis', 'elijahdavis4@gmail.com', '12 Rue Amoreau, 28100 DREUX', 'elijahpassword'),
     ('55', 'Luna', 'Smith', 'lunasmith5@gmail.com', '1 Miton, 18160 TOUCHAY', 'lunapass123'),
-    ('56', 'Killian', 'Lehénaff', 'killian.lehenaff@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'k123LH');
-  --  ('57', 'Thomas ', 'Glet', 'tglet100@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'test');
-    ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234');
-    ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567');
-    ('59', 'test', 'test', 'test', 'test', 'test');
+    ('56', 'Killian', 'Lehénaff', 'killian.lehenaff@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'k123LH'),
+    ('57', 'Thomas ', 'Glet', 'tglet100@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'test'),
+    ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234'),
+    ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567'),
+    ('60', 'test', 'test', 'test', 'test', 'test');
 
 INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
