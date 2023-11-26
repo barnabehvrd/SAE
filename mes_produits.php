@@ -125,6 +125,10 @@
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
+                                        echo '<form action="delete_product.php" method="post">';
+                                        echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
+                                        echo '<button type="submit">Supprimer</button>';
+                                        echo '</form>';
                                         echo '</div> '; 
                                     }
                                     $i++;
