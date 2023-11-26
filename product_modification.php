@@ -15,13 +15,15 @@
       }
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
+      $Id_Produit_Update=$_SESSION["modifyIdProduct"];
+
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="insert_products.php" method="post">
+            <form action="modify_products.php" method="post">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
 
@@ -60,7 +62,7 @@
                 </label>
                 <br>
                 <br>
-                <input type="submit" value="Ajouter le produit">
+                <input type="submit" value="Modifier le produit">
             </form>
             </center>
         </div>
@@ -130,7 +132,7 @@
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
-                                        echo '<form action="product_modification.php" method="post">';
+                                        echo '<form action="modify_product.php" method="post">';
                                         echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">Modifier</button>';
                                         echo '</form>';
