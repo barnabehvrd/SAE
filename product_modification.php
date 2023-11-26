@@ -15,8 +15,8 @@
       }
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
-      $Id_Produit_Update=$_SESSION["modifyIdProduct"];
-
+      $Id_Produit_Update=$_POST["modifyIdProduct"];
+      // récupérer les infos, forcer les champs etc...
     ?>
     <div class="container">
         <div class="left-column">
@@ -132,10 +132,15 @@
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
-                                        echo '<form action="modify_product.php" method="post">';
-                                        echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
-                                        echo '<button type="submit" name="action">Modifier</button>';
-                                        echo '</form>';
+                                        if ($Id_Produit==$Id_Produit_Update){
+                                            echo '<input type="submit" disabled="disabled" value="En cours"/></button>';
+                                        }
+                                        else{
+                                            echo '<form action="product_modification.php" method="post">';
+                                            echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
+                                            echo '<button type="submit" name="action">Modifier</button>';
+                                            echo '</form>';
+                                        }
                                         echo '<form action="delete_product.php" method="post">';
                                         echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">Supprimer</button>';
