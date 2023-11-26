@@ -21,46 +21,46 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="mes_produits.php" method="post">
+            <form action="insert_products.php" method="post">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
 
                 <select name="categorie">
-                    <option value="Animaux">Animaux</option>
-                    <option value="Fruit">Fruit</option>
-                    <option value="Graine">Graine</option>
-                    <option value="Légume">Légume</option>
-                    <option value="Planche">Planche</option>
-                    <option value="Viande">Viande</option>
-                    <option value="Vin">Vin</option>
+                    <option value="6">Animaux</option>
+                    <option value="1">Fruit</option>
+                    <option value="3">Graine</option>
+                    <option value="2">Légume</option>
+                    <option value="7">Planche</option>
+                    <option value="4">Viande</option>
+                    <option value="5">Vin</option>
 			    </select>
                 <br>
                 <br>Prix : 
                 <input style="width: 50px;" type="number" min="0" name="prix" required>€
                 <label>
-                    <input type="radio" name="unitPrix" value="Kg"> le kilo
+                    <input type="radio" name="unitPrix" value="1"> le kilo
                 </label>
                 <label>
-                    <input type="radio" name="unitPrix" value="pièce"> la pièce
+                    <input type="radio" name="unitPrix" value="4"> la pièce
                 </label>
                 <br>
                 <br>Stock : 
                 <input type="number" style="width: 50px;" min="0" name="quantite" required>
                 <label>
-                    <input type="radio" name="unitQuantite" value="Kg"> Kg
+                    <input type="radio" name="unitQuantite" value="1"> Kg
                 </label>
                 <label>
-                    <input type="radio" name="unitQuantite" value="l"> L
+                    <input type="radio" name="unitQuantite" value="2"> L
                 </label>
                 <label>
-                    <input type="radio" name="unitQuantite" value="m²"> m²
+                    <input type="radio" name="unitQuantite" value="3"> m²
                 </label>
                 <label>
-                    <input type="radio" name="unitQuantite" value="pièce"> Pièce
+                    <input type="radio" name="unitQuantite" value="4"> Pièce
                 </label>
                 <br>
                 <br>
-                <input type="submit" value="Envoyer">
+                <input type="submit" value="Ajouter le produit">
             </form>
             </center>
         </div>
@@ -122,9 +122,9 @@
                                         echo '<div class="squareProduct" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
-                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
-                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
+                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
+                                        echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
                                         echo '</div> '; 
                                     }
                                     $i++;
