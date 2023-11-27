@@ -28,7 +28,7 @@
     echo $insertionProduit;
     //echo '<br>';
     //var_dump($_SESSION);
-    
+    $_SESSION["Id_Produit"]=$nbProduits;
     $bdd->query($insertionProduit);
     header('Location: insert_product_picture.php');
 ?>
