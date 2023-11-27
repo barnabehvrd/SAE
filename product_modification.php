@@ -15,7 +15,6 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
       session_start();
-      var_dump($_POST);
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
       $bdd=dbConnect();
@@ -36,7 +35,7 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="product_modification.php" method="post">
+            <form action="modify_product.php" method="post">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
 
