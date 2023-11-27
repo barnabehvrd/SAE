@@ -53,7 +53,11 @@ try {
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
             if(($returnQueryIdAdmin)==null){
-                echo ("les utilisateurs non administrateur n'ont pas accès a cette page" );
+                echo ("
+                <title>Accès refusé - Erreur 403</title>
+                <h1>Accès refusé - Erreur 403</h1>
+                <p>Désolé, vous n'avez pas l'autorisation d'accéder à cette page.</p>
+                " );
             }else {
                 header('Location: panel_admin.php');
             }
