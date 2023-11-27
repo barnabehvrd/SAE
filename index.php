@@ -38,10 +38,11 @@
                     <div class="button-container">
                         <button class="button"><a href="index.php">Accueil</a></button>
                         <button class="button"><a href="message.php">Messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">Commandes</a></button>
+						<button class="button"><a href="commandes.php">Achats</a></button>
                         <?php
                             if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                                 echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
+                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
                             }
                         ?>
 
