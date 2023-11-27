@@ -57,7 +57,7 @@ try {
             $_SESSION['Id_Uti'] = $Id_Uti;
             if(($returnQueryIdAdmin)==null){
                 var_dump($returnQueryIdAdmin);
-            //header('Location: panel_admin.php');
+                header('Location: panel_admin.php');
             }
         } else {
             $_SESSION['test_pwd']--;
