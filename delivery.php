@@ -8,14 +8,14 @@
 </head>
 <body>
 	<?php
-      function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        }
+    	function dbConnect(){
+            $host = 'localhost';
+            $dbname = 'inf2pj_02';
+            $user = 'inf2pj02';
+            $password = 'ahV4saerae';
+            return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+      }
+
 	  $bdd=dbConnect();
 	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
@@ -99,7 +99,6 @@
                                 <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">
                                 <button type="submit">Confirmer</button>
                             </form>
-                            <a href="delivery.php"><button>Annuler</button></a>
                             <br>
                         <?php
 						}

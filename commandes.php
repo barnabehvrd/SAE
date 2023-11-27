@@ -45,7 +45,6 @@
                 <!-- Partie droite du bandeau -->
 					<?php 
                     
-                    session_start();
 					?>
 				<div class="banner-right">
 					<?php
