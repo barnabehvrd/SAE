@@ -34,11 +34,11 @@
             </div>
             <div class="basDePage">
                 <form method="post">
-						<input type="submit" value="Signaler un dysfonctionnement" class="boutonBasDePage">
+						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
                         <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-						<input type="submit" value="CGU" class="boutonBasDePage">
+						<input type="submit" value="CGU" class="lienPopup">
                         <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>

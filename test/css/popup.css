@@ -21,6 +21,7 @@
 }
 
 .contenuPopup{
+    max-width: 50%;
     width: 50%;
     min-width: fit-content;
     padding: 15px;
@@ -30,6 +31,17 @@
 
     display:grid;
     row-gap: 10px;
+}
+
+.contenuPopupAlt{
+    max-height: 50%;
+    max-width: 50%;
+    width: 50%;
+    padding: 15px;
+    background-color: #FFFFFF;
+    border: 2px solid #525252;
+    border-radius: 20px;
+    overflow-y: scroll;
 }
 
 .boutonQuitPopup{
@@ -52,6 +64,7 @@
     font-size: 21px;
 }
 
+
 .formPopup{
     padding: 10px;
     border-radius: 4px;
@@ -61,6 +74,9 @@
     display: grid;
     row-gap: 5px;
 }
+
+
+
 
 .zoneDeTextePopup{
     border-radius: 5px;
