@@ -102,7 +102,7 @@
 				
                 </div>
                 <div class="square">
-                    <h2>Uploader une image</h2>
+                    <h2>modifier votre photo de profil</h2>
                     <form action="upload.php" method="post" enctype="multipart/form-data">
                         <input type="file" name="image" accept="image/*" required>
                         <button type="submit">Envoyer</button>

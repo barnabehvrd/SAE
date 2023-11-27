@@ -40,6 +40,14 @@
 					<input type="profession" id="profession" name="profession"  required><br><br>
 					<input type="submit" value="Envoyer">
 				</form>
+
+
+				
+				<h2>ajouter votre photo de profil</h2>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" accept="image/*" required>
+                    <button type="submit">Envoyer</button>
+                </form>
 				
 				
 				
@@ -50,7 +58,7 @@
 					<label for="pwd">message : </label>
 					<input type="text" name="message" id="message" required><br><br>
 					<input type="submit" value="Envoyer">
-			</form>
+				</form>
 			<a class="fixed-size-button" href="form_sign_in.php" >  vous avez déjà de compte? </a>
 		</div>
     </div>
