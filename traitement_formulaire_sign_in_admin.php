@@ -37,8 +37,6 @@ try {
 
     // Extract user ID
     $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
-    echo $Id_Uti;
-    echo '<Br>';
     // Verify password using stored procedure
     //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
     $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
@@ -52,11 +50,11 @@ try {
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
             $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
             if(($returnQueryIdAdmin)==null){
-                var_dump($returnQueryIdAdmin);
+                echo ("les utilisateurs non administrateur n'ont pas accès a cette page" );
+            }else {
                 header('Location: panel_admin.php');
             }
         } else {
