@@ -14,9 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         // Connect to database
         $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";';
+        if(isset($_SESSION ["Mail_Uti"])){
+            $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";';
+        }else{
+            $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";';
+        }
         echo ($requete);
-        $queryIdProd = $bdd->query(('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";'));
+        $queryIdProd = $bdd->query(($requete));
         $returnqueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
         $Id_Prod=$returnqueryIdProd[0]["Id_Prod"];
 
@@ -40,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Veuillez sélectionner une image.<br>";
     }
+    
     if(isset($_SESSION["Mail_Uti"])){
     header('Location: user_informations.php');    
     }else{
