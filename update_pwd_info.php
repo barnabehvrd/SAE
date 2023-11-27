@@ -13,6 +13,6 @@ if ($pwd1==$pwd2 && $pwd1!==null){
     $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
     echo ($update);
     $bdd->exec($update);
-//header('Location: user_informations.php');
+header('Location: user_informations.php');
 }
 ?>
