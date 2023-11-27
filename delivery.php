@@ -58,7 +58,7 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';'));
+                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
@@ -72,18 +72,20 @@
                         $Nom_Client = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
 						$Nom_Client = mb_strtoupper($Nom_Client);
                         $Prenom_Client = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
-
+                        $Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
+                        //echo $Id_Statut;
+                        
 						$total=0;
 						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
 						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
-						if ($nbProduit>0){
+						if (($nbProduit>0)){
 							echo '<div class="commande" >';
-							echo "Commande n°" . $iterateurCommande+1 ." : Client ".$Prenom_Client." ".$Nom_Client;
+							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
-							echo $Desc_Statut." ";
+							echo "COMMANDE ".$Desc_Statut." ";
                             ?>
                             <form action="change_status_commande.php" method="post">
                                 <select name="categorie">
@@ -111,11 +113,12 @@
 							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
 							$iterateurProduit++;
 						}
-                        $iterateurCommande++;
+
 						if ($nbProduit>0){
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
 						}
+                        $iterateurCommande++;
                     }
                 }
             ?>
