@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
 
-    background-color: #2c44154b;
+    background-color: #2c441563;
 }
 
 .contenuPopup{
@@ -32,9 +32,21 @@
     row-gap: 10px;
 }
 
+.boutonQuitPopup{
+    background: url('../img/quit.svg') no-repeat;
+    background-size: 30px 30px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
 
 .titrePopup{
     margin: 5px;
+    margin-top: 0px;
     text-align: center;
     font-weight: 550;
     font-size: 21px;
