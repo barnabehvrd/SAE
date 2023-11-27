@@ -55,8 +55,9 @@ try {
             var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            if($count($returnQueryIdAdmin!=0)){
-            header('Location: panel_admin.php');
+            if(true){
+                echo($returnQueryIdAdmin);
+            //header('Location: panel_admin.php');
             }
         } else {
             $_SESSION['test_pwd']--;
