@@ -87,7 +87,7 @@
 							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
 							echo "COMMANDE ".$Desc_Statut." ";
-                        }
+                            if ($Desc_Statut!="LIVRÉE"){
                         ?>
                             <form action="change_status_commande.php" method="post">
                                 <select name="categorie">
@@ -101,7 +101,8 @@
                                 <button type="submit">Confirmer</button>
                             </form>
                         <?php
-						
+						    }
+                        }
 						while ($iterateurProduit<$nbProduit){
 							$Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
 							$Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
