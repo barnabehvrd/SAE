@@ -43,7 +43,7 @@
 					else {
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
-					
+					}
 					?>
 					
 					
@@ -51,7 +51,9 @@
                 </div>
             </div>
 			<div class="surContenu">
-				<div class="interlocuteur" <?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>>
+				<div class="interlocuteur" 
+				<?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
+				>
 				<?php 
 				require "fonction thomas/Messagerie/afficherInterlocuteur.php";
 				?>

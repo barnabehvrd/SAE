@@ -41,7 +41,7 @@
 					<input type="submit" value="Envoyer">
 				</form>
 				<label for="btn-producteur">Se connecté en tant que administrateur</label>
-				<input type="button" onclick="window.location.href='form_sign_up_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur">
+				<input type="button" onclick="window.location.href='form_sign_in_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur">
 				
 				
 				<form class="formulaire" action="bug_report.php" method="post">

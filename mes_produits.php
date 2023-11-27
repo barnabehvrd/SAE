@@ -8,13 +8,18 @@
     <?php
      function dbConnect(){
         $host = 'localhost';
-        $dbname = 'sae3';
-        $user = 'root';
-        $password = '';
+        $dbname = 'inf2pj_02';
+        $user = 'inf2pj02';
+        $password = 'ahV4saerae';
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
+
+      $bdd=dbConnect();
+      $queryIdProd = $bdd->query(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+      $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+      $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
     ?>
     <div class="container">
         <div class="left-column">
@@ -102,7 +107,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod=\''.$Id_Prod.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -118,9 +123,7 @@
                                     $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
                                     $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
-                                    
-
-                                    if ($QteProduit>0){
+                                if ($QteProduit>0){
                                         echo '<style>';
                                         echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
                                         echo 'button { display: inline-block; }';

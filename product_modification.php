@@ -6,13 +6,14 @@
 </head>
 <body>
     <?php
-     function dbConnect(){
-        $host = 'localhost';
-        $dbname = 'sae3';
-        $user = 'root';
-        $password = '';
-        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-      }
+    function dbConnect(){
+        $utilisateur = "inf2pj02";
+        $serveur = "localhost";
+        $motdepasse = "ahV4saerae";
+        $basededonnees = "inf2pj_02";
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    }
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
@@ -34,14 +35,12 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="modify_products.php" method="post">
+            <form action="modify_product.php" method="post">
                 <label for="pwd">Produit : </label>
+                <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
-
-
                 <select name="categorie">
                     <?php 
-                    
                         switch ($Id_Type_Produit) {
                             case 1:
                                 echo "";
@@ -244,7 +243,12 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
+                            $queryIdProd = $bdd->query(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+                            $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+                            $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
+
+                            $bdd=dbConnect();
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod=\''.$Id_Prod.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -274,7 +278,7 @@
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         if ($Id_Produit==$Id_Produit_Update){
-                                            echo '<input type="submit" disabled="disabled" value="En cours"/></button>';
+                                            echo '<input type="submit" disabled="disabled" value="Modification"/></button>';
                                         }
                                         else{
                                             echo '<form action="product_modification.php" method="post">';

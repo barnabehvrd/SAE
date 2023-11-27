@@ -36,6 +36,4 @@ if (isset($_SESSION['Id_Uti'])){
             Veuillez contacter un administrateur au plus tôt.');
     $formDisabled=true;
 }
-
-$_SESSION['Id_Uti']=2;
 ?>

@@ -9,12 +9,13 @@
 <body>
 	<?php
     	function dbConnect(){
-        $host = 'localhost';
-        $dbname = 'sae3';
-        $user = 'root';
-        $password = '';
-        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+            $host = 'localhost';
+            $dbname = 'inf2pj_02';
+            $user = 'inf2pj02';
+            $password = 'ahV4saerae';
+            return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
+
 	  $bdd=dbConnect();
 	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
@@ -85,8 +86,9 @@
 							echo '<div class="commande" >';
 							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
-							echo "COMMANDE ".$Desc_Statut." ";
-                            ?>
+							echo "COMMANDE ".$Desc_Statut." <br>";
+                            if ($Desc_Statut!="LIVRÉE"){
+                        ?>
                             <form action="change_status_commande.php" method="post">
                                 <select name="categorie">
                                     <option value="">--MODIFIER LE STATUT--</option>
@@ -98,11 +100,9 @@
                                 <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">
                                 <button type="submit">Confirmer</button>
                             </form>
-                            <a href="delivery.php"><button>Annuler</button></a>
-                            <br>
                         <?php
-						}
-
+						    }
+                        }
 						while ($iterateurProduit<$nbProduit){
 							$Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
 							$Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
