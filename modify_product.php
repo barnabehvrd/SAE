@@ -21,5 +21,5 @@
     $updateProduit= "UPDATE PRODUIT SET Nom_Produit = '".$Nom_Produit."', Id_Type_Produit = ".$Categorie.", Qte_Produit = ".$Quantite.", Id_Unite_Stock = ".$Quantite_Unite.", Prix_Produit_Unitaire = ".$Prix.", Id_unite_Prix = ".$Prix_Unite." WHERE Id_Produit = ".$Id_Produit .";";
     $bdd->exec($updateProduit);
 
-    header('Location: product_modification.php');
+    header('Location: mes_produits.php');
 ?>
