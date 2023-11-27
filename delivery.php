@@ -86,7 +86,7 @@
 							echo '<div class="commande" >';
 							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
-							echo "COMMANDE ".$Desc_Statut." ";
+							echo "COMMANDE ".$Desc_Statut." <br>";
                             if ($Desc_Statut!="LIVRÉE"){
                         ?>
                             <form action="change_status_commande.php" method="post">
