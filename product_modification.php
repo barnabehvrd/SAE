@@ -35,7 +35,7 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="modify_products.php" method="post">
+            <form action="product_modification.php" method="post">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
 
