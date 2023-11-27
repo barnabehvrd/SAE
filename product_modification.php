@@ -19,7 +19,7 @@
       $bdd=dbConnect();
       $queryGetProducts = $bdd->query(('SELECT * FROM PRODUIT WHERE Id_Produit=\''.$Id_Produit_Update.'\';'));
       $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
-      var_dump($returnQueryGetProducts);
+      //var_dump($returnQueryGetProducts);
       $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
       $Nom_Produit = $returnQueryGetProducts[0]["Nom_Produit"];
       $Id_Type_Produit = $returnQueryGetProducts[0]["Id_Type_Produit"];
@@ -138,7 +138,7 @@
                 <br>Stock : 
                 <input type="number" value="<?php echo $Qte_Produit?>" style="width: 50px;" min="0" name="quantite" required>
                 <?php
-                    switch ($Id_Unite_Prix) {
+                    switch ($Id_Unite_Stock) {
                         case 1:
                             echo "<label>";
                             echo "<input type=\"radio\" name=\"unitQuantite\" value=\"1\" checked=\"checked\"> Kg";
@@ -244,7 +244,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -259,7 +259,8 @@
                                     $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
                                     $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
-
+                                    $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
+                                    
                                     if ($QteProduit>0){
                                         echo '<style>';
                                         echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
@@ -271,7 +272,7 @@
                                         echo "Type : " . $typeProduit . "<br>";
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
+                                        echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         if ($Id_Produit==$Id_Produit_Update){
                                             echo '<input type="submit" disabled="disabled" value="En cours"/></button>';
                                         }
