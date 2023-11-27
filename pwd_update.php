@@ -30,7 +30,7 @@
 				<div class="contenu">
 						
 
-						  <form class="formulaire" action="reset_pwd.php" method="post">
+						  <form class="formulaire" action=".php" method="post">
 							<h1>Modifier le mot de passe</h1>
 							<p>Veuillez saisir  votre nouveau mot de passe deux fois.</p>
 							<input type="password" name="pwd_new" placeholder="Nouveau mot de passe">
