@@ -99,10 +99,8 @@
                                 <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">
                                 <button type="submit">Confirmer</button>
                             </form>
-                            <br>
                         <?php
 						}
-
 						while ($iterateurProduit<$nbProduit){
 							$Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
 							$Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
