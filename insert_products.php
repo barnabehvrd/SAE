@@ -30,7 +30,7 @@
     //var_dump($_SESSION);
     
     $bdd->query($insertionProduit);
-    header('Location: mes_produits.php');
+    header('Location: insert_product_picture.php');
 ?>
 
 
