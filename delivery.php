@@ -8,18 +8,15 @@
 </head>
 <body>
 	<?php
-	
-	session_start();
-    function dbConnect(){
-    $utilisateur = "inf2pj02";
-    $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
-
-    // Connect to database
-    return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    	function dbConnect(){
+        $host = 'localhost';
+        $dbname = 'sae3';
+        $user = 'root';
+        $password = '';
+        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
 	  $bdd=dbConnect();
+	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
     ?>
     <div class="container">
@@ -43,12 +40,8 @@
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
+                <div class="banner-right">
 					<?php 
-                    
-                    session_start();
-					?>
-				<div class="banner-right">
-					<?php
                     if (isset($_SESSION['Mail_Uti'])) {  
                     echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 
@@ -65,7 +58,7 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
+                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
@@ -74,30 +67,40 @@
                 else{
                     while ($iterateurCommande<count($returnQueryGetCommande)){
 						$Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
-						$Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
-						$Nom_Prod = mb_strtoupper($Nom_Prod);
-						$Prenom_Prod = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
-						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
 						$Desc_Statut = $returnQueryGetCommande[$iterateurCommande]["Desc_Statut"];
 						$Desc_Statut = mb_strtoupper($Desc_Statut);
-
+                        $Nom_Client = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
+						$Nom_Client = mb_strtoupper($Nom_Client);
+                        $Prenom_Client = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
+                        $Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
+                        //echo $Id_Statut;
+                        
 						$total=0;
 						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
 						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
-						if ($nbProduit>0){
+						if (($nbProduit>0)){
 							echo '<div class="commande" >';
-							echo "Commande n°" . $iterateurCommande+1 ." : Chez ".$Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
+							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
-							echo $Desc_Statut;
-							echo '</br>';
-							echo '<form action="delete_commande.php" method="post">';
-							echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
-
-							echo '<button type="submit">Annuler commande</button>';
-							echo '</form>';
+							echo "COMMANDE ".$Desc_Statut." ";
+                            ?>
+                            <form action="change_status_commande.php" method="post">
+                                <select name="categorie">
+                                    <option value="">--MODIFIER LE STATUT--</option>
+                                    <option value="1">EN COURS</option>
+                                    <option value="2">PRÊTE</option>
+                                    <option value="3">ANNULÉE</option>
+                                    <option value="4">LIVRÉE</option>
+                                </select>
+                                <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">
+                                <button type="submit">Confirmer</button>
+                            </form>
+                            <a href="delivery.php"><button>Annuler</button></a>
+                            <br>
+                        <?php
 						}
 
 						while ($iterateurProduit<$nbProduit){
@@ -110,11 +113,12 @@
 							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
 							$iterateurProduit++;
 						}
-                        $iterateurCommande++;
+
 						if ($nbProduit>0){
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
 						}
+                        $iterateurCommande++;
                     }
                 }
             ?>

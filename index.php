@@ -7,14 +7,14 @@
 
 </head>
 <body>
+    <?php
+        session_start();
+    ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
 			 <p>recherche par catégorie</p>
-
-                            
-			<form method="get" action="index.php"> 
-
+			<form method="post" action="index.php"> 
 			<label for="categories">Sélectionnez une catégorie :</label>
 			<select name="categorie" id="categories">
                 <option value="Tout">Tout</option>
@@ -28,25 +28,26 @@
 			</select>
 			<input type="submit" value="Aller à la catégorie">
 			</form>
-			
         </div>
         <div class="right-column">
             <div class="fixed-banner">
                 <!-- Partie gauche du bandeau -->
                 <div class="banner-left">
                     <div class="button-container">
-                        <button class="button"><a href="index.php">accueil</a></button>
-                        <button class="button"><a href="message.php">messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">commandes</a></button>
-
+                        <button class="button"><a href="index.php">Accueil</a></button>
+                        <button class="button"><a href="message.php">Messagerie</a></button>                 
+						<button class="button"><a href="commandes.php">Achats</a></button>
+                        <?php
+                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
+                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
+                            }
+                        ?>
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
                 <div class="banner-right">
-					
 					<?php 
-                    
-                    session_start();
                     if (isset($_SESSION['Mail_Uti'])) {  
                     echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 
@@ -55,9 +56,7 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-					
 					?>
-					
 					
 					</a>    
                 </div>

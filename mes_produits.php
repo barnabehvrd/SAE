@@ -7,24 +7,62 @@
 <body>
     <?php
      function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-    
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        $host = 'localhost';
+        $dbname = 'sae3';
+        $user = 'root';
+        $password = '';
+        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
       session_start();
-      // variable utilisée plusieurs fois par la suite
-      $Id_Prod = $_GET["Id_Prod"];
+      $utilisateur=$_SESSION["Id_Uti"];
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
+            <center><p><strong>Ajouter un produit</strong></p>
+            <form action="insert_products.php" method="post">
+                <label for="pwd">Produit : </label>
+                <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
+
+                <select name="categorie">
+                    <option value="6">Animaux</option>
+                    <option value="1">Fruit</option>
+                    <option value="3">Graine</option>
+                    <option value="2">Légume</option>
+                    <option value="7">Planche</option>
+                    <option value="4">Viande</option>
+                    <option value="5">Vin</option>
+			    </select>
+                <br>
+                <br>Prix : 
+                <input style="width: 50px;" type="number" min="0" name="prix" required>€
+                <label>
+                    <input type="radio" name="unitPrix" value="1"> le kilo
+                </label>
+                <label>
+                    <input type="radio" name="unitPrix" value="4"> la pièce
+                </label>
+                <br>
+                <br>Stock : 
+                <input type="number" style="width: 50px;" min="0" name="quantite" required>
+                <label>
+                    <input type="radio" name="unitQuantite" value="1"> Kg
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="2"> L
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="3"> m²
+                </label>
+                <label>
+                    <input type="radio" name="unitQuantite" value="4"> Pièce
+                </label>
+                <br>
+                <br>
+                <input type="submit" value="Ajouter le produit">
+            </form>
+            </center>
         </div>
         <div class="right-column">
         <div class="fixed-banner">
@@ -57,9 +95,6 @@
 					</a>
                 </div>
             </div>
-            <form method="get" action="insert_commande.php">
-                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
@@ -67,7 +102,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -82,14 +117,29 @@
                                     $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
                                     $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
+                                    $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
+                                    
 
                                     if ($QteProduit>0){
+                                        echo '<style>';
+                                        echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
+                                        echo 'button { display: inline-block; }';
+                                        echo '</style>';
+
                                         echo '<div class="squareProduct" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
+                                        echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
-                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
+                                        echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
+                                        echo '<form action="product_modification.php" method="post">';
+                                        echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
+                                        echo '<button type="submit" name="action">Modifier</button>';
+                                        echo '</form>';
+                                        echo '<form action="delete_product.php" method="post">';
+                                        echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
+                                        echo '<button type="submit" name="action">Supprimer</button>';
+                                        echo '</form>';
                                         echo '</div> '; 
                                     }
                                     $i++;
@@ -97,43 +147,6 @@
                             }
                         ?>
                     </div>
-                </div>
-                <div class="producteur">
-                    <!-- partie de droite avec les infos producteur -->
-                    <?php
-                        $bdd=dbConnect();
-                        
-                        $queryInfoProd = $bdd->query(('SELECT UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod=\''.$Id_Prod.'\';'));
-                        $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
-
-                        // recupération des paramètres de la requête qui contient 1 élément
-                        $address = $returnQueryInfoProd[0]["Adr_Uti"];
-                        $nom = $returnQueryInfoProd[0]["Nom_Uti"];
-                        $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
-                        $profession = $returnQueryInfoProd[0]["Prof_Prod"];
-                    ?>
-                    <div class="info-container">
-						<div class="img-prod">
-                        	<img class="img-test" src="/~inf2pj02/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
-						</div>
-						<div class="text-info">
-                            <?php
-                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address;
-                            ?>
-                        </div>
-                    </div>
-                    <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
-                    <?php
-                        if (isset($address)) {
-                            $address = str_replace(" ", "+", $address);
-                    ?>
-                    <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
-                        width="100%" height="100%" 
-                    ></iframe>
-                    <?php } 
-                    ?>
-                <button type="submit">Passer commande</button>
-            </form>
                 </div>
             </div>
 

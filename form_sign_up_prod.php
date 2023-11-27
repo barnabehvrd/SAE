@@ -31,6 +31,7 @@
 					<label for="adresse">Ville:</label>
 					<input type="text" name="ville" id="ville" required><br><br>
 					<label for="pwd">Mot de passe :</label>
+
 					<input type="text" name="pwd" id="pwd" required><br><br>
 					<?php
 					if (isset($_GET['mail'])) {
@@ -44,20 +45,14 @@
 					<input type="profession" id="profession" name="profession"  required><br><br>
 					<input type="submit" value="Inscription">
 			</form>
-
-
-				
-				
-				
-				
-				<form class="formulaire" action="bug_report.php" method="post">
-					<p>report a bug</p>
-					<label for="mail">mail :</label>
-					<input type="text" name="mail" id="mail" required><br><br>
-					<label for="pwd">message : </label>
-					<input type="text" name="message" id="message" required><br><br>
-					<input type="submit" value="Envoyer">
-				</form>
+			<form class="formulaire" action="bug_report.php" method="post">
+				<p>report a bug</p>
+				<label for="mail">mail :</label>
+				<input type="text" name="mail" id="mail" required><br><br>
+				<label for="pwd">message : </label>
+				<input type="text" name="message" id="message" required><br><br>
+				<input type="submit" value="Envoyer">
+			</form>
 			<a class="fixed-size-button" href="form_sign_in.php" >  vous avez déjà de compte? </a>
 		</div>
     </div>
