@@ -35,7 +35,7 @@
 						}
 					?>
 					<label for="mail">mail :</label>
-					<input type="mail" id="mail" name="mail"  required><br><br>
+					<input  type="mail"  name="mail" id="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required /><br><br><br><br>
 					<input type="submit" value="Envoyer">
 				</form>
 				<label for="btn-producteur">Je suis producteur</label>
