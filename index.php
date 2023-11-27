@@ -14,7 +14,7 @@
         <div class="left-column">
             <img class="logo" src="img/logo.png">
 			 <p>recherche par catégorie</p>
-			<form method="post" action="index.php"> 
+			<form method="get" action="index.php"> 
 			<label for="categories">Sélectionnez une catégorie :</label>
 			<select name="categorie" id="categories">
                 <option value="Tout">Tout</option>
