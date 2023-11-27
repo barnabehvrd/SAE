@@ -16,7 +16,18 @@
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
-      // récupérer les infos, forcer les champs etc...
+      $bdd=dbConnect();
+      $queryGetProducts = $bdd->query(('SELECT * FROM PRODUIT WHERE Id_Produit=\''.$Id_Produit_Update.'\';'));
+      $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+      var_dump($returnQueryGetProducts);
+      $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
+      $Nom_Produit = $returnQueryGetProducts[0]["Nom_Produit"];
+      $Id_Type_Produit = $returnQueryGetProducts[0]["Id_Type_Produit"];
+      $Qte_Produit = $returnQueryGetProducts[0]["Qte_Produit"];
+      $Id_Unite_Stock = $returnQueryGetProducts[0]["Id_Unite_Stock"];
+      $Prix_Produit_Unitaire = $returnQueryGetProducts[0]["Prix_Produit_Unitaire"];
+      $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
+      //var_dump($Id_Type_Produit);
     ?>
     <div class="container">
         <div class="left-column">
@@ -25,44 +36,173 @@
             <center><p><strong>Ajouter un produit</strong></p>
             <form action="modify_products.php" method="post">
                 <label for="pwd">Produit : </label>
-                <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
+                <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
+
 
                 <select name="categorie">
-                    <option value="6">Animaux</option>
-                    <option value="1">Fruit</option>
-                    <option value="3">Graine</option>
-                    <option value="2">Légume</option>
-                    <option value="7">Planche</option>
-                    <option value="4">Viande</option>
-                    <option value="5">Vin</option>
+                    <?php 
+                    
+                        switch ($Id_Type_Produit) {
+                            case 1:
+                                echo "";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                                break;
+                            case 2:
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                                break;
+                            case 3:
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                                break;
+                            case 4:
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                                break;
+                            case 5:
+                                echo "<option value=\"5\">Vin</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                break;
+                            case 6:
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                                break;
+                            case 7:
+                                echo "<option value=\"7\">Planche</option>";
+                                echo "<option value=\"6\">Animaux</option>";
+                                echo "<option value=\"1\">Fruit</option>";
+                                echo "<option value=\"3\">Graine</option>";
+                                echo "<option value=\"2\">Légume</option>";
+                                echo "<option value=\"4\">Viande</option>";
+                                echo "<option value=\"5\">Vin</option>";
+                               break;
+                        }
+                    ?>
+
 			    </select>
                 <br>
                 <br>Prix : 
-                <input style="width: 50px;" type="number" min="0" name="prix" required>€
-                <label>
-                    <input type="radio" name="unitPrix" value="1"> le kilo
-                </label>
-                <label>
-                    <input type="radio" name="unitPrix" value="4"> la pièce
-                </label>
+                <input style="width: 50px;" value="<?php echo $Prix_Produit_Unitaire?>" type="number" min="0" name="prix" required>€
+                <?php
+                    switch ($Id_Unite_Prix) {
+                        case 1:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitPrix\" value=\"1\" checked=\"checked\"> le kilo";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitPrix\" value=\"4\"> la pièce";
+                            echo "</label>";
+                        break;
+                        case 4:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitPrix\" value=\"1\"> le kilo";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitPrix\" value=\"4\" checked=\"checked\"> la pièce";
+                            echo "</label>";
+                        break;
+                    }
+                ?>
                 <br>
                 <br>Stock : 
-                <input type="number" style="width: 50px;" min="0" name="quantite" required>
-                <label>
-                    <input type="radio" name="unitQuantite" value="1"> Kg
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="2"> L
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="3"> m²
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="4"> Pièce
-                </label>
+                <input type="number" value="<?php echo $Qte_Produit?>" style="width: 50px;" min="0" name="quantite" required>
+                <?php
+                    switch ($Id_Unite_Prix) {
+                        case 1:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"1\" checked=\"checked\"> Kg";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"2\"> L";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"3\"> m²";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"4\"> Pièce";
+                            echo "</label>";
+                            break;
+                        case 2:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"1\"> Kg";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"2\" checked=\"checked\"> L";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"3\"> m²";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"4\"> Pièce";
+                            echo "</label>";
+                            break;
+                        case 3:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"1\"> Kg";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"2\"> L";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"3\" checked=\"checked\"> m²";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"4\"> Pièce";
+                            echo "</label>";
+                            break;
+                        case 4:
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"1\"> Kg";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"2\"> L";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"3\"> m²";
+                            echo "</label>";
+                            echo "<label>";
+                            echo "<input type=\"radio\" name=\"unitQuantite\" value=\"4\" checked=\"checked\"> Pièce";
+                            echo "</label>";
+                            break;
+                    }
+                ?>
                 <br>
                 <br>
-                <input type="submit" value="Modifier le produit">
+                <input type="submit" value="Confirmer la modification">
+            </form>
+            <form action="mes_produits.php" method="post">
+                <input type="submit" value="Annuler la modification">
             </form>
             </center>
         </div>

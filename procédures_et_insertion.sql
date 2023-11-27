@@ -707,7 +707,7 @@ VALUES (2, '35');
 
 INSERT INTO UNITE (Id_Unite, Nom_Unite)
 VALUES (1, 'Kg'),
- (2, 'l'),
+ (2, 'L'),
  (3, 'm²'),
  (4, 'piece'); 
 

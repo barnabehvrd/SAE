@@ -28,12 +28,12 @@
     
     
     $insertionProduit = "INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix) VALUES (".$nbProduits.", '".$Nom_Produit."', ".$Type_De_Produit.", ".$IdProd.", ".$Quantite.", ".$Unite_Quantite.", ".$Prix.", ".$Unite_Prix.");";
-    //echo $insertionProduit;
+    echo $insertionProduit;
     //echo '<br>';
     //var_dump($_SESSION);
     
     $bdd->query($insertionProduit);
-    header('Location: mes_produits.php');
+    //header('Location: mes_produits.php');
 ?>
 
 

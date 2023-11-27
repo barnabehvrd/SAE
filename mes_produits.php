@@ -102,7 +102,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
+                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur INNER JOIN PRODUCTEUR ON produits_d_un_producteur.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Id_Uti=\''.$utilisateur.'\';'));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -117,6 +117,8 @@
                                     $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
                                     $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
+                                    $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
+                                    
 
                                     if ($QteProduit>0){
                                         echo '<style>';
@@ -129,7 +131,7 @@
                                         echo "Type : " . $typeProduit . "<br>";
                                         echo '<img class="img-produit" src="/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo "Stock : " . $QteProduit .' '.$unitePrixProduit. "<br>";
+                                        echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         echo '<form action="product_modification.php" method="post">';
                                         echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">Modifier</button>';
