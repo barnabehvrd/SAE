@@ -35,9 +35,6 @@ function afficherContact($contact){
     <?php
 }
 
-
-$_SESSION['Id_Uti']=2;
-
 if (isset($_SESSION['Id_Uti'])){
     afficheContacts($_SESSION['Id_Uti']);
 }
