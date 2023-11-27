@@ -8,7 +8,7 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
     $bdd=dbConnect();
-    //var_dump($_POST);
+    var_dump($_POST);
 
     $Id_Produit=$_POST["IdProductAModifier"];
     $Nom_Produit=$_POST["nomProduit"];
