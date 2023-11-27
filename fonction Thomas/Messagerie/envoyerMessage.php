@@ -9,7 +9,6 @@ function envoyerMessage($id_user, $id_other_people, $content){
     
 }
 
-$_SESSION['Id_Uti'] = 2;
 
 if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
     if ($_POST['content']!=""){
