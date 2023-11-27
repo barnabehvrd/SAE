@@ -55,8 +55,8 @@ try {
             var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            if(true){
-                echo($returnQueryIdAdmin);
+            if(($returnQueryIdAdmin)==null){
+                var_dump($returnQueryIdAdmin);
             //header('Location: panel_admin.php');
             }
         } else {
