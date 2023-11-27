@@ -31,7 +31,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        header('Location: form_sign_in.php?mail=adresse mail invalide');
+        header('Location: form_sign_in_admin.php?mail=adresse mail invalide');
         exit();
     } else {
 
@@ -58,10 +58,10 @@ try {
             header('Location: panel_admin.php');
         } else {
             $_SESSION['test_pwd']--;
-            header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
+            header('Location: form_sign_in_admin.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
         }
     }else {
-        header('Location: form_sign_in.php?pwd=vous avez épuisé toutes vos tentatives de connection');
+        header('Location: form_sign_in_admin.php?pwd=vous avez épuisé toutes vos tentatives de connection');
     }
     }
 } catch (Exception $e) {
