@@ -31,7 +31,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        header('Location: form_sign_in.php?mail=adresse mail invalide');
+        header('Location: form_sign_in_admin.php?mail=adresse mail invalide');
         exit();
     } else {
 
@@ -50,18 +50,21 @@ try {
         if ($test[0][1] == 1 ) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMNISTRATEUR WHERE ADMINISTRATEUR=\'' . $Id_Uti . '\'');
+            $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
             $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
             var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            header('Location: panel_admin.php');
+            if(($returnQueryIdAdmin)==null){
+                var_dump($returnQueryIdAdmin);
+            //header('Location: panel_admin.php');
+            }
         } else {
             $_SESSION['test_pwd']--;
-            header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
+            header('Location: form_sign_in_admin.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
         }
     }else {
-        header('Location: form_sign_in.php?pwd=vous avez épuisé toutes vos tentatives de connection');
+        header('Location: form_sign_in_admin.php?pwd=vous avez épuisé toutes vos tentatives de connection');
     }
     }
 } catch (Exception $e) {
