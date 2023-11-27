@@ -36,14 +36,11 @@
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
             <form action="modify_product.php" method="post">
-            <input type="hidden" name="modifyIdProduct" value="<?php echo $Id_Produit; ?>">
                 <label for="pwd">Produit : </label>
+                <input type="hidden" name="IdProduct" value="1">
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
-
-
                 <select name="categorie">
                     <?php 
-                    
                         switch ($Id_Type_Produit) {
                             case 1:
                                 echo "";
