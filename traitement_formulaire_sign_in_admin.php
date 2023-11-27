@@ -50,7 +50,7 @@ try {
         if ($test[0][1] == 1 ) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMNISTRATEUR WHERE ADMINISTRATEUR=\'' . $Id_Uti . '\'');
+            $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR=\'' . $Id_Uti . '\'');
             $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
             var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
