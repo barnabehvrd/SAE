@@ -25,7 +25,7 @@ try {
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
     // Check if user email exists
-    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
+    $queryIdUti = $bdd->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle invalid email
@@ -52,22 +52,6 @@ try {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            echo $_SESSION['Id_Uti'];
-
-            $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
-            echo '<br>';
-            var_dump($isProducteur);
-            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            echo '<br>';
-            var_dump($returnIsProducteur);
-            $reponse=$returnIsProducteur[0]["result"];
-            if ($reponse!=NULL){
-                echo 'producteur';
-                $_SESSION["isProd"]=true;
-            }else {
-                $_SESSION["isProd"]=false;
-            }
             header('Location: panel_admin.php');
         } else {
             $_SESSION['test_pwd']--;
