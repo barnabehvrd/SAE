@@ -38,11 +38,8 @@
             <form action="modify_product.php" method="post">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
-
-
                 <select name="categorie">
                     <?php 
-                    
                         switch ($Id_Type_Produit) {
                             case 1:
                                 echo "";
@@ -280,7 +277,7 @@
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         if ($Id_Produit==$Id_Produit_Update){
-                                            echo '<input type="submit" disabled="disabled" value="En cours"/></button>';
+                                            echo '<input type="submit" disabled="disabled" value="Modification"/></button>';
                                         }
                                         else{
                                             echo '<form action="product_modification.php" method="post">';
