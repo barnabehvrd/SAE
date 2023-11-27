@@ -10,7 +10,7 @@
     $bdd=dbConnect();
     //var_dump($_POST);
 
-    $Id_Produit=$_POST["IdProductAmMdifier"];
+    $Id_Produit=$_POST["IdProductAModifier"];
     $Nom_Produit=$_POST["nomProduit"];
     $Categorie=$_POST["categorie"];
     $Prix=$_POST["prix"];
