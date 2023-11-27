@@ -15,6 +15,7 @@
             $password = 'ahV4saerae';
             return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
+
 	  $bdd=dbConnect();
 	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
