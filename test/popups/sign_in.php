@@ -1,6 +1,10 @@
 <div class="popup">
     <div class="contenuPopup">
-        <p class="titrePopup">Se Connecter</p>
+        <form method="post">
+				<input type="submit" value="" class="boutonQuitPopup">
+                <input type="hidden" name="popup" value="">
+		</form>
+        <p class="titrePopup">Se connecter</p>
         <div>
             <form class="formPopup" action="traitement_formulaire_sign_in.php" method="post"> <!--      -->
                 <div>
@@ -33,6 +37,12 @@
 			    </form>
                 <!-- <input type="button" onclick="window.location.href='form_sign_up_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur"> -->
             </div>
+        </div>
+        <div>
+            <form method="post">
+				<input type="submit" value="Mot de passe oublié ?" class="lienPopup">
+                <input type="hidden" name="popup" value="reset_mdp">
+			</form>
         </div>
         <div class="alignementCentreCoteACote">
             <p class="text">Vous n'avez pas de compte ?</p>
