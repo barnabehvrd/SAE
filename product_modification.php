@@ -37,7 +37,7 @@
             <center><p><strong>Ajouter un produit</strong></p>
             <form action="modify_product.php" method="post">
                 <label for="pwd">Produit : </label>
-                <input type="hidden" name="Idddd" value="1">
+                <input type="hidden" name="IdProductAmodifier" value="<?php echo $Id_Produit_Update ?>">
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
                 <select name="categorie">
                     <?php 
