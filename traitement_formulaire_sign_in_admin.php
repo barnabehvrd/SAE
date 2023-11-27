@@ -25,7 +25,7 @@ try {
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
     // Check if user email exists
-    $queryIdUti = $bdd->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
+    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle invalid email
@@ -49,7 +49,12 @@ try {
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
         if ($test[0][1] == 1 ) {
-            echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
+            //bon mdp
+            $queryIdAdmin = $bdd->query('SELECT Id_Uti FROM ADMNISTRATEUR WHERE ADMINISTRATEUR=\'' . $Id_Uti . '\'');
+            $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($returnQueryIdAdmin);
+
+
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
             header('Location: panel_admin.php');
