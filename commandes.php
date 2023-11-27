@@ -46,7 +46,9 @@
 					<?php 
                     
                     session_start();
+					?>
 				<div class="banner-right">
+					<?php
                     if (isset($_SESSION['Mail_Uti'])) {  
                     echo '<a class="fixed-size-button" href="user_informations.php" >';
 					echo $_SESSION['Mail_Uti']; 

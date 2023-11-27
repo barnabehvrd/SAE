@@ -4,7 +4,6 @@
       $serveur = "localhost";
       $motdepasse = "ahV4saerae";
       $basededonnees = "inf2pj_02";
-  
       // Connect to database
       return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
@@ -23,7 +22,6 @@
 
         $iterateurProduit++;
     }
-
       $bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
       $bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
       //echo 'DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';';
