@@ -84,8 +84,7 @@ if ($nb == 0) {
                 header('Location: ad_profile_picture.php');
             }else {
                 header('Location: form_sign_in.php');
-            }
-    
+            }    
 } else {            
     header('Location: form_sign_up.php?mail=adresse mail déjà utilisé');    
 }

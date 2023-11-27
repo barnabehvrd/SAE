@@ -65,7 +65,6 @@ try {
             if ($reponse!=NULL){
                 echo 'producteur';
                 $_SESSION["isProd"]=true;
-                //var_dump($_SESSION);
             }else {
                 $_SESSION["isProd"]=false;
             }
