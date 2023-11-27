@@ -15,6 +15,7 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
       session_start();
+      var_dump($_POST);
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
       $bdd=dbConnect();
