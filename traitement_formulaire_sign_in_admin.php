@@ -55,7 +55,10 @@ try {
             var_dump($returnQueryIdAdmin);
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
+            $is_admin=true;
+            if($is_admin){
             header('Location: panel_admin.php');
+            }
         } else {
             $_SESSION['test_pwd']--;
             header('Location: form_sign_in_admin.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
