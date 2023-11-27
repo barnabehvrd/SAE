@@ -68,11 +68,11 @@
                     while ($iterateurCommande<count($returnQueryGetCommande)){
 						$Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
 						$Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
-						$Nom_Prod = strtoupper($Nom_Prod);
+						$Nom_Prod = mb_strtoupper($Nom_Prod);
 						$Prenom_Prod = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
 						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
 						$Desc_Statut = $returnQueryGetCommande[$iterateurCommande]["Desc_Statut"];
-						$Desc_Statut = strtoupper($Desc_Statut);
+						$Desc_Statut = mb_strtoupper($Desc_Statut);
 
 						$total=0;
 						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
