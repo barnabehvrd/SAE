@@ -38,16 +38,12 @@
 					<input  type="mail"  name="mail" id="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required /><br><br>
 					<label for="profession">profession :</label>
 					<input type="profession" id="profession" name="profession"  required><br><br>
-					<input type="submit" value="Envoyer">
-				</form>
+
+				<input type="submit" value="Inscription">
+			</form>
 
 
 				
-				<h2>ajouter votre photo de profil</h2>
-                <form action="upload.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="image" accept="image/*" required>
-                    <button type="submit">Envoyer</button>
-                </form>
 				
 				
 				

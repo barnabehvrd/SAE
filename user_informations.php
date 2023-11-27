@@ -104,8 +104,8 @@
                 <div class="square">
                     <h2>modifier votre photo de profil</h2>
                     <form action="upload.php" method="post" enctype="multipart/form-data">
-                        <input type="file" name="image" accept="image/*" required>
-                        <button type="submit">Envoyer</button>
+                    <input type="file" name="image" accept=".png" required>
+                    <button type="submit">Envoyer</button>
                     </form>
                 </div>
             </div>

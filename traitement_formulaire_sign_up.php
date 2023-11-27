@@ -17,7 +17,7 @@ if ($producteur_check=='on'){
 }else {
     $_SESSION["is_producteur"]= false;
 }
-
+$_SESSION['Mail_Temp']=$Mail_Uti;
 // Connexion à la base de données 
 $utilisateur = "inf2pj02";
 $serveur = "localhost";
@@ -64,8 +64,27 @@ if ($nb == 0) {
         }
     }
     $connexion1->close();
+    $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+            $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
+            echo '<br>';
+            var_dump($isProducteur);
+            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            echo '<br>';
+            var_dump($returnIsProducteur);
+            $reponse=$returnIsProducteur[0]["result"];
+            if ($reponse!=NULL){
+                echo 'producteur';
+                $_SESSION["isProd"]=true;
+                //var_dump($_SESSION);
+            }else {
+                $_SESSION["isProd"]=false;
+            }
     
-    header('Location: form_sign_in.php');
+            if($_SESSION["isProd"]==true){
+                header('Location: ad_profile_picture.php');
+            }else {
+                header('Location: form_sign_in.php');
+            }
     
 } else {            
     header('Location: form_sign_up.php?mail=adresse mail déjà utilisé');    

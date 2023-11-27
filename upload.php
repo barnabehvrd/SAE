@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_producteur/";
-
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "inf2pj02";
         $serveur = "localhost";
@@ -15,13 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         // Connect to database
         $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";';
+        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";';
         echo ($requete);
-        $queryIdProd = $bdd->query(('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";'));
+        $queryIdProd = $bdd->query(('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";'));
         $returnqueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
         $Id_Prod=$returnqueryIdProd[0]["Id_Prod"];
 
-        // Obtenir l'extension du fichier
+        // Obtenir l'extension du fichie
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
 
         // Utiliser l'extension dans le nouveau nom du fichier
@@ -29,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Créer le chemin complet du fichier de destination
         $targetPath = $targetDir . $newFileName;
-
+        
+        unlink( $targetPath ); 
         // Déplacer le fichier téléchargé vers le dossier de destination
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
@@ -40,7 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Veuillez sélectionner une image.<br>";
     }
+    if(isset($_SESSION["Mail_Uti"])){
     header('Location: user_informations.php');    
+    }else{
+        header('Location: form_sign_in.php');    
+
+    }
 
 }
 
