@@ -38,8 +38,7 @@
 					<input  type="mail"  name="mail" id="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required /><br><br>
 					<label for="profession">profession :</label>
 					<input type="profession" id="profession" name="profession"  required><br><br>
-
-				<input type="submit" value="Inscription">
+					<input type="submit" value="Inscription">
 			</form>
 
 

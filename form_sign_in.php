@@ -40,6 +40,10 @@
 					<input type="text" name="pwd" id="pwd" required><br><br>
 					<input type="submit" value="Envoyer">
 				</form>
+				<label for="btn-producteur">Se connecté en tant que administrateur</label>
+				<input type="button" onclick="window.location.href='form_sign_up_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur">
+				
+				
 				<form class="formulaire" action="bug_report.php" method="post">
 						<p>report a bug</p>
 						<label for="mail">mail :</label>
@@ -48,7 +52,6 @@
 						<input type="text" name="message" id="message" required><br><br>
 						<input type="submit" value="Envoyer">
 				</form>
-				
 				<a class="fixed-size-button" href="form_sign_up.php" >  vous n'avez pas encore de compte? </a>
 			</div>
 		</div>
