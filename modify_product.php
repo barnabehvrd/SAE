@@ -8,9 +8,9 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
     $bdd=dbConnect();
-    //var_dump($_POST);
+    var_dump($_POST);
 
-    $Id_Produit=$_POST["IdProductAmodifier"];
+    $Id_Produit=$_POST["IdProductAModifier"];
     $Nom_Produit=$_POST["nomProduit"];
     $Categorie=$_POST["categorie"];
     $Prix=$_POST["prix"];
@@ -21,5 +21,5 @@
     $updateProduit= "UPDATE PRODUIT SET Nom_Produit = ".$Nom_Produit.", Id_Type_Produit = ".$Categorie.", Qte_Produit = ".$Quantite.", Id_Unite_Stock = ".$Quantite_Unite.", Prix_Produit_Unitaire = ".$Prix.", Id_unite_Prix = ".$Prix_Unite." WHERE Id_Produit = ".$Id_Produit .";";
     $bdd->exec($updateProduit);
 
-    //header('Location: product_modification.php');
+    header('Location: product_modification.php');
 ?>
