@@ -24,9 +24,13 @@
 					<input type="text" name="nom" id="nom" required><br><br>
 					<label for="prenom">Prénom :</label>
 					<input type="text" name="prenom" id="prenom" required><br><br>
-					<label for="adresse">Adresse postale:</label>
-					<input type="text" name="adresse" id="adresse" required><br><br>
-					<label for="pwd">password :</label>
+					<label for="adresse">Rue:</label>
+					<input type="text" name="rue" id="rue" required><br><br>
+					<label for="adresse">Code postale:</label>
+					<input type="text" name="code" id="code" required><br><br>
+					<label for="adresse">Ville:</label>
+					<input type="text" name="ville" id="ville" required><br><br>
+					<label for="pwd">Mot de passe :</label>
 					<input type="text" name="pwd" id="pwd" required><br><br>
 					<?php
 					if (isset($_GET['mail'])) {

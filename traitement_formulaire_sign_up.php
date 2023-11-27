@@ -8,7 +8,7 @@ session_start();
 $_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
-$adresse = $_POST['adresse'];
+$adresse = $_POST['rue'] .", ". $_POST['code']. mb_strtoupper($_POST['ville']);
 $pwd = $_POST['pwd'];
 $Mail_Uti = $_POST['mail'];
 $producteur_check = isset($_POST['producteur_box']) ? $_POST['producteur_box'] : '';
