@@ -64,7 +64,7 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
+                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
