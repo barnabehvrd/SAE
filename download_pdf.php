@@ -1,15 +1,10 @@
 <?php
-// Définit le type de contenu comme PDF
+header('Content-Type: application/pdf; charset=utf-8');
 header('Content-Type: application/pdf');
-
-// Définit le nom du fichier PDF
-header('Content-Disposition: attachment; filename="commande.pdf"');
-
-// Génère le contenu PDF (page vide)
+header('Content-Disposition: attachment; filename="fichier_vide.pdf"');
+echo '<html>';
+echo '<head><style>body {font-family: Arial, sans-serif;}</style></head>';
+echo '<body>';
+echo '</body>';
+echo '</html>';
 ?>
-<html>
-<head><style>body {font-family: Arial, sans-serif;}</style></head>
-<body>
-    Ceci est en test;
-</body>
-</html>
