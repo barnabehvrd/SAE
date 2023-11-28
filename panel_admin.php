@@ -48,25 +48,20 @@
                                 $result = $stmt->get_result();
 
                                 if ($result->num_rows > 0) {
+                                    echo '<div>'; 
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<div style= 
-                                        width: 350px;
-                                        height: 350px;
-                                        background-color: #4caf50;
-                                        margin: 5px; 
-                                        >';
                                         
-			                                 
                                         echo '<form method="post" action="del_acc.php">
                                             <input type="submit" name="submit" id="submit"><br><br>
-                                            <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'>';
+                                            <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'"></form>';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo "Profession : " . $row["Prof_Prod"] . "<br>";
-                                        echo '';                                        
+                                                                              
                                     }
+                                    echo '</div>'; 
                                 } else {
                                     echo "erreur contacté l'équipe de déveloper ";
                                 }
