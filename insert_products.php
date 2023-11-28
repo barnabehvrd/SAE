@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $_SESSION["Id_Produit"]=$nbProduits;
     $bdd->query($insertionProduit);
-    header('Location: insert_product_picture.php');
+    header('Location: mes_produits.php');
 ?>
 
 
