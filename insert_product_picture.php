@@ -3,5 +3,5 @@
 <input type="file" name="image" accept=".png" required>
 <button type="submit">Envoyer</button>
 <br>
-<button class="button"><a href="mes_produits.php">Ignorer</a></button>  
+<input type="button" onclick="window.location.href='mes_produits.php'" value="Ignorer">
 </form>
