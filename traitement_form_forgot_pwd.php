@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Envoi du code par e-mail
     $subject = "Réinitialisation de mot de passe";
     $message = "Votre code de réinitialisation de mot de passe est : $code";
-    $headers = "From: no_reply@létalenligne.com"; // Remplacez par votre adresse e-mail
+    $headers = "From: no-reply@letalenligne.com"; // Remplacez par votre adresse e-mail
 
     // Envoi de l'e-mail
     $mailSent = mail($email, $subject, $message, $headers);
