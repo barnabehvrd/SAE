@@ -9,16 +9,7 @@
 
     <h2>Réinitialisation de mot de passe</h2>
 
-    <?php
-    if (isset($_GET['result'])) {
-        $result = $_GET['result'];
-        if ($result === 'success') {
-            echo '<p style="color: green;">Un code a été envoyé à votre adresse e-mail. Veuillez vérifier votre boîte de réception.</p>';
-        } elseif ($result === 'failure') {
-            echo '<p style="color: red;">L\'envoi du code a échoué. Veuillez réessayer.</p>';
-        }
-    }
-    ?>
+
 
     <form action="traitement_form_forgot_pwd.php" method="post">
         <label for="email">Adresse e-mail :</label>

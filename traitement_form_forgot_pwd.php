@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
-    
+    $_SESSION["Mail_Uti"]=$email;
     // Génération d'un code aléatoire à 6 chiffres
     $code = rand(100000, 999999);
     $_SESSION["code"]=$code;
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mailSent = mail($email, $subject, $message, $headers);
 
     // Redirection avec le résultat de l'envoi
-    $redirectUrl = 'accept_code.php';
+    $redirectUrl = 'form_code.php';
     if ($mailSent) {
         $redirectUrl .= '?result=success';
     } else {
