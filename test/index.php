@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
     <div class="container">
@@ -29,7 +28,7 @@
             </div>
             <div class="contenuPage">
 
-                <!-- some code -->
+               <?php (var_dump($_POST)); ?>
 
             </div>
             <div class="basDePage">
