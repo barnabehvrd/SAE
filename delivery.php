@@ -74,6 +74,7 @@
 						$Nom_Client = mb_strtoupper($Nom_Client);
                         $Prenom_Client = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
                         $Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
+                        $Id_Uti = $returnQueryGetCommande[$iterateurCommande]["Id_Uti"];
                         //echo $Id_Statut;
                         
 						$total=0;
@@ -113,7 +114,9 @@
 							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
 							$iterateurProduit++;
 						}
-
+                        ?>
+                        <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Uti; ?>'" value="Envoyer un message">
+                        <?php
 						if ($nbProduit>0){
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
