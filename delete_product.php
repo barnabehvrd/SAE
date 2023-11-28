@@ -18,5 +18,5 @@
       //echo $imgpath;
       unlink( $imgpath ); 
     
-    header('Location: mes_produits.php?');
+    header('Location: mes_produits.php');
 ?>
