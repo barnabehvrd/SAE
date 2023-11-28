@@ -3,8 +3,8 @@
 <head>
     <title>L'étal en ligne</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="test/css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="test/css/index.css">
 </head>
 <body>
     <div class="container">
@@ -45,5 +45,5 @@
             </div>
         </div>
     </div>
-    <?php require "/home/inf2pj02/popups/gestionPopups.php" ?>
+    <?php require "/home/inf2pj02/popups/gestion_popups.php" ?>
 </body>
