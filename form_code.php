@@ -19,7 +19,7 @@
         }elseif ($result === 'failure1') {
             echo '<p style="color: red;">le code inscrit est mauvais vous aller pouvoir en générer un nouveau</p>';
             sleep(10);
-            header("Location: form_code.php?");
+            header("Location: form_forgot_pwd.php");
         }
     }
     ?>
