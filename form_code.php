@@ -18,8 +18,6 @@
             echo '<p style="color: red;">Le code n\'a pas pu etre envoyer a votre adresse mail si le problème perssiste contacter un administratueur </p>';
         } elseif ($result === 'failure1') {
             echo '<p style="color: red;">le code inscrit est mauvais vous aller pouvoir en générer un nouveau</p>';
-            sleep(10);
-            header("Location: form_forgot_pwd.php");
         }
     }
     ?>
