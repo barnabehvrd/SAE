@@ -22,7 +22,7 @@
 
         $iterateurProduit++;
       }
-      $updateStatutCommande="UPDATE COMMANDE SET Statut_Commande = 3 WHERE Id_Commande = ".$Id_Commande .";";
+      $updateStatutCommande="UPDATE COMMANDE SET Id_Statut = 3 WHERE Id_Commande = ".$Id_Commande .";";
       $bdd->exec($updateStatutCommande);
 
       //$bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
