@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
         } else {
             echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
-            //header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
+            header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
         }
 
     } else {
         echo "Veuillez sélectionner une image.<br>";
     }
     
-    //header('Location: mes_produits.php');    
+    header('Location: mes_produits.php');    
 }
 ?>
