@@ -116,8 +116,7 @@
 						}
 
 						if ($nbProduit>0){
-                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'" value="Envoyer un message">;
-                            ';
+                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'\'" value="Envoyer un message">';
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
 						}
@@ -134,7 +133,6 @@
 					<input type="text" name="message" id="message" required><br><br>
 					<input type="submit" value="Envoyer">
 			</form>
-			
 		</div>
     </div>
 </body>
