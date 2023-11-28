@@ -36,7 +36,8 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="modify_product.php" method="post">
+            <form action="modify_product.php" method="post" enctype="multipart/form-data">
+
                 <label for="pwd">Produit : </label>
                 <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
                 <input type="text" name="nomProduit" value="<?php echo $Nom_Produit?>" required><br><br>
@@ -199,6 +200,7 @@
                 ?>
                 <br>
                 <br>
+                <input type="file" name="image">
                 <input type="submit" value="Confirmer la modification">
             </form>
             <br>
@@ -209,10 +211,6 @@
             <?php
             //echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
             ?>
-            <form action="upload_product.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" accept=".png" required>
-                <button type="submit">Envoyer</button>
-            </form>
             <br>
             <br>
             </center>
