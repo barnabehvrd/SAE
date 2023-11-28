@@ -64,7 +64,7 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
+                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
@@ -79,6 +79,8 @@
 						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
 						$Desc_Statut = $returnQueryGetCommande[$iterateurCommande]["Desc_Statut"];
 						$Desc_Statut = mb_strtoupper($Desc_Statut);
+						$Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
+
 
 						$total=0;
 						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
@@ -92,11 +94,13 @@
 							echo '</br>';
 							echo $Desc_Statut;
 							echo '</br>';
+							if ($Id_Statut!=3){
 							echo '<form action="delete_commande.php" method="post">';
 							echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
-
+							
 							echo '<button type="submit">Annuler commande</button>';
 							echo '</form>';
+							}
 						}
 
 						while ($iterateurProduit<$nbProduit){
