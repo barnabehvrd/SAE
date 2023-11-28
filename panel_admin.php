@@ -49,13 +49,23 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<a href="delete_user.php?Id_Uti='. $row["Id_Uti"] . '" class="square"  >';
+                                        echo '<div style= 
+                                        width: 350px;
+                                        height: 350px;
+                                        background-color: #4caf50;
+                                        margin: 5px; 
+                                        >';
+                                        
+			                                 
+                                        echo '<form method="post" action="del_acc.php">
+                                            <input type="submit" name="submit" id="submit"><br><br>
+                                            <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'>';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo "Profession : " . $row["Prof_Prod"] . "<br>";
-                                        echo '</a> ';                                        
+                                        echo '';                                        
                                     }
                                 } else {
                                     echo "erreur contacté l'équipe de déveloper ";
