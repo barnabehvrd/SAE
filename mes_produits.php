@@ -65,6 +65,8 @@
                 </label>
                 <br>
                 <br>
+                <h3>Image :</h3>
+                <br>
                 <input type="file" name="image" accept=".png">
                 <br>
                 <br>
