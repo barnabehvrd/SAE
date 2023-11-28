@@ -200,7 +200,7 @@
                 ?>
                 <br>
                 <br>
-                <input type="file" name="image" accept=".png" required>
+                <input type="file" name="image">
                 <input type="submit" value="Confirmer la modification">
             </form>
             <br>
