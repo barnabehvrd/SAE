@@ -17,6 +17,7 @@
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
+      $_SESSION["Id_Produit"]=$Id_Produit_Update;
       $bdd=dbConnect();
       $queryGetProducts = $bdd->query(('SELECT * FROM PRODUIT WHERE Id_Produit=\''.$Id_Produit_Update.'\';'));
       $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
@@ -201,7 +202,7 @@
             <br>
             <br>
             <?php
-            echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+            //echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
             ?>
             <form action="upload_product.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="image" accept=".png" required>
