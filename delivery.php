@@ -116,8 +116,8 @@
 						}
 
 						if ($nbProduit>0){
-                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'\'" value="Envoyer un message">';
-                            echo '<input type="button" onclick="window.location.href=\'dl.php" value="Télécharger en PDF">';
+                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'\'" value="Envoyer un message"><br>';
+                            echo '<input type="button" onclick="window.location.href=\'dl.php\'" value="Télécharger en PDF">';
                             echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
 						}
