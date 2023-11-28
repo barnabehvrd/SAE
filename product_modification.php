@@ -198,6 +198,9 @@
                 ?>
                 <br>
                 <br>
+                <img class="img-produit" src="/~inf2pj02/img_produit/<?php echo $Id_Produit?>.png" alt="Image non fournie" style="width: 100%; height: 85%;" >
+                <br>
+                <br>
                 <input type="submit" value="Confirmer la modification">
             </form>
             <form action="mes_produits.php" method="post">
