@@ -13,8 +13,11 @@ session_start();
 
     // Start session
     session_start();
-
-    $utilisateur=$_SESSION["Id_Uti"];
+if (isset($_POST["Id_Uti"])){
+  $utilisateur=$_POST["Id_Uti"];
+}else{
+  $utilisateur=$_SESSION["Id_Uti"];
+}
 
   $isProducteur = $bdd->query('CALL isProducteur('.$utilisateur.');');
   $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
