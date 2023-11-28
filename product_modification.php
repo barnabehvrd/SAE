@@ -36,7 +36,7 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="testKillian.php" method="post" enctype="multipart/form-data">
+            <form action="modify_product.php" method="post" enctype="multipart/form-data">
 
                 <label for="pwd">Produit : </label>
                 <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
