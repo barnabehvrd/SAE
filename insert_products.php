@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $basededonnees = "inf2pj_02";
         session_start();
 
-
         // Obtenir l'extension du fichie
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
 
@@ -67,10 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
 }
-
     $_SESSION["Id_Produit"]=$nbProduits;
     $bdd->query($insertionProduit);
     header('Location: mes_produits.php');
 ?>
-
-

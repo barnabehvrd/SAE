@@ -64,7 +64,11 @@
                     <input type="radio" name="unitQuantite" value="4"> Pièce
                 </label>
                 <br>
+                <br>
+                Image :
                 <input type="file" name="image" accept=".png">
+                <br>
+                <br>
                 <br>
                 <input type="submit" value="Ajouter le produit">
             </form>
