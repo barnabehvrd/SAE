@@ -15,10 +15,10 @@
                     l'utilisation de la Plateforme de Vente de
                     Produits Locaux (ci-après "la Plateforme"),
                     accessible à l'adresse etalenligne.fr . La
-                    Plateforme est exploitée par [Nom de la
-                    Société ou de l'Entité] (ci-après 
-                    "l'Exploitant"). En utilisant la Plateforme,
-                    vous acceptez de vous conformer à ces CGU.
+                    Plateforme est exploitée par L'étal en ligne 
+                    (ci-après "l'Exploitant"). En utilisant la 
+                    Plateforme, vous acceptez de vous conformer 
+                    à ces CGU.
 
 
                     Définitions :
@@ -171,10 +171,9 @@
 
                     11.1. Loi Applicable et Juridiction : 
                     11.1.1. Les présentes CGU sont régies par 
-                    la loi [Nom de la loi applicable] et tout 
-                    litige sera soumis à la juridiction exclusive 
-                    des tribunaux de [Nom de la juridiction 
-                    compétente].
+                    la LIL et tout litige sera soumis à la 
+                    juridiction exclusive des tribunaux de 
+                    la Mayenne.
 
                     Ces CGU visent à établir des règles claires et 
                     juridiquement contraignantes pour l'utilisation 
