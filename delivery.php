@@ -112,10 +112,10 @@
 							echo "- " . $Nom_Produit ." - ".$Qte_Produit_Commande.' '.$Nom_Unite_Prix.' * '.$Prix_Produit_Unitaire.'€ = '.intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande).'€';
 							echo "</br>";
 							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
+                            echo $Id_Uti;
 							$iterateurProduit++;
 						}
                         ?>
-                        <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Uti; ?>'" value="Envoyer un message">
                         <?php
 						if ($nbProduit>0){
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
