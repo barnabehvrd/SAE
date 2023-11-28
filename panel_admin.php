@@ -30,7 +30,6 @@
             </div>
             <div class="contenuPage">
                         <?php
-                                $categorie = $_GET["categorie"];
                                 // Connexion à la base de données 
                                 $utilisateur = "inf2pj02";
                                 $serveur = "localhost";
