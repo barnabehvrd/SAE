@@ -14,5 +14,6 @@ if ($pwd1==$pwd2 && $pwd1!==null){
     echo ($update);
     $bdd->exec($update);
 header('Location: index.php');//la thomas il va faire une pop avec juste un votre mdp a bien été modifier avant d'aller sur l'index
+//potentiel ammélioration vérifié que l'adr mail existe deja dans la db
 }
 ?>
