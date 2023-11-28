@@ -94,7 +94,7 @@
 							echo '</br>';
 							echo $Desc_Statut;
 							echo '</br>';
-							if ($Id_Statut!=3){
+							if ($Id_Statut!=3 and $Id_Statut!=4){
 							echo '<form action="delete_commande.php" method="post">';
 							echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
 							
