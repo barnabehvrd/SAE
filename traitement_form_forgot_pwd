@@ -1,0 +1,27 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    
+    // Génération d'un code aléatoire à 6 chiffres
+    $code = rand(100000, 999999);
+
+    // Envoi du code par e-mail
+    $subject = "Réinitialisation de mot de passe";
+    $message = "Votre code de réinitialisation de mot de passe est : $code";
+    $headers = "From: no_reply@létalenligne.com"; // Remplacez par votre adresse e-mail
+
+    // Envoi de l'e-mail
+    $mailSent = mail($email, $subject, $message, $headers);
+
+    // Redirection avec le résultat de l'envoi
+    $redirectUrl = 'index.php';
+    if ($mailSent) {
+        $redirectUrl .= '?result=success';
+    } else {
+        $redirectUrl .= '?result=failure';
+    }
+
+    header("Location: $redirectUrl");
+    exit();
+}
+?>
