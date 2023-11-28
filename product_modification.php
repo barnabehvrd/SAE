@@ -197,9 +197,14 @@
                             break;
                     }
                 ?>
+                <br>
+                <br>
                 <input type="submit" value="Confirmer la modification">
             </form>
             <br>
+            <form action="mes_produits.php" method="post">
+                <input type="submit" value="Annuler la modification">
+            </form>
             <br>
             <?php
             //echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
@@ -210,9 +215,6 @@
             </form>
             <br>
             <br>
-            <form action="mes_produits.php" method="post">
-                <input type="submit" value="Annuler la modification">
-            </form>
             </center>
         </div>
         <div class="right-column">
