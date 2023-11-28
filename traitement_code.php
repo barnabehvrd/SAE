@@ -4,6 +4,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredCode = $_POST["code"];
     $expectedCode = $_SESSION["code"];
+    var_dump($_SESSION["code"]);
 
     // Comparer le code saisi avec le code attendu
     if ($enteredCode == $expectedCode) {
