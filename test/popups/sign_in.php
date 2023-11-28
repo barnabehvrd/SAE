@@ -4,9 +4,14 @@
 				<input type="submit" value="" class="boutonQuitPopup">
                 <input type="hidden" name="popup" value="">
 		</form>
-        <p class="titrePopup">Se connecter</p>
+        <p class="titrePopup">Se connecter <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
+                                            {echo '(Admin)';}?></p>
         <div>
-            <form class="formPopup" action="traitement_formulaire_sign_in.php" method="post"> <!--      -->
+            <form class="formPopup" action=
+                                            <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
+                                            {echo '"../traitements/traitement_formulaire_sign_in_admin.php"';}
+                                            else{echo '"../traitements/traitement_formulaire_sign_in.php"';}?>
+                    method="post">
                 <div>
                     <label for="mail">Mail :</label>
                     <input class="zoneDeTextePopup" type="text" name="mail" required>
@@ -16,7 +21,7 @@
                     <input class="zoneDeTextePopup" type="text" name="pwd" required>
                 </div>
 
-                <input class="boutonPopup" type="submit" value="Envoyer">
+                <input class="boutonPopup" type="submit" value="se connecter">
 
                 <?php
                 if (isset($_GET['mail'])) {
@@ -32,10 +37,14 @@
             </form>
             <div>
                 <form method="post">
-						<input type="submit" value="Se connecter en tant que administrateur" class="lienPopup">
+					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>
+                        <input type="submit" value="Se connecter en tant qu'utilisateur lambda" class="lienPopup">
+                        <input type="hidden" name="popup" value="sign_in">
+                    <?php }else{ ?> 
+                        <input type="submit" value="Se connecter en tant qu'administrateur" class="lienPopup">
                         <input type="hidden" name="popup" value="sign_in_admin">
+                    <?php } ?>
 			    </form>
-                <!-- <input type="button" onclick="window.location.href='form_sign_up_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur"> -->
             </div>
         </div>
         <div>
@@ -48,7 +57,7 @@
             <p class="text">Vous n'avez pas de compte ?</p>
             <form method="post">
 				<input type="submit" value="S'incrire" class="lienPopup">
-                <input type="hidden" name="popup" value="sign_up">
+                <input type="hidden" name="popup" value="pre_sign_up">
 			</form>
         </div>
     </div>
