@@ -29,10 +29,7 @@
 				</form>
             </div>
             <div class="contenuPage">
-            <div class="gallery-container">
                         <?php
-                        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                            if (isset($_GET["categorie"])) {
                                 $categorie = $_GET["categorie"];
                                 // Connexion à la base de données 
                                 $utilisateur = "inf2pj02";
@@ -44,14 +41,8 @@
                                 if ($connexion->connect_error) {
                                     die("Erreur de connexion : " . $connexion->connect_error);
                                 }
-
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                if ($_GET["categorie"]=="Tout"){
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
-                                }else{
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
-                                    //$stmt->bind_param("s", $categorie);
-                                }
+                                $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
@@ -59,29 +50,19 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                        echo '<a href="delete_user.php?Id_Uti='. $row["Id_Uti"] . '" class="square"  >';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
+                                        echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                        echo "Profession : " . $row["Prof_Prod"] . "<br>";
                                         echo '</a> ';                                        
                                     }
                                 } else {
-                                    echo "Aucun résultat trouvé pour la catégorie : $categorie";
-                                }
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-
-                                        
-                                    }
+                                    echo "erreur contacté l'équipe de déveloper ";
                                 }
                                 $stmt->close();
                                 $connexion->close();
-                            }
-                        }
-                        var_dump($_SESSION["Id_Uti"]);
-                        echo("<br>");
-                        var_dump($_SESSION["Mail_Uti"]);
                         ?>
                     
                 </div>
