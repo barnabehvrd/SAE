@@ -9,7 +9,7 @@
 
     <h2>Validation du Code</h2>
 
-    <?php /*
+    <?php 
     if (isset($_GET['result'])) {
         $result = $_GET['result'];
         if ($result === 'success') {
@@ -21,7 +21,7 @@
             sleep(10);
             header("Location: form_code.php?");
         }
-    }*/
+    }
     ?>
 
     <form action="traitement_code.php" method="post">
