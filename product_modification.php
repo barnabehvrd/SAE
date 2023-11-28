@@ -17,6 +17,7 @@
       session_start();
       $utilisateur=$_SESSION["Id_Uti"];
       $Id_Produit_Update=$_POST["modifyIdProduct"];
+      $_SESSION["Id_Produit"]=$Id_Produit_Update;
       $bdd=dbConnect();
       $queryGetProducts = $bdd->query(('SELECT * FROM PRODUIT WHERE Id_Produit=\''.$Id_Produit_Update.'\';'));
       $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
@@ -196,10 +197,19 @@
                             break;
                     }
                 ?>
-                <br>
-                <br>
                 <input type="submit" value="Confirmer la modification">
             </form>
+            <br>
+            <br>
+            <?php
+            //echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+            ?>
+            <form action="upload_product.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" accept=".png" required>
+                <button type="submit">Envoyer</button>
+            </form>
+            <br>
+            <br>
             <form action="mes_produits.php" method="post">
                 <input type="submit" value="Annuler la modification">
             </form>
@@ -274,7 +284,7 @@
                                         echo '<div class="squareProduct" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
-                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image '.$nomProduit.'" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         if ($Id_Produit==$Id_Produit_Update){
