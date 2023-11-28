@@ -114,10 +114,10 @@
 							$total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
 							$iterateurProduit++;
 						}
-                        ?>
-                        <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Uti; ?>'" value="Envoyer un message">
-                        <?php
+
 						if ($nbProduit>0){
+                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'" value="Envoyer un message">;
+                            ';
 							echo '<div class="aDroite">Total : '.$total.'€</div>';
 							echo '</div> '; 
 						}
