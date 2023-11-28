@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Génération d'un code aléatoire à 6 chiffres
     $code = rand(100000, 999999);
-
+    $_SESSION["code"]=$code;
     // Envoi du code par e-mail
     $subject = "Réinitialisation de mot de passe";
     $message = "Votre code de réinitialisation de mot de passe est : $code";
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mailSent = mail($email, $subject, $message, $headers);
 
     // Redirection avec le résultat de l'envoi
-    $redirectUrl = 'index.php';
+    $redirectUrl = 'accept_code.php';
     if ($mailSent) {
         $redirectUrl .= '?result=success';
     } else {
