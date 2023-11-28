@@ -1,8 +1,6 @@
 <?php
 // Récupération des données du formulaire
 
-
-
 var_dump($_POST);
 $_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
@@ -27,7 +25,6 @@ $id_max = $resultat->fetch_assoc()['id_max'];
 
 // Incrémentation de la valeur de $iduti
 $iduti = $id_max + 1;
-
 // Vérification de l'existence de l'adresse mail
 $requete2 = "SELECT COUNT(*) AS nb FROM UTILISATEUR WHERE Mail_Uti = '$Mail_Uti'";
 $resultat2 = $connexion->query($requete2);
@@ -45,7 +42,6 @@ if ($nb == 0) {
     } else {
         echo "Erreur : " . $insertion . "<br>" . $connexion1->error;
     }
-
     // création producteur
     if (isset($_POST['profession'])){
         $profession = isset($_POST['profession']) ? $_POST['profession'] : '';
@@ -78,16 +74,15 @@ if ($nb == 0) {
             }
     
             if($_SESSION["isProd"]==true){
-                //$_POST['popup'] = 'addProfilPicture';
+                $_POST['popup'] = 'addProfilPicture';
             }else {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $iduti;
-                //$_POST['popup'] = '';
+                $_POST['popup'] = '';
             }    
 } else {            
     //$_GET['erreur'] = 'adresse mail déjà utilisé';    
 }
 // Fermeture de la connexion
-sleep(10);
 $connexion->close();
 ?>

@@ -10,6 +10,7 @@
             <label for="nom">Nom :</label>
             <input class="zoneDeTextePopup" type="text" name="nom" required>
             <input type="hidden" value='0' name="formClicked">
+            <input type="hidden" value='sign_up' name="popup">
         </div>
         <div>
             <label for="prenom">Prénom :</label>
@@ -42,19 +43,20 @@
         </div>
         <?php } ?>        
         <input class="boutonPopup" type="submit" value="s'incrire">
-
-        <?php
+    </form>
+    <?php
+        $_POST['popup'] = 'sign_up';
         if (isset($_POST['formClicked'])){
             require 'traitements/traitement_formulaire_sign_up.php';
             unset($_POST['formClicked']);
-            var_dump($_POST);
         }
+        $_POST['popup'] = 'sign_up';
         if (isset($_POST['erreur'])) {
             $erreur = $_POST['erreur'];
             echo '<p class="erreur">'.$erreur.'</p>';
         }
+        $_POST['popup'] = 'sign_up';
         ?>
-    </form>
     <div class="alignementCentreCoteACote">
         <p class="text">J'ai déjà un compte</p>
         <form method="post">
