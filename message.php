@@ -8,6 +8,9 @@
 
 </head>
 <body>
+	<?php
+        session_start();
+    ?>
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
@@ -25,10 +28,12 @@
 					<button class="button"><a href="index.php">Accueil</a></button>
                         <button class="button"><a href="message.php">Messagerie</a></button>                 
 						<button class="button"><a href="commandes.php">Achats</a></button>
-                        <form method="post">
-							<input type="submit" value=<?php if (!isset($_SESSION)){session_start(); echo '"Se Connecter"';}else {echo $_SESSION['Mail_Uti'];}?> class="boutonDeConnection">
-                    		<input type="hidden" name="popup" value="sign_in">
-						</form>
+                        <?php
+                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
+                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
+                            }
+                        ?>
                     </div>
                 </div>
                 <!-- Partie droite du bandeau -->
