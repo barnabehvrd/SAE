@@ -22,8 +22,8 @@
 
         $iterateurProduit++;
     }
-      $bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
-      $bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
+      //$bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
+      //$bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
       //echo 'DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';';
     
     header('Location: commandes.php?');
