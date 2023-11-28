@@ -26,7 +26,7 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center><p><strong>Ajouter un produit</strong></p>
-            <form action="insert_products.php" method="post">
+            <form action="insert_products.php" method="post" enctype="multipart/form-data">
                 <label for="pwd">Produit : </label>
                 <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
 
@@ -64,6 +64,7 @@
                     <input type="radio" name="unitQuantite" value="4"> Pièce
                 </label>
                 <br>
+                <input type="file" name="image" accept=".png">
                 <br>
                 <input type="submit" value="Ajouter le produit">
             </form>
