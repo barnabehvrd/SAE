@@ -1,5 +1,5 @@
-<?php
-// Définit le type de contenu comme PDF
+<?php 
+// Définit le type de contenu comme PDF test
 header('Content-Type: application/pdf');
 
 // Définit le nom du fichier PDF
