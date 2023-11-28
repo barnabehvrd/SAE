@@ -87,7 +87,7 @@
 							echo "Client ".$Prenom_Client." ".$Nom_Client;
 							echo '</br>';
 							echo "COMMANDE ".$Desc_Statut." <br>";
-                            if ($Desc_Statut!="LIVRÉE"){
+                            if (($Id_Statut!=4) and ($Id_Statut!=3)){
                         ?>
                             <form action="change_status_commande.php" method="post">
                                 <select name="categorie">
