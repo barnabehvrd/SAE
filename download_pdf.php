@@ -131,6 +131,7 @@ $pdf->Ln(); // Saut de ligne
 // Impression
 $pdf->Ln(5); // Saut de ligne réduit
 $dateActuelle = new DateTime('now');
+$dateActuelle->format('Y-m-d H:i:s');
 $pdf->Cell(0, 5, 'Imprimé le '.$dateActuelle, 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
@@ -139,7 +140,7 @@ $pdf->Output($nom_fichier, 'F');
 
 // Envoi des en-têtes pour le téléchargement
 header('Content-Type: application/pdf');
-header('Content-Disposition: attachment; filename="exemple.pdf"');
+header('Content-Disposition: attachment; filename="Commande_'.$Id_Commande.'.pdf"');
 header('Content-Length: ' . filesize($nom_fichier));
 
 // Envoyer le contenu du fichier
