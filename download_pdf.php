@@ -1,3 +1,4 @@
+
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
@@ -32,60 +33,71 @@ $Nom_Prod = $returnQueryGetProducteur[0]["Nom_Uti"];
 $Nom_Prod = mb_strtoupper($Nom_Prod);
 $Prenom_Prod = $returnQueryGetProducteur[0]["Prenom_Uti"];
 $Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
+$Mail_Prod = $returnQueryGetProducteur[0]["Mail_Uti"];
 $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
 require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
 class MonPDF extends tFPDF
 {
+    private $pdf;
+
+    public function setPDF($pdf)
+    {
+        $this->pdf = $pdf;
+    }
+
     // En-tête
     function Header()
     {
         // Titre
-        $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
+        $this->pdf->SetFont('Arial', 'B', 12, 'UTF-8');
+        $this->pdf->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
 
         // Ligne de séparation
-        $this->Cell(0, 0, '', 'T');
-        $this->Ln(5); // Saut de ligne réduit
+        $this->pdf->Cell(0, 0, '', 'T');
+        $this->pdf->Ln(5); // Saut de ligne réduit
     }
 
     // Pied de page
     function Footer()
     {
         // Numéro de page
-        $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
+        $this->pdf->SetY(-15);
+        $this->pdf->SetFont('Arial', 'I', 12, 'UTF-8');
+        $this->pdf->Cell(0, 10, 'Page ' . $this->pdf->PageNo(), 0, 0, 'C');
     }
 }
 
 // Créer une instance de MonPDF
 $pdf = new MonPDF();
+$pdf->setPDF($pdf); // Ajoutez cette ligne
 $pdf->AddPage();
 
 // Ajouter les valeurs
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 12, 'UTF-8');
 
-$pdf->Cell(0, 5, $Nom_Prod.' '.$Prenom_Prod, 0, 1);
+$pdf->Cell(0, 5, $Prenom_Prod.' '.$Nom_Prod, 0, 1);
 $pdf->Cell(0, 5, $Prof_Prod, 0, 1);
+$pdf->Cell(0, 5, $Mail_Prod, 0, 1);
 $pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 
 // Informations sur le client
-$pdf->Cell(0, 5, $Nom_Uti.' '.$Prenom_Uti, 0, 0, 'R');
+$pdf->Cell(0, 5, $Prenom_Uti.' '.$Nom_Uti, 0, 0, 'R');
+$pdf->Ln();
+$pdf->Cell(0, 5, $Mail_Uti, 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
-$pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
+$pdf->Cell(0, 5, 'COMMANDE '.$Id_Commande.' :', 0, 1);
 
-
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(40, 8, 'Produit', 1);
-$pdf->Cell(40, 8, 'Prix Unitaire', 1);
-$pdf->Cell(30, 8, 'Quantité', 1);
-$pdf->Cell(40, 8, 'Prix', 1);
+$pdf->SetFont('Arial', 'B', 12, 'UTF-8');
+$pdf->Cell(40, 8, 'PRODUIT', 1);
+$pdf->Cell(40, 8, 'PRIX UNITAIRE', 1);
+$pdf->Cell(30, 8, 'QUANTITE', 1);
+$pdf->Cell(40, 8, 'PRIX', 1);
 $pdf->Ln();
 
 
@@ -110,12 +122,12 @@ while ($iterateurProduit<$nbProduit){
 
 
 
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 12, 'UTF-8');
 foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
-    $pdf->Cell(40, 8, '$' . $produit[1], 1); 
+    $pdf->Cell(40, 8, $produit[1].' euros', 1); 
     $pdf->Cell(30, 8, $produit[2], 1);
-    $pdf->Cell(40, 8, '$' . intval($produit[1]) * intval($produit[2]), 1); 
+    $pdf->Cell(40, 8, intval($produit[1]) * intval($produit[2]).' euros', 1); 
     $pdf->Ln();
 }
 
@@ -123,9 +135,9 @@ foreach ($produits as $produit) {
 $pdf->Ln(5); // Saut de ligne réduit
 
 // Total
-$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFont('Arial', 'B', 12, 'UTF-8');
 $pdf->Cell(110, 8, 'TOTAL', 1);
-$pdf->Cell(40, 8, '$' . $total, 1);
+$pdf->Cell(40, 8, $total.' euros', 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
@@ -137,11 +149,11 @@ date_default_timezone_set('Europe/Paris');
 // Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
-$pdf->Cell(0, 5, "Imprimé le " . $date->format('Y-m-d H:i:s'), 0, 1);
+$pdf->Cell(0, 5, "Date d'impression : " . $date->format('Y-m-d H:i:s'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
-$pdf->Output($nom_fichier, 'F');
+$pdf->Output($nom_fichier, 'F', true, 'UTF-8');
 
 // Envoi des en-têtes pour le téléchargement
 header('Content-Type: application/pdf');
