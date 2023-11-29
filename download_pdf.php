@@ -87,7 +87,7 @@ $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
-$pdf->Cell(0, 5, 'COMMANDE numéro '.$Id_Commande.' :', 0, 1);
+$pdf->Cell(0, 5, 'COMMANDE '.$Id_Commande.' :', 0, 1);
 
 $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
 $pdf->Cell(40, 8, 'PRODUIT', 1);
