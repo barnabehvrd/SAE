@@ -33,13 +33,14 @@
             </center>
             Statut 
             <br>
+            
             <form action="delivery.php" method="post">
                 <label>
                     <input type="radio" name="typeCategorie" value="0"> TOUT
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="typeCategorie" value="1"> EN COURS
+                    <input type="radio" name="typeCategorie" value="1" checked="<?php if ($filtreCategorie==1) echo "checked";?>"> EN COURS
                 </label>
                 <br>
                 <label>
