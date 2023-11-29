@@ -1,14 +1,4 @@
 <?php
-function dbConnect(){
-    $host = 'localhost';
-    $dbname = 'inf2pj_02';
-    $user = 'inf2pj02';
-    $password = 'ahV4saerae';
-    return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-}
-
-$bdd=dbConnect();
-session_start();
 // Récupération des données de la commande
 $Id_Commande = $_POST["idCommande"];
 $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande=' . $Id_Commande . ';'));
@@ -35,12 +25,12 @@ endobj
 /Contents 4 0 R >>
 endobj
 4 0 obj
-<< /Length 260 >>
+<< /Length 270 >>
 stream
 BT
 /F1 18 Tf
 50 750 Td
-(Bon de Commande) Tj
+(Bon de Commande - ID: ' . $Id_Commande . ' - Statut: ' . $Desc_Statut . ') Tj
 /F1 12 Tf
 50 730 Td
 (--------------------------------------------) Tj
@@ -62,10 +52,6 @@ BT
 (--------------------------------------------) Tj
 50 550 Td
 (Total : $100) Tj
-50 530 Td
-(ID de commande : ' . $Id_Commande . ') Tj
-50 510 Td
-(Statut : ' . $Desc_Statut . ') Tj
 ET
 endstream
 endobj
@@ -75,12 +61,12 @@ xref
 0000000018 00000 n 
 0000000077 00000 n 
 0000000178 00000 n 
-0000000565 00000 n 
+0000000581 00000 n 
 trailer
 << /Root 1 0 R
 /Size 5 >>
 startxref
-592
+600
 %%EOF
 ';
 
