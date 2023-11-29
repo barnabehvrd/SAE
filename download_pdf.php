@@ -13,11 +13,10 @@ session_start();
 
 // Récupération des données de la commande
 $Id_Commande = $_POST["idCommande"];
-$queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, info_producteur.Nom_Prod FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande=' . $Id_Commande . ';'));
+$queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande=' . $Id_Commande . ';'));
 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 $Id_Commande = $returnQueryGetCommande[0]["Id_Commande"];
 $Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
-$Nom_Producteur = $returnQueryGetCommande[0]["Nom_Prod"];
 
 // Génération du contenu PDF avec TCPDF
 $pdf = new TCPDF();
