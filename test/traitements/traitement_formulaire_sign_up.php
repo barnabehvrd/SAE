@@ -1,7 +1,6 @@
 <?php
 // Récupération des données du formulaire
 
-var_dump($_POST);
 $_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
@@ -59,14 +58,9 @@ if ($nb == 0) {
     $connexion1->close();
     $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
-            echo '<br>';
-            var_dump($isProducteur);
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            echo '<br>';
-            var_dump($returnIsProducteur);
             $reponse=$returnIsProducteur[0]["result"];
             if ($reponse!=NULL){
-                echo 'producteur';
                 $_SESSION["isProd"]=true;
                 //var_dump($_SESSION);
             }else {
@@ -80,9 +74,11 @@ if ($nb == 0) {
                 $_SESSION['Id_Uti'] = $iduti;
                 $_POST['popup'] = '';
             }    
-} else {            
-    //$_GET['erreur'] = 'adresse mail déjà utilisé';    
+} else {
+    $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
 }
+
+
 // Fermeture de la connexion
 $connexion->close();
 ?>
