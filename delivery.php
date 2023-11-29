@@ -39,7 +39,7 @@
             
             <form action="delivery.php" method="post">
                 <label>
-                    <input type="radio" name="typeCategorie" value="0"> TOUT
+                    <input type="radio" name="typeCategorie" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> TOUT
                 </label>
                 <br>
                 <label>
