@@ -5,7 +5,7 @@
             <input type="hidden" name="popup" value="">
     </form>
     <p class="titrePopup">S'inscrire</p>
-    <form class="formPopup" method="post"> <!--      -->
+    <form class="formPopup" method="post"> 
         <div>
             <label for="nom">Nom :</label>
             <input class="zoneDeTextePopup" type="text" name="nom" required>
