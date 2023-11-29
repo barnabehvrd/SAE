@@ -14,7 +14,7 @@
         </div>
         <div>
             <label for="prenom">Prénom :</label>
-            <input class="zoneDeTextePopup" type="text" name="prenom"pattern="^[A-Z][a-zA-Z]{0,199}$" title="Le prénom doit commencer par une majuscule et avoir une longueur maximale de 200 caractères." required>
+            <input class="zoneDeTextePopup" type="text" name="prenom"pattern="^[A-Z][a-zA-Z]{0,99}$" title="Le prénom doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
         </div>
         <div>
             <label for="rue">Rue :</label>
