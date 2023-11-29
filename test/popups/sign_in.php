@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
-                    <input class="zoneDeTextePopup" type="text" name="pwd" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,50}$"  required>
+                    <input class="zoneDeTextePopup" type="password" name="pwd" required> 
                 </div>
                 <div>
                     <?php

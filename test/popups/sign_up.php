@@ -30,7 +30,7 @@
         </div>
         <div>
             <label for="pwd">Mot de passe :</label>
-            <input class="zoneDeTextePopup" type="password" name="pwd" required>
+            <input class="zoneDeTextePopup" type="password" pattern=pattern="^(?=.*[0-9])(?=.*[!@#$%^&*()-=_+[\]{}|;:'\",.<>/?])[A-Za-z0-9!@#$%^&*()-=_+[\]{}|;:'\",.<>/?]{8,50}$"  name="pwd" required>
         </div>
         <div>
             <label for="mail">Mail :</label>
