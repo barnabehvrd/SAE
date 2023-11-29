@@ -621,7 +621,7 @@ END $$
 
 DELIMITER ;
 
-
+INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
     ('1', 'John', 'Doe', 'johndoe1@gmail.com', '7 rue des Fleurs, 37000 TOURS', 'password123'),
