@@ -40,7 +40,7 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="typeCategorie" value="1" checked="false"> EN COURS
+                    <input type="radio" name="typeCategorie" value="1" <?php if($filtreCategorie==1) echo 'checked="true"';?>> EN COURS
                 </label>
                 <br>
                 <label>
