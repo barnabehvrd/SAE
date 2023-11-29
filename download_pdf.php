@@ -34,9 +34,9 @@ $Prenom_Prod = $returnQueryGetProducteur[0]["Prenom_Uti"];
 $Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
 $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
-require('fpdf/fpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier FPDF
+require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
-class MonPDF extends FPDF
+class MonPDF extends tFPDF
 {
     // En-tête
     function Header()
