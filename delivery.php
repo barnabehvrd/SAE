@@ -23,6 +23,29 @@
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
+            <center>
+                <p><strong>Ajouter un produit</strong></p>
+                <form action="mes_produits.php" method="post">
+                    <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
+
+                    <label>
+                        <input type="radio" name="typeCategorie" value="1"> EN COURS
+                    </label>
+                    <label>
+                        <input type="radio" name="typeCategorie" value="2"> PRÊTE
+                    </label>
+                    <label>
+                        <input type="radio" name="typeCategorie" value="3"> ANNULÉE
+                    </label>
+                    <label>
+                        <input type="radio" name="typeCategorie" value="4"> LIVRÉE
+                    </label>
+
+                    <br>
+                    <br>
+                    <input type="submit" value="Ajouter le produit">
+                </form>
+            </center>
         </div>
         <div class="right-column">
 		<div class="fixed-banner">
