@@ -19,10 +19,52 @@
 	  $bdd=dbConnect();
 	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
+      if (isset($_POST["typeCategorie"])==true){
+        $filtreCategorie=$_POST["typeCategorie"];
+      }
+      else{
+        $filtreCategorie=0;
+      }
     ?>
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
+            <center>
+                <p><strong>Filtrer par :</strong></p>
+                <br>
+                <br>
+            </center>
+            Statut 
+            <br>
+            
+            <form action="delivery.php" method="post">
+                <label>
+                    <input type="radio" name="typeCategorie" value="0"> TOUT
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="1" <?php if($filtreCategorie==1) echo 'checked="true"';?>> EN COURS
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="2"> PRÊTE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="4"> LIVRÉE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="3"> ANNULÉE
+                </label>
+
+                <br>
+                <br>
+                <center>
+                    <input type="submit" value="Filtrer">
+                </center>
+            </form>
+            
         </div>
         <div class="right-column">
 		<div class="fixed-banner">

@@ -29,6 +29,7 @@ $requete2 = "SELECT COUNT(*) AS nb FROM UTILISATEUR WHERE Mail_Uti = '$Mail_Uti'
 $resultat2 = $connexion->query($requete2);
 $nb = $resultat2->fetch_assoc()['nb'];
 // Exécution de la requête d'insertion si l'adresse mail n'est pas déjà utilisée
+echo($nb);
 if ($nb == 0) {
     $insertion = "INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES ('$iduti', '$prenom', '$nom', '$adresse', '$pwd', '$Mail_Uti');";
     $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
