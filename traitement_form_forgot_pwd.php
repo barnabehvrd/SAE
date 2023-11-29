@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Si l'envoi échoue, vous pouvez prendre des mesures appropriées ici
     }
+    $redirectUrl = 'form_code.php';
     if ($mailSent) {
         $redirectUrl .= '?result=success';
     } else {
