@@ -62,7 +62,7 @@ class MonPDF extends FPDF
 
 // Créer une instance de MonPDF
 $pdf = new MonPDF();
-$pdf->AddPage();
+$pdf->AddPage('UTF-8');
 
 // Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
@@ -137,7 +137,7 @@ date_default_timezone_set('Europe/Paris');
 // Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
-$pdf->Cell(0, 5, "Imprimé le " . $date->format('YmdHis'), 0, 1);
+$pdf->Cell(0, 5, "Imprimé le " . $date->format('Y-m-d H:i:s'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
