@@ -42,7 +42,7 @@ class MonPDF extends FPDF
     function Header()
     {
         // Titre
-        $this->SetFont('Arial', 'B', 12);
+        $this->SetFont('ArialUnicodeMS', 'B', 12);
         $this->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
 
         // Ligne de séparation
@@ -55,7 +55,7 @@ class MonPDF extends FPDF
     {
         // Numéro de page
         $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 8);
+        $this->SetFont('ArialUnicodeMS', 'I', 8);
         $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
     }
 }
@@ -65,7 +65,7 @@ $pdf = new MonPDF();
 $pdf->AddPage();
 
 // Ajouter les valeurs
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('ArialUnicodeMS', '', 12);
 
 $pdf->Cell(0, 5, $Nom_Prod.' '.$Prenom_Prod, 0, 1);
 $pdf->Cell(0, 5, $Prof_Prod, 0, 1);
@@ -81,7 +81,7 @@ $pdf->Ln(5); // Sauts de ligne réduits
 $pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
 
 
-$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFont('ArialUnicodeMS', 'B', 12);
 $pdf->Cell(40, 8, 'Produit', 1);
 $pdf->Cell(40, 8, 'Prix Unitaire', 1);
 $pdf->Cell(30, 8, 'Quantité', 1);
@@ -110,7 +110,7 @@ while ($iterateurProduit<$nbProduit){
 
 
 
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('ArialUnicodeMS', '', 12);
 foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
     $pdf->Cell(40, 8, '$' . $produit[1], 1); 
@@ -123,7 +123,7 @@ foreach ($produits as $produit) {
 $pdf->Ln(5); // Saut de ligne réduit
 
 // Total
-$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFont('ArialUnicodeMS', 'B', 12);
 $pdf->Cell(110, 8, 'TOTAL', 1);
 $pdf->Cell(40, 8, '$' . $total, 1);
 $pdf->Ln(); // Saut de ligne
