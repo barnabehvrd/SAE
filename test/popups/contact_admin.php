@@ -9,7 +9,7 @@
             <div>
                 <label for="mail">Mail :</label>
                 <input type="hidden" value='0' name="formClicked">
-                <input class="zoneDeTextePopup" type="text" name="mail" id="mail" required
+                <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="mail" id="mail" required
                 <?php if(isset($_SESSION['Mail_Uti'])){
                     echo 'disable';} ?> >
             </div>
