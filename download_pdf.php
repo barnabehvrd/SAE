@@ -87,6 +87,7 @@ $pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
 $pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
+$pdf->Cell(0, 5, utf8_encode('COMMANDE n°' . $Id_Commande . ' :'), 0, 1);
 
 
 $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
@@ -121,9 +122,9 @@ while ($iterateurProduit<$nbProduit){
 $pdf->SetFont('Arial', '', 12, 'UTF-8');
 foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
-    $pdf->Cell(40, 8, '$' . $produit[1], 1); 
+    $pdf->Cell(40, 8, $produit[1].'€', 1); 
     $pdf->Cell(30, 8, $produit[2], 1);
-    $pdf->Cell(40, 8, '$' . intval($produit[1]) * intval($produit[2]), 1); 
+    $pdf->Cell(40, 8, intval($produit[1]) * intval($produit[2]).'€', 1); 
     $pdf->Ln();
 }
 
@@ -133,7 +134,7 @@ $pdf->Ln(5); // Saut de ligne réduit
 // Total
 $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
 $pdf->Cell(110, 8, 'TOTAL', 1);
-$pdf->Cell(40, 8, '$' . $total, 1);
+$pdf->Cell(40, 8, $total.'€', 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
