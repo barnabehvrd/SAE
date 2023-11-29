@@ -18,25 +18,27 @@ $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 $Id_Commande = $returnQueryGetCommande[0]["Id_Commande"];
 $Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
 
-// Génération du contenu PDF avec TCPDF
-$pdf = new TCPDF();
-$pdf->SetMargins(10, 10, 10);
+require('fpdf/fpdf.php');
+
+// Créer une instance de la classe FPDF
+$pdf = new FPDF();
+
+// Ajouter une page au PDF
 $pdf->AddPage();
 
-// Ajoutez le contenu du PDF ici
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, 'Bon de Commande', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Commande ID: ' . $Id_Commande, 0, 1, 'C');
-$pdf->Cell(0, 10, 'Statut: ' . $Desc_Statut, 0, 1, 'C');
-$pdf->Cell(0, 10, 'Producteur: ' . $Nom_Producteur, 0, 1, 'C');
-$pdf->Cell(0, 10, 'Nombre de produits: 3', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Produit 1: T-shirt, Quantité: 5, Prix unitaire: $10', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Produit 2: Tomates, Quantité: 3, Prix unitaire: $5', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Produit 3: Chaussures, Quantité: 2, Prix unitaire: $50', 0, 1, 'C');
+// Définir la police
+$pdf->SetFont('Arial', 'B', 16);
 
-// Nom du fichier de sortie
-$filename = 'bill.pdf';
+// Ajouter du texte au PDF
+$pdf->Cell(40, 10, 'Bonjour, voici votre PDF!');
 
-// Envoie les entêtes pour indiquer que le contenu est un PDF à télécharger
-$pdf->Output($filename, 'D');
+// Nom du fichier PDF à télécharger
+$nom_fichier = 'votre_fichier.pdf';
+
+// Envoi des en-têtes HTTP pour forcer le téléchargement du fichier
+header('Content-Type: application/pdf');
+header('Content-Disposition: attachment; filename="' . $nom_fichier . '"');
+
+// Générer le PDF et le transmettre au navigateur
+$pdf->Output('F', $nom_fichier);
 ?>
