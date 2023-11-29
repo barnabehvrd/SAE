@@ -19,6 +19,7 @@
 	  $bdd=dbConnect();
 	  session_start();
 	  $utilisateur=$_SESSION["Id_Uti"];
+      $filtreCategorie=$_POST["typeCategorie"];
     ?>
     <div class="container">
         <div class="left-column">
@@ -27,9 +28,9 @@
                 <p><strong>Filtrer par :</strong></p>
                 <br>
                 <br>
-                Statut 
-                <br>
             </center>
+            Statut 
+            <br>
             <form action="mes_produits.php" method="post">
                 <label>
                     <input type="radio" name="typeCategorie" value="0"> TOUT
@@ -54,7 +55,7 @@
                 <br>
                 <br>
                 <center>
-                    <input type="submit" value="Ajouter le produit">
+                    <input type="submit" value="Filtrer">
                 </center>
             </form>
             
