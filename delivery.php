@@ -29,32 +29,35 @@
                 <br>
                 Statut 
                 <br>
-                <form action="mes_produits.php" method="post">
-                    <label>
-                        <input type="radio" name="typeCategorie" value="0"> TOUT
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="typeCategorie" value="1"> EN COURS
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="typeCategorie" value="2"> PRÊTE
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="typeCategorie" value="3"> ANNULÉE
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="typeCategorie" value="4"> LIVRÉE
-                    </label>
-
-                    <br>
-                    <br>
-                    <input type="submit" value="Ajouter le produit">
-                </form>
             </center>
+            <form action="mes_produits.php" method="post">
+                <label>
+                    <input type="radio" name="typeCategorie" value="0"> TOUT
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="1"> EN COURS
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="2"> PRÊTE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="4"> LIVRÉE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="3"> ANNULÉE
+                </label>
+
+                <br>
+                <br>
+                <center>
+                    <input type="submit" value="Ajouter le produit">
+                </center>
+            </form>
+            
         </div>
         <div class="right-column">
 		<div class="fixed-banner">
