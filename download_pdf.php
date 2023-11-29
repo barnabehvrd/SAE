@@ -16,7 +16,7 @@ $queryGetCommande = $bdd->query('SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.
 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 
 $Id_Prod = $returnQueryGetCommande[0]["Id_Prod"];
-$Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
+$Desc_Statut = utf8_encode($returnQueryGetCommande[0]["Desc_Statut"]);
 $Nom_Uti = utf8_encode($returnQueryGetCommande[0]["Nom_Uti"]);
 $Nom_Uti = mb_strtoupper($Nom_Uti);
 $Prenom_Uti = utf8_encode($returnQueryGetCommande[0]["Prenom_Uti"]);
@@ -34,7 +34,7 @@ $Prenom_Prod = utf8_encode($returnQueryGetProducteur[0]["Prenom_Uti"]);
 $Adr_Prod = utf8_encode($returnQueryGetProducteur[0]["Adr_Uti"]);
 $Prof_Prod = utf8_encode($returnQueryGetProducteur[0]["Prof_Prod"]);
 
-require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
+require('tfpdf/tfpdf.php');
 
 class MonPDF extends tFPDF
 {
@@ -45,47 +45,36 @@ class MonPDF extends tFPDF
         $this->pdf = $pdf;
     }
 
-    // En-tête
     function Header()
     {
-        // Titre
         $this->pdf->SetFont('Arial', 'B', 12);
         $this->pdf->Cell(0, 5, utf8_encode('Bon de commande'), 0, 1, 'C');
-
-        // Ligne de séparation
         $this->pdf->Cell(0, 0, '', 'T');
-        $this->pdf->Ln(5); // Saut de ligne réduit
+        $this->pdf->Ln(5);
     }
 
-    // Pied de page
     function Footer()
     {
-        // Numéro de page
         $this->pdf->SetY(-15);
         $this->pdf->SetFont('Arial', 'I', 12);
         $this->pdf->Cell(0, 10, utf8_encode('Page ' . $this->pdf->PageNo()), 0, 0, 'C');
     }
 }
 
-// Créer une instance de MonPDF
 $pdf = new MonPDF();
-$pdf->setPDF($pdf); // Ajoutez cette ligne
+$pdf->setPDF($pdf);
 $pdf->AddPage();
-
-// Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
 
 $pdf->Cell(0, 5, utf8_encode($Nom_Prod.' '.$Prenom_Prod), 0, 1);
 $pdf->Cell(0, 5, utf8_encode($Prof_Prod), 0, 1);
 $pdf->Cell(0, 5, utf8_encode($Adr_Prod), 0, 1);
 
-// Informations sur le client
 $pdf->Cell(0, 5, utf8_encode($Nom_Uti.' '.$Prenom_Uti), 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(0, 5, utf8_encode($Adr_Uti), 0, 0, 'R');
-$pdf->Ln(5); // Sauts de ligne réduits
+$pdf->Ln(5);
 
-// Informations sur la commande
 $pdf->Cell(0, 5, utf8_encode('COMMANDE n°'.$Id_Commande.' :'), 0, 1);
 
 $pdf->SetFont('Arial', 'B', 12);
@@ -122,37 +111,27 @@ foreach ($produits as $produit) {
     $pdf->Ln();
 }
 
-$pdf->Ln(5); // Saut de ligne réduit
+$pdf->Ln(5);
 
-// Total
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(110, 8, utf8_encode('TOTAL'), 1);
 $pdf->Cell(40, 8, '$' . $total, 1);
-$pdf->Ln(); // Saut de ligne
+$pdf->Ln();
 
-// Impression
-$pdf->Ln(5); // Saut de ligne réduit
+$pdf->Ln(5);
 
-// Définir le fuseau horaire
 date_default_timezone_set('Europe/Paris');
-
-// Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
 $pdf->Cell(0, 5, utf8_encode("Imprimé le " . $date->format('Y-m-d H:i:s')), 0, 1);
 
-// Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
 $pdf->Output($nom_fichier, 'F');
 
-// Envoi des en-têtes pour le téléchargement
 header('Content-Type: application/pdf');
 header('Content-Disposition: attachment; filename="Commande_'.$Id_Commande.'.pdf"');
 header('Content-Length: ' . filesize($nom_fichier));
 
-// Envoyer le contenu du fichier
 readfile($nom_fichier);
-
-// Supprimer le fichier temporaire
 unlink($nom_fichier);
 ?>
