@@ -110,6 +110,7 @@
                 $queryGetCommande = $bdd->query(($query));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
+                var_dump($returnQueryGetCommande);
                 if(count($returnQueryGetCommande)==0){
                     echo "Aucune commande pour le moment";
                 }
