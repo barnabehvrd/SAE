@@ -85,6 +85,14 @@
     font-size: 16px;
 }
 
+.grosseZoneDeTextePopup{
+    border-radius: 5px;
+    border: 1px solid #808080;
+    background: #ffffff;
+    font-size: 16px;
+    height: 16*3;
+}
+
 .popup label{
     font-size: 19px;
 }
