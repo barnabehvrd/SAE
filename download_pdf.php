@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
+
 function dbConnect(){
     $host = 'localhost';
     $dbname = 'inf2pj_02';
@@ -129,7 +130,8 @@ $pdf->Ln(); // Saut de ligne
 
 // Impression
 $pdf->Ln(5); // Saut de ligne réduit
-$pdf->Cell(0, 5, 'IMPRESSION', 0, 1);
+$dateActuelle = date("Y-m-d H:i:s");
+$pdf->Cell(0, 5, 'Imprimé le '.$dateActuelle, 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
