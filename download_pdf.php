@@ -137,7 +137,7 @@ $pdf->Ln(5); // Saut de ligne réduit
 // Total
 $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
 $pdf->Cell(110, 8, 'TOTAL', 1);
-$pdf->Cell(40, 8, $total.'euros', 1);
+$pdf->Cell(40, 8, $total.' euros', 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
