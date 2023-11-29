@@ -95,6 +95,14 @@ $pdf->Cell(30, 8, 'Quantité', 1);
 $pdf->Cell(40, 8, 'Prix', 1);
 $pdf->Ln();
 
+// Tableau avec des produits récupérés depuis la base de données
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 8, 'Produit', 1);
+$pdf->Cell(40, 8, 'Prix Unitaire', 1);
+$pdf->Cell(30, 8, 'Quantité', 1);
+$pdf->Cell(40, 8, 'Prix', 1);
+$pdf->Ln();
+
 // Récupération des produits depuis la base de données
 $queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande =' . $Id_Commande . ';'));
 $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
@@ -111,9 +119,9 @@ while ($iterateurProduit < $nbProduit) {
 
     // Ajout des produits récupérés dans le tableau
     $pdf->Cell(40, 8, $Nom_Produit, 1);
-    $pdf->Cell(40, 8, '$' . number_format($Prix_Produit_Unitaire, 2), 1);
+    $pdf->Cell(40, 8, '$' . number_format($Prix_Produit_Unitaire, 2, '.', ''), 1);
     $pdf->Cell(30, 8, $Qte_Produit_Commande, 1);
-    $pdf->Cell(40, 8, '$' . number_format($Prix_Produit_Unitaire * $Qte_Produit_Commande, 2), 1);
+    $pdf->Cell(40, 8, '$' . number_format($Prix_Produit_Unitaire * $Qte_Produit_Commande, 2, '.', ''), 1);
     $pdf->Ln();
 
     // Calcul du total
@@ -127,7 +135,7 @@ $pdf->Ln(5); // Saut de ligne réduit
 // Total
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(110, 8, 'TOTAL', 1);
-$pdf->Cell(40, 8, '$' . number_format($total, 2), 1);
+$pdf->Cell(40, 8, '$' . number_format($total, 2, '.', ''), 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
