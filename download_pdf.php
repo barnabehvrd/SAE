@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/pdf');
-header('Content-Disposition: inline; filename=bill.pdf');
+header('Content-Disposition: attachment; filename=bill.pdf');
 
 echo '%PDF-1.3
 1 0 obj
