@@ -131,8 +131,13 @@ $pdf->Ln(); // Saut de ligne
 // Impression
 $pdf->Ln(5); // Saut de ligne réduit
 
+// Définir le fuseau horaire
+date_default_timezone_set('Europe/Paris');
 
-$pdf->Cell(0, 5, "Imprimé le ", 0, 1);
+// Créer une instance de DateTime pour la date et l'heure actuelles
+$date = new DateTime('now');
+
+$pdf->Cell(0, 5, "Imprimé le " . $date->format('YmdHis'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
