@@ -47,15 +47,15 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="typeCategorie" value="2"> PRÊTE
+                    <input type="radio" name="typeCategorie" value="2"<?php if($filtreCategorie==2) echo 'checked="true"';?>> PRÊTE
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="typeCategorie" value="4"> LIVRÉE
+                    <input type="radio" name="typeCategorie" value="4" <?php if($filtreCategorie==4) echo 'checked="true"';?>> LIVRÉE
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="typeCategorie" value="3"> ANNULÉE
+                    <input type="radio" name="typeCategorie" value="3" <?php if($filtreCategorie==3) echo 'checked="true"';?>> ANNULÉE
                 </label>
 
                 <br>
@@ -101,7 +101,13 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1>Partie droite (1/5)</h1>
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';'));
+                if ($filtreCategorie!=0){
+                    $query='SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.' AND Desc_Statut='.$filtreCategorie.';';
+                }
+                else{
+                    $query='SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';';
+                }
+                $queryGetCommande = $bdd->query(($query));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
