@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+header('Content-Type: text/html; charset=utf-8');
 
 function dbConnect(){
     $host = 'localhost';
@@ -149,7 +149,7 @@ $pdf->Cell(0, 5, "Imprimé le " . $date->format('Y-m-d H:i:s'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
-$pdf->Output($nom_fichier, 'F');
+$pdf->Output($nom_fichier, 'F', true, 'UTF-8');
 
 // Envoi des en-têtes pour le téléchargement
 header('Content-Type: application/pdf');
