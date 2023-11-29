@@ -62,7 +62,7 @@ class MonPDF extends FPDF
 
 // Créer une instance de MonPDF
 $pdf = new MonPDF();
-$pdf->AddPage('UTF-8');
+$pdf->AddPage();
 
 // Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
