@@ -14,23 +14,23 @@
         </div>
         <div>
             <label for="prenom">Prénom :</label>
-            <input class="zoneDeTextePopup" type="text" name="prenom" required>
+            <input class="zoneDeTextePopup" type="text" name="prenom"pattern="^[A-Z][a-zA-Z]{0,199}$" title="Le prénom doit commencer par une majuscule et avoir une longueur maximale de 200 caractères." required>
         </div>
         <div>
             <label for="rue">Rue :</label>
-            <input class="zoneDeTextePopup" type="text" name="rue" required>
+            <input class="zoneDeTextePopup" type="text" name="rue" pattern="^[A-Z][a-zA-Z]{0,99}$" title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
         </div>
         <div>
             <label for="code">Code postale :</label>
-            <input class="zoneDeTextePopup" type="text" name="code" required>
+            <input class="zoneDeTextePopup" type="text" name="code" pattern="^\d{5}$" title="Le code postal doit contenir exactement 5 chiffres." required>
         </div>
         <div>
             <label for="ville">Ville :</label>
-            <input class="zoneDeTextePopup" type="text" name="ville" required>
+            <input class="zoneDeTextePopup" type="text" name="ville" pattern="^[A-Z][a-zA-Z]{0,99}$" title="La ville doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
         </div>
         <div>
             <label for="pwd">Mot de passe :</label>
-            <input class="zoneDeTextePopup" type="password"  name="pwd" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$" required>
+            <input class="zoneDeTextePopup" type="password" name="pwd" pattern="pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." required>
         </div>
         <div>
             <label for="mail">Mail :</label>
