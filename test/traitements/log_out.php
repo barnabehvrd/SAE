@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Détruisez toutes les variables de session
 $_SESSION = array();
 
