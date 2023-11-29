@@ -20,7 +20,7 @@ endobj
 /Contents 4 0 R >>
 endobj
 4 0 obj
-<< /Length 150 >>
+<< /Length 190 >>
 stream
 BT
 /F1 18 Tf
@@ -30,7 +30,7 @@ BT
 50 730 Td
 (--------------------------------------------) Tj
 50 710 Td
-(Produit : T-shirt) Tj
+(Produit 1 : T-shirt) Tj
 50 690 Td
 (Quantité : 5) Tj
 50 670 Td
@@ -38,7 +38,15 @@ BT
 50 650 Td
 (--------------------------------------------) Tj
 50 630 Td
-(Total : $50) Tj
+(Produit 2 : Tomates) Tj
+50 610 Td
+(Quantité : 5) Tj
+50 590 Td
+(Prix unitaire : $10) Tj
+50 570 Td
+(--------------------------------------------) Tj
+50 550 Td
+(Total : $100) Tj
 ET
 endstream
 endobj
@@ -48,12 +56,12 @@ xref
 0000000018 00000 n 
 0000000077 00000 n 
 0000000178 00000 n 
-0000000458 00000 n 
+0000000565 00000 n 
 trailer
 << /Root 1 0 R
 /Size 5 >>
 startxref
-546
+589
 %%EOF
 ';
 ?>
