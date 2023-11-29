@@ -36,33 +36,40 @@ $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
 require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
-// Créer une instance de MonPDF
-$pdf = new MonPDF();
-
 class MonPDF extends tFPDF
 {
+    private $pdf;
+
+    public function setPDF($pdf)
+    {
+        $this->pdf = $pdf;
+    }
+
     // En-tête
     function Header()
     {
         // Titre
-        $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
-        $this->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
+        $this->pdf->SetFont('Arial', 'B', 12, 'UTF-8');
+        $this->pdf->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
 
         // Ligne de séparation
-        $this->Cell(0, 0, '', 'T');
-        $this->Ln(5); // Saut de ligne réduit
+        $this->pdf->Cell(0, 0, '', 'T');
+        $this->pdf->Ln(5); // Saut de ligne réduit
     }
 
     // Pied de page
     function Footer()
     {
         // Numéro de page
-        $this->SetY(-15);
-        $pdf->SetFont('Arial', 'I', 12, 'UTF-8');
-        $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
+        $this->pdf->SetY(-15);
+        $this->pdf->SetFont('Arial', 'I', 12, 'UTF-8');
+        $this->pdf->Cell(0, 10, 'Page ' . $this->pdf->PageNo(), 0, 0, 'C');
     }
 }
 
+// Créer une instance de MonPDF
+$pdf = new MonPDF();
+$pdf->setPDF($pdf); // Ajoutez cette ligne
 $pdf->AddPage();
 
 // Ajouter les valeurs
