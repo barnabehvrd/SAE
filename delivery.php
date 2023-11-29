@@ -24,19 +24,28 @@
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
             <center>
-                <p><strong>Ajouter un produit</strong></p>
+                <p><strong>Filtrer par :</strong></p>
+                <br>
+                <br>
+                Statut 
+                <br>
                 <form action="mes_produits.php" method="post">
-                    <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
-
+                    <label>
+                        <input type="radio" name="typeCategorie" value="0"> TOUT
+                    </label>
+                    <br>
                     <label>
                         <input type="radio" name="typeCategorie" value="1"> EN COURS
                     </label>
+                    <br>
                     <label>
                         <input type="radio" name="typeCategorie" value="2"> PRÊTE
                     </label>
+                    <br>
                     <label>
                         <input type="radio" name="typeCategorie" value="3"> ANNULÉE
                     </label>
+                    <br>
                     <label>
                         <input type="radio" name="typeCategorie" value="4"> LIVRÉE
                     </label>
