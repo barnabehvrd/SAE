@@ -792,20 +792,6 @@ VALUES (1, 'En cours'),
 (4, 'livrée');
 
 
-
-INSERT INTO COMMANDE (Id_Commande, Id_Prod, Id_Uti, Id_Statut)
-VALUES ('1', 1, '1', 1),
-('2', 2, '2', 2),
-('4', 3, '5', 3),
-('5', 1, '12', 1),
-('6', 1, '32', 2),
-('7', 2, '42', 3),
-('8', 1, '15', 4),
-('9', 3, '18', 4),
-('10', 3, '2', 4),
-('11', 1, '3', 2),
-('12', 2, '7', 4);
-
 INSERT INTO TYPE_DE_PRODUIT (Id_Type_Produit, Desc_Type_Produit)
 VALUES (1, 'Fruits'),
 (2, 'Légumes'),
