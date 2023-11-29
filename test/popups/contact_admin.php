@@ -7,11 +7,16 @@
         <p class="titrePopup">Contacter un administrateur ou report un bug</p>
         <form class="formPopup" action="bug_report.php" method="post">
             <div>
-                <label for="mail">mail :</label>
-                <input class="zoneDeTextePopup" type="text" name="mail" id="mail" required>
+                <label for="mail">Mail :</label>
+                <input class="zoneDeTextePopup" type="text" name="mail" id="mail" required
+                <?php if(isset($_SESSION['Mail_Uti'])){
+                    echo 'value="'.$_SESSION['Mail_Uti'].'" disable';
+                } ?>
+                
+                >
             </div>
-            <label for="pwd">message : </label>
-            <input class="grosseZoneDeTextePopup" type="text" name="message" required><br><br>
+            <label for="pwd">Message : </label>
+            <textarea class="grosseZoneDeTextePopup" name="message" required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer">
         </form>
     </div>
