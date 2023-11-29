@@ -79,8 +79,8 @@ $pdf->SetFont('Arial', '', 12, 'UTF-8');
 
 $pdf->Cell(0, 5, $Nom_Prod.' '.$Prenom_Prod, 0, 1);
 $pdf->Cell(0, 5, $Prof_Prod, 0, 1);
-$pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 $pdf->Cell(0, 5, $Mail_Prod, 0, 1);
+$pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 
 // Informations sur le client
 $pdf->Cell(0, 5, $Nom_Uti.' '.$Prenom_Uti, 0, 0, 'R');
