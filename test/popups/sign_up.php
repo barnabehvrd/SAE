@@ -17,45 +17,48 @@
             <input class="zoneDeTextePopup" type="text" name="prenom" required>
         </div>
         <div>
-            <label for="adresse">Rue :</label>
+            <label for="rue">Rue :</label>
             <input class="zoneDeTextePopup" type="text" name="rue" required>
         </div>
         <div>
-            <label for="adresse">Code postale :</label>
+            <label for="code">Code postale :</label>
             <input class="zoneDeTextePopup" type="text" name="code" required>
         </div>
         <div>
-            <label for="adresse">Ville :</label>
+            <label for="ville">Ville :</label>
             <input class="zoneDeTextePopup" type="text" name="ville" required>
         </div>
         <div>
             <label for="pwd">Mot de passe :</label>
-            <input class="zoneDeTextePopup" type="password" name="pwd" id="pwd" required>
+            <input class="zoneDeTextePopup" type="password" name="pwd" required>
         </div>
         <div>
             <label for="mail">Mail :</label>
-            <input class="zoneDeTextePopup" type="mail"  name="mail" id="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required />
+            <input class="zoneDeTextePopup" type="mail"  name="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required />
         </div>
         <?php if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){?> 
         <div>
             <label for="profession">Profession :</label>
 			<input class="zoneDeTextePopup" type="profession" name="profession" required>
         </div>
-        <?php } ?>        
+        <?php } ?>
+        <div>
+            <?php
+            if (isset($_SESSION['erreur'])) {
+                
+                $erreur = $_SESSION['erreur'];
+                echo '<p class="erreur">'.$erreur.'</p>';
+                unset($_SESSION['formClicked']);
+            }
+            ?>
+        </div>
         <input class="boutonPopup" type="submit" value="s'incrire">
     </form>
     <?php
-        $_POST['popup'] = 'sign_up';
         if (isset($_POST['formClicked'])){
             require 'traitements/traitement_formulaire_sign_up.php';
             unset($_POST['formClicked']);
         }
-        $_POST['popup'] = 'sign_up';
-        if (isset($_POST['erreur'])) {
-            $erreur = $_POST['erreur'];
-            echo '<p class="erreur">'.$erreur.'</p>';
-        }
-        $_POST['popup'] = 'sign_up';
         ?>
     <div class="alignementCentreCoteACote">
         <p class="text">J'ai déjà un compte</p>
