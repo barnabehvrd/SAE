@@ -36,6 +36,9 @@ $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
 require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
+// Créer une instance de MonPDF
+$pdf = new MonPDF();
+
 class MonPDF extends tFPDF
 {
     // En-tête
@@ -60,8 +63,6 @@ class MonPDF extends tFPDF
     }
 }
 
-// Créer une instance de MonPDF
-$pdf = new MonPDF();
 $pdf->AddPage();
 
 // Ajouter les valeurs
