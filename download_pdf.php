@@ -66,18 +66,18 @@ $pdf->AddPage();
 // Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
 
-$pdf->Cell(0, 5, $Nom_Prod.$Prenom_Prod, 0, 1);
+$pdf->Cell(0, 5, $Nom_Prod.' '.$Prenom_Prod, 0, 1);
 $pdf->Cell(0, 5, $Prof_Prod, 0, 1);
 $pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 
 // Informations sur le client
-$pdf->Cell(0, 5, $Nom_Uti.$Prenom_Uti, 0, 0, 'R');
+$pdf->Cell(0, 5, $Nom_Uti.' '.$Prenom_Uti, 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
-$pdf->Cell(0, 5, 'COMMANDE XXX :', 0, 1);
+$pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
 
 // Tableau avec des produits générés aléatoirement
 $pdf->SetFont('Arial', 'B', 12);
@@ -86,6 +86,13 @@ $pdf->Cell(40, 8, 'Prix Unitaire', 1);
 $pdf->Cell(30, 8, 'Quantité', 1);
 $pdf->Cell(40, 8, 'Prix', 1);
 $pdf->Ln();
+
+
+$total=0;
+$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
+$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+$iterateurProduit=0;
+$nbProduit=count($returnQueryGetProduitCommande);
 
 // Génération de produits aléatoires (exemple avec 3 produits)
 $produits = [
