@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 function dbConnect(){
     $host = 'localhost';
@@ -79,7 +80,7 @@ $pdf->Ln(5); // Sauts de ligne réduits
 // Informations sur la commande
 $pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
 
-// Tableau avec des produits générés aléatoirement
+
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(40, 8, 'Produit', 1);
 $pdf->Cell(40, 8, 'Prix Unitaire', 1);
@@ -94,33 +95,43 @@ $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_A
 $iterateurProduit=0;
 $nbProduit=count($returnQueryGetProduitCommande);
 
-// Génération de produits aléatoires (exemple avec 3 produits)
-$produits = [
-    ['Produit 1', 10, 2],
-    ['Produit 2', 15, 3],
-    ['Produit 3', 20, 1],
-];
+
+$produits = [];
+
+while ($iterateurProduit<$nbProduit){
+    $Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
+    $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+    $Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
+    $Prix_Produit_Unitaire=$returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
+    array_push($produits, [$Nom_Produit, $Prix_Produit_Unitaire, $Qte_Produit_Commande.' '.$Nom_Unite_Prix]);
+    $total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
+    $iterateurProduit++;
+}
+
+
 
 $pdf->SetFont('Arial', '', 12);
 foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
-    $pdf->Cell(40, 8, '$' . number_format($produit[1], 2), 1);
+    $pdf->Cell(40, 8, '$' . $produit[1], 1); 
     $pdf->Cell(30, 8, $produit[2], 1);
-    $pdf->Cell(40, 8, '$' . number_format($produit[1] * $produit[2], 2), 1);
+    $pdf->Cell(40, 8, '$' . intval($produit[1]) * intval($produit[2]), 1); 
     $pdf->Ln();
 }
+
 
 $pdf->Ln(5); // Saut de ligne réduit
 
 // Total
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(110, 8, 'TOTAL', 1);
-$pdf->Cell(40, 8, '$' . number_format(array_sum(array_column($produits, 1)), 2), 1);
+$pdf->Cell(40, 8, '$' . $total, 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
 $pdf->Ln(5); // Saut de ligne réduit
-$pdf->Cell(0, 5, 'IMPRESSION', 0, 1);
+$dateActuelle = new DateTime('now');
+$pdf->Cell(0, 5, 'Imprimé le '.$dateActuelle, 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
