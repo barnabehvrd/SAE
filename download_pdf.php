@@ -87,16 +87,13 @@ $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
-$pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1);
-$pdf->Cell(0, 5, 'COMMANDE n°'.$Id_Commande.' :', 0, 1, 'L', false, 'UTF-8');
-
-
+$pdf->Cell(0, 5, 'COMMANDE numéro '.$Id_Commande.' :', 0, 1);
 
 $pdf->SetFont('Arial', 'B', 12, 'UTF-8');
-$pdf->Cell(40, 8, 'Produit', 1);
-$pdf->Cell(40, 8, 'Prix Unitaire', 1);
-$pdf->Cell(30, 8, 'Quantité', 1);
-$pdf->Cell(40, 8, 'Prix', 1);
+$pdf->Cell(40, 8, 'PRODUIT', 1);
+$pdf->Cell(40, 8, 'PRIX UNITAIRE', 1);
+$pdf->Cell(30, 8, 'QUANTITE', 1);
+$pdf->Cell(40, 8, 'PRIX', 1);
 $pdf->Ln();
 
 
@@ -148,7 +145,7 @@ date_default_timezone_set('Europe/Paris');
 // Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
-$pdf->Cell(0, 5, "Imprimé le " . $date->format('Y-m-d H:i:s'), 0, 1);
+$pdf->Cell(0, 5, "Date d'impression : " . $date->format('Y-m-d H:i:s'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
