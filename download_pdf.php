@@ -22,7 +22,7 @@ $Id_Statut = $returnQueryGetCommande[0]["Id_Statut"];
 $Mail_Uti = $returnQueryGetCommande[0]["Mail_Uti"];
 $Adr_Uti = $returnQueryGetCommande[0]["Adr_Uti"];
 
-
+$bdd=dbConnect();
 $queryGetProducteur = $bdd->query(('SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod WHERE Id_Prod='.$Id_Prod.';'));
 $returnQueryGetProducteur = $queryGetProducteur->fetchAll(PDO::FETCH_ASSOC);
 $Nom_Prod = $returnQueryGetCommande[0]["Nom_Uti"];
