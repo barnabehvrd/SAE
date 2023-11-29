@@ -34,9 +34,9 @@ $Prenom_Prod = $returnQueryGetProducteur[0]["Prenom_Uti"];
 $Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
 $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
-require('fpdf/fpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier FPDF
+require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
-class MonPDF extends FPDF
+class MonPDF extends tFPDF
 {
     // En-tête
     function Header()
@@ -137,7 +137,7 @@ date_default_timezone_set('Europe/Paris');
 // Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
-$pdf->Cell(0, 5, "Imprimé le " . $date->format('YmdHis'), 0, 1);
+$pdf->Cell(0, 5, "Imprimé le " . $date->format('Y-m-d H:i:s'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
