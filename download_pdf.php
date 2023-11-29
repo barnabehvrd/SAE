@@ -1,4 +1,36 @@
 <?php
+
+function dbConnect(){
+    $host = 'localhost';
+    $dbname = 'inf2pj_02';
+    $user = 'inf2pj02';
+    $password = 'ahV4saerae';
+    return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
+}
+
+$bdd=dbConnect();
+$Id_Commande=$_POST["idCommande"];
+
+$queryGetCommande = $bdd->query(('SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti  FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande='.$Id_Commande.';'));
+$returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
+$Id_Prod = $returnQueryGetCommande[0]["Id_Prod"];
+$Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
+$Nom_Uti = $returnQueryGetCommande[0]["Nom_Uti"];
+$Nom_Uti = mb_strtoupper($Nom_Uti);
+$Prenom_Uti = $returnQueryGetCommande[0]["Prenom_Uti"];
+$Id_Statut = $returnQueryGetCommande[0]["Id_Statut"];
+$Mail_Uti = $returnQueryGetCommande[0]["Mail_Uti"];
+$Adr_Uti = $returnQueryGetCommande[0]["Adr_Uti"];
+
+
+$queryGetProducteur = $bdd->query(('SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod WHERE Id_Prod='.$Id_Prod.';'));
+$returnQueryGetProducteur = $queryGetProducteur->fetchAll(PDO::FETCH_ASSOC);
+$Nom_Prod = $returnQueryGetCommande[0]["Nom_Uti"];
+$Nom_Prod = mb_strtoupper($Nom_Prod);
+$Prenom_Prod = $returnQueryGetCommande[0]["Prenom_Uti"];
+$Adr_Prod = $returnQueryGetCommande[0]["Adr_Uti"];
+$Prof_Prod = $returnQueryGetCommande[0]["Prof_Prod"];
+
 require('fpdf/fpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier FPDF
 
 class MonPDF extends FPDF
@@ -8,7 +40,7 @@ class MonPDF extends FPDF
     {
         // Titre
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 5, 'Mon Document', 0, 1, 'C');
+        $this->Cell(0, 5, 'Bon de commande', 0, 1, 'C');
 
         // Ligne de séparation
         $this->Cell(0, 0, '', 'T');
@@ -32,14 +64,14 @@ $pdf->AddPage();
 // Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
 
-$pdf->Cell(0, 5, 'Producteur', 0, 1);
-$pdf->Cell(0, 5, 'PROFESSION', 0, 1);
-$pdf->Cell(0, 5, 'ADRESSE', 0, 1);
+$pdf->Cell(0, 5, $Nom_Prod.$Prenom_Prod, 0, 1);
+$pdf->Cell(0, 5, $Prof_Prod, 0, 1);
+$pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 
 // Informations sur le client
-$pdf->Cell(0, 5, 'Client CLIENT', 0, 0, 'R');
+$pdf->Cell(0, 5, $Nom_Uti.$Prenom_Uti, 0, 0, 'R');
 $pdf->Ln();
-$pdf->Cell(0, 5, 'ADRESSE CLIENT', 0, 0, 'R');
+$pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(10); // Sauts de ligne réduits
 
 // Informations sur la commande
