@@ -22,6 +22,9 @@
       if (isset($_POST["typeCategorie"])==true){
         $filtreCategorie=$_POST["typeCategorie"];
       }
+      else{
+        $filtreCategorie=0;
+      }
     ?>
     <div class="container">
         <div class="left-column">
