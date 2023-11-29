@@ -33,6 +33,7 @@ $Nom_Prod = $returnQueryGetProducteur[0]["Nom_Uti"];
 $Nom_Prod = mb_strtoupper($Nom_Prod);
 $Prenom_Prod = $returnQueryGetProducteur[0]["Prenom_Uti"];
 $Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
+$Mail_Prod = $returnQueryGetProducteur[0]["Mail_Uti"];
 $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
 require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
@@ -79,9 +80,12 @@ $pdf->SetFont('Arial', '', 12, 'UTF-8');
 $pdf->Cell(0, 5, $Nom_Prod.' '.$Prenom_Prod, 0, 1);
 $pdf->Cell(0, 5, $Prof_Prod, 0, 1);
 $pdf->Cell(0, 5, $Adr_Prod, 0, 1);
+$pdf->Cell(0, 5, $Mail_Prod, 0, 1);
 
 // Informations sur le client
 $pdf->Cell(0, 5, $Nom_Uti.' '.$Prenom_Uti, 0, 0, 'R');
+$pdf->Ln();
+$pdf->Cell(0, 5, $Mail_Uti, 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
 $pdf->Ln(5); // Sauts de ligne réduits
