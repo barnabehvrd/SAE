@@ -1,6 +1,5 @@
 <?php
 
-echo '1';
 // Error handling with try-catch block
 try {
     // Retrieve form data
@@ -27,7 +26,7 @@ try {
     // Check if user email exists
     $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
-
+    echo("SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'");
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);

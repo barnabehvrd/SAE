@@ -30,11 +30,11 @@
         </div>
         <div>
             <label for="pwd">Mot de passe :</label>
-            <input class="zoneDeTextePopup" type="password" pattern=pattern="^(?=.*[0-9])(?=.*[!@#$%^&*()-=_+[\]{}|;:',.<>/?])[A-Za-z0-9!@#$%^&*()-=_+[\]{}|;:',.<>/?]{8,50}$"  name="pwd" required>
+            <input class="zoneDeTextePopup" type="password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*()-=_+[\\]{}|;:',.\"\/\?])[A-Za-z0-9!@#$%^&*()-=_+[\\]{}|;:',.\"\/\?]{8,50}$"   name="pwd" required>
         </div>
         <div>
             <label for="mail">Mail :</label>
-            <input class="zoneDeTextePopup" type="mail"  name="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="30" required />
+            <input class="zoneDeTextePopup" type="mail"  name="mail" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" size="30" required />
         </div>
         <?php if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){?> 
         <div>
