@@ -1,28 +1,25 @@
 <?php
+// Inclure la bibliothèque FPDF
 require('fpdf/fpdf.php');
 
-// Créer une instance de la classe FPDF
+// Créer une instance de FPDF
 $pdf = new FPDF();
-
-// Ajouter une page au PDF
 $pdf->AddPage();
-
-// Définir la police
 $pdf->SetFont('Arial', 'B', 16);
+$pdf->Cell(40, 10, 'Bonjour, ceci est un exemple de PDF!');
 
-// Ajouter du texte au PDF
-$pdf->Cell(40, 10, 'Bonjour, voici votre PDF!');
+// Enregistrez le PDF dans un fichier temporaire
+$nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
+$pdf->Output($nom_fichier, 'F');
 
-// Nom du fichier PDF à télécharger
-$nom_fichier = 'votre_fichier.pdf';
-
-// Nettoyer le tampon de sortie
-ob_clean();
-
-// Envoi des en-têtes HTTP pour forcer le téléchargement du fichier
+// Envoi des en-têtes pour le téléchargement
 header('Content-Type: application/pdf');
-header('Content-Disposition: attachment; filename="' . $nom_fichier . '"');
+header('Content-Disposition: attachment; filename="exemple.pdf"');
+header('Content-Length: ' . filesize($nom_fichier));
 
-// Générer le PDF et le transmettre au navigateur
-$pdf->Output('F', $nom_fichier);
+// Envoyer le contenu du fichier
+readfile($nom_fichier);
+
+// Supprimer le fichier temporaire
+unlink($nom_fichier);
 ?>
