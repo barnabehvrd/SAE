@@ -130,7 +130,7 @@ $pdf->Ln(); // Saut de ligne
 
 // Impression
 $pdf->Ln(5); // Saut de ligne réduit
-$dateActuelle = date("Y-m-d H:i:s");
+$dateActuelle = new DateTime('now');
 $pdf->Cell(0, 5, 'Imprimé le '.$dateActuelle, 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
