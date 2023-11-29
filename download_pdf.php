@@ -15,6 +15,7 @@ $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_U
 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 $Id_Commande = $returnQueryGetCommande[0]["Id_Commande"];
 $Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
+$Nom_Producteur = $returnQueryGetCommande[0]["Nom_Prod"];
 
 // Génération du contenu PDF
 $pdfContent = '%PDF-1.3
@@ -35,33 +36,49 @@ endobj
 /Contents 4 0 R >>
 endobj
 4 0 obj
-<< /Length 270 >>
+<< /Length 300 >>
 stream
 BT
 /F1 18 Tf
 50 750 Td
-(Bon de Commande - ID: ' . $Id_Commande . ' - Statut: ' . $Desc_Statut . ') Tj
+(Bon de Commande) Tj
 /F1 12 Tf
 50 730 Td
 (--------------------------------------------) Tj
 50 710 Td
-(Produit 1 : T-shirt) Tj
+(Commande ID: ' . $Id_Commande . ') Tj
 50 690 Td
-(Quantité : 5) Tj
+(Statut: ' . $Desc_Statut . ') Tj
 50 670 Td
-(Prix unitaire : $10) Tj
+(Producteur: ' . $Nom_Producteur . ') Tj
 50 650 Td
 (--------------------------------------------) Tj
 50 630 Td
-(Produit 2 : Tomates) Tj
+(Nombre de produits: 3) Tj
 50 610 Td
-(Quantité : 5) Tj
+(Produit 1: T-shirt) Tj
 50 590 Td
-(Prix unitaire : $10) Tj
+(Quantité: 5) Tj
 50 570 Td
-(--------------------------------------------) Tj
+(Prix unitaire: $10) Tj
 50 550 Td
-(Total : $100) Tj
+(--------------------------------------------) Tj
+50 530 Td
+(Produit 2: Tomates) Tj
+50 510 Td
+(Quantité: 3) Tj
+50 490 Td
+(Prix unitaire: $5) Tj
+50 470 Td
+(--------------------------------------------) Tj
+50 450 Td
+(Produit 3: Chaussures) Tj
+50 430 Td
+(Quantité: 2) Tj
+50 410 Td
+(Prix unitaire: $50) Tj
+50 390 Td
+(--------------------------------------------) Tj
 ET
 endstream
 endobj
@@ -71,12 +88,12 @@ xref
 0000000018 00000 n 
 0000000077 00000 n 
 0000000178 00000 n 
-0000000581 00000 n 
+0000000653 00000 n 
 trailer
 << /Root 1 0 R
 /Size 5 >>
 startxref
-600
+622
 %%EOF
 ';
 
