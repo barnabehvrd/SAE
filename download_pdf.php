@@ -137,7 +137,7 @@ date_default_timezone_set('Europe/Paris');
 // Créer une instance de DateTime pour la date et l'heure actuelles
 $date = new DateTime('now');
 
-$pdf->Cell(0, 5, "Imprimé le " . $date->format('l j F Y, H:i:s'), 0, 1);
+$pdf->Cell(0, 5, "Imprimé le " . $date->format('YmdHis'), 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
