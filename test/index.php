@@ -22,13 +22,13 @@
                     <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
                 </div>
                 <form method="post">
-					<input type="submit" value=<?php if (!isset($_SESSION)){session_start(); echo '"Se Connecter"';}else {echo $_SESSION['Mail_Uti'];}?> class="boutonDeConnection">
+					<input type="submit" value=<?php if (!isset($_SESSION, $_SESSION['Mail_Uti'])){session_start(); $_SESSION = array(); echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
                     <input type="hidden" name="popup" value="sign_in">
 				</form>
             </div>
             <div class="contenuPage">
 
-               <?php (var_dump($_POST)); ?>
+               <?php var_dump($_SESSION); ?>
 
             </div>
             <div class="basDePage">
