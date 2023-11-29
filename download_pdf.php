@@ -1,6 +1,5 @@
 <?php
-// Inclure la bibliothèque FPDF
-require('fpdf/fpdf.php');
+require('fpdf/fpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier FPDF
 
 class MonPDF extends FPDF
 {
@@ -9,11 +8,11 @@ class MonPDF extends FPDF
     {
         // Titre
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 10, 'Mon Document', 0, 1, 'C');
+        $this->Cell(0, 5, 'Mon Document', 0, 1, 'C');
 
         // Ligne de séparation
         $this->Cell(0, 0, '', 'T');
-        $this->Ln(10); // Saut de ligne
+        $this->Ln(5); // Saut de ligne réduit
     }
 
     // Pied de page
@@ -33,26 +32,25 @@ $pdf->AddPage();
 // Ajouter les valeurs
 $pdf->SetFont('Arial', '', 12);
 
-$pdf->Cell(0, 10, 'Producteur', 0, 1);
-$pdf->Cell(0, 10, 'PROFESSION', 0, 1);
-$pdf->Cell(0, 10, 'ADRESSE', 0, 1);
+$pdf->Cell(0, 5, 'Producteur', 0, 1);
+$pdf->Cell(0, 5, 'PROFESSION', 0, 1);
+$pdf->Cell(0, 5, 'ADRESSE', 0, 1);
 
 // Informations sur le client
-$pdf->Cell(0, 10, 'Client CLIENT', 0, 0, 'R');
+$pdf->Cell(0, 5, 'Client CLIENT', 0, 0, 'R');
 $pdf->Ln();
-$pdf->Cell(0, 10, 'ADRESSE CLIENT', 0, 0, 'R');
-$pdf->Ln(20); // Sauts de ligne
+$pdf->Cell(0, 5, 'ADRESSE CLIENT', 0, 0, 'R');
+$pdf->Ln(10); // Sauts de ligne réduits
 
 // Informations sur la commande
-$pdf->Cell(0, 10, 'COMMANDE XXX :', 0, 1);
-$pdf->Ln(); // Saut de ligne
+$pdf->Cell(0, 5, 'COMMANDE XXX :', 0, 1);
 
 // Tableau avec des produits générés aléatoirement
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(40, 10, 'Produit', 1);
-$pdf->Cell(40, 10, 'Prix Unitaire', 1);
-$pdf->Cell(30, 10, 'Quantité', 1);
-$pdf->Cell(40, 10, 'Prix', 1);
+$pdf->Cell(40, 8, 'Produit', 1);
+$pdf->Cell(40, 8, 'Prix Unitaire', 1);
+$pdf->Cell(30, 8, 'Quantité', 1);
+$pdf->Cell(40, 8, 'Prix', 1);
 $pdf->Ln();
 
 // Génération de produits aléatoires (exemple avec 3 produits)
@@ -64,24 +62,24 @@ $produits = [
 
 $pdf->SetFont('Arial', '', 12);
 foreach ($produits as $produit) {
-    $pdf->Cell(40, 10, $produit[0], 1);
-    $pdf->Cell(40, 10, '$' . number_format($produit[1], 2), 1);
-    $pdf->Cell(30, 10, $produit[2], 1);
-    $pdf->Cell(40, 10, '$' . number_format($produit[1] * $produit[2], 2), 1);
+    $pdf->Cell(40, 8, $produit[0], 1);
+    $pdf->Cell(40, 8, '$' . number_format($produit[1], 2), 1);
+    $pdf->Cell(30, 8, $produit[2], 1);
+    $pdf->Cell(40, 8, '$' . number_format($produit[1] * $produit[2], 2), 1);
     $pdf->Ln();
 }
 
-$pdf->Ln(); // Saut de ligne
+$pdf->Ln(5); // Saut de ligne réduit
 
 // Total
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(110, 10, 'TOTAL', 1);
-$pdf->Cell(40, 10, '$' . number_format(array_sum(array_column($produits, 1)), 2), 1);
+$pdf->Cell(110, 8, 'TOTAL', 1);
+$pdf->Cell(40, 8, '$' . number_format(array_sum(array_column($produits, 1)), 2), 1);
 $pdf->Ln(); // Saut de ligne
 
 // Impression
-$pdf->Ln(10); // Saut de ligne
-$pdf->Cell(0, 10, 'IMPRESSION', 0, 1);
+$pdf->Ln(5); // Saut de ligne réduit
+$pdf->Cell(0, 5, 'IMPRESSION', 0, 1);
 
 // Enregistrer le PDF dans un fichier temporaire
 $nom_fichier = tempnam(sys_get_temp_dir(), 'pdf');
