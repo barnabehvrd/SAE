@@ -1,5 +1,4 @@
 <?php
-require_once('fpdf186/fpdf.php');
 function dbConnect(){
     $host = 'localhost';
     $dbname = 'inf2pj_02';
@@ -10,7 +9,6 @@ function dbConnect(){
 
 $bdd=dbConnect();
 session_start();
-
 // Récupération des données de la commande
 $Id_Commande = $_POST["idCommande"];
 $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande=' . $Id_Commande . ';'));
