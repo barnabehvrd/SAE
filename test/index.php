@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" src="img/logo.png">
+			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
                 <!-- some code -->
             </div>
