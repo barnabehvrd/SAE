@@ -7,34 +7,39 @@
         <p class="titrePopup">Se connecter <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
                                             {echo '(Admin)';}?></p>
         <div>
-            <form class="formPopup" action=
-                                            <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
-                                            {echo '"../traitements/traitement_formulaire_sign_in_admin.php"';}
-                                            else{echo '"../traitements/traitement_formulaire_sign_in.php"';}?>
-                    method="post">
+            <form class="formPopup" method="post">
                 <div>
                     <label for="mail">Mail :</label>
                     <input class="zoneDeTextePopup" type="text" name="mail" required>
+                    <input type="hidden" value='0' name="formClicked">
+                    <input type="hidden" value='sign_in' name="popup">
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
                     <input class="zoneDeTextePopup" type="text" name="pwd" required>
                 </div>
-
+                <div>
+                    <?php
+                    if (isset($_SESSION['erreur'])) {
+                        $erreur = $_SESSION['erreur'];
+                        echo '<p class="erreur">'.$erreur.'</p>';
+                        unset($_SESSION['erreur']);
+                    }
+                    ?>
+                </div>
                 <input class="boutonPopup" type="submit" value="se connecter">
-
-                <?php
-                if (isset($_GET['mail'])) {
-                    $mail = $_GET['mail'];
-                    echo '<p class="erreur"> $mail </p>';
-                }
-
-                if (isset($_GET['pwd'])) {
-                    $pwd = $_GET['pwd'];
-                    echo '<p class="erreur"> $pwd </p>';
-                }
-                ?>
             </form>
+            <?php
+            if (isset($_POST['formClicked'])){
+                if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
+                    require 'traitements/traitement_formulaire_sign_in_admin.php';
+                }else{
+                    require 'traitements/traitement_formulaire_sign_in.php';
+                }
+                unset($_POST['formClicked']);
+                unset($_SESSION['tempIsAdmin']);
+            }
+            ?>
             <div>
                 <form method="post">
 					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>

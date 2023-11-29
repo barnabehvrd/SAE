@@ -1,6 +1,6 @@
 <?php
 
-
+echo '1';
 // Error handling with try-catch block
 try {
     // Retrieve form data

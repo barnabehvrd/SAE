@@ -5,20 +5,24 @@
                 <input type="hidden" name="popup" value="">
 		</form>
         <p class="titrePopup">Contacter un administrateur ou report un bug</p>
-        <form class="formPopup" action="bug_report.php" method="post">
+        <form class="formPopup" method="post">
             <div>
                 <label for="mail">Mail :</label>
+                <input type="hidden" value='0' name="formClicked">
                 <input class="zoneDeTextePopup" type="text" name="mail" id="mail" required
                 <?php if(isset($_SESSION['Mail_Uti'])){
-                    echo 'value="'.$_SESSION['Mail_Uti'].'" disable';
-                } ?>
-                
-                >
+                    echo 'disable';} ?> >
             </div>
             <label for="pwd">Message : </label>
             <textarea class="grosseZoneDeTextePopup" name="message" pattern="[A-Za-z0-9.]{1,4096}" required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer">
         </form>
+        <?php
+        if (isset($_POST['formClicked'])){
+            require 'traitements/traitement_formulaire_sign_up.php';
+            unset($_POST['formClicked']);
+        }
+        ?>
     </div>
 </div>
 

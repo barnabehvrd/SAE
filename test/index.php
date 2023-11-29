@@ -22,8 +22,14 @@
                     <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
                 </div>
                 <form method="post">
-					<input type="submit" value=<?php if (!isset($_SESSION, $_SESSION['Mail_Uti'])){session_start(); /*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value="sign_in">
+                    <?php
+                    if(!isset($_SESSION)){
+                    session_start();
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION, $_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_uti']){}?>
+                    "sign_in">
 				</form>
             </div>
             <div class="contenuPage">
