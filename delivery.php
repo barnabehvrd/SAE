@@ -119,7 +119,7 @@
                             echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'\'" value="Envoyer un message"><br>';
                             ?>
                             <form action="download_pdf.php" method="post">
-                                <button type="submit">Générer en PDF</button>
+                                <button type="submit">Générer en PF</button>
                             </form>
                             <?php
                             echo '<div class="aDroite">Total : '.$total.'€</div>';
