@@ -87,11 +87,22 @@ $pdf->Cell(30, 8, 'Quantité', 1);
 $pdf->Cell(40, 8, 'Prix', 1);
 $pdf->Ln();
 
+// Tableau avec des produits récupérés depuis la base de données
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 8, 'Produit', 1);
+$pdf->Cell(40, 8, 'Prix Unitaire', 1);
+$pdf->Cell(30, 8, 'Quantité', 1);
+$pdf->Cell(40, 8, 'Prix', 1);
+$pdf->Ln();
+
 // Récupération des produits depuis la base de données
 $queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande =' . $Id_Commande . ';'));
 $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 $iterateurProduit = 0;
 $nbProduit = count($returnQueryGetProduitCommande);
+
+$pdf->SetFont('Arial', '', 12); // Ajout de cette ligne pour réinitialiser la police après le titre du tableau
+
 while ($iterateurProduit < $nbProduit) {
     $Nom_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
     $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
@@ -99,7 +110,6 @@ while ($iterateurProduit < $nbProduit) {
     $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
 
     // Ajout des produits récupérés dans le tableau
-    $pdf->SetFont('Arial', '', 12);
     $pdf->Cell(40, 8, $Nom_Produit, 1);
     $pdf->Cell(40, 8, '$' . number_format($Prix_Produit_Unitaire, 2), 1);
     $pdf->Cell(30, 8, $Qte_Produit_Commande, 1);
