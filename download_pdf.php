@@ -8,11 +8,12 @@ function dbConnect(){
     return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
 }
 
-$bdd=dbConnect();
-$Id_Commande=$_POST["idCommande"];
+$bdd = dbConnect();
+$Id_Commande = $_POST["idCommande"];
 
 $queryGetCommande = $bdd->query(('SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti  FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande='.$Id_Commande.';'));
 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
+
 $Id_Prod = $returnQueryGetCommande[0]["Id_Prod"];
 $Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
 $Nom_Uti = $returnQueryGetCommande[0]["Nom_Uti"];
@@ -22,14 +23,15 @@ $Id_Statut = $returnQueryGetCommande[0]["Id_Statut"];
 $Mail_Uti = $returnQueryGetCommande[0]["Mail_Uti"];
 $Adr_Uti = $returnQueryGetCommande[0]["Adr_Uti"];
 
-$bdd=dbConnect();
+$bdd = dbConnect();
 $queryGetProducteur = $bdd->query(('SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod FROM info_producteur WHERE Id_Prod='.$Id_Prod.';'));
 $returnQueryGetProducteur = $queryGetProducteur->fetchAll(PDO::FETCH_ASSOC);
-$Nom_Prod = $returnQueryGetCommande[0]["Nom_Uti"];
+
+$Nom_Prod = $returnQueryGetProducteur[0]["Nom_Uti"];
 $Nom_Prod = mb_strtoupper($Nom_Prod);
-$Prenom_Prod = $returnQueryGetCommande[0]["Prenom_Uti"];
-$Adr_Prod = $returnQueryGetCommande[0]["Adr_Uti"];
-$Prof_Prod = $returnQueryGetCommande[0]["Prof_Prod"];
+$Prenom_Prod = $returnQueryGetProducteur[0]["Prenom_Uti"];
+$Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
+$Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
 require('fpdf/fpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier FPDF
 
@@ -72,7 +74,7 @@ $pdf->Cell(0, 5, $Adr_Prod, 0, 1);
 $pdf->Cell(0, 5, $Nom_Uti.$Prenom_Uti, 0, 0, 'R');
 $pdf->Ln();
 $pdf->Cell(0, 5, $Adr_Uti, 0, 0, 'R');
-$pdf->Ln(10); // Sauts de ligne réduits
+$pdf->Ln(5); // Sauts de ligne réduits
 
 // Informations sur la commande
 $pdf->Cell(0, 5, 'COMMANDE XXX :', 0, 1);
