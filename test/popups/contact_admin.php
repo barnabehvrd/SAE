@@ -16,7 +16,7 @@
                 >
             </div>
             <label for="pwd">Message : </label>
-            <textarea class="grosseZoneDeTextePopup" name="message" required></textarea>
+            <textarea class="grosseZoneDeTextePopup" name="message" pattern="[A-Za-z0-9.]{1,4096}" required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer">
         </form>
     </div>
