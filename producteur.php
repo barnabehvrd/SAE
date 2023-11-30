@@ -23,7 +23,7 @@
         $filtreType=$_GET["filtreType"];
       }
       else{
-        $filtreType=0;
+        $filtreType="TOUT";
       }
     ?>
     <div class="container">
