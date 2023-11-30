@@ -154,6 +154,15 @@
                             else if ($tri=="PrixAsc"){
                                 $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
                             }
+                            else if ($tri=="PrixDesc"){
+                                $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
+                            }
+                            else if ($tri=="Alpha"){
+                                $query=$query.' ORDER BY Nom_Produit ASC;';
+                            }
+                            else if ($tri=="AntiAlpha"){
+                                $query=$query.' ORDER BY Nom_Produit DESC;';
+                            }
                             $queryGetProducts = $bdd->query(($query));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
