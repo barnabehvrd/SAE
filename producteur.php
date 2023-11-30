@@ -38,7 +38,7 @@
             Type de produit 
             <br>
             
-            <form action="producteur.php" method="post">
+            <form action="producteur.php" method="get">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
                     <input type="radio" name="filtreType" value="0" <?php if($filtreType==0) echo 'checked="true"';?>> TOUT
