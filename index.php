@@ -13,9 +13,9 @@
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
-			 <p>recherche par catégorie</p>
+			<center><strong><p>Recherche</p></strong></center>
 			<form method="get" action="index.php"> 
-			<label for="categories">Sélectionnez une catégorie :</label>
+			<label>Par profession :</label>
 			<select name="categorie" id="categories">
                 <option value="Tout">Tout</option>
 				<option value="Agriculteur">Agriculteur</option>
@@ -26,7 +26,9 @@
 				<option value="Viticulteur">Viticulteur</option>
 				<option value="Pépiniériste">Pépiniériste</option>
 			</select>
-			<input type="submit" value="Aller à la catégorie">
+            <br>
+            <br>
+			<input type="submit" value="Rechercher">
 			</form>
         </div>
         <div class="right-column">
