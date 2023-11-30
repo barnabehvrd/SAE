@@ -19,8 +19,8 @@
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
 
-      if (isset($_POST["filtreType"])==true){
-        $filtreType=$_POST["filtreType"];
+      if (isset($_GET["filtreType"])==true){
+        $filtreType=$_GET["filtreType"];
       }
       else{
         $filtreType=0;
@@ -38,7 +38,8 @@
             Type de produit 
             <br>
             
-            <form action="producteur.php" method="post">
+            <form action="producteur.php" method="get">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
                     <input type="radio" name="filtreType" value="0" <?php if($filtreType==0) echo 'checked="true"';?>> TOUT
                 </label>
@@ -110,7 +111,6 @@
             </div>
             <form method="get" action="insert_commande.php">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
