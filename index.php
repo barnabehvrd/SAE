@@ -67,7 +67,7 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-                    if (isset($_GET["filtreType"])==false){
+                    if (isset($_GET["categorie"])==false){
                         $_GET["categorie"]="Tout";
                       }
 					?>
