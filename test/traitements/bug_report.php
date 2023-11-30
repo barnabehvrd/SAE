@@ -4,7 +4,6 @@
 
 // Récupération des données du formulaire
 
-session_start();
 // Database connection
 $utilisateur = "inf2pj02";
 $serveur = "localhost";
@@ -15,13 +14,14 @@ $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisat
 $message = $_POST['message'];
 // Appel de la fonction SQL
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
+  
   // Les variables de session sont définies, exécuter la requête
-  $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message .  '\');');
+  $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
 } else {
-  $bdd->query('CALL broadcast_admin( 0 ', '\'' . $_POST["mail"]. "\n "  . $message . '\');');
-
+  // Une ou plusieurs variables ne sont pas définies, afficher un message d'erreur ou prendre une autre action
+  
+  $bdd->query('CALL broadcast_admin(0 , \''. $_POST["mail"]. $message . '\');');
 }
 
 // Redirection vers la page d'accueil
-header('Location: index.php');
-?>
+$_POST['popup'] = '';

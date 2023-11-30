@@ -31,20 +31,27 @@
       else{
         $tri="No";
       }
+      if (isset($_GET["rechercheNom"])==true){
+        $rechercheNom=$_GET["rechercheNom"];
+      }
+      else{
+        $rechercheNom="";
+      }
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center>
-                <p><strong>Trier par :</strong></p>
-                <br>
-                <br>
+                <p><strong>Rechercher par :</strong></p>
             </center>
-            - Type de produit 
             <br>
-            
             <form action="producteur.php" method="get">
+                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
+                <br>
+                <br>
+                - Type de produit 
+                <br>
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
                     <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
@@ -92,7 +99,7 @@
                 <br>
                 <br>
                 <center>
-                    <input type="submit" value="Trier">
+                    <input type="submit" value="Rechercher">
                 </center>
             </form>
             <br>
@@ -138,13 +145,17 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            //filtre
+                            //filtre type
                             if ($filtreType=="TOUT"){
                                 $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\'';
                             }
                             else{
                                 $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\' AND Desc_Type_Produit=\''.$filtreType.'\'';
 
+                            }
+                            // filtre nom
+                            if ($rechercheNom!=""){
+                                $query=$query.' AND Nom_Produit LIKE \'%'.$rechercheNom.'%\'';
                             }
 
                             //tri
@@ -153,6 +164,15 @@
                             }
                             else if ($tri=="PrixAsc"){
                                 $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
+                            }
+                            else if ($tri=="PrixDesc"){
+                                $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
+                            }
+                            else if ($tri=="Alpha"){
+                                $query=$query.' ORDER BY Nom_Produit ASC;';
+                            }
+                            else if ($tri=="AntiAlpha"){
+                                $query=$query.' ORDER BY Nom_Produit DESC;';
                             }
                             $queryGetProducts = $bdd->query(($query));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);

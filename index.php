@@ -56,6 +56,9 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
+                    if (isset($_GET["filtreType"])==false){
+                        $_GET["categorie"]="Tout";
+                      }
 					?>
 					
 					</a>    
@@ -65,12 +68,6 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
             <h1> PRODUCTEURS : </h1>
             <?php
-            
-            echo('la tu vois si il est producteur');
-            var_dump($_SESSION["isProd"]);
-            echo("php version debug<br>");
-            echo phpversion();
-            echo '<h1>'.$_SESSION['Mail_Uti'].'</h1>';
              ?> 
 				<div class="gallery-container">
                         <?php
@@ -122,9 +119,6 @@
                                 $connexion->close();
                             }
                         }
-                        var_dump($_SESSION["Id_Uti"]);
-                        echo("<br>");
-                        var_dump($_SESSION["Mail_Uti"]);
                         ?>
                     
                 </div>
