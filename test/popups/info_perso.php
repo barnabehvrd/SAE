@@ -7,7 +7,7 @@
 		    </form>
             <form method="post">
 				<input type="submit" value="se deconnecter" name="deconnexion">
-                <input type="hidden" name="deconnexion">
+                <input type="hidden" name="popup" value="info_perso">
 		    </form>
         </div>
         <p class="titrePopup">Informations personelles</p>
