@@ -845,6 +845,3 @@ INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Prod
 VALUES
 (22, 'Rosiers', 5, 1, '10', 4, '7.50', 4),
 (23, 'Sapins', 5, 1, '8', 1, '9.00', 4);
-
-
-INSERT INTO CONTENU (Id_Commande, Id_Produit, Qte_Produit_Commande, Num_Produit_Commande) VALUES ('1', '16', '12', '2'), ('1', '13', '320', '3'), ('2', '9', '560', '1'), ('2', '17', '12', '7'), ('4', '21', '36', '8'), ('5', '20', '21', '9'), ('7', '15', '12', '11'), ('12', '12', '1250', '12'), ('12', '6', '3', '14'), ('8', '5', '1', '16');
