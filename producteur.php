@@ -25,17 +25,23 @@
       else{
         $filtreType="TOUT";
       }
+      if (isset($_GET["tri"])==true){
+        $tri=$_GET["tri"];
+      }
+      else{
+        $tri="No";
+      }
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center>
-                <p><strong>Filtrer par :</strong></p>
+                <p><strong>Trier par :</strong></p>
                 <br>
                 <br>
             </center>
-            Type de produit 
+            - Type de produit 
             <br>
             
             <form action="producteur.php" method="get">
@@ -73,10 +79,24 @@
                 </label>
                 <br>
                 <br>
+                <br>
+                - Tri
+                <br>
+                <select name="tri">
+                    <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>>Aucun tri</option>
+                    <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>>Par prix croissant</option>
+                    <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>>Par prix décroissant</option>
+                    <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>>Par ordre alphabétique</option>
+                    <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>>Par ordre anti-alphabétique</option>
+			    </select>
+                <br>
+                <br>
                 <center>
-                    <input type="submit" value="Filtrer">
+                    <input type="submit" value="Trier">
                 </center>
             </form>
+            <br>
+            <br>       
         </div>
         <div class="right-column">
         <div class="fixed-banner">
