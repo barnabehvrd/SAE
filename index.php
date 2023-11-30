@@ -33,8 +33,8 @@
 				<option value="Pépiniériste">Pépiniériste</option>
 			</select>
             <br>
-            <br>Par ville :
-            <input type="text" name="rechercheVille" value="" placeholder="Nom">
+            <br>- Par ville :
+            <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
