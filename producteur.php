@@ -40,35 +40,35 @@
             
             <form action="producteur.php" method="post">
                 <label>
-                    <input type="radio" name="filtreType" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> TOUT
+                    <input type="radio" name="filtreType" value="0" <?php if($filtreType==0) echo 'checked="true"';?>> TOUT
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="1" <?php if($filtreCategorie==6) echo 'checked="true"';?>> ANIMAUX
+                    <input type="radio" name="filtreType" value="1" <?php if($filtreType==6) echo 'checked="true"';?>> ANIMAUX
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreCategorie==1) echo 'checked="true"';?>> FRUITS
+                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==1) echo 'checked="true"';?>> FRUITS
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="2"<?php if($filtreCategorie==3) echo 'checked="true"';?>> GRAINES
+                    <input type="radio" name="filtreType" value="2"<?php if($filtreType==3) echo 'checked="true"';?>> GRAINES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="4" <?php if($filtreCategorie==2) echo 'checked="true"';?>> LÉGUMES
+                    <input type="radio" name="filtreType" value="4" <?php if($filtreType==2) echo 'checked="true"';?>> LÉGUMES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreCategorie==7) echo 'checked="true"';?>> PLANCHES
+                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==7) echo 'checked="true"';?>> PLANCHES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreCategorie==4) echo 'checked="true"';?>> VIANDE
+                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==4) echo 'checked="true"';?>> VIANDE
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreCategorie==5) echo 'checked="true"';?>> VIN
+                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==5) echo 'checked="true"';?>> VIN
                 </label>
                 <br>
                 <br>
