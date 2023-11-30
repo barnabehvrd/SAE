@@ -11,7 +11,6 @@
                 <div>
                     <label for="mail">Mail :</label>
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
-                    <input type="hidden" value='0' name="formClicked">
                     <input type="hidden" value='sign_in' name="popup">
                 </div>
                 <div>
@@ -27,13 +26,15 @@
                     }
                     ?>
                 </div>
-                <input class="boutonPopup" type="submit" value="se connecter">
+                <input class="boutonPopup" name="formClicked" type="submit" value="se connecter">
             </form>
             <?php
             if (isset($_POST['formClicked'])){
                 if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
+                    echo(1);
                     require 'traitements/traitement_formulaire_sign_in_admin.php';
                 }else{
+                    echo(2);
                     require 'traitements/traitement_formulaire_sign_in.php';
                 }
                 unset($_POST['formClicked']);
@@ -61,7 +62,7 @@
         <div class="alignementCentreCoteACote">
             <p class="text">Vous n'avez pas de compte ?</p>
             <form method="post">
-				<input type="submit" value="S'incrire" class="lienPopup">
+				<input type="submit" value="S'inscrire" class="lienPopup">
                 <input type="hidden" name="popup" value="pre_sign_up">
 			</form>
         </div>

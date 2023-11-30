@@ -6,9 +6,6 @@ try {
     $pwd = $_POST['pwd'];
     $Mail_Uti = $_POST['mail'];
 
-    // Start session
-    session_start();
-
     // Handle password attempts
     if (!isset($_SESSION['test_pwd'])) {
         $_SESSION['test_pwd'] = 5;
@@ -19,19 +16,21 @@ try {
     $serveur = "localhost";
     $motdepasse = "ahV4saerae";
     $basededonnees = "inf2pj_02";
+    echo(2);
 
     // Connect to database
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    echo(2);
 
     // Check if user email exists
     $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
-    echo("SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'");
+    
+    echo(2);
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        header('Location: form_sign_in.php?mail=adresse mail invalide');
-        exit();
+        $_POST['erreur'] = 'adresse mail invalide';
     } else {
 
     // Extract user ID
@@ -42,6 +41,8 @@ try {
     // Verify password using stored procedure
     //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
     $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
+    
+    echo(2);
 
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -67,17 +68,16 @@ try {
             }else {
                 $_SESSION["isProd"]=false;
             }
-            header('Location: index.php');
+            $_POST['popup'] = '';
         } else {
             $_SESSION['test_pwd']--;
-            header('Location: form_sign_in.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
+            $_POST['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
         }
     }else {
-        header('Location: form_sign_in.php?pwd=vous avez épuisé toutes vos tentatives de connection');
+        $_POST['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
     }
     }
 } catch (Exception $e) {
     // Handle any exceptions
     echo "An error occurred: " . $e->getMessage();
-    exit();
 }
