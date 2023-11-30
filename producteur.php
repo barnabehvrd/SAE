@@ -53,7 +53,7 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="GRAINES"<?php if($filtreType=="GRAINES") echo 'checked="true"';?>> GRAINES
+                    <input type="radio" name="filtreType" value="GRAINS"<?php if($filtreType=="GRAINS") echo 'checked="true"';?>> GRAINS
                 </label>
                 <br>
                 <label>
@@ -61,7 +61,7 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> PLANCHES
+                    <input type="radio" name="filtreType" value="PLANCHE" <?php if($filtreType=="PLANCHE") echo 'checked="true"';?>> PLANCHES
                 </label>
                 <br>
                 <label>
