@@ -28,7 +28,7 @@
             <center><p><strong>Ajouter un produit</strong></p>
             <form action="insert_products.php" method="post" enctype="multipart/form-data">
                 <label for="pwd">Produit : </label>
-                <input type="text" name="nomProduit" placeholder="nom du produit" required><br><br>
+                <input type="text" pattern="[A-Za-z0-9 ]{0,100}" name="nomProduit" placeholder="nom du produit" required><br><br>
 
                 <select name="categorie">
                     <option value="6">Animaux</option>

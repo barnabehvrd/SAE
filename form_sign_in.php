@@ -30,7 +30,7 @@
 						}
 					?>
 					<label for="mail">mail :</label>
-					<input type="text" name="mail" id="mail" required><br><br>
+					<input type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="mail" id="mail" required><br><br>
 					<?php 
 						if (isset($_GET['pwd'])) {
  					  	 $pwd = $_GET['pwd'];

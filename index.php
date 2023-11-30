@@ -136,12 +136,6 @@
 					
 				
 			</div>
-			<form class="formulaire" action="bug_report.php" method="post">
-					<p class= "centered">report a bug</p>
-					<label for="pwd">message : </label>
-					<input type="text" name="message" id="message" required><br><br>
-					<input type="submit" value="Envoyer">
-			</form>
 			
 		</div>
     </div>
