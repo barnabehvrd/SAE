@@ -34,7 +34,7 @@
 			</select>
             <br>
             <br>- Par ville :
-            <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}" value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
