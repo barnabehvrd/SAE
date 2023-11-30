@@ -4,7 +4,7 @@
 $_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
-$adresse = $_POST['rue'] .", ". $_POST['code']. mb_strtoupper($_POST['ville']);
+$adresse = $_POST['rue'] .", ". $_POST['code']. " ".mb_strtoupper($_POST['ville']);
 $pwd = $_POST['pwd'];
 $Mail_Uti = $_POST['mail'];
 
@@ -67,14 +67,13 @@ if ($nb == 0) {
             }else {
                 $_SESSION["isProd"]=false;
             }
-    
             if($_SESSION["isProd"]==true){
                 $_POST['popup'] = 'addProfilPicture';
             }else {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $iduti;
                 $_POST['popup'] = '';
-            }    
+            }
 } else {
     $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
 }

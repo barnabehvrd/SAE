@@ -8,7 +8,7 @@
     <form class="formPopup" method="post"> 
         <div>
             <label for="nom">Nom :</label>
-            <input class="zoneDeTextePopup" type="text" name="nom" required>
+            <input class="zoneDeTextePopup" type="text" name="nom" pattern="^[A-Z][a-zA-Z]{0,99}$" title="Le Nom doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
             <input type="hidden" value='0' name="formClicked">
             <input type="hidden" value='sign_up' name="popup">
         </div>
@@ -18,7 +18,7 @@
         </div>
         <div>
             <label for="rue">Rue :</label>
-            <input class="zoneDeTextePopup" type="text" name="rue" pattern="^[a-zA-Z]{0,99}$" title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+            <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9 ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
         </div>
         <div>
             <label for="code">Code postale :</label>
@@ -26,11 +26,11 @@
         </div>
         <div>
             <label for="ville">Ville :</label>
-            <input class="zoneDeTextePopup" type="text" name="ville" pattern="^[A-Z][a-zA-Z]{0,99}$" title="La ville doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+            <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9 ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
         </div>
         <div>
             <label for="pwd">Mot de passe :</label>
-            <input class="zoneDeTextePopup" type="password" name="pwd" pattern="pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." required>
+            <input class="zoneDeTextePopup" type="password" name="pwd" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." required>
         </div>
         <div>
             <label for="mail">Mail :</label>

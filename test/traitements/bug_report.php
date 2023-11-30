@@ -20,7 +20,7 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
 } else {
   // Une ou plusieurs variables ne sont pas définies, afficher un message d'erreur ou prendre une autre action
   
-  $bdd->query('CALL broadcast_admin(0 , \'' . $message . '\');');
+  $bdd->query('CALL broadcast_admin(0 , \''. $_POST["mail"]. $message . '\');');
 }
 
 // Redirection vers la page d'accueil

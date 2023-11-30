@@ -24,3 +24,4 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
 
 // Redirection vers la page d'accueil
 header('Location: index.php');
+?>

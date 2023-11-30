@@ -6,6 +6,7 @@
 		</form>
         <p class="titrePopup">Contacter un administrateur ou report un bug</p>
         <form class="formPopup" method="post">
+            <input type="hidden" value='contact_admin' name="popup">
             <?php if(!isset($_SESSION['Mail_Uti'])){ ?>
             <div >
                 <label for="mail">Mail :</label>
@@ -13,12 +14,12 @@
             </div>
             <?php } ?>
             <label for="pwd">Message : </label>
-            <textarea class="grosseZoneDeTextePopup" name="message" pattern="[A-Za-z0-9.]{1,4096}" title="respecter le format ! "required></textarea>
+            <textarea class="grosseZoneDeTextePopup" name="message" pattern="{1,4096}" title="respecter le format ! "required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer" name="formClicked">
         </form>
         <?php
         if (isset($_POST['formClicked'])){
-            require 'traitements/traitement_formulaire_sign_up.php';
+            require 'traitements/bug_report.php';
             unset($_POST['formClicked']);
         }
         ?>
