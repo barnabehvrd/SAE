@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
-                    <input class="zoneDeTextePopup" type="password" name="pwd" required> 
+                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." name="pwd" required> 
                 </div>
                 <div>
                     <?php
