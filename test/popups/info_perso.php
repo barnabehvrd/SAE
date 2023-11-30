@@ -24,9 +24,10 @@
                     <label for="new_prenom">Prénom :</label>
                     <input type="text" name="new_prenom" pattern="^[A-Z][a-zA-Z]{0,99}$" title="Le prénom doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." value=<?php echo ($row["Prenom_Uti"]) ?>>
                     
+                    <p>  Adresse actuelle : <br><?php echo ($row["Adr_Uti"])?></p>
                     <div>
                         <label for="rue">Rue :</label>
-                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9 ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[a-z0-9 ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
                     </div>
                     <div>
                         <label for="code">Code postale :</label>
