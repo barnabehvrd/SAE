@@ -23,7 +23,7 @@
         $filtreType=$_GET["filtreType"];
       }
       else{
-        $filtreType=0;
+        $filtreType="TOUT";
       }
     ?>
     <div class="container">
@@ -53,7 +53,7 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="GRAINES"<?php if($filtreType=="GRAINES") echo 'checked="true"';?>> GRAINES
+                    <input type="radio" name="filtreType" value="GRAINS"<?php if($filtreType=="GRAINS") echo 'checked="true"';?>> GRAINS
                 </label>
                 <br>
                 <label>
@@ -118,7 +118,7 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            if ($filtreCategorie=="TOUT"){
+                            if ($filtreType=="TOUT"){
                                 $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';';
                             }
                             else{
