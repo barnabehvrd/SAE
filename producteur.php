@@ -77,6 +77,27 @@
                     <input type="submit" value="Filtrer">
                 </center>
             </form>
+            <br>
+            <br>
+            <center>
+                <p><strong>Trier par :</strong></p>
+                <br>
+                <br>
+            </center>          
+            <form action="producteur.php" method="get">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
+                <br>
+                <select name="tri">
+                    <option value="PrixAsc">Par prix croissant</option>
+                    <option value="PrixDesc">Par prix décroissant</option>
+                    <option value="Alpha">Par ordre alphabétique</option>
+                    <option value="AntiAlpha">Par ordre anti-alphabétique</option>
+			    </select>
+                <br>
+                <center>
+                    <input type="submit" value="Trier">
+                </center>
+            </form>
         </div>
         <div class="right-column">
         <div class="fixed-banner">
