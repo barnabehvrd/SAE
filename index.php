@@ -14,7 +14,10 @@
           }
           else{
             $rechercheVille="";
-          }
+        }
+        if (isset($_GET["categorie"])==false){
+            $_GET["categorie"]="Tout";
+        }
     ?>
     <div class="container">
         <div class="left-column">
@@ -23,14 +26,14 @@
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
 			<select name="categorie" id="categories">
-                <option value="Tout">Tout</option>
-				<option value="Agriculteur">Agriculteur</option>
-				<option value="Vigneron">Vigneron</option>
-				<option value="Maraîcher">Maraîcher</option>
-				<option value="Apiculteur">Apiculteur</option>
-				<option value="Éleveur de volaille">Éleveur de volaille</option>
-				<option value="Viticulteur">Viticulteur</option>
-				<option value="Pépiniériste">Pépiniériste</option>
+                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
+				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
+				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
+				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
+				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>>Apiculteur</option>
+				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>>Éleveur de volaille</option>
+				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>>Viticulteur</option>
+				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>>Pépiniériste</option>
 			</select>
             <br>
             <br>- Par ville :
@@ -67,9 +70,6 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-                    if (isset($_GET["categorie"])==false){
-                        $_GET["categorie"]="Tout";
-                      }
 					?>
 					
 					</a>    
