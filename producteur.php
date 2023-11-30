@@ -46,13 +46,13 @@
                 <p><strong>Rechercher par :</strong></p>
                 <br>
                 <br>
-                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
-                <br>
-                <br>
             </center>
-            - Type de produit 
             <br>
             <form action="producteur.php" method="get">
+                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
+                <br>
+                - Type de produit 
+                <br>
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
                     <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
