@@ -21,7 +21,7 @@
             <img class="logo" src="img/logo.png">
 			<center><strong><p>Rechercher par</p></strong></center>
 			<form method="get" action="index.php"> 
-			<label>Profession :</label>
+			<label>- Profession :</label>
 			<select name="categorie" id="categories">
                 <option value="Tout">Tout</option>
 				<option value="Agriculteur">Agriculteur</option>
