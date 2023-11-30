@@ -18,8 +18,8 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   // Les variables de session sont définies, exécuter la requête
   $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
 } else {
-  // Une ou plusieurs variables ne sont pas définies, afficher un message d'erreur ou prendre une autre action
-  echo "Erreur : Les variables de session ne sont pas définies.";
+  $bdd->query('CALL broadcast_admin( 1 ', '\'' . $message . '\');');
+
 }
 
 // Redirection vers la page d'accueil

@@ -18,7 +18,7 @@
         </div>
         <div>
             <label for="rue">Rue :</label>
-            <input class="zoneDeTextePopup" type="text" name="rue" pattern="^[A-Z][a-zA-Z]{0,99}$" title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+            <input class="zoneDeTextePopup" type="text" name="rue" pattern="^[a-zA-Z]{0,99}$" title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
         </div>
         <div>
             <label for="code">Code postale :</label>
