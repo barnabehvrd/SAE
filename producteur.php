@@ -25,6 +25,12 @@
       else{
         $filtreType="TOUT";
       }
+      if (isset($_GET["tri"])==true){
+        $tri=$_GET["tri"];
+      }
+      else{
+        $tri="No";
+      }
     ?>
     <div class="container">
         <div class="left-column">
@@ -86,15 +92,16 @@
             </center>          
             <form action="producteur.php" method="get">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-                <br>
+                <center>
                 <select name="tri">
-                    <option value="PrixAsc">Par prix croissant</option>
-                    <option value="PrixDesc">Par prix décroissant</option>
-                    <option value="Alpha">Par ordre alphabétique</option>
-                    <option value="AntiAlpha">Par ordre anti-alphabétique</option>
+                    <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>>Aucun tri</option>
+                    <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>>Par prix croissant</option>
+                    <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>>Par prix décroissant</option>
+                    <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>>Par ordre alphabétique</option>
+                    <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>>Par ordre anti-alphabétique</option>
 			    </select>
                 <br>
-                <center>
+                <br>
                     <input type="submit" value="Trier">
                 </center>
             </form>
