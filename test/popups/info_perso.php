@@ -27,7 +27,7 @@
                     <p>  Adresse actuelle : <br><?php echo ($row["Adr_Uti"])?></p>
                     <div>
                         <label for="rue">Rue :</label>
-                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[a-z0-9 ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9 ]{0,120}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 120 caractères." required>
                     </div>
                     <div>
                         <label for="code">Code postale :</label>
@@ -35,7 +35,7 @@
                     </div>
                     <div>
                         <label for="ville">Ville :</label>
-                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9 ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
+                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9 ]{0,120}" title="la ville doit faire  entre 0 et 120 caractères alphanumériques, espaces autorisés." required>
                     </div>
    
                     <!-- Add the submit button -->
