@@ -19,8 +19,8 @@
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
 
-      if (isset($_POST["filtreType"])==true){
-        $filtreType=$_POST["filtreType"];
+      if (isset($_GET["filtreType"])==true){
+        $filtreType=$_GET["filtreType"];
       }
       else{
         $filtreType=0;
