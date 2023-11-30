@@ -61,7 +61,7 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="PLANCHE" <?php if($filtreType=="PLANCHE") echo 'checked="true"';?>> PLANCHES
+                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> PLANCHES
                 </label>
                 <br>
                 <label>

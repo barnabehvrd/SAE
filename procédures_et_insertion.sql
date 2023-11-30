@@ -799,7 +799,7 @@ VALUES (1, 'Fruits'),
 (4, 'Viande'),
 (5, 'Vin'),
 (6, 'Animaux'),
-(7, 'Plances');
+(7, 'Planches');
 
 -- Pour un agriculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
