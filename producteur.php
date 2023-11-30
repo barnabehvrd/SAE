@@ -31,19 +31,27 @@
       else{
         $tri="No";
       }
+      if (isset($_GET["rechercheNom"])==true){
+        $rechercheNom=$_GET["rechercheNom"];
+      }
+      else{
+        $rechercheNom="";
+      }
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center>
-                <p><strong>Trier par :</strong></p>
+                <p><strong>Rechercher par :</strong></p>
+                <br>
+                <br>
+                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
                 <br>
                 <br>
             </center>
             - Type de produit 
             <br>
-            
             <form action="producteur.php" method="get">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
@@ -92,7 +100,7 @@
                 <br>
                 <br>
                 <center>
-                    <input type="submit" value="Trier">
+                    <input type="submit" value="Rechercher">
                 </center>
             </form>
             <br>
