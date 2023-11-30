@@ -11,7 +11,7 @@
 
     <form action="traitement_form_forgot_pwd.php" method="post">
         <label for="email">Adresse e-mail :</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="email" required>
         <input type="submit" value="Envoyer le code">
     </form>
 

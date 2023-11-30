@@ -1,5 +1,6 @@
 
 <?php
+
 $adr = $_POST['rue'] .", ". $_POST['code']. " ".mb_strtoupper($_POST['ville']);
 
 $utilisateur = "inf2pj02";
@@ -13,6 +14,5 @@ session_start();
 $update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$adr."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
 
 echo ($update);
-$bdd->exec($update);
-header('Location: user_informations.php');    
+$bdd->exec($update);   
 ?>
