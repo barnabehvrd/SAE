@@ -9,13 +9,19 @@
 <body>
     <?php
         session_start();
+        if (isset($_GET["rechercheVille"])==true){
+            $rechercheVille=$_GET["rechercheVille"];
+          }
+          else{
+            $rechercheVille="";
+          }
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
-			 <p>recherche par catégorie</p>
+			<center><strong><p>Rechercher par</p></strong></center>
 			<form method="get" action="index.php"> 
-			<label for="categories">Sélectionnez une catégorie :</label>
+			<label>- Profession :</label>
 			<select name="categorie" id="categories">
                 <option value="Tout">Tout</option>
 				<option value="Agriculteur">Agriculteur</option>
@@ -26,7 +32,12 @@
 				<option value="Viticulteur">Viticulteur</option>
 				<option value="Pépiniériste">Pépiniériste</option>
 			</select>
-			<input type="submit" value="Aller à la catégorie">
+            <br>
+            <br>- Par ville :
+            <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <br>
+            <br>
+			<center><input type="submit" value="Rechercher"></center>
 			</form>
         </div>
         <div class="right-column">

@@ -47,11 +47,11 @@
             </center>
             <br>
             <form action="producteur.php" method="get">
+                - Nom
                 <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
                 <br>
                 <br>
                 - Type de produit 
-                <br>
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
                     <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
@@ -88,7 +88,6 @@
                 <br>
                 <br>
                 - Tri
-                <br>
                 <select name="tri">
                     <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>>Aucun tri</option>
                     <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>>Par prix croissant</option>
