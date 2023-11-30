@@ -37,7 +37,7 @@
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
             <center>
-                <p><strong>Filtrer par :</strong></p>
+                <p><strong>Trier par :</strong></p>
                 <br>
                 <br>
             </center>
@@ -79,20 +79,7 @@
                 </label>
                 <br>
                 <br>
-                <center>
-                    <input type="submit" value="Filtrer">
-                </center>
-            </form>
-            <br>
-            <br>
-            <center>
-                <p><strong>Trier par :</strong></p>
-                <br>
-                <br>
-            </center>          
-            <form action="producteur.php" method="get">
-                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-                <center>
+                Tri
                 <select name="tri">
                     <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>>Aucun tri</option>
                     <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>>Par prix croissant</option>
@@ -100,11 +87,12 @@
                     <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>>Par ordre alphabétique</option>
                     <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>>Par ordre anti-alphabétique</option>
 			    </select>
-                <br>
-                <br>
+                <center>
                     <input type="submit" value="Trier">
                 </center>
             </form>
+            <br>
+            <br>       
         </div>
         <div class="right-column">
         <div class="fixed-banner">
