@@ -34,7 +34,7 @@
 			</select>
             <br>
             <br>Par ville :
-            <input type="text" name="rechercheVille" value="<?php echo $rechercheNom?>" placeholder="Nom">
+            <input type="text" name="rechercheVille" value="" placeholder="Nom">
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
