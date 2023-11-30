@@ -14,7 +14,7 @@
             </div>
             <?php } ?>
             <label for="pwd">Message : </label>
-            <textarea class="grosseZoneDeTextePopup" name="message" pattern="[A-Za-z0-9.]{1,4096}" title="respecter le format ! "required></textarea>
+            <textarea class="grosseZoneDeTextePopup" name="message" pattern="{1,4096}" title="respecter le format ! "required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer" name="formClicked">
         </form>
         <?php
