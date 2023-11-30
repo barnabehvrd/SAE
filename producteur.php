@@ -41,35 +41,35 @@
             <form action="producteur.php" method="get">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
-                    <input type="radio" name="filtreType" value="0" <?php if($filtreType==0) echo 'checked="true"';?>> TOUT
+                    <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="1" <?php if($filtreType==6) echo 'checked="true"';?>> ANIMAUX
+                    <input type="radio" name="filtreType" value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'checked="true"';?>> ANIMAUX
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==1) echo 'checked="true"';?>> FRUITS
+                    <input type="radio" name="filtreType" value="FRUITS" <?php if($filtreType=="FRUITS") echo 'checked="true"';?>> FRUITS
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="2"<?php if($filtreType==3) echo 'checked="true"';?>> GRAINES
+                    <input type="radio" name="filtreType" value="GRAINES"<?php if($filtreType=="GRAINES") echo 'checked="true"';?>> GRAINES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="4" <?php if($filtreType==2) echo 'checked="true"';?>> LÉGUMES
+                    <input type="radio" name="filtreType" value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'checked="true"';?>> LÉGUMES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==7) echo 'checked="true"';?>> PLANCHES
+                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> PLANCHES
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==4) echo 'checked="true"';?>> VIANDE
+                    <input type="radio" name="filtreType" value="VIANDE" <?php if($filtreType=="VIANDE") echo 'checked="true"';?>> VIANDE
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="3" <?php if($filtreType==5) echo 'checked="true"';?>> VIN
+                    <input type="radio" name="filtreType" value="VIN" <?php if($filtreType=="VIN") echo 'checked="true"';?>> VIN
                 </label>
                 <br>
                 <br>
@@ -118,7 +118,14 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            if ($filtreCategorie=="TOUT"){
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';';
+                            }
+                            else{
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\' AND Desc_Type_Produit=\''.$filtreType.'\';';
+
+                            }
+                            $queryGetProducts = $bdd->query(($query));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
