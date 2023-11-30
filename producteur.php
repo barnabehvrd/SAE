@@ -18,13 +18,65 @@
       session_start();
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
+
+      if (isset($_GET["filtreType"])==true){
+        $filtreType=$_GET["filtreType"];
+      }
+      else{
+        $filtreType=0;
+      }
     ?>
     <div class="container">
         <div class="left-column">
             <img class="logo" src="img/logo.png">
             <!-- Contenu de la partie gauche -->
-            <h1>Partie gauche (4/5)</h1>
-            <p>Ceci est la partie gauche de la page web.</p>
+            <center>
+                <p><strong>Filtrer par :</strong></p>
+                <br>
+                <br>
+            </center>
+            Type de produit 
+            <br>
+            
+            <form action="producteur.php" method="get">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
+                <label>
+                    <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'checked="true"';?>> ANIMAUX
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="FRUITS" <?php if($filtreType=="FRUITS") echo 'checked="true"';?>> FRUITS
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="GRAINES"<?php if($filtreType=="GRAINES") echo 'checked="true"';?>> GRAINES
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'checked="true"';?>> LÉGUMES
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> PLANCHES
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="VIANDE" <?php if($filtreType=="VIANDE") echo 'checked="true"';?>> VIANDE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="filtreType" value="VIN" <?php if($filtreType=="VIN") echo 'checked="true"';?>> VIN
+                </label>
+                <br>
+                <br>
+                <center>
+                    <input type="submit" value="Filtrer">
+                </center>
+            </form>
         </div>
         <div class="right-column">
         <div class="fixed-banner">
@@ -59,7 +111,6 @@
             </div>
             <form method="get" action="insert_commande.php">
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
@@ -67,7 +118,14 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            if ($filtreCategorie=="TOUT"){
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\';';
+                            }
+                            else{
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\' AND Desc_Type_Produit=\''.$filtreType.'\';';
+
+                            }
+                            $queryGetProducts = $bdd->query(($query));
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
