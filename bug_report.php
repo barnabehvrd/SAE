@@ -16,9 +16,9 @@ $message = $_POST['message'];
 // Appel de la fonction SQL
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   // Les variables de session sont définies, exécuter la requête
-  $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
+  $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message .  '\');');
 } else {
-  $bdd->query('CALL broadcast_admin( 1 ', '\'' . $message . '\');');
+  $bdd->query('CALL broadcast_admin( 0 ', '\'' . $_POST["mail"]. "\n "  . $message . '\');');
 
 }
 
