@@ -109,20 +109,26 @@
                 $km = $r * $c;
             
                 return ($miles ? ($km * 0.621371192) : $km);
+        }
+        
+
+
+        if (isset($_GET["autourDeChezMoi"])==false){
+            $mabdd=dbConnect();           
+            $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+            $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+            if (count($returnQueryAdrUti)>0){
+                $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
             }
-        
-
-
-        
-        $mabdd=dbConnect();           
-        $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
-        $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-        if (count($returnQueryAdrUti)>0){
-            $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+            else{
+                $Adr_Uti_En_Cours='PARIS';
+            }
         }
         else{
             $Adr_Uti_En_Cours='PARIS';
         }
+        
+
     ?>
     <div class="container">
         <div class="left-column">
@@ -236,9 +242,6 @@
                                  // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
                                 $result = $stmt->get_result();
-
-                                
-                                
                                 
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
