@@ -167,7 +167,7 @@
                                 // URL vers l'API Nominatim
                                 $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                                 // Configurer les paramètres du proxy
-                                $proxy = 'tcp://your_proxy_address:your_proxy_port'; // Remplacez avec votre adresse et port de proxy
+                                $proxy = 'tcp://Proxy.univ-lemans.fr:3128'; // Remplacez avec votre adresse et port de proxy
                                 $proxy_context = stream_context_create([
                                     'http' => [
                                         'proxy' => $proxy,
