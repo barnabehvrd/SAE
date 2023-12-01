@@ -104,16 +104,17 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
 			<?php
 				$query='SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur;
-				echo $query;
 				if ($filtreCategorie!=0){
 					$query=$query.' AND COMMANDE.Id_Statut='.$filtreCategorie.';';
 				}
                 $queryGetCommande = $bdd->query(($query));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
-				var_dump($returnQueryGetCommande);
                 $iterateurCommande=0;
-                if(count($returnQueryGetCommande)==0){
+				if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
                     echo "Aucune commande pour le moment";
+                }
+                elseif(count($returnQueryGetCommande)==0){
+                    echo "Aucune commande ne correspond à ces critères";
                 }
                 else{
                     while ($iterateurCommande<count($returnQueryGetCommande)){
