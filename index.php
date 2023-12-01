@@ -14,7 +14,38 @@
           }
           else{
             $rechercheVille="";
+        }
+        if (isset($_GET["categorie"])==false){
+            $_GET["categorie"]="Tout";
+        }
+        if (isset($_SESSION["Id_Uti"])==false){
+            $utilisateur=-1;
+        }
+        else{
+            $utilisateur=$_SESSION["Id_Uti"];
+        }
+        if (isset($_GET["rayon"])==false){
+            $rayon=10;
+        }
+        else{
+            $rayon=$_GET["rayon"];
+        }
+
+        // récupération adresse du client
+        function dbConnect(){
+            $utilisateur = "inf2pj02";
+            $serveur = "localhost";
+            $motdepasse = "ahV4saerae";
+            $basededonnees = "inf2pj_02";
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
           }
+        $mabdd=dbConnect();           
+        $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+        $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+        if (count($returnQueryAdrUti)>0){
+            $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+        }
     ?>
     <div class="container">
         <div class="left-column">
@@ -22,19 +53,39 @@
 			<center><strong><p>Rechercher par</p></strong></center>
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
+            <br>
 			<select name="categorie" id="categories">
-                <option value="Tout">Tout</option>
-				<option value="Agriculteur">Agriculteur</option>
-				<option value="Vigneron">Vigneron</option>
-				<option value="Maraîcher">Maraîcher</option>
-				<option value="Apiculteur">Apiculteur</option>
-				<option value="Éleveur de volaille">Éleveur de volaille</option>
-				<option value="Viticulteur">Viticulteur</option>
-				<option value="Pépiniériste">Pépiniériste</option>
+                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
+				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
+				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
+				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
+				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>>Apiculteur</option>
+				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>>Éleveur de volaille</option>
+				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>>Viticulteur</option>
+				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>>Pépiniériste</option>
 			</select>
             <br>
             <br>- Par ville :
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <br>
+            <br>
+            <br>- Autour de chez moi :
+            <br>
+            <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
+            <br>
+            <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+            <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
+            <script>
+                function AfficheRange2(newVal) {
+                    var monCurseurKm = document.getElementById("monCurseurKm");
+                    if (newVal >= 100) {
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ Km";
+                    } else {
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + " Km";
+                    }
+                }
+            </script>
+            <br>
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
@@ -67,11 +118,7 @@
                     echo '<a class="fixed-size-button" href="form_sign_in.php" >';
 					echo "connection";
 					}
-                    if (isset($_GET["categorie"])==false){
-                        $_GET["categorie"]="Tout";
-                      }
 					?>
-					
 					</a>    
                 </div>
             </div>
@@ -97,10 +144,13 @@
                                 }
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                                 if ($_GET["categorie"]=="Tout"){
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
+                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod LIKE \'%\'';
                                 }else{
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
                                     //$stmt->bind_param("s", $categorie);
+                                }
+                                if ($rechercheVille!=""){
+                                    $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
                                 }
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
@@ -117,7 +167,7 @@
                                         echo '</a> ';                                        
                                     }
                                 } else {
-                                    echo "Aucun résultat trouvé pour la catégorie : $categorie";
+                                    echo "Aucun résultat ne correspond à ces critères";
                                 }
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {

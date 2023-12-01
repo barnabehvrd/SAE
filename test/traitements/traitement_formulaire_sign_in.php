@@ -16,17 +16,14 @@ try {
     $serveur = "localhost";
     $motdepasse = "ahV4saerae";
     $basededonnees = "inf2pj_02";
-    echo(2);
 
     // Connect to database
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    echo(2);
 
     // Check if user email exists
     $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
     
-    echo(2);
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
@@ -35,40 +32,30 @@ try {
 
     // Extract user ID
     $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
-    echo $Id_Uti;
-    echo '<Br>';
     
     // Verify password using stored procedure
     //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
     $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
     
-    echo(2);
+    
 
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
-
     // Handle password verification
-    if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
+    if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
         if ($test[0][1] == 1 ) {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
-            echo $_SESSION['Id_Uti'];
 
             $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
-            echo '<br>';
-            var_dump($isProducteur);
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            echo '<br>';
-            var_dump($returnIsProducteur);
             $reponse=$returnIsProducteur[0]["result"];
             if ($reponse!=NULL){
-                echo 'producteur';
                 $_SESSION["isProd"]=true;
             }else {
                 $_SESSION["isProd"]=false;
             }
-            $_POST['popup'] = '';
         } else {
             $_SESSION['test_pwd']--;
             $_POST['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';

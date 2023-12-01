@@ -52,9 +52,9 @@
         <?php
         if (isset($_POST['formClicked'])){
             require 'traitements/update_user_info.php';
-            unset($_POST['formClicked']);
         }
         if(isset($_POST['deconnexion'])){
+            $_POST['formClicked'] = 'deconnexion';
             require 'traitements/log_out.php';
             unset($_POST['deconnexion']);
         }
