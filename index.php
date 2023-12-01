@@ -66,12 +66,14 @@
 			</select>
             <br>
             <br>- Par ville :
+            <br>
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
             <br>- Autour de chez moi :
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
+            <br>
             <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
             <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
