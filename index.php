@@ -163,24 +163,9 @@
                                 //localisation du client
                                 // Construire l'URL de l'API Nominatim
                                 $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                                // Effectuer la requête HTTP
-                                $response = file_get_contents($url);
-                                // Analyser la réponse JSON
-                                $data = json_decode($response);
-                                // Vérifier si la requête a réussi
-                                if (!empty($data) && is_array($data) && isset($data[0])) {
-                                    // Récupérer la latitude et la longitude
-                                    $latitude = $data[0]->lat;
-                                    $longitude = $data[0]->lon;
-                                    // Afficher les résultats
-                                    echo "Latitude: $latitude<br>";
-                                    echo "Longitude: $longitude";
-                                } else {
-                                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                                    echo "Adresse non trouvée ou erreur de géocodage.";
-                                }
+                                echo $url;
 
-                                
+
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
