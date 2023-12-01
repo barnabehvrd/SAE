@@ -170,60 +170,43 @@
 
 
 
-/*
 
-$ch=curl_init($url);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-$response = curl_exec($ch);
-var_dump($response);
-                                // Analyser la réponse JSON
-                                $data = json_decode($response);
-                                // Vérifier si la réponse a été correctement analysée
-                                if (!empty($data) && is_array($data) && isset($data[0])) {
-                                    // Récupérer la latitude et la longitude
-                                    $latitude = $data[0]->lat;
-                                    $longitude = $data[0]->lon;
-                                    // Afficher les résultats
-                                    echo "Latitude : $latitude<br>";
-                                    echo "Longitude : $longitude";
+
+                                $url = 'http://nominatim.openstreetmap.org/search?q=1645,%20route%20des%20Lucioles,%20Biot&format=json';
+
+                                $ch = curl_init($url);
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+                                
+                                $response = curl_exec($ch);
+                                var_dump($response);                             
+                                // Vérifier s'il y a eu une erreur cURL
+                                if (curl_errno($ch)) {
+                                    echo 'Erreur cURL : ' . curl_error($ch);
                                 } else {
-                                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                                    echo "Erreur lors de l'extraction des données de géocodage.";
-                                }*/
+                                    // Analyser la réponse JSON
+                                    $data = json_decode($response);
 
-                                // replace all the white space with "+" sign to match with google search pattern	
-// Adresse à géocoder
-$Adr_Uti_En_Cours = str_replace(" ", "+", $Adr_Uti_En_Cours);
+                                    // Vérifier si la réponse a été correctement analysée
+                                    if (!empty($data) && is_array($data) && isset($data[0])) {
+                                        // Récupérer la latitude et la longitude
+                                        $latitude = $data[0]->lat;
+                                        $longitude = $data[0]->lon;
+                                        
+                                        // Afficher les résultats
+                                        echo "Latitude : $latitude<br>";
+                                        echo "Longitude : $longitude";
+                                    } else {
+                                        // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
+                                        echo "Erreur lors de l'extraction des données de géocodage.";
+                                    }
+                                }
+                                
 
 
-// URL pour cURL
-$url_curl = "https://maps.googleapis.com/maps/api/geocode/json?$Adr_Uti_En_Cours=%s&sensor=false";
-
-// Initialiser cURL
-$ch = curl_init($url_curl);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-// Exécuter la requête cURL
-$response_curl = curl_exec($ch);
-
-// Vérifier s'il y a eu une erreur cURL
-if (curl_errno($ch)) {
-    echo 'Erreur cURL : ' . curl_error($ch);
-} else {
-    // Analyser la réponse JSON
-    $json_curl = json_decode($response_curl, true);
-
-    // Latitude et Longitude avec cURL
-    $latitude_curl = ($json_curl['results'][0]['geometry']['location']['lat']) ? $json_curl['results'][0]['geometry']['location']['lat'] : '--';
-    $longitude_curl = ($json_curl['results'][0]['geometry']['location']['lng']) ? $json_curl['results'][0]['geometry']['location']['lng'] : '--';
-
-    // Affichage avec cURL
-    echo "Latitude (cURL): $latitude_curl<br>";
-    echo "Longitude (cURL): $longitude_curl<br>";
-}
-
-// Fermer la ressource cURL
-curl_close($ch);
+                                
+                                // Fermer la ressource cURL
+                                curl_close($ch);
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
