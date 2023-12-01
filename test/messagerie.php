@@ -13,7 +13,7 @@
 			<img class="logo" src="img/logo.png">
             <p>Contacts récents :</p>
 			<?php
-			require 'fonction thomas/Messagerie/afficheContacts.php';
+			require 'traitement/afficheContacts.php';
 			?>
         </div>
         <div class="rightColumn">
@@ -42,20 +42,20 @@
 				<?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
 				>
 				<?php 
-				require "fonction thomas/Messagerie/afficherInterlocuteur.php";
+				require "traitement/afficherInterlocuteur.php";
 				?>
 				</div>
 				<div class="contenuMessagerie">
             	
             		<?php
-					require 'fonction thomas/Messagerie/afficheMessages.php';
+					require 'traitement/afficheMessages.php';
 					?>
 					<form method="post" id="zoneDEnvoi">
 						<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
 						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
 					</form>
 					<?php
-					require 'fonction thomas/Messagerie/envoyerMessage.php';
+					require 'traitement/envoyerMessage.php';
 					?>
 				</div>
             </div>
