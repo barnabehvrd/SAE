@@ -67,9 +67,6 @@
                     $latitude = $data[0]->lat;
                     $longitude = $data[0]->lon;
                     return [$latitude, $longitude];
-                } else {
-                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                    echo "Erreur lors de l'extraction des données de géocodage.";
                 }
                 return [0,0];
             }
@@ -137,6 +134,7 @@
             <br>
             <br>
             <br>- Autour de chez moi : 
+            <br>
             <?php
                 $mabdd=dbConnect();           
                 $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
@@ -145,13 +143,12 @@
                 echo '('.$Adr_Uti_En_Cours.')';
             ?>
             <br>
-            <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
+            <span id="monCurseurKm">Rayon de <?php echo $rayon;?>+</span>
             <script>
                 function AfficheRange2(newVal) {
                     var monCurseurKm = document.getElementById("monCurseurKm");
-                    if ((newVal >= 100) || ($rayon=>100)) {
+                    if ((newVal >= 100)) {
                         monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
                     } else {
                         monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
