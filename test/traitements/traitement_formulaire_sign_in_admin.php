@@ -41,7 +41,7 @@ try {
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
-        if ($test[0][1] == 1 ) {
+        if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
