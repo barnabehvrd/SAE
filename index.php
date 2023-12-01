@@ -160,6 +160,12 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
 
+                                //localisation du client
+                                // Construire l'URL de l'API Nominatim
+                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                                echo $url;
+
+
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
