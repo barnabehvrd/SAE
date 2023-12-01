@@ -172,7 +172,7 @@
 
 
 
-                                $url = 'http://nominatim.openstreetmap.org/search?q=1645,%20route%20des%20Lucioles,%20Biot&format=json';
+                                $url = 'http://nominatim.openstreetmap.org/search?q=Nice,%20France&format=json';
 
                                 $ch = curl_init($url);
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -186,7 +186,7 @@
                                 } else {
                                     // Analyser la réponse JSON
                                     $data = json_decode($response);
-                                
+                                    var_dump($data);
                                     // Vérifier si la réponse a été correctement analysée
                                     if (!empty($data) && is_array($data) && isset($data[0])) {
                                         // Récupérer la latitude et la longitude
@@ -204,7 +204,7 @@
                                 
 
 
-                                
+
                                 // Fermer la ressource cURL
                                 curl_close($ch);
 
