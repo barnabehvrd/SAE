@@ -197,7 +197,7 @@ $Adr_Uti_En_Cours = str_replace(" ", "+", $Adr_Uti_En_Cours);
 
 
 // URL pour cURL
-$url_curl = "https://maps.googleapis.com/maps/api/geocode/json?$Adr_Uti_En_Cours=%s&sensor=false";
+$url_curl = "http://nominatim.openstreetmap.org/search?q=1645,%20route%20des%20Lucioles,%20Biot&format=json";
 
 // Initialiser cURL
 $ch = curl_init($url_curl);
