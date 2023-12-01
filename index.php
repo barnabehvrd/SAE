@@ -167,19 +167,15 @@
                                 // URL vers l'API Nominatim
                                 $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                                 // Configurer les paramètres du proxy
-                                $proxy = 'tcp://Proxy.univ-lemans.fr:3128'; // Remplacez avec votre adresse et port de proxy
-                                $proxy_context = stream_context_create([
-                                    'http' => [
-                                        'proxy' => $proxy,
-                                        'request_fulluri' => true,
-                                    ],
-                                    'https' => [
-                                        'proxy' => $proxy,
-                                        'request_fulluri' => true,
-                                    ],
-                                ]);
-                                // Utiliser le flux contextuel avec file_get_contents
-                                $response = file_get_contents($url, false, $proxy_context);
+
+
+
+/*
+
+$ch=curl_init($url);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+$response = curl_exec($ch);
+var_dump($response);
                                 // Analyser la réponse JSON
                                 $data = json_decode($response);
                                 // Vérifier si la réponse a été correctement analysée
@@ -193,7 +189,22 @@
                                 } else {
                                     // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
                                     echo "Erreur lors de l'extraction des données de géocodage.";
-                                }
+                                }*/
+
+                                // replace all the white space with "+" sign to match with google search pattern	
+	$Adr_Uti_En_Cours = str_replace(" ", "+", $Adr_Uti_En_Cours); 
+
+	$url = "https://maps.google.com/maps/api/geocode/json?sensor=false&key=votrecle&address=$Adr_Uti_En_Cours";
+	$response = file_get_contents($url);
+	
+	// generate array object from the response from the web
+	$json = json_decode($response,TRUE);
+	// Latitude
+	$latitude = ($json['results'][0]['geometry']['location']['lat']) ? $json['results'][0]['geometry']['location']['lat'] : '--';
+	// Longitude
+	$longitude = ($json['results'][0]['geometry']['location']['lng']) ? $json['results'][0]['geometry']['location']['lng'] : '--';
+
+    echo $latitude, $longitude;
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
