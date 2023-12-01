@@ -34,7 +34,6 @@
 			<center>
                 <p><strong>Filtrer par :</strong></p>
                 <br>
-                <br>
             </center>
             Statut 
             <br>
@@ -104,7 +103,11 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
 			<?php
-                $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
+				$query='SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.' AND COMMANDE.Id_Statut='.$filtreCategorie.';';
+				if ($filtreCategorie!=0){
+					$query=$query.' AND COMMANDE.Id_Statut='.$filtreCategorie.';';
+				}
+                $queryGetCommande = $bdd->query(($query));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){

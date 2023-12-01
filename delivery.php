@@ -32,7 +32,6 @@
             <center>
                 <p><strong>Filtrer par :</strong></p>
                 <br>
-                <br>
             </center>
             Statut 
             <br>
