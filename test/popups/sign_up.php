@@ -44,11 +44,11 @@
         <?php } ?>
         <div>
             <?php
-            if (isset($_SESSION['erreur'])) {
+            if (isset($_POST['erreur'])) {
                 
-                $erreur = $_SESSION['erreur'];
+                $erreur = $_POST['erreur'];
                 echo '<p class="erreur">'.$erreur.'</p>';
-                unset($_SESSION['erreur']);
+                unset($_POST['erreur']);
             }
             ?>
         </div>
@@ -58,6 +58,7 @@
         if (isset($_POST['formClicked'])){
             require 'traitements/traitement_formulaire_sign_up.php';
             unset($_POST['formClicked']);
+            $_SESSION['actualiser'] = true;
         }
         ?>
     <div class="alignementCentreCoteACote">

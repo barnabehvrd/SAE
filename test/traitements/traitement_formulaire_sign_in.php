@@ -42,7 +42,7 @@ try {
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
-        if ($test[0][1] == 1 ) {
+        if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;

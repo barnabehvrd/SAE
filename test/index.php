@@ -26,9 +26,9 @@
                     if(!isset($_SESSION)){
                     session_start();
                     }
-                    if(isset($_SESSION, $_SESSION["tempPost"])){
-                        $_POST = $_SESSION["tempPost"];
-                        unset($_SESSION["tempPost"]);
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
                     }
                     ?>
 					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
@@ -54,8 +54,6 @@
         </div>
     </div>
     <?php require "popups/gestion_popups.php";
-    if (isset($_POST['formClicked'])){
-        $_SESSION['tempPopup'] = $_POST['popup'];
-        @header('refresh:0');
-    }?>
+    var_dump($_SESSION);
+    var_dump($_POST);?>
 </body>
