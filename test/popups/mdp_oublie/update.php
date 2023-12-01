@@ -1,10 +1,3 @@
-<?php
-if (isset($_POST['formClicked'])){
-    unset($_POST['formClicked']);
-    require 'traitements/mdp_oublie/mail.php';
-    $_SESSION['actualiser'] = true;
-}
-?>
 <div class="popup">
     <div class="contenuPopup">
         <div>
@@ -12,12 +5,35 @@ if (isset($_POST['formClicked'])){
                     <input type="submit" value="" class="boutonQuitPopup">
                     <input type="hidden" name="popup" value="">
             </form>
-            <p class="titrePopup">Réinitialisation de mot de passe</p>
+            <p class="titrePopup">Nouveau mot de passe</p>
         </div>
         <form class="formPopup" method="post">
-            <input type="email" id="email" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="email" required>
-            <label>un code vous sera envoyer sur votre adresse mail afin de changer votre mot de passe</label>
-            <input name="formClicked" type="submit" value="Envoyer le code" class="boutonPopup">
+            <label for="pwd1">Nouveau mot de passe :</label>
+            <input type="text" name="pwd1">
+            <label for="pwd2">Ressaisissez le nouveau mot de passe :</label>
+            <input type="text" name="pwd2">
+            
+            <input type="hidden" value="mdp_oublie/update" name="popup" >
+            <?php
+            if (isset($_SESSION['erreur'])) {
+                $erreur = $_SESSION['erreur'];
+                echo '<p class="erreur">'.$erreur.'</p>';
+            }
+            ?>
+            <input name="formClicked" type="submit" value="Changer le mot de passe" class="boutonPopup">
         </form>
     </div>
 </div>
+<?php
+if (isset($_POST['formClicked'])){
+    unset($_POST['formClicked']);
+    require 'traitements/mdp_oublie/update.php';
+    $_SESSION['actualiser'] = true;
+}
+?>
+
+
+
+<form method="post">
+    
+</form>
