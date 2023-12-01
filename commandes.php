@@ -18,9 +18,9 @@
 	if (isset($_POST["typeCategorie"])==true){
         $filtreCategorie=$_POST["typeCategorie"];
       }
-      else{
-        $filtreCategorie=0;
-      }
+    else{
+    	$filtreCategorie=0;
+    }
 
     // Connect to database
     return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
