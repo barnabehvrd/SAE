@@ -68,8 +68,8 @@
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
-            <input type="range" value="1" min="0" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="valBox">Rayon de 4</span>
+            <input name="rayon" type="range" value="10" min="0" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+            <span id="valBox">Rayon de 10</span>
             <script>
                  function AfficheRange2(newVal){
                     document.getElementById("valBox").innerHTML="Rayon de "+newVal;
