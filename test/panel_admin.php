@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>L'étal en ligne</title>
+    <title>pnael_admin</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="test/css/style_general.css">
-    <link rel="stylesheet" type="text/css" href="test/css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
     <div class="container">
