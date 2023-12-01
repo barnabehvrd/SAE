@@ -56,6 +56,6 @@
     <?php require "popups/gestion_popups.php";
     if (isset($_POST['formClicked'])){
         $_SESSION['tempPopup'] = $_POST['popup'];
-        header('refresh:0');
+        @header('refresh:0');
     }?>
 </body>

@@ -31,8 +31,13 @@
             <?php
             if (isset($_POST['formClicked'])){
                 if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
+                    echo(1);
+                    sleep(10);
                     require 'traitements/traitement_formulaire_sign_in_admin.php';
                 }else{
+                    
+                    echo(2);
+                    sleep(10);
                     require 'traitements/traitement_formulaire_sign_in.php';
                 }
                 unset($_SESSION['tempIsAdmin']);

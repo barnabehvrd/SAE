@@ -2,9 +2,10 @@
 // Détruisez toutes les variables de session
 $_SESSION = array();
 // Effacez le cookie de session
+$_POST['erreur'] = 'Déconnexion réussie';
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
-    setcookie(
+    @setcookie(
         session_name(),
         '',
         time() - 42000,
