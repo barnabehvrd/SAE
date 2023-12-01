@@ -3,14 +3,13 @@
 <head>
     <title>L'étal en ligne</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
-    <link rel="stylesheet" type="text/css" href="css/#################.css"> <!-- name of the page -->
 </head>
 <body>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" src="img/logo.png">
+			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
                 <!-- some code -->
             </div>
@@ -23,13 +22,22 @@
                     <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
                 </div>
                 <form method="post">
-					<input type="submit" value=<?php if (!isset($_SESSION)){session_start(); echo '"Se Connecter"';}else {echo $_SESSION['Mail_Uti'];}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value="sign_in">
+                    <?php
+                    if(!isset($_SESSION)){
+                    session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
 				</form>
             </div>
             <div class="contenuPage">
 
-                <!-- some code -->
+               <!-- some code -->
 
             </div>
             <div class="basDePage">
@@ -44,5 +52,5 @@
             </div>
         </div>
     </div>
-    <?php require "popups/gestionPopups.php" ?>
+    <?php require "popups/gestion_popups.php";?>
 </body>
