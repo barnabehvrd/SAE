@@ -208,17 +208,20 @@
                                 
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
-                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                                $cood=latLongGps($url);
-                                $lat=$cood[0];
-                                $lo=$cood[1];
-                                echo $lat, $lo;
+                                $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                                $coordonneesUti=latLongGps($urlUti);
+                                $latitudeUti=$coordonneesUti[0];
+                                $longitudeUti=$coordonneesUti[1];
                                 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
+                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                        $coordonneesProd=latLongGps($urlProd);
+                                        $latitudeProd=$coordonneesProd[0];
+                                        $longitudeProd=$coordonneesProd[1];
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                        echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
+                                        echo "Prénom : " . $row["Prenom_Uti"],$latitudeProd,$longitudeProd . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                         echo '</a> ';                                        
