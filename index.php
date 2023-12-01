@@ -66,6 +66,7 @@
 			</select>
             <br>
             <br>- Par ville :
+            <br>
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
@@ -73,18 +74,20 @@
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
+            <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
             <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
             <script>
                 function AfficheRange2(newVal) {
                     var monCurseurKm = document.getElementById("monCurseurKm");
                     if (newVal >= 100) {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ Km";
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
                     } else {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + " Km";
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
                     }
                 }
             </script>
+            Km
             <br>
             <br>
             <br>
