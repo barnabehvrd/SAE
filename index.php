@@ -103,6 +103,9 @@
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
                                     //$stmt->bind_param("s", $categorie);
                                 }
+                                if ($rechercheVille!=""){
+                                    $requete=$requete.' AND Adr_Uti LIKE \'%,% %'.$rechercheVille.'%\'';
+                                }
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
