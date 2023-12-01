@@ -25,7 +25,7 @@
             $utilisateur=$_SESSION["Id_Uti"];
         }
         if (isset($_GET["rayon"])==false){
-            $rayon=10;
+            $rayon=100;
         }
         else{
             $rayon=$_GET["rayon"];
@@ -67,9 +67,6 @@
                     $latitude = $data[0]->lat;
                     $longitude = $data[0]->lon;
                     return [$latitude, $longitude];
-                } else {
-                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                    echo "Erreur lors de l'extraction des données de géocodage.";
                 }
                 return [0,0];
             }
@@ -109,20 +106,9 @@
                 $km = $r * $c;
             
                 return ($miles ? ($km * 0.621371192) : $km);
-            }
+        }
         
 
-
-        
-        $mabdd=dbConnect();           
-        $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
-        $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-        if (count($returnQueryAdrUti)>0){
-            $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-        }
-        else{
-            $Adr_Uti_En_Cours='PARIS';
-        }
     ?>
     <div class="container">
         <div class="left-column">
@@ -147,17 +133,22 @@
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
-            <br>- Autour de chez moi :
+            <br>- Autour de chez moi : 
             <br>
-            <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
-            <br>
+            <?php
+                $mabdd=dbConnect();           
+                $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+                $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+                echo '('.$Adr_Uti_En_Cours.')';
+            ?>
             <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
+            <span id="monCurseurKm">Rayon de <?php echo $rayon;?>+</span>
             <script>
                 function AfficheRange2(newVal) {
                     var monCurseurKm = document.getElementById("monCurseurKm");
-                    if (newVal >= 100) {
+                    if ((newVal >= 100)) {
                         monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
                     } else {
                         monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
@@ -236,9 +227,6 @@
                                  // "s" indique que la valeur est une chaîne de caractères
                                 $stmt->execute();
                                 $result = $stmt->get_result();
-
-                                
-                                
                                 
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
@@ -246,22 +234,30 @@
                                 $coordonneesUti=latLongGps($urlUti);
                                 $latitudeUti=$coordonneesUti[0];
                                 $longitudeUti=$coordonneesUti[1];
-                                
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                        $coordonneesProd=latLongGps($urlProd);
-                                        $latitudeProd=$coordonneesProd[0];
-                                        $longitudeProd=$coordonneesProd[1];
-                                        $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                        echo $distance.'<br>';
-                                        if (($rayon>=100)or ($distance<$rayon)){
+                                        if ($rayon>=100){
                                             echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                             echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                             echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                             echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                             echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                             echo '</a> ';  
+                                        }    
+                                        else{
+                                            $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                            $coordonneesProd=latLongGps($urlProd);
+                                            $latitudeProd=$coordonneesProd[0];
+                                            $longitudeProd=$coordonneesProd[1];
+                                            $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                            if ($distance<$rayon){
+                                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                                echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                                echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                                echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                                echo '</a> ';  
+                                            }    
                                         }
                                     }
                                 } else {
@@ -269,8 +265,6 @@
                                 }
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-
-                                        
                                     }
                                 }
                                 $stmt->close();
@@ -278,12 +272,9 @@
                             }
                         }
                         ?>
-                    
                 </div>
-					
-				
+
 			</div>
-			
 		</div>
     </div>
 </body>
