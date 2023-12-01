@@ -40,7 +40,7 @@ if (isset($_POST['popup'])){
     }
     if (isset($_POST['formClicked'])){
         unset($_POST['formClicked']);
-        $_SESSION['tempPopup'] = $_POST['popup'];
+        $_SESSION['tempPost'] = $_POST;
         header('refresh:0');
     }
 }
