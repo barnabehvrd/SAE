@@ -163,36 +163,42 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
 
+                                
+                                
+                                
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
                                 $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                                // Configurer les paramètres du proxy
 
-
-
-
-
-                                $url = 'http://nominatim.openstreetmap.org/search?q=1645,%20route%20des%20Lucioles,%20Biot&format=json';
-
+                                // Configuration de la requête cURL
                                 $ch = curl_init($url);
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
                                 
+                                // Ajout du User Agent
+                                $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
+                                curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
+                                
+                                // Ajout du Referrer
+                                $customReferrer = "https://la-projets.univ-lemans.fr/~inf2pj02/index.php"; // Remplacez par l'URL de votre application
+                                curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
+                                
+                                // Exécution de la requête
                                 $response = curl_exec($ch);
-                                var_dump($response);                             
+                                
                                 // Vérifier s'il y a eu une erreur cURL
                                 if (curl_errno($ch)) {
                                     echo 'Erreur cURL : ' . curl_error($ch);
                                 } else {
                                     // Analyser la réponse JSON
                                     $data = json_decode($response);
-
+                                
                                     // Vérifier si la réponse a été correctement analysée
                                     if (!empty($data) && is_array($data) && isset($data[0])) {
                                         // Récupérer la latitude et la longitude
                                         $latitude = $data[0]->lat;
                                         $longitude = $data[0]->lon;
-                                        
+                                
                                         // Afficher les résultats
                                         echo "Latitude : $latitude<br>";
                                         echo "Longitude : $longitude";
@@ -202,11 +208,9 @@
                                     }
                                 }
                                 
-
-
-                                
-                                // Fermer la ressource cURL
+                                // Fermeture de la session cURL
                                 curl_close($ch);
+
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
