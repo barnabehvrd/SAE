@@ -7,9 +7,6 @@ try {
     $pwd = $_POST['pwd'];
     $Mail_Uti = $_POST['mail'];
 
-    // Start session
-    session_start();
-
     // Handle password attempts
     if (!isset($_SESSION['test_pwd'])) {
         $_SESSION['test_pwd'] = 5;
@@ -31,8 +28,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        header('Location: form_sign_in_admin.php?mail=adresse mail invalide');
-        exit();
+        $_POST['erreur'] = 'adresse mail invalide';
     } else {
 
     // Extract user ID
@@ -63,14 +59,13 @@ try {
             }
         } else {
             $_SESSION['test_pwd']--;
-            header('Location: form_sign_in_admin.php?pwd=mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)');
+            $_POST['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
         }
     }else {
-        header('Location: form_sign_in_admin.php?pwd=vous avez épuisé toutes vos tentatives de connection');
+        $_POST['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
     }
     }
 } catch (Exception $e) {
     // Handle any exceptions
     echo "An error occurred: " . $e->getMessage();
-    exit();
 }
