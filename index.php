@@ -253,7 +253,7 @@
                                         $coordonneesProd=latLongGps($urlProd);
                                         $latitudeProd=$coordonneesProd[0];
                                         $longitudeProd=$coordonneesProd[1];
-                                        $distance=distance(47.45376854, 0.71693349, 47.44431175, 0.70717026);
+                                        $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $$longitudeProd);
                                         echo $distance.'<br>';
                                         /*echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
