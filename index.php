@@ -179,14 +179,14 @@
                                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
                                 
                                 $response = curl_exec($ch);
-                                
+                                var_dump($response);                             
                                 // Vérifier s'il y a eu une erreur cURL
                                 if (curl_errno($ch)) {
                                     echo 'Erreur cURL : ' . curl_error($ch);
                                 } else {
                                     // Analyser la réponse JSON
                                     $data = json_decode($response);
-                                    var_dump($data);
+
                                     // Vérifier si la réponse a été correctement analysée
                                     if (!empty($data) && is_array($data) && isset($data[0])) {
                                         // Récupérer la latitude et la longitude
