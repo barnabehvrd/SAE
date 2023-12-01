@@ -253,14 +253,16 @@
                                         $coordonneesProd=latLongGps($urlProd);
                                         $latitudeProd=$coordonneesProd[0];
                                         $longitudeProd=$coordonneesProd[1];
-                                        $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $$longitudeProd);
+                                        $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
                                         echo $distance.'<br>';
-                                        /*echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
-                                        echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                        echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                        echo '</a> ';         */                               
+                                        if (($rayon>=100)or ($distance<$rayon)){
+                                            echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                            echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                            echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                            echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                            echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                            echo '</a> ';  
+                                        }
                                     }
                                 } else {
                                     echo "Aucun résultat ne correspond à ces critères";
