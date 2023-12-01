@@ -14,13 +14,11 @@
     $serveur = "localhost";
     $motdepasse = "ahV4saerae";
     $basededonnees = "inf2pj_02";
-
+	
+	$filtreCategorie=0;
 	if (isset($_POST["typeCategorie"])==true){
         $filtreCategorie=$_POST["typeCategorie"];
       }
-    else{
-    	$filtreCategorie=0;
-    }
 
     // Connect to database
     return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
