@@ -192,19 +192,38 @@ var_dump($response);
                                 }*/
 
                                 // replace all the white space with "+" sign to match with google search pattern	
-	$Adr_Uti_En_Cours = str_replace(" ", "+", $Adr_Uti_En_Cours); 
+// Adresse à géocoder
+$Adr_Uti_En_Cours = str_replace(" ", "+", $Adr_Uti_En_Cours);
 
-	$url = "https://maps.google.com/maps/api/geocode/json?sensor=false&key=votrecle&address=$Adr_Uti_En_Cours";
-	$response = file_get_contents($url);
-	
-	// generate array object from the response from the web
-	$json = json_decode($response,TRUE);
-	// Latitude
-	$latitude = ($json['results'][0]['geometry']['location']['lat']) ? $json['results'][0]['geometry']['location']['lat'] : '--';
-	// Longitude
-	$longitude = ($json['results'][0]['geometry']['location']['lng']) ? $json['results'][0]['geometry']['location']['lng'] : '--';
 
-    echo $latitude, $longitude;
+// URL pour cURL
+$url_curl = "https://maps.googleapis.com/maps/api/geocode/json?$Adr_Uti_En_Cours=%s&sensor=false";
+
+// Initialiser cURL
+$ch = curl_init($url_curl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+// Exécuter la requête cURL
+$response_curl = curl_exec($ch);
+
+// Vérifier s'il y a eu une erreur cURL
+if (curl_errno($ch)) {
+    echo 'Erreur cURL : ' . curl_error($ch);
+} else {
+    // Analyser la réponse JSON
+    $json_curl = json_decode($response_curl, true);
+
+    // Latitude et Longitude avec cURL
+    $latitude_curl = ($json_curl['results'][0]['geometry']['location']['lat']) ? $json_curl['results'][0]['geometry']['location']['lat'] : '--';
+    $longitude_curl = ($json_curl['results'][0]['geometry']['location']['lng']) ? $json_curl['results'][0]['geometry']['location']['lng'] : '--';
+
+    // Affichage avec cURL
+    echo "Latitude (cURL): $latitude_curl<br>";
+    echo "Longitude (cURL): $longitude_curl<br>";
+}
+
+// Fermer la ressource cURL
+curl_close($ch);
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
