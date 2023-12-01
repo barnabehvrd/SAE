@@ -8,13 +8,19 @@
 </head>
 <body>
 	<?php
-	
 	session_start();
     function dbConnect(){
     $utilisateur = "inf2pj02";
     $serveur = "localhost";
     $motdepasse = "ahV4saerae";
     $basededonnees = "inf2pj_02";
+
+	if (isset($_POST["typeCategorie"])==true){
+        $filtreCategorie=$_POST["typeCategorie"];
+      }
+      else{
+        $filtreCategorie=0;
+      }
 
     // Connect to database
     return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
@@ -25,6 +31,41 @@
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
+			<center>
+                <p><strong>Filtrer par :</strong></p>
+                <br>
+                <br>
+            </center>
+            Statut 
+            <br>
+            
+            <form action="delivery.php" method="post">
+                <label>
+                    <input type="radio" name="typeCategorie" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> TOUT
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="1" <?php if($filtreCategorie==1) echo 'checked="true"';?>> EN COURS
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="2"<?php if($filtreCategorie==2) echo 'checked="true"';?>> PRÊTE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="4" <?php if($filtreCategorie==4) echo 'checked="true"';?>> LIVRÉE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="3" <?php if($filtreCategorie==3) echo 'checked="true"';?>> ANNULÉE
+                </label>
+
+                <br>
+                <br>
+                <center>
+                    <input type="submit" value="Filtrer">
+                </center>
+            </form>
         </div>
         <div class="right-column">
 		<div class="fixed-banner">
@@ -62,7 +103,6 @@
             </div>
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
-            <h1>Partie droite (1/5)</h1>
 			<?php
                 $queryGetCommande = $bdd->query(('SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur.';'));
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
