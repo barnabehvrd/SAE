@@ -73,12 +73,46 @@
                 }
                 return [0,0];
             }
-            
             // Fermeture de la session cURL
             curl_close($ch);
-
-
           }
+
+
+        /*---------------------------------------------------------------*/
+        /*
+            Titre : Calcul la distance entre 2 points en km                                                                       
+                                                                                                                                
+            URL   : https://phpsources.net/code_s.php?id=1091
+            Auteur           : sheppy1                                                                                            
+            Website auteur   : https://lejournalabrasif.fr/qwanturank-concours-seo-qwant/                                         
+            Date édition     : 05 Aout 2019                                                                                       
+            Date mise à jour : 16 Aout 2019                                                                                      
+            Rapport de la maj:                                                                                                    
+            - fonctionnement du code vérifié                                                                                    
+        */
+        /*---------------------------------------------------------------*/
+        
+            function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
+            {
+                $pi80 = M_PI / 180;
+                $lat1 *= $pi80;
+                $lng1 *= $pi80;
+                $lat2 *= $pi80;
+                $lng2 *= $pi80;
+        
+                $r = 6372.797; // rayon moyen de la Terre en km
+                $dlat = $lat2 - $lat1;
+                $dlng = $lng2 - $lng1;
+                $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin(
+        $dlng / 2) * sin($dlng / 2);
+                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                $km = $r * $c;
+            
+                return ($miles ? ($km * 0.621371192) : $km);
+            }
+        
+
+
         
         $mabdd=dbConnect();           
         $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
@@ -219,12 +253,14 @@
                                         $coordonneesProd=latLongGps($urlProd);
                                         $latitudeProd=$coordonneesProd[0];
                                         $longitudeProd=$coordonneesProd[1];
-                                        echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                        $distance=distance(47.45376854, 0.71693349, 47.44431175, 0.70717026);
+                                        echo $distance.'<br>';
+                                        /*echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                        echo "Prénom : " . $row["Prenom_Uti"],$latitudeProd,$longitudeProd . "<br>";
+                                        echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                        echo '</a> ';                                        
+                                        echo '</a> ';         */                               
                                     }
                                 } else {
                                     echo "Aucun résultat ne correspond à ces critères";
