@@ -15,14 +15,14 @@
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
-                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." name="pwd" required> 
+                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." name="pwd" required>
                 </div>
                 <div>
                     <?php
-                    if (isset($_SESSION['erreur'])) {
-                        $erreur = $_SESSION['erreur'];
+                    if (isset($_POST['erreur'])) {
+                        $erreur = $_POST['erreur'];
                         echo '<p class="erreur">'.$erreur.'</p>';
-                        unset($_SESSION['erreur']);
+                        unset($_POST['erreur']);
                     }
                     ?>
                 </div>

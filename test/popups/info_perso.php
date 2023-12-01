@@ -47,6 +47,7 @@
             require 'traitements/update_user_info.php';
         }
         if(isset($_POST['deconnexion'])){
+            $_POST['formClicked'] = 'deconnexion';
             require 'traitements/log_out.php';
             $_POST['formClicked'] = 'deconnexion';
             unset($_POST['deconnexion']);

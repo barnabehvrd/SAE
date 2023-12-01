@@ -26,9 +26,9 @@
                     if(!isset($_SESSION)){
                     session_start();
                     }
-                    if(isset($_SESSION, $_SESSION['tempPopup'])){
-                        $_POST['popup'] = $_SESSION['tempPopup'];
-                        unset($_SESSION['tempPopup']);
+                    if(isset($_SESSION, $_SESSION["tempPost"])){
+                        $_POST = $_SESSION["tempPost"];
+                        unset($_SESSION["tempPost"]);
                     }
                     ?>
 					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
