@@ -54,13 +54,6 @@
         </div>
     </div>
     <?php require "popups/gestion_popups.php";
-    if (isset($_POST['formClicked'])){
-        unset($_POST['formClicked']);
-        $_SESSION['tempPopup'] = $_POST['popup'];?>
-        <script>
-            location.reload();
-        </script>
-    <?php }
     var_dump($_SESSION);
     var_dump($_POST);?>
 </body>

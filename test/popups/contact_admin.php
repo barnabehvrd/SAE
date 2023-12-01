@@ -19,8 +19,9 @@
         </form>
         <?php
         if (isset($_POST['formClicked'])){
-            require 'traitements/bug_report.php';
             unset($_POST['formClicked']);
+            require 'traitements/bug_report.php';
+            $_SESSION['actualiser'] = true;
         }
         ?>
     </div>
