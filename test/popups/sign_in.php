@@ -20,10 +20,10 @@
                 </div>
                 <div>
                     <?php
-                    if (isset($_POST['erreur'])) {
-                        $erreur = $_POST['erreur'];
+                    if (isset($_SESSION['erreur'])) {
+                        $erreur = $_SESSION['erreur'];
                         echo '<p class="erreur">'.$erreur.'</p>';
-                        unset($_POST['erreur']);
+                        unset($_SESSION['erreur']);
                     }
                     ?>
                 </div>
