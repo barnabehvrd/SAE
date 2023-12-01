@@ -18,6 +18,25 @@
         if (isset($_GET["categorie"])==false){
             $_GET["categorie"]="Tout";
         }
+        if (isset($_SESSION["Id_Uti"])==false){
+            $utilisateur=-1;
+        }
+
+        // récupération adresse du client
+        function dbConnect(){
+            $utilisateur = "inf2pj02";
+            $serveur = "localhost";
+            $motdepasse = "ahV4saerae";
+            $basededonnees = "inf2pj_02";
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+          }
+        $mabdd=dbConnect();           
+        $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+        $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+        if (count($returnQueryAdrUti)>0){
+            $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+        }
     ?>
     <div class="container">
         <div class="left-column">
@@ -38,6 +57,10 @@
             <br>
             <br>- Par ville :
             <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <br>
+            <br>
+            <br>- Autour de chez moi :
+            <input type="text" name="autourDeChezMoi" value="<?php echo $autourDeChezMoi?>" placeholder="<?php echo $Adr_Uti_En_Cours;?>">
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
