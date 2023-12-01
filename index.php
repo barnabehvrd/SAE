@@ -24,6 +24,9 @@
         else{
             $utilisateur=$_SESSION["Id_Uti"];
         }
+        if (isset($_GET["rayon"])==false){
+            $rayon=10;
+        }
 
         // récupération adresse du client
         function dbConnect(){
@@ -68,11 +71,17 @@
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
-            <input name="rayon" type="range" value="10" min="0" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="valBox">Rayon de 10</span>
+            <input name="rayon" type="range" value="<?php echo $rayon;?>" min="0" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+            <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
             <script>
                  function AfficheRange2(newVal){
-                    document.getElementById("valBox").innerHTML="Rayon de "+newVal;
+                    if (document.getElementById("monCurseurKm").value>=100){
+                        document.getElementById("monCurseurKm").innerHTML="Rayon de "+newVal+"+";
+                    }
+                    else{
+                        document.getElementById("monCurseurKm").innerHTML="Rayon de "+newVal;
+
+                    } 
                 }
             </script>
             <label> Km</label>
@@ -110,7 +119,6 @@
 					echo "connection";
 					}
 					?>
-					
 					</a>    
                 </div>
             </div>
@@ -160,7 +168,7 @@
                                         echo '</a> ';                                        
                                     }
                                 } else {
-                                    echo "Aucun résultat trouvé pour la catégorie : $categorie";
+                                    echo "Aucun résultat ne correspond à ces critères";
                                 }
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
