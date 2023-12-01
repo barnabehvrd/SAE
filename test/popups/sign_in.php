@@ -1,3 +1,16 @@
+<?php
+if (isset($_POST['formClicked'])){
+    if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
+        $_SESSION['debug'][0]=0;
+        require 'traitements/traitement_formulaire_sign_in_admin.php';
+    }else{
+        $_SESSION['debug'][0]=1;
+        require 'traitements/traitement_formulaire_sign_in.php';
+    }
+    unset($_POST['formClicked']);
+    $_SESSION['actualiser'] = true;
+}
+?>
 <div class="popup">
     <div class="contenuPopup">
         <form method="post">
@@ -29,19 +42,6 @@
                 </div>
                 <input class="boutonPopup" name="formClicked" type="submit" value="se connecter">
             </form>
-            <?php
-            if (isset($_POST['formClicked'])){
-                if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
-                    $_SESSION['debug'][0]=0;
-                    require 'traitements/traitement_formulaire_sign_in_admin.php';
-                }else{
-                    $_SESSION['debug'][0]=1;
-                    require 'traitements/traitement_formulaire_sign_in.php';
-                }
-                unset($_POST['formClicked']);
-                $_SESSION['actualiser'] = true;
-            }
-            ?>
             <div>
                 <form method="post">
 					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>

@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['formClicked'])){
+    unset($_POST['formClicked']);
+    require 'traitements/bug_report.php';
+    $_SESSION['actualiser'] = true;
+}
+?>
 <div class="popup">
     <div class="contenuPopup">
         <form method="post">
@@ -17,13 +24,6 @@
             <textarea class="grosseZoneDeTextePopup" name="message" pattern="{1,4096}" title="respecter le format ! "required></textarea>
             <input class="boutonPopup" type="submit" value="Envoyer" name="formClicked">
         </form>
-        <?php
-        if (isset($_POST['formClicked'])){
-            unset($_POST['formClicked']);
-            require 'traitements/bug_report.php';
-            $_SESSION['actualiser'] = true;
-        }
-        ?>
     </div>
 </div>
 

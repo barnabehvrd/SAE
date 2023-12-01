@@ -1,4 +1,16 @@
-<div class="popup">
+<?php
+        if (isset($_POST['formClicked'])){
+            unset($_POST['formClicked']);
+            require 'traitements/update_user_info.php';
+            $_SESSION['actualiser'] = true;
+        }
+        if(isset($_POST['deconnexion'])){
+            unset($_POST['deconnexion']);
+            require 'traitements/log_out.php';
+            $_SESSION['actualiser'] = true;
+        }
+        ?>
+    <div class="popup">
     <div class="contenuPopup">
         <div style="display:flex;justify-content:space-between;">
             <form method="post">
@@ -58,24 +70,11 @@
                     <input class="boutonPopup" type="submit" name="formClicked" value="Modifier">
                 </form>
                 <?php
-                //var_dump($row["Adr_Uti"]);
             }
         } else {
             ?><p>Aucun résultat trouvé pour votre compte, veuillez contacter le support.</p><?php
         }
         ?>
         </div>
-        <?php
-        if (isset($_POST['formClicked'])){
-            unset($_POST['formClicked']);
-            require 'traitements/update_user_info.php';
-            $_SESSION['actualiser'] = true;
-        }
-        if(isset($_POST['deconnexion'])){
-            unset($_POST['deconnexion']);
-            require 'traitements/log_out.php';
-            $_SESSION['actualiser'] = true;
-        }
-        ?>
     </div>
 </div>
