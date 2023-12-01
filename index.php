@@ -70,7 +70,6 @@
             <br>
             <input type="range" name="kmAutourDeChezMoi" min="0" max="100" value="10" step="1" />
             <label> Km</label>
-            </div>
             <br>
             <br>
             <br>
