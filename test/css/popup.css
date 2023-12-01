@@ -85,6 +85,11 @@
     font-size: 16px;
 }
 
+.zoneDeTextePopupFixSize{
+    width: 150px;
+}
+
+
 .grosseZoneDeTextePopup{
     border-radius: 5px;
     border: 1px solid #808080;
