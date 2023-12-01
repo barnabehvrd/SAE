@@ -80,13 +80,12 @@
                 function AfficheRange2(newVal) {
                     var monCurseurKm = document.getElementById("monCurseurKm");
                     if (newVal >= 100) {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ km";
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ Km";
                     } else {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + " km";
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + " Km";
                     }
                 }
             </script>
-            <label> Km</label>
             <br>
             <br>
             <br>
@@ -153,7 +152,7 @@
                                     //$stmt->bind_param("s", $categorie);
                                 }
                                 if ($rechercheVille!=""){
-                                    $requete=$requete.' AND Adr_Uti LIKE \'%,% %'.$rechercheVille.'%\'';
+                                    $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
                                 }
                                 $stmt = $connexion->prepare($requete);
                                  // "s" indique que la valeur est une chaîne de caractères
