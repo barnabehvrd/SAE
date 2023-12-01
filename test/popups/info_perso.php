@@ -23,14 +23,25 @@
                         
                         <!--  Set default values to current user information -->
                         <label for="new_nom">Nom :</label>
-                        <input type="text" name="new_nom" value=<?php echo ($row["Nom_Uti"]) ?>>
+                        <input type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" value=<?php echo ($row["Nom_Uti"]) ?>>
 
                         <label for="new_prenom">Prénom :</label>
-                        <input type="text" name="new_prenom" value=<?php echo ($row["Prenom_Uti"]) ?>>
-                        
-                        <label for="new_adr">Adresse postale :</label>
-                        <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>">
-                        
+                        <input type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" value=<?php echo ($row["Prenom_Uti"]) ?>>
+ 
+                            <label for="new_adr">Adresse postale :</label>
+                            <input type="text" name="new_adr" value="<?php echo ($row["Adr_Uti"])?>">
+                        <div>
+                            <label for="rue">Rue :</label>
+                            <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+                        </div>
+                        <div>
+                             <label for="code">Code postale :</label>
+                             <input class="zoneDeTextePopup" type="text" name="code" pattern="^\d{5}$" title="Le code postal doit contenir exactement 5 chiffres." required>
+                        </div>
+                        <div>
+                            <label for="ville">Ville :</label>
+                            <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
+                        </div>
                         <!-- Add the submit button -->
                         <input type="submit" name="formClicked" value="Modifier">
                     </form>
