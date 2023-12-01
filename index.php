@@ -172,7 +172,7 @@
 
 
 
-                                $url = 'http://nominatim.openstreetmap.org/search?q=Nice,%20France&format=json';
+                                $url = 'http://nominatim.openstreetmap.org/search?q=1645,%20route%20des%20Lucioles,%20Biot&format=json';
 
                                 $ch = curl_init($url);
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -204,7 +204,7 @@
                                 
 
 
-
+                                
                                 // Fermer la ressource cURL
                                 curl_close($ch);
 
