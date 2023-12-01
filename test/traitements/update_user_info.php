@@ -15,6 +15,5 @@ if (isset($_POST['new_nom'], $_POST['new_prenom'], $_POST['rue'], $_POST['code']
 
     echo ($update);
     $bdd->exec($update);
-    header('Location: user_informations.php');
 }
 ?>

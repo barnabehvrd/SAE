@@ -19,19 +19,19 @@ if (isset($_POST['popup'])){
             require $_POST['popup'].".php";
             break;
 
-        case 'sign_in':
+        case 'sign_in_client':
             if(isset($_SESSION['Mail_Uti'])){
                 $_POST['popup'] = 'info_perso';
+                require $_POST['popup'].".php";
             }else{
             $_SESSION['tempIsAdmin'] = false;
+            require "sign_in.php";
             }
-            require $_POST['popup'].".php";
             break;
 
         case 'sign_in_admin':
             $_SESSION['tempIsAdmin'] = true;
-            $_POST['popup'] = 'sign_in';
-            require $_POST['popup'].".php";
+            require "sign_in.php";
             break;
         
         default:
@@ -40,9 +40,10 @@ if (isset($_POST['popup'])){
     }
     if (isset($_POST['formClicked'])){
         unset($_POST['formClicked']);
-        $_SESSION['tempPost'] = $_POST;
-        @header('refresh:0');
-       
-    }
+        $_SESSION['tempPopup'] = $_POST['popup'];?>
+        <script>
+            location.reload();
+        </script>
+    <?php }
 }
 ?>

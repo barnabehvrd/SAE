@@ -8,7 +8,8 @@
                                             {echo '(Admin)';}?></p>
         <div>
             <form class="formPopup" method="post">
-                <input type="hidden" value='sign_in' name="popup">
+                <input type="hidden" name="popup" value=
+                <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){echo '"sign_in_admin"';}else{echo '"sign_in_client"';}?>>
                 <div>
                     <label for="mail">Mail :</label>
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
@@ -30,24 +31,22 @@
             </form>
             <?php
             if (isset($_POST['formClicked'])){
+                $_SESSION['debug'][1]=$_SESSION['tempIsAdmin'];
                 if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
-                    echo(1);
-                    sleep(10);
+                    $_SESSION['debug'][0]=0;
                     require 'traitements/traitement_formulaire_sign_in_admin.php';
                 }else{
-                    
-                    echo(2);
-                    sleep(10);
+                    $_SESSION['debug'][0]=1;
                     require 'traitements/traitement_formulaire_sign_in.php';
                 }
-                unset($_SESSION['tempIsAdmin']);
+                //unset($_SESSION['tempIsAdmin']);
             }
             ?>
             <div>
                 <form method="post">
 					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>
                         <input type="submit" value="Se connecter en tant qu'utilisateur lambda" class="lienPopup">
-                        <input type="hidden" name="popup" value="sign_in">
+                        <input type="hidden" name="popup" value="sign_in_client">
                     <?php }else{ ?> 
                         <input type="submit" value="Se connecter en tant qu'administrateur" class="lienPopup">
                         <input type="hidden" name="popup" value="sign_in_admin">
