@@ -21,6 +21,9 @@
         if (isset($_SESSION["Id_Uti"])==false){
             $utilisateur=-1;
         }
+        else{
+            $utilisateur=$_SESSION["Id_Uti"];
+        }
 
         // récupération adresse du client
         function dbConnect(){
