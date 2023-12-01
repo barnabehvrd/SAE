@@ -27,7 +27,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        $_POST['erreur'] = 'adresse mail invalide';
+        $_SESSION['erreur'] = 'adresse mail invalide';
     } else {
 
     // Extract user ID
@@ -58,10 +58,10 @@ try {
             }
         } else {
             $_SESSION['test_pwd']--;
-            $_POST['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
+            $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
         }
     }else {
-        $_POST['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
+        $_SESSION['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
     }
     }
 } catch (Exception $e) {

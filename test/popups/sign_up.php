@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['formClicked'])){
+    require 'traitements/traitement_formulaire_sign_up.php';
+    unset($_POST['formClicked']);
+    $_SESSION['actualiser'] = true;
+}
+?>
 <div class="popup">
 <div class="contenuPopup">
     <form method="post">
@@ -9,7 +16,6 @@
         <div>
             <label for="nom">Nom :</label>
             <input class="zoneDeTextePopup" type="text" name="nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" title="la ville doit faire entre 0 et 100 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô" required>
-            <input type="hidden" value='0' name="formClicked">
             <input type="hidden" value='sign_up' name="popup">
         </div>
         <div>
@@ -44,23 +50,16 @@
         <?php } ?>
         <div>
             <?php
-            if (isset($_POST['erreur'])) {
+            if (isset($_SESSION['erreur'])) {
                 
-                $erreur = $_POST['erreur'];
+                $erreur = $_SESSION['erreur'];
                 echo '<p class="erreur">'.$erreur.'</p>';
-                unset($_POST['erreur']);
+                unset($_SESSION['erreur']);
             }
             ?>
         </div>
-        <input class="boutonPopup" type="submit" value="s'incrire">
+        <input class="boutonPopup" name="formClicked" type="submit" value="s'incrire">
     </form>
-    <?php
-        if (isset($_POST['formClicked'])){
-            require 'traitements/traitement_formulaire_sign_up.php';
-            unset($_POST['formClicked']);
-            $_SESSION['actualiser'] = true;
-        }
-        ?>
     <div class="alignementCentreCoteACote">
         <p class="text">J'ai déjà un compte</p>
         <form method="post">

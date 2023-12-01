@@ -28,7 +28,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        $_POST['erreur'] = 'adresse mail invalide';
+        $_SESSION['erreur'] = 'adresse mail invalide';
     } else {
 
     // Extract user ID
@@ -41,13 +41,11 @@ try {
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
-        if ($test[0][1] == 1 ) {
+        if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
             $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
-            $_SESSION['Mail_Uti'] = $Mail_Uti;
-            $_SESSION['Id_Uti'] = $Id_Uti;
             if(($returnQueryIdAdmin)==null){
                 echo ("
                 <title>Accès refusé - Erreur 403</title>
@@ -55,14 +53,16 @@ try {
                 <p>Désolé, vous n'avez pas l'autorisation d'accéder à cette page.</p>
                 " );
             }else {
+                $_SESSION['Mail_Uti'] = $Mail_Uti;
+                $_SESSION['Id_Uti'] = $Id_Uti;
                 header('Location: panel_admin.php');
             }
         } else {
             $_SESSION['test_pwd']--;
-            $_POST['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
+            $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
         }
     }else {
-        $_POST['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
+        $_SESSION['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
     }
     }
 } catch (Exception $e) {

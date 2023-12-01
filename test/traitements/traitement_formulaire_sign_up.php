@@ -75,7 +75,7 @@ if ($nb == 0) {
                 $_POST['popup'] = '';
             }
 } else {
-    $_POST['erreur'] = 'adresse mail déjà utilisé'; 
+    $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
 }
 
 
