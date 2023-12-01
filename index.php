@@ -47,6 +47,7 @@
 			<center><strong><p>Rechercher par</p></strong></center>
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
+            <br>
 			<select name="categorie" id="categories">
                 <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
 				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
@@ -59,11 +60,18 @@
 			</select>
             <br>
             <br>- Par ville :
+            <br>
             <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
             <br>- Autour de chez moi :
+            <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
+            <br>
+            <input type="range" name="kmAutourDeChezMoi" min="0" max="100" value="10" step="1" />
+            <label> Km</label>
+            </div>
+            <br>
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
