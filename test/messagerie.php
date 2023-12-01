@@ -13,7 +13,6 @@
     <div class="container">
         <div class="left-column">
 			<img class="logo" src="img/logo.png">
-			
             <p>Contacts récents :</p>
 			<?php
 			require 'fonction thomas/Messagerie/afficheContacts.php';
