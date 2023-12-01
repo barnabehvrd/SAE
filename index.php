@@ -81,10 +81,7 @@
                     if (document.getElementById("monCurseurKm").value>=100){
                         document.getElementById("monCurseurKm").innerHTML="Rayon de "+newVal+"+";
                     }
-                    else{
-                        document.getElementById("monCurseurKm").innerHTML="Rayon de "+newVal;
-
-                    } 
+=
                 }
             </script>
             <label> Km</label>
