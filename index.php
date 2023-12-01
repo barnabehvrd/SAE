@@ -165,43 +165,12 @@
 
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
-                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours). '&format=json&limit=1';
                                 // Configurer les paramètres du proxy
-/*
-$context = array();
-$proxy = getenv("http_proxy");
-echo $proxy;
-if ($proxy !== null) {
-
-    $context['http'] = array(
-        'proxy' => str_replace("http", "tcp", $proxy),
-        'request_fulluri' => true
-    );
-}
-$cxContext = stream_context_create($context);
-
-//file_get_contents($file, false, $cxContext);
 
 
-*/
 
 
-				/*$opts = array ('http'=>array('proxy '=> 'tcp://proxy.univ-lemans.fr:3128', 'request_fulluri'=>true));
-				$context=stream_context_create($opts);*/
-				/*$proxy = 'tcp://proxy.univ-lemans.fr:3128'; // Remplacez avec votre adresse et port de proxy
-                                $proxy_context = stream_context_create([
-                                    'http' => [
-                                        'proxy' => $proxy,
-                                        'request_fulluri' => true,
-                                    ],
-                                    'https' => [
-                                        'proxy' => $proxy,
-                                        'request_fulluri' => true,
-                                    ],
-                                ]);*/
-                                // Utiliser le flux contextuel avec file_get_contents
-                                
-//$response = file_get_contents("https://www.google.fr", false, $context);
 
 $ch=curl_init($url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
