@@ -144,7 +144,7 @@
             ?>
             <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="monCurseurKm">Rayon de <?php echo $rayon;?>+</span>
+            <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
             <script>
                 function AfficheRange2(newVal) {
                     var monCurseurKm = document.getElementById("monCurseurKm");
