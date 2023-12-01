@@ -23,5 +23,3 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   $bdd->query('CALL broadcast_admin(0 , \''. $_POST["mail"]. $message . '\');');
 }
 
-// Redirection vers la page d'accueil
-$_POST['popup'] = '';
