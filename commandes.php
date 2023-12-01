@@ -9,22 +9,24 @@
 <body>
 	<?php
 	session_start();
+
     function dbConnect(){
-    $utilisateur = "inf2pj02";
-    $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
-	
-	$filtreCategorie=0;
-	if (isset($_POST["typeCategorie"])==true){
-        $filtreCategorie=$_POST["typeCategorie"];
+		$utilisateur = "inf2pj02";
+		$serveur = "localhost";
+		$motdepasse = "ahV4saerae";
+		$basededonnees = "inf2pj_02";
+		// Connect to database
+		return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
 
-    // Connect to database
-    return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-      }
 	  $bdd=dbConnect();
 	  $utilisateur=$_SESSION["Id_Uti"];
+	  
+	  $filtreCategorie=0;
+	  if (isset($_POST["typeCategorie"])==true){
+		  $filtreCategorie=$_POST["typeCategorie"];
+	  }
+  
     ?>
     <div class="container">
         <div class="left-column">
@@ -37,7 +39,7 @@
             Statut 
             <br>
             
-            <form action="delivery.php" method="post">
+            <form action="commandes.php" method="post">
                 <label>
                     <input type="radio" name="typeCategorie" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> TOUT
                 </label>
