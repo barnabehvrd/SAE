@@ -112,6 +112,10 @@
                 $iterateurCommande=0;
 				if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
                     echo "Aucune commande pour le moment";
+					?>
+					<br>
+					<input type="button" onclick="window.location.href='index.php'" value="Découvrez nos producteurs">
+					<?php
                 }
                 elseif(count($returnQueryGetCommande)==0){
                     echo "Aucune commande ne correspond à ces critères";
