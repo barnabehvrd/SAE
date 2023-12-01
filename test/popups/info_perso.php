@@ -63,7 +63,6 @@
                         if (isset($_SESSION['erreur'])) {
                             $erreur = $_SESSION['erreur'];
                             echo '<p class="erreur">'.$erreur.'</p>';
-                            unset($_SESSION['erreur']);
                         }
                         ?>
                     </div>

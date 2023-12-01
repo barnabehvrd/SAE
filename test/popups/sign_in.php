@@ -36,7 +36,6 @@ if (isset($_POST['formClicked'])){
                     if (isset($_SESSION['erreur'])) {
                         $erreur = $_SESSION['erreur'];
                         echo '<p class="erreur">'.$erreur.'</p>';
-                        unset($_SESSION['erreur']);
                     }
                     ?>
                 </div>
@@ -57,7 +56,7 @@ if (isset($_POST['formClicked'])){
         <div>
             <form method="post">
 				<input type="submit" value="Mot de passe oublié ?" class="lienPopup">
-                <input type="hidden" name="popup" value="reset_mdp">
+                <input type="hidden" name="popup" value="mdp_oublie/mail">
 			</form>
         </div>
         <div class="alignementCentreCoteACote">
