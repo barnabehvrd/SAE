@@ -248,12 +248,11 @@
                                 $longitudeUti=$coordonneesUti[1];
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        /*$urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
                                         $coordonneesProd=latLongGps($urlProd);
                                         $latitudeProd=$coordonneesProd[0];
                                         $longitudeProd=$coordonneesProd[1];
                                         $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                        */
                                         $distance=0;
                                         if (($rayon>=100)or ($distance<$rayon)){
                                             echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
