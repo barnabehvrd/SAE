@@ -160,28 +160,6 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
 
-                                //calcul des coordonnées de l'uitilisateur
-                                // Adresse à géocoder
-                                $address = 'Votre adresse physique';
-                                // Construire l'URL de l'API Nominatim
-                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($address);
-                                // Effectuer la requête HTTP
-                                $response = file_get_contents($url);
-                                // Analyser la réponse JSON
-                                $data = json_decode($response);
-                                // Vérifier si la requête a réussi
-                                if (!empty($data) && is_array($data) && isset($data[0])) {
-                                    // Récupérer la latitude et la longitude
-                                    $latitudeEntree = $data[0]->lat;
-                                    $longitudeEntree = $data[0]->lon;
-
-                                    // Afficher les résultats
-                                    echo "Latitude: $latitudeEntree<br>";
-                                    echo "Longitude: $longitudeEntree";
-                                } else {
-                                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                                    echo "Adresse non trouvée ou erreur de géocodage.";
-                                } 
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
