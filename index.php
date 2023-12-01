@@ -27,6 +27,9 @@
         if (isset($_GET["rayon"])==false){
             $rayon=10;
         }
+        else{
+            $rayon=$_GET["rayon"];
+        }
 
         // récupération adresse du client
         function dbConnect(){
