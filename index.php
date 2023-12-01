@@ -112,21 +112,6 @@
         }
         
 
-        if (isset($_GET["autourDeChezMoi"])==false){
-            $mabdd=dbConnect();           
-            $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
-            $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-            if (count($returnQueryAdrUti)>0){
-                $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-            }
-            else{
-                $Adr_Uti_En_Cours='PARIS';
-            }
-        }
-        else{
-            $Adr_Uti_En_Cours=$_GET["autourDeChezMoi"];
-        }
-
     ?>
     <div class="container">
         <div class="left-column">
@@ -151,9 +136,14 @@
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
-            <br>- Autour de chez moi :
-            <br>
-            <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
+            <br>- Autour de chez moi : 
+            <?php
+                $mabdd=dbConnect();           
+                $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+                $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+                echo '('.$Adr_Uti_En_Cours.')';
+            ?>
             <br>
             <br>
             <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
