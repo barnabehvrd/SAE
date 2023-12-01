@@ -38,8 +38,8 @@ if (isset($_POST['popup'])){
             require $_POST['popup'].".php";
             break;
     }
-    if (isset($_POST['formClicked'])){
-        unset($_POST['formClicked']);
+    if (isset($_SESSION['actualiser']) and $_SESSION['actualiser']){
+        $_SESSION['actualiser'] = false;
         $_SESSION['tempPopup'] = $_POST['popup'];?>
         <script>
             location.reload();

@@ -31,7 +31,6 @@
             </form>
             <?php
             if (isset($_POST['formClicked'])){
-                $_SESSION['debug'][1]=$_SESSION['tempIsAdmin'];
                 if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
                     $_SESSION['debug'][0]=0;
                     require 'traitements/traitement_formulaire_sign_in_admin.php';
@@ -39,7 +38,8 @@
                     $_SESSION['debug'][0]=1;
                     require 'traitements/traitement_formulaire_sign_in.php';
                 }
-                //unset($_SESSION['tempIsAdmin']);
+                unset($_POST['formClicked']);
+                $_SESSION['actualiser'] = true;
             }
             ?>
             <div>

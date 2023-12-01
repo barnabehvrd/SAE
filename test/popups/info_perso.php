@@ -67,12 +67,14 @@
         </div>
         <?php
         if (isset($_POST['formClicked'])){
+            unset($_POST['formClicked']);
             require 'traitements/update_user_info.php';
+            $_SESSION['actualiser'] = true;
         }
         if(isset($_POST['deconnexion'])){
             unset($_POST['deconnexion']);
-            $_POST['formClicked'] = 'deconnexion';
             require 'traitements/log_out.php';
+            $_SESSION['actualiser'] = true;
         }
         ?>
     </div>
