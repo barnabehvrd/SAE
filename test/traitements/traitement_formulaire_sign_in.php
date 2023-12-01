@@ -56,6 +56,7 @@ try {
             }else {
                 $_SESSION["isProd"]=false;
             }
+            $_SESSION['erreur'] = '';
         } else {
             $_SESSION['test_pwd']--;
             $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';

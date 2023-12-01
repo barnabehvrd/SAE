@@ -32,7 +32,6 @@ $nb = $resultat2->fetch_assoc()['nb'];
 echo($nb);
 if ($nb == 0) {
     $insertion = "INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES ('$iduti', '$prenom', '$nom', '$adresse', '$pwd', '$Mail_Uti');";
-    $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
 
     $connexion1 = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 
@@ -67,11 +66,13 @@ if ($nb == 0) {
             }else {
                 $_SESSION["isProd"]=false;
             }
+            $_SESSION['Mail_Uti'] = $Mail_Uti;
+            $_SESSION['Id_Uti'] = $iduti;
+            $_SESSION['erreur'] = '';
             if($_SESSION["isProd"]==true){
                 $_POST['popup'] = 'addProfilPicture';
             }else {
-                $_SESSION['Mail_Uti'] = $Mail_Uti;
-                $_SESSION['Id_Uti'] = $iduti;
+                
                 $_POST['popup'] = '';
             }
 } else {

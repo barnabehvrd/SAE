@@ -54,7 +54,6 @@ if (isset($_POST['formClicked'])){
                 
                 $erreur = $_SESSION['erreur'];
                 echo '<p class="erreur">'.$erreur.'</p>';
-                unset($_SESSION['erreur']);
             }
             ?>
         </div>
