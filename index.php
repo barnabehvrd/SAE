@@ -111,8 +111,7 @@
                 return ($miles ? ($km * 0.621371192) : $km);
         }
         
-
-
+        
         if (isset($_GET["autourDeChezMoi"])==false){
             $mabdd=dbConnect();           
             $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
@@ -124,10 +123,6 @@
                 $Adr_Uti_En_Cours='PARIS';
             }
         }
-        else{
-            $Adr_Uti_En_Cours='PARIS';
-        }
-        
 
     ?>
     <div class="container">
