@@ -26,6 +26,10 @@
                     if(!isset($_SESSION)){
                     session_start();
                     }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
                     ?>
 					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
@@ -49,5 +53,9 @@
             </div>
         </div>
     </div>
-    <?php require "popups/gestion_popups.php" ?>
+    <?php require "popups/gestion_popups.php";
+    if (isset($_POST['formClicked'])){
+        $_SESSION['tempPopup'] = $_POST['popup'];
+        header('refresh:0');
+    }?>
 </body>
