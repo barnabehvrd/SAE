@@ -66,8 +66,7 @@
 			</select>
             <br>
             <br>- Par ville :
-            <br>
-            <input type="text" name="rechercheVille" value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
             <br>
             <br>- Autour de chez moi :
@@ -144,7 +143,6 @@
                                 if ($connexion->connect_error) {
                                     die("Erreur de connexion : " . $connexion->connect_error);
                                 }
-
                                 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                                 if ($_GET["categorie"]=="Tout"){
                                     $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod LIKE \'%\'';
