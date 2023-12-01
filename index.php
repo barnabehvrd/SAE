@@ -162,7 +162,7 @@
 
                                 //localisation du client
                                 // Construire l'URL de l'API Nominatim
-                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                                /*$url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                                 // Effectuer la requête HTTP
                                 $response = file_get_contents($url);
                                 // Analyser la réponse JSON
@@ -179,7 +179,7 @@
                                     // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
                                     echo "Erreur lors de l'extraction des données de géocodage.";
                                 }
-
+*/
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
