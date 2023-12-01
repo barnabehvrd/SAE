@@ -132,32 +132,35 @@
             <br>
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
-            <br>
-            <br>- Autour de chez moi : 
-            <br>
             <?php
                 $mabdd=dbConnect();           
                 $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-                $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-                echo '('.$Adr_Uti_En_Cours.')';
+                if (count($returnQueryAdrUti)>0){
+                    $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
             ?>
-            <br>
-            <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-            <script>
-                function AfficheRange2(newVal) {
-                    var monCurseurKm = document.getElementById("monCurseurKm");
-                    if ((newVal >= 100)) {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
-                    } else {
-                        monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                <br>
+                <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
+                <br>
+                <br>
+                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
+                <script>
+                    function AfficheRange2(newVal) {
+                        var monCurseurKm = document.getElementById("monCurseurKm");
+                        if ((newVal >= 100)) {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                        } else {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                        }
                     }
+                </script>
+                Km
+                <br>
+                <br>
+            <?php
                 }
-            </script>
-            Km
-            <br>
-            <br>
+            ?>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
 			</form>

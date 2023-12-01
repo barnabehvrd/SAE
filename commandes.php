@@ -114,7 +114,7 @@
                     echo "Aucune commande pour le moment";
 					?>
 					<br>
-					<input onclick="window.location.href='index.php'" value="Découvrez nos producteurs">
+					<input type="button" onclick="window.location.href='index.php'" value="Découvrez nos producteurs">
 					<?php
                 }
                 elseif(count($returnQueryGetCommande)==0){
