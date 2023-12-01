@@ -633,7 +633,7 @@ VALUES
     ('7', 'Linda', 'Johnson', 'lindajohnson7@gmail.com', '9 rue Colbert, 13001 MARSEILLE ', 'lindapassword'),
     ('8', 'Robert', 'Martinez', 'robertmartinez8@gmail.com', '21 Boulevard Françoise Duparc, 13004 MARSEILLE ', 'robertpass123'),
     ('9', 'Lisa', 'Taylor', 'lisataylor9@gmail.com', '35 Rue Berger, 75001 PARIS ', 'lisapassword'),
-    ('10', 'William', 'Anderson', 'williamanderson10@gmail.com', '10 Avenue Amiral Courbet, 30000 NIMES', 'williampass'),
+    ('10', 'William', 'Anderson', 'williamanderson10@gmail.com', '10 Boulevard Amiral Courbet, 30000 NIMES', 'williampass'),
     ('11', 'Sophia', 'Garcia', 'sophiagarcia1@gmail.com', 'Avenue Jean Jaurès, 77550 MOISSY CRAMAYEL ', 'sophiapassword'),
     ('12', 'Ethan', 'Brown', 'ethanbrown2@gmail.com', '54 Rue des Docteurs Calmette et Guérin, 53000 LAVAL', 'ethanpass123'),
     ('13', 'Olivia', 'Davis', 'oliviadavis3@gmail.com', '111 Rue de Buzenval, 92380 GARCHES', 'oliviapass567'),
