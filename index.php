@@ -68,7 +68,15 @@
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
-            <input type="range" name="kmAutourDeChezMoi" min="0" max="100" value="10" step="1" />
+            <input type="range" value="10" min="0" max="100" step="1"
+            onchange="AfficheRange2(this.value)"
+            onkeyup="AfficheRange2(this.value)">
+            <span id="valBox">Valeur=4</span>
+            <script>
+                 function AfficheRange2(newVal){
+                    document.getElementById("valBox").innerHTML="Valeur="+newVal;
+                }
+            </script>
             <label> Km</label>
             <br>
             <br>
