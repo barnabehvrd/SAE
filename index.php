@@ -40,6 +40,46 @@
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
           }
+
+          function latLongGps($url){
+            // Configuration de la requête cURL
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+            // Ajout du User Agent
+            $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
+            curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
+            // Ajout du Referrer
+            $customReferrer = "https://la-projets.univ-lemans.fr/~inf2pj02/index.php"; // Remplacez par l'URL de votre application
+            curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
+            // Exécution de la requête
+            $response = curl_exec($ch);
+            // Vérifier s'il y a eu une erreur cURL
+            if (curl_errno($ch)) {
+                echo 'Erreur cURL : ' . curl_error($ch);
+            } else {
+                // Analyser la réponse JSON
+                $data = json_decode($response);
+            
+                // Vérifier si la réponse a été correctement analysée
+                if (!empty($data) && is_array($data) && isset($data[0])) {
+                    // Récupérer la latitude et la longitude
+                    $latitude = $data[0]->lat;
+                    $longitude = $data[0]->lon;
+                    return [$latitude, $longitude];
+                } else {
+                    // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
+                    echo "Erreur lors de l'extraction des données de géocodage.";
+                }
+                return [0,0];
+            }
+            
+            // Fermeture de la session cURL
+            curl_close($ch);
+
+
+          }
+        
         $mabdd=dbConnect();           
         $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
         $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
@@ -169,49 +209,11 @@
                                 // récupère les coordonnées de l'utiliasteur
                                 // URL vers l'API Nominatim
                                 $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-
-                                // Configuration de la requête cURL
-                                $ch = curl_init($url);
-                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+                                $cood=latLongGps($url);
+                                $lat=$cood[0];
+                                $lo=$cood[1];
+                                echo $lat, $lo;
                                 
-                                // Ajout du User Agent
-                                $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
-                                curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
-                                
-                                // Ajout du Referrer
-                                $customReferrer = "https://la-projets.univ-lemans.fr/~inf2pj02/index.php"; // Remplacez par l'URL de votre application
-                                curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
-                                
-                                // Exécution de la requête
-                                $response = curl_exec($ch);
-                                
-                                // Vérifier s'il y a eu une erreur cURL
-                                if (curl_errno($ch)) {
-                                    echo 'Erreur cURL : ' . curl_error($ch);
-                                } else {
-                                    // Analyser la réponse JSON
-                                    $data = json_decode($response);
-                                
-                                    // Vérifier si la réponse a été correctement analysée
-                                    if (!empty($data) && is_array($data) && isset($data[0])) {
-                                        // Récupérer la latitude et la longitude
-                                        $latitude = $data[0]->lat;
-                                        $longitude = $data[0]->lon;
-                                
-                                        // Afficher les résultats
-                                        echo "Latitude : $latitude<br>";
-                                        echo "Longitude : $longitude";
-                                    } else {
-                                        // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
-                                        echo "Erreur lors de l'extraction des données de géocodage.";
-                                    }
-                                }
-                                
-                                // Fermeture de la session cURL
-                                curl_close($ch);
-
-
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
