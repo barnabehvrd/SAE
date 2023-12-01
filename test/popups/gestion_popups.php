@@ -20,7 +20,11 @@ if (isset($_POST['popup'])){
             break;
 
         case 'sign_in':
+            if(isset($_SESSION['Mail_Uti'])){
+                $_POST['popup'] = 'info_perso';
+            }else{
             $_SESSION['tempIsAdmin'] = false;
+            }
             require $_POST['popup'].".php";
             break;
 
@@ -33,6 +37,11 @@ if (isset($_POST['popup'])){
         default:
             require $_POST['popup'].".php";
             break;
+    }
+    if (isset($_POST['formClicked'])){
+        unset($_POST['formClicked']);
+        $_SESSION['tempPost'] = $_POST;
+        header('refresh:0');
     }
 }
 ?>
