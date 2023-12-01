@@ -160,6 +160,9 @@
                 <br>
             <?php
                 }
+                else{
+                    $Adr_Uti_En_Cours='France';
+                }
             ?>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
