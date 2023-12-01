@@ -63,7 +63,7 @@
             <br>
             <br>
             <br>- Autour de chez moi :
-            <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="50">
+            <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
             <br>
 			<center><input type="submit" value="Rechercher"></center>
