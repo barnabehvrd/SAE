@@ -20,7 +20,7 @@
             <div class="topBanner">
                 <div class="divNavigation">
                     <a class="bontonDeNavigation" href="index.php">UTILISATEUR</a>
-                    <a class="bontonDeNavigation" href="message.php">Messagerie</a>
+                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
                     <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
                 </div>
                 <form method="post">
