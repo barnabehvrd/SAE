@@ -46,6 +46,9 @@
         if (count($returnQueryAdrUti)>0){
             $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
         }
+        else{
+            $Adr_Uti_En_Cours='PARIS';
+        }
     ?>
     <div class="container">
         <div class="left-column">
@@ -160,11 +163,23 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
 
-                                //localisation du client
-                                // Construire l'URL de l'API Nominatim
-                                /*$url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                                // Effectuer la requête HTTP
-                                $response = file_get_contents($url);
+                                // récupère les coordonnées de l'utiliasteur
+                                // URL vers l'API Nominatim
+                                $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                                // Configurer les paramètres du proxy
+                                $proxy = 'tcp://proxy.univ-lemans.fr:3128'; // Remplacez avec votre adresse et port de proxy
+                                $proxy_context = stream_context_create([
+                                    'http' => [
+                                        'proxy' => $proxy,
+                                        'request_fulluri' => true,
+                                    ],
+                                    'https' => [
+                                        'proxy' => $proxy,
+                                        'request_fulluri' => true,
+                                    ],
+                                ]);
+                                // Utiliser le flux contextuel avec file_get_contents
+                                $response = file_get_contents($url, false, $proxy_context);
                                 // Analyser la réponse JSON
                                 $data = json_decode($response);
                                 // Vérifier si la réponse a été correctement analysée
@@ -179,7 +194,7 @@
                                     // En cas d'erreur ou si aucune correspondance n'est trouvée, afficher un message
                                     echo "Erreur lors de l'extraction des données de géocodage.";
                                 }
-*/
+
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
