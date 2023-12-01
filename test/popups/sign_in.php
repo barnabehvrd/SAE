@@ -8,10 +8,10 @@
                                             {echo '(Admin)';}?></p>
         <div>
             <form class="formPopup" method="post">
+                <input type="hidden" value='sign_in' name="popup">
                 <div>
                     <label for="mail">Mail :</label>
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
-                    <input type="hidden" value='sign_in' name="popup">
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
