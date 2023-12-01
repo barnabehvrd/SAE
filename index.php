@@ -74,14 +74,16 @@
             <br>
             <input type="text" name="autourDeChezMoi" value="<?php echo $Adr_Uti_En_Cours;?>" placeholder="Adresse physique" size="auto">
             <br>
-            <input name="rayon" type="range" value="<?php echo $rayon;?>" min="0" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+            <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
             <span id="monCurseurKm">Rayon de <?php echo $rayon;?></span>
             <script>
-                 function AfficheRange2(newVal){
-                    if (document.getElementById("monCurseurKm").value>=100){
-                        document.getElementById("monCurseurKm").innerHTML="Rayon de "+newVal+"+";
+                function AfficheRange2(newVal) {
+                    var monCurseurKm = document.getElementById("monCurseurKm");
+                    if (newVal >= 100) {
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + "+ km";
+                    } else {
+                        monCurseurKm.innerHTML = "Rayon de " + newVal + " km";
                     }
-=
                 }
             </script>
             <label> Km</label>
