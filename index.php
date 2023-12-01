@@ -254,7 +254,6 @@
                                         $latitudeProd=$coordonneesProd[0];
                                         $longitudeProd=$coordonneesProd[1];
                                         $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                        echo $distance.'<br>';
                                         if (($rayon>=100)or ($distance<$rayon)){
                                             echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                             echo "Nom : " . $row["Nom_Uti"] . "<br>";
