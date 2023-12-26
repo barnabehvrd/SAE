@@ -16,7 +16,7 @@
             $rechercheVille="";
         }
         if (isset($_GET["categorie"])==false){
-            $_GET["categorie"]="Tout";
+            $_GET["categorie"]="Toutest";
         }
         if (isset($_SESSION["Id_Uti"])==false){
             $utilisateur=-1;
