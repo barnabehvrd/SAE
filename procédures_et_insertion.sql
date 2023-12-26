@@ -624,7 +624,7 @@ DELIMITER ;
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
-    ('1', 'John', 'Doe', 'johndoe1@gmail.com', '7 rue des Fleurs, 37000 TOURS', 'password123'),
+    ('1', 'John', 'Doe', 'johndoe1@gmail.com', '16 sentier des ravins, 93100 MONTREUIL', 'password123'),
     ('2', 'Alice', 'Smith', 'alicesmith2@gmail.com', '36 rue du Dome, 92100 BOULOGNE BILLANCOURT', 'securepass'),
     ('3', 'Maria', 'Garcia', 'mariagarcia3@gmail.com', '9 Place Comte de Bendern, 78170 LA CELLE ST CLOUD', 'securepassword'),
     ('4', 'David', 'Wilson', 'davidwilson4@gmail.com', '98/108 Rue Petit, 75019 PARIS', 'strongpass123'),
@@ -714,11 +714,11 @@ VALUES (1, 'Kg'),
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
-    ('1', '2023-10-23 09:00:00', '2024-04-23 09:00:00', "Bonjour, j'aimerais acheter des légumes frais.", '2', '6'),
-    ('2', '2023-10-23 09:05:00', '2024-04-23 09:05:00', 'Bonjour, nous avons une variété de légumes disponibles. Que recherchez-vous en particulier ?', '6', '2'),
-    ('3', '2023-10-23 09:10:00', '2024-04-23 09:10:00', 'Je suis intéressé par des carottes et des tomates. Pouvez-vous me donner les détails ?', '2', '6'),
-    ('4', '2023-10-23 09:15:00', '2024-04-23 09:15:00', 'Bien sûr ! Nos carottes sont fraîches du jour. Les tomates sont également en stock. Souhaitez-vous les acheter en quantité ?', '6', '2'),
-    ('5', '2023-10-23 09:20:00', '2024-04-23 09:20:00', 'Je prendrais 2 kg de carottes et 1 kg de tomates. Quel est le prix ?', '2', '6');
+    ('1', '2023-10-23 09:00:00', '2024-04-23 09:00:00', "Bonjour, j'aimerais acheter des légumes frais.", '2', '1'),
+    ('2', '2023-10-23 09:05:00', '2024-04-23 09:05:00', 'Bonjour, nous avons une variété de légumes disponibles. Que recherchez-vous en particulier ?', '1', '2'),
+    ('3', '2023-10-23 09:10:00', '2024-04-23 09:10:00', 'Je suis intéressé par des carottes et des tomates. Pouvez-vous me donner les détails ?', '2', '1'),
+    ('4', '2023-10-23 09:15:00', '2024-04-23 09:15:00', 'Bien sûr ! Nos carottes sont fraîches du jour. Les tomates sont également en stock. Souhaitez-vous les acheter en quantité ?', '1', '2'),
+    ('5', '2023-10-23 09:20:00', '2024-04-23 09:20:00', 'Je prendrais 2 kg de carottes et 1 kg de tomates. Quel est le prix ?', '2', '1');
 
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
@@ -804,44 +804,44 @@ VALUES (1, 'Fruits'),
 -- Pour un agriculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(12, 'Blé', 6, 6, '100', 1, '2.00', 1),
-(13, 'Maïs', 6, 6, '80', 1, '1.50', 1);
+(12, 'Blé', 3, 6, '100', 1, '2.00', 1),
+(13, 'Maïs', 3, 6, '80', 1, '1.50', 1);
 
 -- Pour un vigneron
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(14, 'Vin rouge', 7, 7, '10', 4, '15.00', 4),
-(15, 'Vin blanc', 7, 7, '8', 4, '12.00', 4);
+(14, 'Vin rouge', 5, 7, '10', 4, '15.00', 4),
+(15, 'Vin blanc', 5, 7, '8', 4, '12.00', 4);
 
 -- Pour un maraîcher
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(5, 'Tomates', 5, 4, '20', 1, '2.00', 1),
-(6, 'Poivrons', 5, 4, '10', 1, '1.50', 1),
-(7, 'Courgettes', 5, 4, '15', 1, '1.75', 4),
+(5, 'Tomates', 1, 4, '20', 1, '2.00', 1),
+(6, 'Poivrons', 2, 4, '10', 1, '1.50', 1),
+(7, 'Courgettes', 2, 4, '15', 1, '1.75', 4),
 (8, 'Carottes', 2, 4, '18', 1, '1.40', 1),
-(9, 'Aubergines', 5, 4, '12', 1, '2.25', 4);
+(9, 'Aubergines', 2, 4, '12', 1, '2.25', 4);
 
 -- Pour un apiculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(16, 'Miel', 3, 8, '5', 1, '10.00', 1),
-(17, 'Cire d''abeille', 4, 8, '2', 1, '5.00', 1);
+(16, 'Miel', 6, 8, '5', 1, '10.00', 1),
+(17, 'Cire d''abeille', 6, 8, '2', 1, '5.00', 1);
 
 -- Pour un éleveur de volaille
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
 (18, 'Poulet entier', 6, 9, '5', 4, '6.00', 4),
-(19, 'oeufs de poule', 7, 9, '30', 4, '0.50', 4);
+(19, 'oeufs de poule', 6, 9, '30', 4, '0.50', 4);
 
 -- Pour un viticulteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(20, 'Chardonnay', 7, 10, '12', 2, '18.00', 2),
-(21, 'Merlot', 7, 10, '15', 2, '16.00', 2);
+(20, 'Chardonnay', 5, 10, '12', 2, '18.00', 2),
+(21, 'Merlot', 5, 10, '15', 2, '16.00', 2);
 
 -- Pour un pépiniériste
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(22, 'Rosiers', 5, 1, '10', 4, '7.50', 4),
-(23, 'Sapins', 5, 1, '8', 1, '9.00', 4);
+(22, 'Rosiers', 7, 1, '10', 4, '7.50', 4),
+(23, 'Sapins', 7, 1, '8', 1, '9.00', 4);
