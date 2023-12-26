@@ -118,7 +118,7 @@
 			<label>- Profession :</label>
             <br>
 			<select name="categorie" id="categories">
-                <option value="Toutest" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
+                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Toutest</option>
 				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
 				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
 				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
