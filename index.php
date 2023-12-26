@@ -16,7 +16,7 @@
             $rechercheVille="";
         }
         if (isset($_GET["categorie"])==false){
-            $_GET["categorie"]="Toutest";
+            $_GET["categorie"]="Tout";
         }
         if (isset($_SESSION["Id_Uti"])==false){
             $utilisateur=-1;
@@ -118,7 +118,7 @@
 			<label>- Profession :</label>
             <br>
 			<select name="categorie" id="categories">
-                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
+                <option value="Toutest" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
 				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
 				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
 				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
