@@ -686,16 +686,16 @@ VALUES
 
 INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
-    (1, '1', 'Agriculteur'),
+    (1, '1', 'Pépiniériste'),
     (2, '2', 'Agriculteur'),
     (3, '3', 'Vigneron'),
-    (4, '4', 'Vigneron'),
+    (4, '4', 'Éleveur de volaille'),
     (5, '5', 'Maraîcher'),
-    (6, '6', 'Apiculteur'),
-    (7, '7', 'Maraîcher'),
-    (8, '8', 'Éleveur de volaille'),
-    (9, '9', 'Viticulteur'),
-    (10, '10', 'Pépiniériste');
+    (6, '6', 'Agriculteur'),
+    (7, '7', 'Viticulteur'),
+    (8, '8', 'Apiculteur'),
+    (9, '9', 'Éleveur de volaille'),
+    (10, '10', 'Viticulteur');
 
 INSERT INTO ADMINISTRATEUR (Id_Admin, Id_Uti)
 VALUES (1, '24');
