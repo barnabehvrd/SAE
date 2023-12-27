@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     session_start();
-    $email = $_POST["email"];
+    $email = htmlspecialchars($_POST["email"]);
     $_SESSION["Mail_Uti"]=$email;
     // Génération d'un code aléatoire à 6 chiffres
     $code = rand(100000, 999999);
