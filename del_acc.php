@@ -32,14 +32,13 @@ if (isset($_POST["Id_Uti"])){
     if ($reponse==NULL){
         //echo 'non producteur';
         $bdd=dbConnect();
-        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti = :utilisateur;'));
+        $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti = :utilisateur;');
         $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
         $iterateurProduit=0;
         $nbProduit=count($returnQueryGetProduitCommande);
         while ($iterateurProduit<$nbProduit){
-          echo $iterateurProduit;
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
           
