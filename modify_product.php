@@ -8,18 +8,26 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
     $bdd=dbConnect();
-    var_dump($_POST);
-    $Id_Produit=$_POST["IdProductAModifier"];
-    $Nom_Produit=$_POST["nomProduit"];
-    $Categorie=$_POST["categorie"];
-    $Prix=$_POST["prix"];
-    $Prix_Unite=$_POST["unitPrix"];
-    $Quantite=$_POST["quantite"];
-    $Quantite_Unite=$_POST["unitQuantite"];
+    //var_dump($_POST);
+    $Id_Produit = htmlspecialchars($_POST["IdProductAModifier"]);
+    $Nom_Produit = htmlspecialchars($_POST["nomProduit"]);
+    $Categorie = htmlspecialchars($_POST["categorie"]);
+    $Prix = htmlspecialchars($_POST["prix"]);
+    $Prix_Unite = htmlspecialchars($_POST["unitPrix"]);
+    $Quantite = htmlspecialchars($_POST["quantite"]);
+    $Quantite_Unite = htmlspecialchars($_POST["unitQuantite"]);
 
-    $updateProduit= "UPDATE PRODUIT SET Nom_Produit = '".$Nom_Produit."', Id_Type_Produit = ".$Categorie.", Qte_Produit = ".$Quantite.", Id_Unite_Stock = ".$Quantite_Unite.", Prix_Produit_Unitaire = ".$Prix.", Id_unite_Prix = ".$Prix_Unite." WHERE Id_Produit = ".$Id_Produit .";";
-    $bdd->exec($updateProduit);
 
+    $updateProduit = "UPDATE PRODUIT SET Nom_Produit = :Nom_Produit, Id_Type_Produit = :Categorie, Qte_Produit = :Quantite, Id_Unite_Stock = :Quantite_Unite, Prix_Produit_Unitaire = :Prix, Id_unite_Prix = :Prix_Unite WHERE Id_Produit = :Id_Produit";
+    $stmt = $bdd->prepare($updateProduit);
+    $stmt->bindParam(':Nom_Produit', $Nom_Produit);
+    $stmt->bindParam(':Categorie', $Categorie);
+    $stmt->bindParam(':Quantite', $Quantite);
+    $stmt->bindParam(':Quantite_Unite', $Quantite_Unite);
+    $stmt->bindParam(':Prix', $Prix);
+    $stmt->bindParam(':Prix_Unite', $Prix_Unite);
+    $stmt->bindParam(':Id_Produit', $Id_Produit);
+    $stmt->execute();
 
     //modification de l'image
 // Vérifier si le formulaire a été soumis

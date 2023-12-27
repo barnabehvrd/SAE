@@ -139,7 +139,6 @@
                                         echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
                                         echo 'button { display: inline-block; }';
                                         echo '</style>';
-
                                         echo '<div class="squareProduct" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
