@@ -8,22 +8,30 @@
       return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
       }
       $bdd=dbConnect();
-      $Id_Commande=$_POST["deleteValeur"];
+      $Id_Commande=htmlspecialchars($_POST["deleteValeur"]);
 
-      $queryGetProduitCommande = $bdd->query(('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
+      $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes  WHERE Id_Commande =:Id_Commande;'));
+      $queryGetProduitCommande->bindParam(":Id_Commande", $Id_Commande, PDO::PARAM_STR);
+      $queryGetProduitCommande->execute();
       $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
       $iterateurProduit=0;
       $nbProduit=count($returnQueryGetProduitCommande);
       while ($iterateurProduit<$nbProduit){
         $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
         $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
-        $updateProduit="UPDATE PRODUIT SET Qte_Produit = Qte_Produit+".$Qte_Produit_Commande." WHERE Id_Produit = ".$Id_Produit .";";
-        $bdd->exec($updateProduit);
+        
+        $updateProduit = "UPDATE PRODUIT SET Qte_Produit = Qte_Produit + :Qte_Produit_Commande WHERE Id_Produit = :Id_Produit";
+        $bindUpdateProduit = $bdd->prepare($updateProduit);
+        $bindUpdateProduit->bindParam(':Qte_Produit_Commande', $Qte_Produit_Commande, PDO::PARAM_INT);
+        $bindUpdateProduit->bindParam(':Id_Produit', $Id_Produit, PDO::PARAM_INT);
+        $bindUpdateProduit->execute();
 
         $iterateurProduit++;
       }
-      $updateStatutCommande="UPDATE COMMANDE SET Id_Statut = 3 WHERE Id_Commande = ".$Id_Commande .";";
-      $bdd->exec($updateStatutCommande);
+      $updateStatutCommande="UPDATE COMMANDE SET Id_Statut = 3 WHERE Id_Commande = :Id_Commande ;";
+      $bindUpdateStatutCommande = $bdd->prepare($updateStatutCommande);
+      $bindUpdateStatutCommande->bindParam(':Id_Commande', $Id_Commande, PDO::PARAM_INT);
+      $bdd->exec($bindUpdateStatutCommande);
 
       //$bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
       //$bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
