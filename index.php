@@ -10,7 +10,7 @@
     <?php
         session_start();
         if (isset($_GET["rechercheVille"])==true){
-            $rechercheVille=$_GET["rechercheVille"];
+            $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
           }
           else{
             $rechercheVille="";
@@ -22,13 +22,13 @@
             $utilisateur=-1;
         }
         else{
-            $utilisateur=$_SESSION["Id_Uti"];
+            $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
         }
         if (isset($_GET["rayon"])==false){
             $rayon=100;
         }
         else{
-            $rayon=$_GET["rayon"];
+            $rayon=htmlspecialchars($_GET["rayon"]);
         }
 
         // récupération adresse du client
@@ -134,8 +134,11 @@
             <br>
             <?php
                 $mabdd=dbConnect();           
-                $queryAdrUti = $mabdd->query(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+                $queryAdrUti = $mabdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
+                $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
+                $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
             ?>
@@ -208,7 +211,7 @@
                         <?php
                         if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             if (isset($_GET["categorie"])) {
-                                $categorie = $_GET["categorie"];
+                                $categorie = htmlspecialchars($_GET["categorie"]);
                                 // Connexion à la base de données 
                                 $utilisateur = "inf2pj02";
                                 $serveur = "localhost";
