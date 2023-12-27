@@ -18,6 +18,7 @@ if (isset($_POST["Id_Uti"])){
 }else{
   $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
 }
+echo $utilisateur;
 
   $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
 
