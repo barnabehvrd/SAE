@@ -18,21 +18,25 @@
       session_start();
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
+      htmlspecialchars($Id_Prod);
 
       if (isset($_GET["filtreType"])==true){
         $filtreType=$_GET["filtreType"];
+        htmlspecialchars($filtreType);
       }
       else{
         $filtreType="TOUT";
       }
       if (isset($_GET["tri"])==true){
         $tri=$_GET["tri"];
+        htmlspecialchars($tri);
       }
       else{
         $tri="No";
       }
       if (isset($_GET["rechercheNom"])==true){
         $rechercheNom=$_GET["rechercheNom"];
+        htmlspecialchars($rechercheNom);
       }
       else{
         $rechercheNom="";
@@ -147,15 +151,15 @@
                             $bdd=dbConnect();
                             //filtre type
                             if ($filtreType=="TOUT"){
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\'';
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod';
                             }
                             else{
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod=\''.$Id_Prod.'\' AND Desc_Type_Produit=\''.$filtreType.'\'';
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit= :filtreType';
 
                             }
                             // filtre nom
                             if ($rechercheNom!=""){
-                                $query=$query.' AND Nom_Produit LIKE \'%'.$rechercheNom.'%\'';
+                                $query=$query.' AND Nom_Produit LIKE :rechercheNom ';
                             }
 
                             //tri
@@ -174,7 +178,21 @@
                             else if ($tri=="AntiAlpha"){
                                 $query=$query.' ORDER BY Nom_Produit DESC;';
                             }
-                            $queryGetProducts = $bdd->query(($query));
+
+                            //preparation paramètres
+                            $queryGetProducts = $bdd->prepare(($query));
+                            if ($filtreType=="TOUT"){
+                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);                            
+                            }
+                            else{
+                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);   
+                                $queryGetProducts->bindParam(":filtreType", $filtreType, PDO::PARAM_STR);
+                            }
+                            if ($rechercheNom!=""){
+                                $queryGetProducts->bindParam(":rechercheNom", $rechercheNom, PDO::PARAM_STR);  
+                            }
+
+                            $queryGetProducts->execute();
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
@@ -209,8 +227,9 @@
                     <!-- partie de droite avec les infos producteur -->
                     <?php
                         $bdd=dbConnect();
-                        
-                        $queryInfoProd = $bdd->query(('SELECT UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod=\''.$Id_Prod.'\';'));
+                        $queryInfoProd = $bdd->prepare(('SELECT UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;'));
+                        $queryInfoProd->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
+                        $queryInfoProd->execute();   
                         $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
 
                         // recupération des paramètres de la requête qui contient 1 élément
