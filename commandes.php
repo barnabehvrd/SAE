@@ -112,7 +112,7 @@
 				if ($filtreCategorie!=0){
 					$queryGetCommande->bindParam(":filtreCategorie", $filtreCategorie, PDO::PARAM_STR);
 				}
-				$stmt->execute();
+				$queryGetCommande->execute();
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
 				if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
