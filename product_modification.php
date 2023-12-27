@@ -15,11 +15,14 @@
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
       session_start();
-      $utilisateur=$_SESSION["Id_Uti"];
-      $Id_Produit_Update=$_POST["modifyIdProduct"];
+      $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
+      $Id_Produit_Update=htmlspecialchars($_POST["modifyIdProduct"]);
       $_SESSION["Id_Produit"]=$Id_Produit_Update;
+      
       $bdd=dbConnect();
-      $queryGetProducts = $bdd->query(('SELECT * FROM PRODUIT WHERE Id_Produit=\''.$Id_Produit_Update.'\';'));
+      $queryGetProducts = $bdd->prepare('SELECT * FROM PRODUIT WHERE Id_Produit = :Id_Produit_Update');
+      $queryGetProducts->bindParam(':Id_Produit_Update', $Id_Produit_Update, PDO::PARAM_INT);
+      $queryGetProducts->execute();
       $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
       //var_dump($returnQueryGetProducts);
       $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
@@ -255,12 +258,16 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            $queryIdProd = $bdd->query(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+                            $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
+                            $queryIdProd->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+                            $queryIdProd->execute();
                             $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
                             $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
 
                             $bdd=dbConnect();
-                            $queryGetProducts = $bdd->query(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod=\''.$Id_Prod.'\';'));
+                            $queryGetProducts = $bdd->prepare('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd');
+                            $queryGetProducts->bindParam(':idProd', $Id_Prod, PDO::PARAM_INT);
+                            $queryGetProducts->execute();                            
                             $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
