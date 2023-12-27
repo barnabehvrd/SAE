@@ -70,7 +70,7 @@ if (isset($_POST["Id_Uti"])){
     else{
         //echo ' producteur';
         $bdd=dbConnect();
-        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM produits_commandes WHERE Id_Prod = :utilisateur;'));
+        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :utilisateur;'));
         var_dump($queryGetProduitCommande);
         $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
