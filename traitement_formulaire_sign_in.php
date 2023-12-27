@@ -1,11 +1,9 @@
 <?php
-
-
 // Error handling with try-catch block
 try {
     // Retrieve form data
-    $pwd = $_POST['pwd'];
-    $Mail_Uti = $_POST['mail'];
+    $pwd = htmlspecialchars($_POST['pwd']);
+    $Mail_Uti = htmlspecialchars($_POST['mail']);
 
     // Start session
     session_start();
@@ -25,7 +23,9 @@ try {
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
     // Check if user email exists
-    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
+    $queryIdUti = $bdd->prepare('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti = :mailUti');
+    $queryIdUti->bindParam(':mailUti', $Mail_Uti, PDO::PARAM_STR);
+    $queryIdUti->execute();    
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
     
 
@@ -43,20 +43,24 @@ try {
     
     // Verify password using stored procedure
     //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
-    $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
-
+    $query = $bdd->prepare('CALL verifMotDePasse(:idUti, :pwd)');
+    $query->bindParam(':idUti', $Id_Uti, PDO::PARAM_INT);
+    $query->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+    $query->execute();
     $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > 1) {
         if ($test[0][1] == 1 ) {
             echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
-            $_SESSION['Mail_Uti'] = $Mail_Uti;
-            $_SESSION['Id_Uti'] = $Id_Uti;
+            $_SESSION['Mail_Uti'] = htmlspecialchars($Mail_Uti);
+            $_SESSION['Id_Uti'] = htmlspecialchars($Id_Uti);
             echo $_SESSION['Id_Uti'];
 
             $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
+            $isProducteur = $bdd2->prepare('CALL isProducteur(:idUti)');
+            $isProducteur->bindParam(':idUti', $Id_Uti, PDO::PARAM_INT);
+            $isProducteur->execute();            
             echo '<br>';
             var_dump($isProducteur);
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
