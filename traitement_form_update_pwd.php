@@ -1,6 +1,6 @@
 <?php
-$pwd1 = $_POST['pwd1'];
-$pwd2 = $_POST['pwd2'];
+$pwd1 = htmlspecialchars($_POST['pwd1']);
+$pwd2 = htmlspecialchars($_POST['pwd2']);
 
 if ($pwd1 == $pwd2 && $pwd1 !== null) {
 
@@ -19,9 +19,11 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
     $emailCount = $checkEmailStmt->fetch(PDO::FETCH_ASSOC)['count'];
 
     if ($emailCount > 0) {  
-        $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
-        echo ($update);
-        $bdd->exec($update);
+        $update = "UPDATE UTILISATEUR SET Pwd_Uti = :newPassword WHERE Mail_Uti = :userMail";
+        $updateStatement = $bdd->prepare($update);
+        $updateStatement->bindParam(':newPassword', $pwd1, PDO::PARAM_STR);
+        $updateStatement->bindParam(':userMail', $_SESSION["Mail_Uti"], PDO::PARAM_STR);
+        $updateStatement->execute();
         header('Location: pup_up_pwd.php?message=Le mot de passe a été mis à jour avec succès.');
 
     } else {
