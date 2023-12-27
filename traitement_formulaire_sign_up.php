@@ -6,18 +6,18 @@
 session_start();
 
 $_SESSION['test_pwd'] = 5;
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$adresse = $_POST['rue'] .", ". $_POST['code']. mb_strtoupper($_POST['ville']);
-$pwd = $_POST['pwd'];
-$Mail_Uti = $_POST['mail'];
-$producteur_check = isset($_POST['producteur_box']) ? $_POST['producteur_box'] : '';
+$nom = htmlspecialchars($_POST['nom']);
+$prenom = htmlspecialchars($_POST['prenom']);
+$adresse = htmlspecialchars($_POST['rue'] .", ". $_POST['code']. mb_strtoupper($_POST['ville']));
+$pwd = htmlspecialchars($_POST['pwd']);
+$Mail_Uti = htmlspecialchars($_POST['mail']);
+$producteur_check = isset($_POST['producteur_box']) ? htmlspecialchars($_POST['producteur_box']) : '';
 if ($producteur_check=='on'){
     $_SESSION["is_producteur"]= true;
 }else {
     $_SESSION["is_producteur"]= false;
 }
-$_SESSION['Mail_Temp']=$Mail_Uti;
+$_SESSION['Mail_Temp']=htmlspecialchars($Mail_Uti);
 // Connexion à la base de données 
 $utilisateur = "inf2pj02";
 $serveur = "localhost";
