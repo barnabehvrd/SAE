@@ -621,6 +621,20 @@ END $$
 
 DELIMITER ;
 
+
+DELETE FROM ADMINISTRATEUR;
+DELETE FROM CONTENU;
+DELETE FROM MESSAGE;
+DELETE FROM PRODUIT;
+DELETE FROM TYPE_DE_PRODUIT;
+DELETE FROM UNITE;
+DELETE FROM COMMANDE;
+DELETE FROM PRODUCTEUR;
+DELETE FROM STATUT;
+DELETE FROM UTILISATEUR;
+
+
+
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
