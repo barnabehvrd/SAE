@@ -13,13 +13,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         // Connect to database
         $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        if(isset($_SESSION ["Mail_Uti"])){
-            $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Uti'].'";';
-        }else{
-            $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti="'.$_SESSION['Mail_Temp'].'";';
+
+        if (isset($_SESSION["Mail_Uti"])) {
+            $mailUti = $_SESSION["Mail_Uti"];
+        } else {
+            $mailUti = $_SESSION["Mail_Temp"];
         }
-        echo ($requete);
-        $queryIdProd = $bdd->query(($requete));
+        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti = :mail';
+        $queryIdProd = $bdd->prepare($requete);
+        $queryIdProd->bindParam(':mail', $mailUti, PDO::PARAM_STR);
+        $queryIdProd->execute();
         $returnqueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
         $Id_Prod=$returnqueryIdProd[0]["Id_Prod"];
 
