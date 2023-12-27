@@ -71,11 +71,12 @@ if (isset($_POST["Id_Uti"])){
         //echo ' producteur';
         $bdd=dbConnect();
         $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM produits_commandes WHERE Id_Prod = :utilisateur;'));
+        var_dump($queryGetProduitCommande);
         $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
         $iterateurProduit=0;
-        var_dump($returnQueryGetProduitCommande);
+        
         $nbProduit=count($returnQueryGetProduitCommande);
         while ($iterateurProduit<$nbProduit){
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
