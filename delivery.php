@@ -18,9 +18,9 @@
 
 	  $bdd=dbConnect();
 	  session_start();
-	  $utilisateur=$_SESSION["Id_Uti"];
+	  $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
       if (isset($_POST["typeCategorie"])==true){
-        $filtreCategorie=$_POST["typeCategorie"];
+        $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
       }
       else{
         $filtreCategorie=0;
@@ -100,12 +100,29 @@
             <!-- Contenu de la partie droite (sous le bandeau) -->
 			<?php
                 if ($filtreCategorie!=0){
-                    $query='SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.' AND COMMANDE.Id_Statut='.$filtreCategorie.';';
+                    $query = 'SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut 
+                    FROM COMMANDE 
+                    INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod 
+                    INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut 
+                    INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti 
+                    WHERE info_producteur.Id_Uti = :utilisateur AND COMMANDE.Id_Statut = :filtreCategorie';
+                    $queryGetCommande = $bdd->prepare($query);
+                    $queryGetCommande->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+                    $queryGetCommande->bindParam(':filtreCategorie', $filtreCategorie, PDO::PARAM_INT);            
                 }
                 else{
-                    $query='SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE info_producteur.Id_Uti='.$utilisateur.';';
+                    $query = 'SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut 
+                    FROM COMMANDE 
+                    INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod 
+                    INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut 
+                    INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti 
+                    WHERE info_producteur.Id_Uti = :utilisateur';
+          
+                    $queryGetCommande = $bdd->prepare($query);
+                    $queryGetCommande->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+                    
                 }
-                $queryGetCommande = $bdd->query(($query));
+                $queryGetCommande->execute();
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
                 if(count($returnQueryGetCommande)==0){
@@ -124,8 +141,13 @@
                         //echo $Id_Statut;
                         
 						$total=0;
-						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
-						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+                        $query = 'SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix 
+                        FROM produits_commandes 
+                        WHERE Id_Commande = :idCommande';
+                        $queryGetProduitCommande = $bdd->prepare($query);
+                        $queryGetProduitCommande->bindParam(':idCommande', $Id_Commande, PDO::PARAM_INT);
+                        $queryGetProduitCommande->execute();
+                        $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
