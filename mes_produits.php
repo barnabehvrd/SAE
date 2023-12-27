@@ -47,7 +47,7 @@
                 <br>Prix : 
                 <input style="width: 50px;" type="number" min="0" name="prix" required>€
                 <label>
-                    <input type="radio" name="unitPrix" value="1"> le kilo
+                    <input type="radio" name="unitPrix" value="1" checked="true"> le kilo
                 </label>
                 <label>
                     <input type="radio" name="unitPrix" value="4"> la pièce
@@ -56,7 +56,7 @@
                 <br>Stock : 
                 <input type="number" style="width: 50px;" min="0" name="quantite" required>
                 <label>
-                    <input type="radio" name="unitQuantite" value="1"> Kg
+                    <input type="radio" name="unitQuantite" value="1" checked="true"> Kg
                 </label>
                 <label>
                     <input type="radio" name="unitQuantite" value="2"> L
