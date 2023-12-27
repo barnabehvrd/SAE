@@ -17,26 +17,22 @@
       }
       session_start();
       // variable utilisée plusieurs fois par la suite
-      $Id_Prod = $_GET["Id_Prod"];
-      htmlspecialchars($Id_Prod);
+      $Id_Prod = htmlspecialchars($_GET["Id_Prod"]);
 
       if (isset($_GET["filtreType"])==true){
-        $filtreType=$_GET["filtreType"];
-        htmlspecialchars($filtreType);
+        $filtreType=htmlspecialchars($_GET["filtreType"]);
       }
       else{
         $filtreType="TOUT";
       }
       if (isset($_GET["tri"])==true){
-        $tri=$_GET["tri"];
-        htmlspecialchars($tri);
+        $tri=htmlspecialchars($_GET["tri"]);
       }
       else{
         $tri="No";
       }
       if (isset($_GET["rechercheNom"])==true){
-        $rechercheNom=$_GET["rechercheNom"];
-        htmlspecialchars($rechercheNom);
+        $rechercheNom=htmlspecialchars($_GET["rechercheNom"]);
       }
       else{
         $rechercheNom="";
