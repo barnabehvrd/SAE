@@ -26,7 +26,7 @@
 					<input type="text" name="prenom" id="prenom" required><br><br>
 					<label for="adresse">Rue:</label>
 					<input type="text" name="rue" id="rue" required><br><br>
-					<label for="adresse">Code postale:</label>
+					<label for="adresse">Code postal :</label>
 					<input type="text" name="code" id="code" required><br><br>
 					<label for="adresse">Ville:</label>
 					<input type="text" name="ville" id="ville" required><br><br>
@@ -35,7 +35,7 @@
 					<input type="text" name="pwd" id="pwd" required><br><br>
 					<?php
 					if (isset($_GET['mail'])) {
- 					  	 $mail = $_GET['mail'];
+ 					  	 $mail = htmlspecialchars($_GET['mail']);
    						 echo " $mail <br>";
 						}
 					?>
