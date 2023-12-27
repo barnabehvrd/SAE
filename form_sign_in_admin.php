@@ -10,7 +10,7 @@
 					<h1>Connection</h1>
 					<?php
 					if (isset($_GET['mail'])) {
- 					  	 $mail = $_GET['mail'];
+ 					  	 $mail = htmlspecialchars($_GET['mail']);
    						 echo " $mail <br>";
 						}
 					?>
@@ -18,7 +18,7 @@
 					<input type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="mail" id="mail" required><br><br>
 					<?php 
 						if (isset($_GET['pwd'])) {
- 					  	 $pwd = $_GET['pwd'];
+ 					  	 $pwd = htmlspecialchars($_GET['pwd']);
    						 echo " $pwd <br>";
 						}?>
 					<label for="pwd">password :</label>
