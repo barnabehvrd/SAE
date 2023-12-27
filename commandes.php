@@ -20,11 +20,11 @@
       }
 
 	  $bdd=dbConnect();
-	  $utilisateur=$_SESSION["Id_Uti"];
+	  $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
 	  
 	  $filtreCategorie=0;
 	  if (isset($_POST["typeCategorie"])==true){
-		  $filtreCategorie=$_POST["typeCategorie"];
+		  $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
 	  }
   
     ?>
@@ -103,11 +103,16 @@
 			<div class="contenu">
             <!-- Contenu de la partie droite (sous le bandeau) -->
 			<?php
-				$query='SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti='.$utilisateur;
+				$query='SELECT Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti= :utilisateur';
 				if ($filtreCategorie!=0){
-					$query=$query.' AND COMMANDE.Id_Statut='.$filtreCategorie.';';
+					$query=$query.' AND COMMANDE.Id_Statut= :filtreCategorie ;';
 				}
-                $queryGetCommande = $bdd->query(($query));
+				$queryGetCommande = $bdd->prepare($query);
+				$queryGetCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
+				if ($filtreCategorie!=0){
+					$queryGetCommande->bindParam(":filtreCategorie", $filtreCategorie, PDO::PARAM_STR);
+				}
+				$stmt->execute();
                 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
                 $iterateurCommande=0;
 				if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
@@ -133,7 +138,9 @@
 
 
 						$total=0;
-						$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
+						$queryGetProduitCommande = $bdd->prepare('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande = :Id_Commande;');
+						$queryGetProduitCommande->bindParam(":Id_Commande", $Id_Commande, PDO::PARAM_STR);
+						$queryGetProduitCommande->execute();
 						$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
