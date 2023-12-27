@@ -18,7 +18,6 @@ if (isset($_POST["Id_Uti"])){
 }else{
   $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
 }
-echo $utilisateur;
 
   $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
 
@@ -40,6 +39,7 @@ echo $utilisateur;
         $iterateurProduit=0;
         $nbProduit=count($returnQueryGetProduitCommande);
         while ($iterateurProduit<$nbProduit){
+          echo $iterateurProduit;
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
           
