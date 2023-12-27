@@ -17,9 +17,12 @@
       $utilisateur=$_SESSION["Id_Uti"];
 
       $bdd=dbConnect();
-      $queryIdProd = $bdd->query(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=\''.$utilisateur.'\';'));
+      $queryIdProd = $bdd->prepare(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti= :Id_Uti ;'));
+      $queryIdProd->bindParam(":Id_Uti", $utilisateur, PDO::PARAM_STR);
+      $queryIdProd->execute();
       $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
       $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
+  
     ?>
     <div class="container">
         <div class="left-column">

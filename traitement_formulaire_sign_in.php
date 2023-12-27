@@ -27,6 +27,7 @@ try {
     // Check if user email exists
     $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
+    
 
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
