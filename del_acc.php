@@ -76,11 +76,12 @@ if (isset($_POST["Id_Uti"])){
         $queryGetProduitCommande->execute();
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
         $iterateurProduit=0;
-        var_dump($returnQueryGetProduitCommande);
+        //var_dump($returnQueryGetProduitCommande);
         $nbProduit=count($returnQueryGetProduitCommande);
         while ($iterateurProduit<$nbProduit){
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           //echo $updateProduit;
+          echo $Id_Produit;
           $delContenu=$bdd->prepare(('DELETE FROM CONTENU WHERE Id_Produit=:Id_Produit;'));
           $delContenu->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
           $delContenu->execute();
