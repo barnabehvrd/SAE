@@ -11,9 +11,18 @@ function dbConnect(){
 }
 
 $bdd = dbConnect();
-$Id_Commande = $_POST["idCommande"];
+$Id_Commande = htmlspecialchars($_POST["idCommande"]);
 
-$queryGetCommande = $bdd->query(('SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti  FROM COMMANDE INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti WHERE COMMANDE.Id_Commande='.$Id_Commande.';'));
+$query = 'SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti 
+          FROM COMMANDE 
+          INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod 
+          INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut 
+          INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti 
+          WHERE COMMANDE.Id_Commande = :idCommande';
+$queryGetCommande = $bdd->prepare($query);
+$queryGetCommande->bindParam(':idCommande', $Id_Commande, PDO::PARAM_INT);
+$queryGetCommande->execute();
+
 $returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 
 $Id_Prod = $returnQueryGetCommande[0]["Id_Prod"];
@@ -26,7 +35,12 @@ $Mail_Uti = $returnQueryGetCommande[0]["Mail_Uti"];
 $Adr_Uti = $returnQueryGetCommande[0]["Adr_Uti"];
 
 $bdd = dbConnect();
-$queryGetProducteur = $bdd->query(('SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod FROM info_producteur WHERE Id_Prod='.$Id_Prod.';'));
+$query = 'SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod 
+          FROM info_producteur 
+          WHERE Id_Prod = :idProducteur';
+$queryGetProducteur = $bdd->prepare($query);
+$queryGetProducteur->bindParam(':idProducteur', $Id_Prod, PDO::PARAM_INT);
+$queryGetProducteur->execute();
 $returnQueryGetProducteur = $queryGetProducteur->fetchAll(PDO::FETCH_ASSOC);
 
 $Nom_Prod = $returnQueryGetProducteur[0]["Nom_Uti"];
@@ -102,7 +116,13 @@ $pdf->Ln();
 
 
 $total=0;
-$queryGetProduitCommande = $bdd->query(('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande ='.$Id_Commande.';'));
+$query = 'SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix 
+          FROM produits_commandes  
+          WHERE Id_Commande = :idCommande';
+
+$queryGetProduitCommande = $bdd->prepare($query);
+$queryGetProduitCommande->bindParam(':idCommande', $Id_Commande, PDO::PARAM_INT);
+$queryGetProduitCommande->execute();
 $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 $iterateurProduit=0;
 $nbProduit=count($returnQueryGetProduitCommande);
