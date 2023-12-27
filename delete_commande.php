@@ -31,7 +31,7 @@
       $updateStatutCommande="UPDATE COMMANDE SET Id_Statut = 3 WHERE Id_Commande = :Id_Commande ;";
       $bindUpdateStatutCommande = $bdd->prepare($updateStatutCommande);
       $bindUpdateStatutCommande->bindParam(':Id_Commande', $Id_Commande, PDO::PARAM_INT);
-      $bdd->exec($bindUpdateStatutCommande);
+      $bindUpdateStatutCommande->execute();
 
       //$bdd->query(('DELETE FROM CONTENU WHERE Id_Commande='.$Id_Commande.';'));
       //$bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
