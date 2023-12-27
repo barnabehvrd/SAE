@@ -81,10 +81,15 @@ if (isset($_POST["Id_Uti"])){
         while ($iterateurProduit<$nbProduit){
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           //echo $updateProduit;
-          echo $Id_Produit;
+          //echo $Id_Produit;
           $delContenu=$bdd->prepare(('DELETE FROM CONTENU WHERE Id_Produit=:Id_Produit;'));
           $delContenu->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
           $delContenu->execute();
+
+          $delProduit=$bdd->prepare(('DELETE FROM PRODUIT WHERE Id_Produit=:Id_Produit;'));
+          $delProduit->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
+          $delProduit->execute();
+
           $iterateurProduit++;
       }
         $delCommande=$bdd->prepare(('DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;'));
