@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
 
         // Utiliser l'extension dans le nouveau nom du fichier
-        $newFileName = $_SESSION["Id_Produit"] . '.' . $extension;
+        $newFileName = htmlspecialchars($_SESSION["Id_Produit"]) . '.' . $extension;
 
         // Créer le chemin complet du fichier de destination
         $targetPath = $targetDir . $newFileName;
