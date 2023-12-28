@@ -31,31 +31,37 @@ $nb = $resultat2->fetch_assoc()['nb'];
 // Exécution de la requête d'insertion si l'adresse mail n'est pas déjà utilisée
 echo($nb);
 if ($nb == 0) {
-    $insertion = "INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES ('$iduti', '$prenom', '$nom', '$adresse', '$pwd', '$Mail_Uti');";
+    // Connexion à la base de données avec PDO
+    $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees", $utilisateur, $motdepasse);
+    
+    // Définir le mode d'erreur sur Exception
+    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $connexion1 = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+    // Préparation de la requête d'insertion pour l'utilisateur
+    $insertionUtilisateur = $connexion->prepare("INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES (?, ?, ?, ?, ?, ?)");
+    $insertionUtilisateur->execute([$iduti, $prenom, $nom, $adresse, $pwd, $Mail_Uti]);
 
-    // Exécution de la requête
-    if ($connexion1->query($insertion) === TRUE) {
-        echo "Enregistrement réussi.";
-    } else {
-        echo "Erreur : " . $insertion . "<br>" . $connexion1->error;
-    }
-    // création producteur
-    if (isset($_POST['profession'])){
-        $profession = isset($_POST['profession']) ? $_POST['profession'] : '';
-        $requete1 = "SELECT MAX(Id_Prod) AS id_max1 FROM PRODUCTEUR";
-        $resultat1 = $connexion1->query($requete1);
-        $id_max_prod = $resultat1->fetch_assoc()['id_max1'];
+    echo "Enregistrement utilisateur réussi.";
+
+    // Création du producteur si la profession est définie
+    if (isset($_POST['profession'])) {
+        $profession = $_POST['profession'];
+
+        // Récupérer le dernier Id_Prod
+        $requeteIdProd = $connexion->query("SELECT MAX(Id_Prod) AS id_max1 FROM PRODUCTEUR");
+        $id_max_prod = $requeteIdProd->fetch(PDO::FETCH_ASSOC)['id_max1'];
         $id_max_prod++;
-        $insertion1 = "INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES ('$iduti', '$id_max_prod', '$profession');";
-        if ($connexion1->query($insertion1) === TRUE) {
-            echo "Enregistrement réussi.";
-        } else {
-            echo "Erreur : " . $insertion1 . "<br>" . $connexion1->error;
-        }
+
+        // Préparation de la requête d'insertion pour le producteur
+        $insertionProducteur = $connexion->prepare("INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES (?, ?, ?)");
+        $insertionProducteur->execute([$iduti, $id_max_prod, $profession]);
+
+        echo "Enregistrement producteur réussi.";
     }
-    $connexion1->close();
+
+    // Fermeture de la connexion
+    $connexion = null;
+
     $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
             $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
