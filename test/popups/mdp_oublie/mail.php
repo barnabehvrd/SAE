@@ -9,7 +9,7 @@
         </div>
         <form class="formPopup" method="post">
             <input type="hidden" name="popup" value="mdp_oublie/mail">
-            <label>Veuillez entrer votre mot de passe</label>
+            <label>Veuillez entrer votre mail</label>
             <input type="email" id="email" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="email" required>
             <label>un code vous sera envoyer sur votre adresse mail afin de changer votre mot de passe</label>
             <?php
