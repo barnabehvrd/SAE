@@ -22,10 +22,6 @@
                     <a class="bontonDeNavigation" href="index.php">Utilisateurs</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
                 </div>
-                <form method="post">
-					<input type="submit" value=<?php if (!isset($_SESSION)){session_start(); echo "Connexion";}else {echo $_SESSION['Mail_Uti'];}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value="signIn">
-				</form>
             </div>
             <div class="contenuPage">
                         <?php
