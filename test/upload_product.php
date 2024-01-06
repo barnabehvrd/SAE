@@ -35,6 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Veuillez sélectionner une image.<br>";
     }
     
-    header('Location: mes_produits.php');    
+    header('Location: produits.php');    
 }
 ?>
