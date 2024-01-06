@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
-    <link rel="stylesheet" type="text/css" href="css/#################.css"> 
+    <link rel="stylesheet" type="text/css" href="css/messagerie.css"> 
     <!-- name of the page -->
 </head>
 <body>
@@ -20,9 +20,17 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
-                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
+                <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <?php
+                        if (isset($_SESSION["Id_Uti"])){
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                        }
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                        }
+                    ?>
                 </div>
                 <form method="post">
                 <?php
