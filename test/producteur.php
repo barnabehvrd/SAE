@@ -146,6 +146,9 @@
 
 
 
+            <form method="get" action="insert_commande.php">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
+            
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
