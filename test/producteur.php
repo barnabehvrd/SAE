@@ -255,7 +255,7 @@
                             ?>
                         </div>
                     </div>
-                    <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
+                    <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
                     <?php
                         if (isset($address)) {
                             $address = str_replace(" ", "+", $address);
