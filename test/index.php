@@ -173,7 +173,7 @@
                 }
             ?>
             <br>
-			<center><input type="submit" value="Rechercher"></center>
+			<input type="submit" value="Rechercher">
 			</form>
 
 
