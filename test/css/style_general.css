@@ -209,3 +209,9 @@ body{
     max-height: 200px;
     max-width: 200px;
 }
+
+
+.map-frame {
+    width: 100%;
+    height: 400px;
+}
