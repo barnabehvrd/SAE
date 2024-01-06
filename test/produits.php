@@ -125,7 +125,6 @@
             
 
 
-                <div class="product">
                     <!-- partie de gauche avec les produits -->
                     <p><center><U>Produits proposés :</U></center></p>
                     <div class="gallery-container">
@@ -175,7 +174,6 @@
                             }
                         ?>
                     </div>
-                </div>
 
 
 
