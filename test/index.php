@@ -181,7 +181,7 @@
                 <div class="divNavigation">
                     <a class="bontonDeNavigation" href="index.php">Accueil</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
+                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
                 </div>
                 <form method="post">
                     <?php
