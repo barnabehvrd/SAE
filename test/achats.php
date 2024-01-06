@@ -57,6 +57,42 @@
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
 				</form>
             </div>
+
+            <center>
+                <p><strong>Filtrer par :</strong></p>
+                <br>
+            </center>
+            Statut 
+            <br>
+            
+            <form action="commandes.php" method="post">
+                <label>
+                    <input type="radio" name="typeCategorie" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> TOUT
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="1" <?php if($filtreCategorie==1) echo 'checked="true"';?>> EN COURS
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="2"<?php if($filtreCategorie==2) echo 'checked="true"';?>> PRÊTE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="4" <?php if($filtreCategorie==4) echo 'checked="true"';?>> LIVRÉE
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="typeCategorie" value="3" <?php if($filtreCategorie==3) echo 'checked="true"';?>> ANNULÉE
+                </label>
+
+                <br>
+                <br>
+                <center>
+                    <input type="submit" value="Filtrer">
+                </center>
+            </form>
+
             <div class="contenuPage">
 
                <!-- some code -->
