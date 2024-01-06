@@ -44,7 +44,6 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        
                                         echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
                                             <input type="submit" name="submit" id="submit"><br><br>
                                             <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
@@ -53,7 +52,6 @@
                                         echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo "Profession : " . $row["Prof_Prod"] . "<br></form>";
-                                                                              
                                     }
                                     echo '</div>'; 
                                 } else {
@@ -62,7 +60,43 @@
                                 $stmt->close();
                                 $connexion->close();
                         ?>
-                    
+                <div class="gallery-container">
+                <?php
+                    // Connexion à la base de données 
+                    $utilisateur = "inf2pj02";
+                    $serveur = "localhost";
+                    $motdepasse = "ahV4saerae";
+                    $basededonnees = "inf2pj_02";
+                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+                    // Vérifiez la connexion
+                    if ($connexion->connect_error) {
+                        die("Erreur de connexion : " . $connexion->connect_error);
+                    }
+                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                    $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR';
+                    $stmt = $connexion->prepare($requete);
+                        // "s" indique que la valeur est une chaîne de caractères
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            
+                            echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
+                                <input type="submit" name="submit" id="submit"><br><br>
+                                <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
+                            echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                            echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
+                            echo "Mail : " . $row["Mail_Uti"] . "<br>";
+                            echo "Adresse : " . $row["Adr_Uti"] . "<br></form>";
+                        }
+                        echo '</div>'; 
+                    } else {
+                        echo "erreur contacté l'équipe de déveloper ";
+                    }
+                    $stmt->close();
+                    $connexion->close();
+                ?>
                 </div>
                 <!-- some code -->
 
