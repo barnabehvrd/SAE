@@ -12,6 +12,12 @@ body{
     width: 100%;
 }
 
+.square1 {
+    width: 350px;
+    height: 350px;
+    background-color: #4caf50;
+    margin: 5px;
+}
 .container{
     margin: 0px;
     padding: 0px;
@@ -111,6 +117,15 @@ body{
 
 }
 
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center ;
+    gap: 10px;
+			
+}
+/*
 .contenuPage{
     margin-top: 5%;
     margin-left: 3%;
@@ -122,7 +137,7 @@ body{
 
     overflow-y: scroll;
 }
-
+*/
 .basDePage{
     display: flex;
     align-items: flex-end;

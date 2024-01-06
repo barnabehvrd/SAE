@@ -209,9 +209,8 @@
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
 				</form>
             </div>
-            <div class="contenuPage">
             <h1> PRODUCTEURS : </h1>
-
+            <div class="gallery-container">
                <?php 
                
                
@@ -242,7 +241,6 @@
                      // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    var_dump('manque affichage car copier coller détruit une partie du css, jai commenté le while dans le code');
                     // récupère les coordonnées de l'utiliasteur
                     // URL vers l'API Nominatim
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
@@ -250,9 +248,9 @@
                     $latitudeUti=$coordonneesUti[0];
                     $longitudeUti=$coordonneesUti[1];
                     if ($result->num_rows > 0) {
-                        /*while ($row = $result->fetch_assoc()) {
+                        while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
-                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square1"  >';
                                 echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                 echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                 echo "Adresse : " . $row["Adr_Uti"] . "<br>";
@@ -266,7 +264,7 @@
                                 $longitudeProd=$coordonneesProd[1];
                                 $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
                                 if ($distance<$rayon){
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square1"  >';
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                     echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
@@ -274,7 +272,7 @@
                                     echo '</a> ';  
                                 }    
                             }
-                        }*/
+                        }
                     } else {
                         echo "Aucun résultat ne correspond à ces critères";
                     }
@@ -288,7 +286,6 @@
             }
                
                ?>
-
             </div>
             <div class="basDePage">
                 <form method="post">
