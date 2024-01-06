@@ -38,71 +38,10 @@
                 $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
 
-                if (count($returnQueryAdrUti)>0){
-                    $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-            ?>
-                <br>
-                <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
-                <br>
-                <br>
-                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-                <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-                <script>
-                    function AfficheRange2(newVal) {
-                        var monCurseurKm = document.getElementById("monCurseurKm");
-                        if ((newVal >= 100)) {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
-                        } else {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
-                        }
-                    }
-                </script>
-                Km
-                <br>
-                <br>
-            <?php
-                }
-                else{
-                    $Adr_Uti_En_Cours='France';
-                }
-            ?>
-            <br>
-			<center><input type="submit" value="Rechercher"></center>
-			</form>
-
-
-            </div>
-        </div>
-        <div class="rightColumn">
-            <div class="topBanner">
-                <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
-                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
-                </div>
-                <form method="post">
-                    <?php
-                    if(!isset($_SESSION)){
-                    session_start();
-                    }
-                    if(isset($_SESSION, $_SESSION['tempPopup'])){
-                        $_POST['popup'] = $_SESSION['tempPopup'];
-                        unset($_SESSION['tempPopup']);
-                    }
-                    ?>
-					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-				</form>
-            </div>
-            <div class="contenuPage">
-
-               <?php 
+                               
                
                
-               
-               
-               
-               if (isset($_GET["rechercheVille"])==true){
+            if (isset($_GET["rechercheVille"])==true){
                 $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
               }
               else{
@@ -200,6 +139,69 @@
                 
                     return ($miles ? ($km * 0.621371192) : $km);
             }
+
+                if (count($returnQueryAdrUti)>0){
+                    $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+            ?>
+                <br>
+                <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
+                <br>
+                <br>
+                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
+                <script>
+                    function AfficheRange2(newVal) {
+                        var monCurseurKm = document.getElementById("monCurseurKm");
+                        if ((newVal >= 100)) {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                        } else {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                        }
+                    }
+                </script>
+                Km
+                <br>
+                <br>
+            <?php
+                }
+                else{
+                    $Adr_Uti_En_Cours='France';
+                }
+            ?>
+            <br>
+			<center><input type="submit" value="Rechercher"></center>
+			</form>
+
+
+            </div>
+        </div>
+        <div class="rightColumn">
+            <div class="topBanner">
+                <div class="divNavigation">
+                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
+                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
+                </div>
+                <form method="post">
+                    <?php
+                    if(!isset($_SESSION)){
+                    session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+				</form>
+            </div>
+            <div class="contenuPage">
+
+               <?php 
+               
+               
+
                
                
                
