@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+if(!isset($_SESSION)){
+    session_start();
+}
+
 function afficheMessages($id_user, $id_other_people){
     $bdd = dbConnect();
     $query = $bdd->query(('CALL conversation('.$id_user.', '.$id_other_people.');'));
