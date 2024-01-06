@@ -84,5 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bindInsertProduct->bindParam(':Unite_Prix', $Unite_Prix, PDO::PARAM_INT);
     $bindInsertProduct->execute();
 
-    header('Location: mes_produits.php');
+    header('Location: produits.php');
 ?>
