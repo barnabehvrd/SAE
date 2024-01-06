@@ -37,7 +37,6 @@
             $motdepasse = "ahV4saerae";
             $basededonnees = "inf2pj_02";
             // Connect to database
-            echo('eeeeeeeeeeeeee');
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
 
@@ -138,10 +137,8 @@
                 $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
                 $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($returnQueryAdrUti);
-
-               
-            
+                var_dump($utilisateur);
+                var_dump($queryAdrUti);
 
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
