@@ -36,28 +36,8 @@
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
-                <!-- some code -->
-            </div>
-        </div>
-        <div class="rightColumn">
-            <div class="topBanner">
-                <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
-                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
-                </div>
-                <form method="post">
-                    <?php
-                    if(isset($_SESSION, $_SESSION['tempPopup'])){
-                        $_POST['popup'] = $_SESSION['tempPopup'];
-                        unset($_SESSION['tempPopup']);
-                    }
-                    ?>
-					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-				</form>
-            </div>
-
+                
+            
             <center>
                 <p><strong>Filtrer par :</strong></p>
                 <br>
@@ -92,6 +72,27 @@
                     <input type="submit" value="Filtrer">
                 </center>
             </form>
+
+            </div>
+        </div>
+        <div class="rightColumn">
+            <div class="topBanner">
+                <div class="divNavigation">
+                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
+                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
+                </div>
+                <form method="post">
+                    <?php
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+				</form>
+            </div>
 
             <div class="contenuPage">
 
