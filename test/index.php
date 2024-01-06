@@ -11,7 +11,66 @@
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
-                <!-- some code -->
+                
+            <center><strong><p>Rechercher par</p></strong></center>
+			<form method="get" action="index.php"> 
+			<label>- Profession :</label>
+            <br>
+			<select name="categorie" id="categories">
+                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
+				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
+				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
+				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
+				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>>Apiculteur</option>
+				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>>Éleveur de volaille</option>
+				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>>Viticulteur</option>
+				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>>Pépiniériste</option>
+			</select>
+            <br>
+            <br>- Par ville :
+            <br>
+            <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
+            <br>
+            <?php
+                $mabdd=dbConnect();           
+                $queryAdrUti = $mabdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
+                $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
+                $queryAdrUti->execute();
+                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+
+                if (count($returnQueryAdrUti)>0){
+                    $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+            ?>
+                <br>
+                <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
+                <br>
+                <br>
+                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
+                <script>
+                    function AfficheRange2(newVal) {
+                        var monCurseurKm = document.getElementById("monCurseurKm");
+                        if ((newVal >= 100)) {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                        } else {
+                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                        }
+                    }
+                </script>
+                Km
+                <br>
+                <br>
+            <?php
+                }
+                else{
+                    $Adr_Uti_En_Cours='France';
+                }
+            ?>
+            <br>
+			<center><input type="submit" value="Rechercher"></center>
+			</form>
+
+
             </div>
         </div>
         <div class="rightColumn">
@@ -164,7 +223,5 @@
             </div>
         </div>
     </div>
-    <?php require "popups/gestion_popups.php";
-    var_dump($_SESSION);
-    var_dump($_POST);?>
+    <?php require "popups/gestion_popups.php";?>
 </body>
