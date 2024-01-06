@@ -58,11 +58,11 @@ body{
 .rightColumn{
     margin: 0px;
     padding: 0px;
-
-    display: grid;
-    grid-template-rows: 2fr 25fr 2fr;
     
-    background-color: #EBF4EC;    
+    flex: 4;
+    background-color: #EBF4EC;
+    justify-content: center;
+    height: 100%;
 }
 
 .topBanner{
