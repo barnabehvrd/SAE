@@ -175,7 +175,7 @@ body{
 }
 
 .product {
-    flex: 2;
+    flex: 1;
     /* Partie gauche occupe 50% de la largeur */
     background-color: #f0f0f0;
     padding: 20px;
