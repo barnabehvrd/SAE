@@ -137,12 +137,14 @@
                 $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
                 $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+                var_dump($returnQueryAdrUti);
 
                
             
 
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+                    var_dump($returnQueryAdrUti);
             ?>
                 <br>
                 <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
@@ -201,7 +203,7 @@
 
                <?php 
                
-               var_dump($_SESSION["Id_Uti"]);
+
 
                
                
