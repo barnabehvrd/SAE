@@ -135,3 +135,11 @@ body{
     display: flex;
     justify-content: center;
 }
+
+
+.square {
+    width: 350px;
+    height: 350px;
+    background-color: #4caf50;
+    margin: 5px;
+}
