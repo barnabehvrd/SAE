@@ -195,11 +195,10 @@
 				</form>
             </div>
             <div class="contenuPage">
+            <h1> PRODUCTEURS : </h1>
 
                <?php 
                
-
-                    echo 'test';
                
                
                
