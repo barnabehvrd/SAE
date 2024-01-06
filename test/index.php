@@ -247,7 +247,7 @@
                     $latitudeUti=$coordonneesUti[0];
                     $longitudeUti=$coordonneesUti[1];
                     if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                        /*while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
                                 echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
                                 echo "Nom : " . $row["Nom_Uti"] . "<br>";
@@ -271,7 +271,7 @@
                                     echo '</a> ';  
                                 }    
                             }
-                        }
+                        }*/
                     } else {
                         echo "Aucun résultat ne correspond à ces critères";
                     }
