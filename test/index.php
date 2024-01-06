@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+    var_dump($_SESSION);
         if (isset($_GET["rechercheVille"])==true){
             $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
         }
@@ -137,8 +138,6 @@
                 $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
                 $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($utilisateur);
-                var_dump($queryAdrUti);
 
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
