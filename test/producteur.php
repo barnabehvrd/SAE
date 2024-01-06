@@ -264,8 +264,11 @@
                         width="100%" height="100%" 
                     ></iframe>
                     <?php } 
+
+                    if (sizeof($returnQueryGetProducts)>0){
                     ?>
                 <button type="submit">Passer commande</button>
+                <?php }?>
             </form>
                 </div>
             </div>
