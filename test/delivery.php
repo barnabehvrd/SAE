@@ -21,7 +21,6 @@
       }
 
 	  $bdd=dbConnect();
-	  session_start();
 	  $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
       if (isset($_POST["typeCategorie"])==true){
         $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
@@ -109,7 +108,7 @@
             <div class="contenuPage">
 
 
-            
+
             
             <?php
                 if ($filtreCategorie!=0){
