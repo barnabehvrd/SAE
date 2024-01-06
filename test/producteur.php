@@ -7,6 +7,41 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
+    <?php
+     function dbConnect(){
+        $utilisateur = "inf2pj02";
+        $serveur = "localhost";
+        $motdepasse = "ahV4saerae";
+        $basededonnees = "inf2pj_02";
+    
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+      }
+      if(!isset($_SESSION)){
+        session_start();
+        }
+      // variable utilisée plusieurs fois par la suite
+      $Id_Prod = htmlspecialchars($_GET["Id_Prod"]);
+
+      if (isset($_GET["filtreType"])==true){
+        $filtreType=htmlspecialchars($_GET["filtreType"]);
+      }
+      else{
+        $filtreType="TOUT";
+      }
+      if (isset($_GET["tri"])==true){
+        $tri=htmlspecialchars($_GET["tri"]);
+      }
+      else{
+        $tri="No";
+      }
+      if (isset($_GET["rechercheNom"])==true){
+        $rechercheNom=htmlspecialchars($_GET["rechercheNom"]);
+      }
+      else{
+        $rechercheNom="";
+      }
+    ?>
     <div class="container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
