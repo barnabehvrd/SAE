@@ -37,6 +37,7 @@
             $motdepasse = "ahV4saerae";
             $basededonnees = "inf2pj_02";
             // Connect to database
+            echo('eeeeeeeeeeeeee');
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
 
@@ -144,7 +145,6 @@
 
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-                    var_dump($returnQueryAdrUti);
             ?>
                 <br>
                 <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
