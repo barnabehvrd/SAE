@@ -125,7 +125,6 @@
             
 
 
-            <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
                     <p><center><U>Produits proposés :</U></center></p>
@@ -177,7 +176,6 @@
                         ?>
                     </div>
                 </div>
-            </div>
 
 
 
