@@ -23,7 +23,7 @@
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
                 </div>
             </div>
-            <div class="contenuPage">
+            <div class="gallery-container">
                         <?php
                                 // Connexion à la base de données 
                                 $utilisateur = "inf2pj02";
@@ -46,14 +46,14 @@
                                     echo '<div>'; 
                                     while ($row = $result->fetch_assoc()) {
                                         
-                                        echo '<form method="post" action="del_acc.php" class="square1">
+                                        echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
                                             <input type="submit" name="submit" id="submit"><br><br>
-                                            <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'"></form>';
+                                            <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo "Profession : " . $row["Prof_Prod"] . "<br>";
+                                        echo "Profession : " . $row["Prof_Prod"] . "<br></form>";
                                                                               
                                     }
                                     echo '</div>'; 

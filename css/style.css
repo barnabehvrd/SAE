@@ -83,6 +83,12 @@ body {
     margin: 5px;
 }
 
+.squarePanelUser {
+    width: 350px;
+    height: 350px;
+    background-color: #4caf50;
+    margin: 5px;
+}
 .formulaire {
     background-color: #d2d2d2;
     padding: 20px;
