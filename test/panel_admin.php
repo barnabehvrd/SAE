@@ -43,7 +43,6 @@
                                 $result = $stmt->get_result();
 
                                 if ($result->num_rows > 0) {
-                                    echo '<div>'; 
                                     while ($row = $result->fetch_assoc()) {
                                         
                                         echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
