@@ -227,7 +227,7 @@
                      // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    
+                    var_dump('manque affichage car copier coller détruit une partie du css, jai commenté le while dans le code');
                     // récupère les coordonnées de l'utiliasteur
                     // URL vers l'API Nominatim
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
@@ -235,31 +235,32 @@
                     $latitudeUti=$coordonneesUti[0];
                     $longitudeUti=$coordonneesUti[1];
                     if ($result->num_rows > 0) {
-                        /*while ($row = $result->fetch_assoc()) {
-                            if ($rayon>=100){
-                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                        echo '<div class="row">'; // Ouvre la première ligne
+                        while ($row = $result->fetch_assoc()) {
+                            if ($rayon >= 100) {
+                                echo '<a href="producteur.php?Id_Prod=' . $row["Id_Uti"] . '" class="square-container square">';
                                 echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                 echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                echo '</a> ';  
-                            }    
-                            else{
+                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                echo '</a>';
+                            } else {
                                 $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                $coordonneesProd=latLongGps($urlProd);
-                                $latitudeProd=$coordonneesProd[0];
-                                $longitudeProd=$coordonneesProd[1];
-                                $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                if ($distance<$rayon){
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                $coordonneesProd = latLongGps($urlProd);
+                                $latitudeProd = $coordonneesProd[0];
+                                $longitudeProd = $coordonneesProd[1];
+                                $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                if ($distance < $rayon) {
+                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Uti"] . '" class="square-container square">';
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                    echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                    echo '</a> ';  
-                                }    
+                                    echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '</a>';
+                                }
                             }
-                        }*/
+                        }
+                        echo '</div>'; // Ferme la dernière ligne
                     } else {
                         echo "Aucun résultat ne correspond à ces critères";
                     }
