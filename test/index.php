@@ -201,7 +201,77 @@
 
                <?php 
                
-               
+               if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                if (isset($_GET["categorie"])) {
+                    $categorie = htmlspecialchars($_GET["categorie"]);
+                    // Connexion à la base de données 
+                    $utilisateur = "inf2pj02";
+                    $serveur = "localhost";
+                    $motdepasse = "ahV4saerae";
+                    $basededonnees = "inf2pj_02";
+                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+                    // Vérifiez la connexion
+                    if ($connexion->connect_error) {
+                        die("Erreur de connexion : " . $connexion->connect_error);
+                    }
+                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                    if ($_GET["categorie"]=="Tout"){
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod LIKE \'%\'';
+                    }else{
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
+                        //$stmt->bind_param("s", $categorie);
+                    }
+                    if ($rechercheVille!=""){
+                        $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
+                    }
+                    $stmt = $connexion->prepare($requete);
+                     // "s" indique que la valeur est une chaîne de caractères
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    
+                    // récupère les coordonnées de l'utiliasteur
+                    // URL vers l'API Nominatim
+                    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                    $coordonneesUti=latLongGps($urlUti);
+                    $latitudeUti=$coordonneesUti[0];
+                    $longitudeUti=$coordonneesUti[1];
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if ($rayon>=100){
+                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                echo '</a> ';  
+                            }    
+                            else{
+                                $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                $coordonneesProd=latLongGps($urlProd);
+                                $latitudeProd=$coordonneesProd[0];
+                                $longitudeProd=$coordonneesProd[1];
+                                $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                if ($distance<$rayon){
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                    echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '</a> ';  
+                                }    
+                            }
+                        }
+                    } else {
+                        echo "Aucun résultat ne correspond à ces critères";
+                    }
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                        }
+                    }
+                    $stmt->close();
+                    $connexion->close();
+                }
+            }
 
                
                
