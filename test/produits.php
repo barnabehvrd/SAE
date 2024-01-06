@@ -126,54 +126,56 @@
 
 
             <div class="content-container">
-                <!-- partie de gauche avec les produits -->
-                <p><center><U>Produits proposés :</U></center></p>
-                <div class="gallery-container">
-                    <?php
-                        $bdd=dbConnect();
-                        $queryGetProducts = $bdd->prepare(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod= :Id_Prod ;'));
-                        $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
-                        $queryGetProducts->execute();
-                        $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+                <div class="product">
+                    <!-- partie de gauche avec les produits -->
+                    <p><center><U>Produits proposés :</U></center></p>
+                    <div class="gallery-container">
+                        <?php
+                            $bdd=dbConnect();
+                            $queryGetProducts = $bdd->prepare(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod= :Id_Prod ;'));
+                            $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
+                            $queryGetProducts->execute();
+                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
-                        $i=0;
-                        if(count($returnQueryGetProducts)==0){
-                            echo "Aucun produit en stock";
-                        }
-                        else{
-                            while ($i<count($returnQueryGetProducts)){
-                                $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
-                                $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];
-                                $typeProduit = $returnQueryGetProducts[$i]["Desc_Type_Produit"];
-                                $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
-                                $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
-                                $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
-                                $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
-                            if ($QteProduit>0){
-                                    echo '<style>';
-                                    echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
-                                    echo 'button { display: inline-block; }';
-                                    echo '</style>';
-                                    echo '<div class="squareProduct" >';
-                                    echo "Produit : " . $nomProduit . "<br>";
-                                    echo "Type : " . $typeProduit . "<br>";
-                                    echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
-                                    echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                    echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
-                                    echo '<form action="product_modification.php" method="post">';
-                                    echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
-                                    echo '<button type="submit" name="action">Modifier</button>';
-                                    echo '</form>';
-                                    echo '<form action="delete_product.php" method="post">';
-                                    echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
-                                    echo '<button type="submit" name="action">Supprimer</button>';
-                                    echo '</form>';
-                                    echo '</div> '; 
-                                }
-                                $i++;
+                            $i=0;
+                            if(count($returnQueryGetProducts)==0){
+                                echo "Aucun produit en stock";
                             }
-                        }
-                    ?>
+                            else{
+                                while ($i<count($returnQueryGetProducts)){
+                                    $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
+                                    $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];
+                                    $typeProduit = $returnQueryGetProducts[$i]["Desc_Type_Produit"];
+                                    $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
+                                    $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
+                                    $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
+                                    $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
+                                if ($QteProduit>0){
+                                        echo '<style>';
+                                        echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
+                                        echo 'button { display: inline-block; }';
+                                        echo '</style>';
+                                        echo '<div class="squareProduct" >';
+                                        echo "Produit : " . $nomProduit . "<br>";
+                                        echo "Type : " . $typeProduit . "<br>";
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
+                                        echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
+                                        echo '<form action="product_modification.php" method="post">';
+                                        echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
+                                        echo '<button type="submit" name="action">Modifier</button>';
+                                        echo '</form>';
+                                        echo '<form action="delete_product.php" method="post">';
+                                        echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
+                                        echo '<button type="submit" name="action">Supprimer</button>';
+                                        echo '</form>';
+                                        echo '</div> '; 
+                                    }
+                                    $i++;
+                                }
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
 
