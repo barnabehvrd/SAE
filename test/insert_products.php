@@ -46,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $serveur = "localhost";
         $motdepasse = "ahV4saerae";
         $basededonnees = "inf2pj_02";
-        session_start();
 
         // Obtenir l'extension du fichie
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
@@ -90,5 +89,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bindInsertProduct->bindParam(':Unite_Prix', $Unite_Prix, PDO::PARAM_INT);
     $bindInsertProduct->execute();
 
-    //header('Location: produits.php');
+    header('Location: produits.php');
 ?>
