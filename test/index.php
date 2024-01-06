@@ -227,7 +227,7 @@
                      // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    var_dump($result);
+                    var_dump($requete);
                     
                     // récupère les coordonnées de l'utiliasteur
                     // URL vers l'API Nominatim
