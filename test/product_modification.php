@@ -19,7 +19,6 @@
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
-          session_start();
           $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
           $Id_Produit_Update=htmlspecialchars($_POST["modifyIdProduct"]);
           $_SESSION["Id_Produit"]=$Id_Produit_Update;
