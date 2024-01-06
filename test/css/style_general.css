@@ -158,7 +158,10 @@ body{
     margin: 5px;
 }
 
-
+.content-container {
+    display: flex;
+    /* Utiliser Flexbox pour les éléments "product" et "map" */
+}
 
 .product {
     flex: 2;
