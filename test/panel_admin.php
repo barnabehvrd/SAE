@@ -19,9 +19,8 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">UTILISATEUR</a>
+                    <a class="bontonDeNavigation" href="index.php">Utilisateurs</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
                 </div>
                 <form method="post">
 					<input type="submit" value=<?php if (!isset($_SESSION)){session_start(); echo "Connexion";}else {echo $_SESSION['Mail_Uti'];}?> class="boutonDeConnection">
