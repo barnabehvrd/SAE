@@ -12,7 +12,6 @@
         if(!isset($_SESSION)){
             session_start();
         }
-        var_dump($_SESSION);
         if (isset($_GET["rechercheVille"])==true){
             $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
         }
