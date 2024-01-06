@@ -265,7 +265,7 @@
 
 
                     <!-- partie de gauche avec les produits -->
-                    <p><center><U>Produits proposés :</U></center></p>
+                    <p><center><U>Mes produits en stock :</U></center></p>
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
