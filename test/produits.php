@@ -157,7 +157,7 @@
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
                                         // /test/  A SUPPRIMER QUAND ON REFERA LE VFINALE SUR SERVER !!!!!!
-                                        echo '<img class="img-produit" src="/~inf2pj02/test/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 85%; height: 70%;" ><br>';
+                                        echo '<center><img class="img-produit" src="/~inf2pj02/test/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 85%; height: 70%;" ><br></center>';
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo "Stock : " . $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         echo '<form action="product_modification.php" method="post">';
