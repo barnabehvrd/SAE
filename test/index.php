@@ -200,7 +200,7 @@
                <?php 
                
                
-               
+               echo 'il me faut des endroits pré-faits (des carrés) pour que je puisse mettre mes producteurs';
                
                ?>
 
