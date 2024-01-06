@@ -153,7 +153,7 @@
                                         echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
                                         echo 'button { display: inline-block; }';
                                         echo '</style>';
-                                        echo '<div class="squareProduct" >';
+                                        echo '<div class="square1" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
                                         // /test/  A SUPPRIMER QUAND ON REFERA LE VFINALE SUR SERVER !!!!!!
