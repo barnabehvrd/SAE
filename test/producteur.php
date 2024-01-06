@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
+    <?php
+    if(!isset($_SESSION)){
+    session_start();
+    }
+    ?>
     <div class="container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
