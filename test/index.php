@@ -210,9 +210,8 @@
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
 				</form>
             </div>
-            <div class="contenuPage">
             <h1> PRODUCTEURS : </h1>
-
+            <div class="gallery-container">
                <?php 
                
                
@@ -243,7 +242,6 @@
                      // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    var_dump('manque affichage car copier coller détruit une partie du css, jai commenté le while dans le code');
                     // récupère les coordonnées de l'utiliasteur
                     // URL vers l'API Nominatim
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
@@ -289,7 +287,6 @@
             }
                
                ?>
-
             </div>
             <div class="basDePage">
                 <form method="post">

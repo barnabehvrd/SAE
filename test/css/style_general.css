@@ -117,6 +117,15 @@ body{
 
 }
 
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center ;
+    gap: 10px;
+			
+}
+/*
 .contenuPage{
     margin-top: 5%;
     margin-left: 3%;
@@ -128,7 +137,7 @@ body{
 
     overflow-y: scroll;
 }
-
+*/
 .basDePage{
     display: flex;
     align-items: flex-end;
