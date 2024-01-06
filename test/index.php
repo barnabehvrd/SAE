@@ -251,9 +251,9 @@
                     $latitudeUti=$coordonneesUti[0];
                     $longitudeUti=$coordonneesUti[1];
                     if ($result->num_rows > 0) {
-                        /*while ($row = $result->fetch_assoc()) {
+                        while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
-                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square1"  >';
                                 echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                 echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                 echo "Adresse : " . $row["Adr_Uti"] . "<br>";
@@ -267,7 +267,7 @@
                                 $longitudeProd=$coordonneesProd[1];
                                 $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
                                 if ($distance<$rayon){
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square1"  >';
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                     echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
@@ -275,7 +275,7 @@
                                     echo '</a> ';  
                                 }    
                             }
-                        }*/
+                        }
                     } else {
                         echo "Aucun résultat ne correspond à ces critères";
                     }
