@@ -9,6 +9,11 @@
     <!-- name of the page -->
 </head>
 <body>
+    <?php
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    ?>
     <div class="container">
     <div class="left-column">
 			<img class="logo" src="img/logo.png">
