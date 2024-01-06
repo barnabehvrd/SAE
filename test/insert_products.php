@@ -54,17 +54,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Utiliser l'extension dans le nouveau nom du fichier
         $newFileName = $nbProduits . '.' . $extension;
 
-        // Créer le chemin complet du fichier de destination
-        $targetPath = $targetDir . $newFileName;
-        
-        unlink( $targetPath ); 
-        // Déplacer le fichier téléchargé vers le dossier de destination
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
-            echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
-        } else {
-            echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
-            header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
-        }
+            // Créer le chemin complet du fichier de destination
+            $newFileName = $nbProduits . '.' . $extension;
+            $targetPath = $targetDir . $newFileName;
+
+            // Vérifier si le fichier existe avant de le supprimer
+            if (file_exists($targetPath)) {
+                unlink($targetPath);
+                echo "L'ancienne image a été supprimée avec succès.<br>";
+            }
+
+            // Déplacer le fichier téléchargé vers le dossier de destination
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
+                echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
+            } else {
+                echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
+                header('Location: mes_produits.php?erreur='. error_get_last()['message']);
+            }
 
     } else {
         echo "Veuillez sélectionner une image.<br>";
