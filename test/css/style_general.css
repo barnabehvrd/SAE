@@ -170,6 +170,7 @@ body{
 
 .content-container {
     display: flex;
+    padding: 20px;
     /* Utiliser Flexbox pour les éléments "product" et "map" */
 }
 
