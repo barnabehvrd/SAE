@@ -84,6 +84,9 @@
                 </div>
                 <form method="post">
                     <?php
+                    if(!isset($_SESSION)){
+                        session_start();
+                    }
                     if(isset($_SESSION, $_SESSION['tempPopup'])){
                         $_POST['popup'] = $_SESSION['tempPopup'];
                         unset($_SESSION['tempPopup']);

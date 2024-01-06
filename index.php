@@ -181,8 +181,8 @@
 						<button class="button"><a href="commandes.php">Achats</a></button>
                         <?php
                             if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
-                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
+                                echo '<button class="button"><a href="mes_produits.php">Produits</a></button>';
+                                echo '<button class="button"><a href="delivery.php">Commandes</a></button>';
                             }
                         ?>
                     </div>
