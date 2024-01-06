@@ -44,7 +44,6 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        
                                         echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
                                             <input type="submit" name="submit" id="submit"><br><br>
                                             <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
@@ -53,7 +52,6 @@
                                         echo "Mail : " . $row["Mail_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo "Profession : " . $row["Prof_Prod"] . "<br></form>";
-                                                                              
                                     }
                                     echo '</div>'; 
                                 } else {
@@ -90,7 +88,7 @@
                             echo "Nom : " . $row["Nom_Uti"] . "<br>";
                             echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                             echo "Mail : " . $row["Mail_Uti"] . "<br>";
-                            echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                            echo "Adresse : " . $row["Adr_Uti"] . "<br></form>";
                         }
                         echo '</div>'; 
                     } else {
