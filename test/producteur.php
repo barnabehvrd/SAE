@@ -111,7 +111,7 @@
             <br>
             <br>  
 
-            
+
             </div>
         </div>
         <div class="rightColumn">
@@ -143,11 +143,135 @@
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
 				</form>
             </div>
-            <div class="contenuPage">
 
-               <!-- some code -->
 
+
+            <div class="content-container">
+                <div class="product">
+                    <!-- partie de gauche avec les produits -->
+                    <p><center><U>Produits proposés :</U></center></p>
+                    <div class="gallery-container">
+                        <?php
+                            $bdd=dbConnect();
+                            //filtre type
+                            if ($filtreType=="TOUT"){
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod';
+                            }
+                            else{
+                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit= :filtreType';
+
+                            }
+                            // filtre nom
+                            if ($rechercheNom!=""){
+                                $query=$query.' AND Nom_Produit LIKE :rechercheNom ';
+                            }
+
+                            //tri
+                            if ($tri=="No"){
+                                $query=$query.';';
+                            }
+                            else if ($tri=="PrixAsc"){
+                                $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
+                            }
+                            else if ($tri=="PrixDesc"){
+                                $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
+                            }
+                            else if ($tri=="Alpha"){
+                                $query=$query.' ORDER BY Nom_Produit ASC;';
+                            }
+                            else if ($tri=="AntiAlpha"){
+                                $query=$query.' ORDER BY Nom_Produit DESC;';
+                            }
+
+                            //preparation paramètres
+                            $queryGetProducts = $bdd->prepare(($query));
+                            if ($filtreType=="TOUT"){
+                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);                            
+                            }
+                            else{
+                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);   
+                                $queryGetProducts->bindParam(":filtreType", $filtreType, PDO::PARAM_STR);
+                            }
+                            if ($rechercheNom!=""){
+                                $queryGetProducts->bindParam(":rechercheNom", $rechercheNom, PDO::PARAM_STR);  
+                            }
+
+                            $queryGetProducts->execute();
+                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+
+                            $i=0;
+                            if(count($returnQueryGetProducts)==0){
+                                echo "Aucun produit en stock";
+                            }
+                            else{
+                                while ($i<count($returnQueryGetProducts)){
+                                    $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
+                                    $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];
+                                    $typeProduit = $returnQueryGetProducts[$i]["Desc_Type_Produit"];
+                                    $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
+                                    $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
+                                    $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
+
+                                    if ($QteProduit>0){
+                                        echo '<div class="squareProduct" >';
+                                        echo "Produit : " . $nomProduit . "<br>";
+                                        echo "Type : " . $typeProduit . "<br>";
+                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
+                                        echo '</div> '; 
+                                    }
+                                    $i++;
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="producteur">
+                    <!-- partie de droite avec les infos producteur -->
+                    <?php
+                        $bdd=dbConnect();
+                        $queryInfoProd = $bdd->prepare(('SELECT UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;'));
+                        $queryInfoProd->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
+                        $queryInfoProd->execute();   
+                        $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
+
+                        // recupération des paramètres de la requête qui contient 1 élément
+                        $address = $returnQueryInfoProd[0]["Adr_Uti"];
+                        $nom = $returnQueryInfoProd[0]["Nom_Uti"];
+                        $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
+                        $profession = $returnQueryInfoProd[0]["Prof_Prod"];
+                    ?>
+                    <div class="info-container">
+						<div class="img-prod">
+                        	<img class="img-test" src="/~inf2pj02/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
+						</div>
+						<div class="text-info">
+                            <?php
+                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address;
+                            ?>
+                        </div>
+                    </div>
+                    <input type="button" onclick="window.location.href='message.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
+                    <?php
+                        if (isset($address)) {
+                            $address = str_replace(" ", "+", $address);
+                    ?>
+                    <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
+                        width="100%" height="100%" 
+                    ></iframe>
+                    <?php } 
+                    ?>
+                <button type="submit">Passer commande</button>
+            </form>
+                </div>
             </div>
+
+
+
+
+
+
             <div class="basDePage">
                 <form method="post">
 						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
