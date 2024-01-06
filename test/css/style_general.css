@@ -189,3 +189,10 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+
+.img-produit {
+    justify-content: center;
+    flex: 1;
+    max-height: 200px;
+}
