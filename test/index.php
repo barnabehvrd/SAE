@@ -188,7 +188,11 @@
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                             echo'<a class="bontonDeNavigation" href="produits.php">Mes produits</a>';
                             echo'<a class="bontonDeNavigation" href="delivery.php">Préparation des commandes</a>';
+                        }/*
+                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Admin</a>';
                         }
+                        */
                     ?>
                 </div>
                 <form method="post">
