@@ -215,7 +215,7 @@
                 <input type="submit" value="Confirmer la modification">
             </form>
             <br>
-            <form action="mes_produits.php" method="post">
+            <form action="produits.php" method="post">
                 <input type="submit" value="Annuler la modification">
             </form>
             <br>
@@ -301,7 +301,7 @@
                                         echo 'button { display: inline-block; }';
                                         echo '</style>';
 
-                                        echo '<div class="squareProduct" >';
+                                        echo '<div class="square1" >';
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br><br>";
                                         echo '<img class="img-produit" src="/~inf2pj02/test/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
