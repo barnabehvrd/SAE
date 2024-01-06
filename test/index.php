@@ -184,6 +184,12 @@
                     <a class="bontonDeNavigation" href="index.php">Accueil</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
                     <a class="bontonDeNavigation" href="achats.php">Achats</a>
+                    <?php
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Mes produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Préparation des commandes</a>';
+                        }
+                    ?>
                 </div>
                 <form method="post">
                     <?php
