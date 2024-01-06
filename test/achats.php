@@ -7,6 +7,31 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
+
+    <?php
+    if(!isset($_SESSION)){
+        session_start();
+        }
+
+        function dbConnect(){
+            $utilisateur = "inf2pj02";
+            $serveur = "localhost";
+            $motdepasse = "ahV4saerae";
+            $basededonnees = "inf2pj_02";
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        }
+
+        $bdd=dbConnect();
+        $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
+        
+        $filtreCategorie=0;
+        if (isset($_POST["typeCategorie"])==true){
+            $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
+        }
+    
+    ?>
+
     <div class="container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
@@ -19,13 +44,10 @@
                 <div class="divNavigation">
                     <a class="bontonDeNavigation" href="index.php">Accueil</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="commandes.php">Commandes</a>
+                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
                 </div>
                 <form method="post">
                     <?php
-                    if(!isset($_SESSION)){
-                    session_start();
-                    }
                     if(isset($_SESSION, $_SESSION['tempPopup'])){
                         $_POST['popup'] = $_SESSION['tempPopup'];
                         unset($_SESSION['tempPopup']);
