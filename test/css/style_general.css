@@ -157,3 +157,21 @@ body{
     background-color: #4caf50;
     margin: 5px;
 }
+
+
+
+.product {
+    flex: 2;
+    /* Partie gauche occupe 50% de la largeur */
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.producteur {
+    flex: 1;
+    /* Partie droite occupe 50% de la largeur */
+    background-color: #c0c0c0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
