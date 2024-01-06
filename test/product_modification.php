@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <title>L'étal en ligne</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
     <?php
-    function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    }
-      session_start();
-      $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
-      $Id_Produit_Update=htmlspecialchars($_POST["modifyIdProduct"]);
-      $_SESSION["Id_Produit"]=$Id_Produit_Update;
-      
-      $bdd=dbConnect();
-      $queryGetProducts = $bdd->prepare('SELECT * FROM PRODUIT WHERE Id_Produit = :Id_Produit_Update');
-      $queryGetProducts->bindParam(':Id_Produit_Update', $Id_Produit_Update, PDO::PARAM_INT);
-      $queryGetProducts->execute();
-      $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
-      //var_dump($returnQueryGetProducts);
-      $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
-      $Nom_Produit = $returnQueryGetProducts[0]["Nom_Produit"];
-      $Id_Type_Produit = $returnQueryGetProducts[0]["Id_Type_Produit"];
-      $Qte_Produit = $returnQueryGetProducts[0]["Qte_Produit"];
-      $Id_Unite_Stock = $returnQueryGetProducts[0]["Id_Unite_Stock"];
-      $Prix_Produit_Unitaire = $returnQueryGetProducts[0]["Prix_Produit_Unitaire"];
-      $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
-      //var_dump($Id_Type_Produit);
-    ?>
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        function dbConnect(){
+            $utilisateur = "inf2pj02";
+            $serveur = "localhost";
+            $motdepasse = "ahV4saerae";
+            $basededonnees = "inf2pj_02";
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        }
+          session_start();
+          $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
+          $Id_Produit_Update=htmlspecialchars($_POST["modifyIdProduct"]);
+          $_SESSION["Id_Produit"]=$Id_Produit_Update;
+          
+          $bdd=dbConnect();
+          $queryGetProducts = $bdd->prepare('SELECT * FROM PRODUIT WHERE Id_Produit = :Id_Produit_Update');
+          $queryGetProducts->bindParam(':Id_Produit_Update', $Id_Produit_Update, PDO::PARAM_INT);
+          $queryGetProducts->execute();
+          $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+          //var_dump($returnQueryGetProducts);
+          $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
+          $Nom_Produit = $returnQueryGetProducts[0]["Nom_Produit"];
+          $Id_Type_Produit = $returnQueryGetProducts[0]["Id_Type_Produit"];
+          $Qte_Produit = $returnQueryGetProducts[0]["Qte_Produit"];
+          $Id_Unite_Stock = $returnQueryGetProducts[0]["Id_Unite_Stock"];
+          $Prix_Produit_Unitaire = $returnQueryGetProducts[0]["Prix_Produit_Unitaire"];
+          $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
+          //var_dump($Id_Type_Produit);
+        ?>
     <div class="container">
-        <div class="left-column">
-            <img class="logo" src="img/logo.png">
-            <!-- Contenu de la partie gauche -->
+        <div class="leftColumn">
+			<img class="logo" href="index.php" src="img/logo.png">
+            <div class="contenuBarre">
+                
+            
             <center><p><strong>Ajouter un produit</strong></p>
             <form action="modify_product.php" method="post" enctype="multipart/form-data">
 
@@ -219,38 +226,45 @@
             <br>
             <br>
             </center>
-        </div>
-        <div class="right-column">
-        <div class="fixed-banner">
-                <!-- Partie gauche du bandeau -->
-                <div class="banner-left">
-                    <div class="button-container">
-                    <button class="button"><a href="index.php">Accueil</a></button>
-                        <button class="button"><a href="message.php">Messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">Achats</a></button>
-                        <?php
-                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
-                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
-                            }
-                        ?>
-                    </div>
-                </div>
-                <!-- Partie droite du bandeau -->
-                <div class="banner-right">
-					<?php 
-                    if (isset($_SESSION['Mail_Uti'])) {  
-                    echo '<a class="fixed-size-button" href="user_informations.php" >';
-					echo $_SESSION['Mail_Uti']; 
-					}
-					else {
-                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
-					echo "connection";
-					}
-					?>
-					</a>
-                </div>
+
+
+
+
             </div>
+        </div>
+        <div class="rightColumn">
+            <div class="topBanner">
+                <div class="divNavigation">
+                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <?php
+                        if (isset($_SESSION["Id_Uti"])){
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                        }
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                        }
+                    ?>
+                </div>
+                <form method="post">
+                    <?php
+                    if(!isset($_SESSION)){
+                    session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+				</form>
+            </div>
+
+            
+
+
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
@@ -319,18 +333,21 @@
                 </div>
             </div>
 
-            <form class="formulaire" action="bug_report.php" method="post">
-                <p class="centered">report a bug</p>
-                <label for="mail">mail :</label>
-                <input type="text" name="mail" id="mail" required><br><br>
-                <label for="pwd">message : </label>
-                <input type="text" name="message" id="message" required><br><br>
-                <input type="submit" value="Envoyer">
-            </form>
 
+
+
+
+            <div class="basDePage">
+                <form method="post">
+						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+                        <input type="hidden" name="popup" value="contact_admin">
+				</form>
+                <form method="post">
+						<input type="submit" value="CGU" class="lienPopup">
+                        <input type="hidden" name="popup" value="cgu">
+				</form>
+            </div>
         </div>
     </div>
+    <?php require "popups/gestion_popups.php";?>
 </body>
-</html>
-
-
