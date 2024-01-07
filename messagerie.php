@@ -85,5 +85,5 @@
             </div>
         </div>
     </div>
-    <?php require "popups/gestionPopups.php" ?>
+    <?php require "popups/gestion_popups.php" ?>
 </body>
