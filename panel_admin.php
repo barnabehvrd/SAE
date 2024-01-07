@@ -19,8 +19,9 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Utilisateurs</a>
+                    <a class="bontonDeNavigation" href="index.php">accueil</a>
                     <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
+                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
                 </div>
             </div>
             <div class="gallery-container">
