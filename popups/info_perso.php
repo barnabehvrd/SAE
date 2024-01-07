@@ -36,11 +36,11 @@
                     <!--  Set default values to current user information -->
                     <div>
                         <label for="new_nom">Nom :</label>
-                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" value=<?php echo ($row["Nom_Uti"]) ?>>
+                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value=<?php echo ($row["Nom_Uti"]) ?>>
                     </div>
                     <div>
                         <label for="new_prenom">Prénom :</label>
-                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" value=<?php echo ($row["Prenom_Uti"]) ?>>
+                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value=<?php echo ($row["Prenom_Uti"]) ?>>
                     </div>
                     <div>
                         <label>Adresse postale actuelle :</label>
@@ -48,7 +48,7 @@
                     </div>
                     <div>
                         <label for="rue">Rue :</label>
-                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
+                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
                     </div>
                     <div>
                             <label for="code">Code postale :</label>
@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <label for="ville">Ville :</label>
-                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâô ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
+                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
                     </div>
                     <div>
                         <?php
