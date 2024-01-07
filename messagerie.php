@@ -3,7 +3,7 @@
 <head>
     <title>L'étal en ligne</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
     <link rel="stylesheet" type="text/css" href="css/messagerie.css"> 
     <!-- name of the page -->
