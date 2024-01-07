@@ -191,6 +191,10 @@
                             echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
                             echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
                         }
+                        if (isset($_SESSION["Id_Uti"])AND ($_SESSION["Id_Uti"]=24 or $_SESSION["Id_Uti"]=35)){
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                        }
+
                         /*
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
                             echo'<a class="bontonDeNavigation" href="panel_admin.php">Admin</a>';
