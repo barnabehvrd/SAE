@@ -220,7 +220,7 @@
                                         echo "Produit : " . $nomProduit . "<br>";
                                         echo "Type : " . $typeProduit . "<br>";
                                         echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="/~inf2pj02/test/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
                                         echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                         echo '</div> '; 
                                     }
