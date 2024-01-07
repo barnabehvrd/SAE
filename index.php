@@ -260,9 +260,9 @@
                         while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
                                 echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                echo "Nom : " . $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                echo "Prénom : " . $row["Prof_Prod"]. "<br>";
-                                echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
+                                echo $row["Prof_Prod"]. "<br>";
+                                echo $row["Adr_Uti"] . "<br>";
                                 echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
@@ -296,6 +296,7 @@
                
                ?>
             </div>
+            <br>
             <div class="basDePage">
                 <form method="post">
 						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
