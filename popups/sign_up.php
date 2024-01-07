@@ -24,7 +24,7 @@ if (isset($_POST['formClicked'])){
         </div>
         <div>
             <label for="rue">Rue :</label>
-            <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôâêàéôââîââçâœççœâôœêëâô ]{0,120}" title="la rue doit faire entre 0 et 120 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô">
+            <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôâêàéôââîââçâœççœâôœêëâô ]{0,120}" title="la rue doit faire entre 0 et 120 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô" required>
         </div>
         <div>
             <label for="code">Code postale :</label>
