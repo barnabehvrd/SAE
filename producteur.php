@@ -255,7 +255,16 @@
                             ?>
                         </div>
                     </div>
+                    
+                    
+                    <?php
+                    //bloquer les 2 boutons pour les visiteurs non connectés
+                    if (isset($_SESSION["Id_Uti"])){
+                    ?>
                     <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
+                    <?php }?>
+
+
                     <?php
                         if (isset($address)) {
                             $address = str_replace(" ", "+", $address);
@@ -265,16 +274,13 @@
                     ></iframe>
                     <?php } 
 
-                    if (sizeof($returnQueryGetProducts)>0){
+                    if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"])){
                     ?>
                 <button type="submit">Passer commande</button>
                 <?php }?>
             </form>
                 </div>
             </div>
-
-
-
 
 
 
