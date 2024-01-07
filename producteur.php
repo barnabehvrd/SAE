@@ -262,7 +262,8 @@
                     if (isset($_SESSION["Id_Uti"])){
                     ?>
                     <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
-                    <?php }?>
+                    <?php 
+                    }?>
 
 
                     <?php
