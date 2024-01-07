@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>L'étal en ligne</title>
+<?php
+    require "language_fr.php" ; 
+?>
+    <title> <?php $index_title ?> </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
     <?php
-    
         if(!isset($_SESSION)){
             session_start();
         }
@@ -116,7 +118,7 @@
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
                 
-            <center><strong><p>Rechercher par</p></strong></center>
+            <center><strong><p><?php $search_by?></p></strong></center>
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
             <br>
