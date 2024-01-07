@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
+    <title>L'étal en ligne</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
     <?php
-        session_start();
+    
+        if(!isset($_SESSION)){
+            session_start();
+        }
         if (isset($_GET["rechercheVille"])==true){
             $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
-          }
-          else{
+        }
+        else{
             $rechercheVille="";
         }
         if (isset($_GET["categorie"])==false){
@@ -39,9 +42,9 @@
             $basededonnees = "inf2pj_02";
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-          }
+        }
 
-          function latLongGps($url){
+        function latLongGps($url){
             // Configuration de la requête cURL
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -72,7 +75,7 @@
             }
             // Fermeture de la session cURL
             curl_close($ch);
-          }
+        }
 
 
         /*---------------------------------------------------------------*/
@@ -107,13 +110,13 @@
             
                 return ($miles ? ($km * 0.621371192) : $km);
         }
-        
-
     ?>
     <div class="container">
-        <div class="left-column">
-            <img class="logo" src="img/logo.png">
-			<center><strong><p>Rechercher par</p></strong></center>
+        <div class="leftColumn">
+			<img class="logo" href="index.php" src="img/logo.png">
+            <div class="contenuBarre">
+                
+            <center><strong><p>Rechercher par</p></strong></center>
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
             <br>
@@ -162,129 +165,142 @@
                 <br>
                 <br>
             <?php
+            
                 }
                 else{
                     $Adr_Uti_En_Cours='France';
                 }
             ?>
             <br>
-			<center><input type="submit" value="Rechercher"></center>
+			<input type="submit" value="Rechercher">
 			</form>
-        </div>
-        <div class="right-column">
-            <div class="fixed-banner">
-                <!-- Partie gauche du bandeau -->
-                <div class="banner-left">
-                    <div class="button-container">
-                        <button class="button"><a href="index.php">Accueil</a></button>
-                        <button class="button"><a href="message.php">Messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">Achats</a></button>
-                        <?php
-                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                                echo '<button class="button"><a href="mes_produits.php">Produits</a></button>';
-                                echo '<button class="button"><a href="delivery.php">Commandes</a></button>';
-                            }
-                        ?>
-                    </div>
-                </div>
-                <!-- Partie droite du bandeau -->
-                <div class="banner-right">
-					<?php 
-                    if (isset($_SESSION['Mail_Uti'])) {  
-                    echo '<a class="fixed-size-button" href="user_informations.php" >';
-					echo $_SESSION['Mail_Uti']; 
-					}
-					else {
-                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
-					echo "connection";
-					}
-					?>
-					</a>    
-                </div>
+
+
             </div>
-			<div class="contenu">
-            <!-- Contenu de la partie droite (sous le bandeau) -->
+        </div>
+        <div class="rightColumn">
+            <div class="topBanner">
+                <div class="divNavigation">
+                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <?php
+                        if (isset($_SESSION["Id_Uti"])){
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                        }
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                        }
+                        /*
+                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Admin</a>';
+                        }
+                        */
+                    ?>
+                </div>
+                <form method="post">
+                    <?php
+                    if(!isset($_SESSION)){
+                        session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+				</form>
+            </div>
             <h1> PRODUCTEURS : </h1>
-            <?php
-             ?> 
-				<div class="gallery-container">
-                        <?php
-                        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                            if (isset($_GET["categorie"])) {
-                                $categorie = htmlspecialchars($_GET["categorie"]);
-                                // Connexion à la base de données 
-                                $utilisateur = "inf2pj02";
-                                $serveur = "localhost";
-                                $motdepasse = "ahV4saerae";
-                                $basededonnees = "inf2pj_02";
-                                $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                                // Vérifiez la connexion
-                                if ($connexion->connect_error) {
-                                    die("Erreur de connexion : " . $connexion->connect_error);
-                                }
-                                // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                                if ($_GET["categorie"]=="Tout"){
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod LIKE \'%\'';
-                                }else{
-                                    $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
-                                    //$stmt->bind_param("s", $categorie);
-                                }
-                                if ($rechercheVille!=""){
-                                    $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
-                                }
-                                $stmt = $connexion->prepare($requete);
-                                 // "s" indique que la valeur est une chaîne de caractères
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                
-                                // récupère les coordonnées de l'utiliasteur
-                                // URL vers l'API Nominatim
-                                $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                                $coordonneesUti=latLongGps($urlUti);
-                                $latitudeUti=$coordonneesUti[0];
-                                $longitudeUti=$coordonneesUti[1];
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        if ($rayon>=100){
-                                            echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
-                                            echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                            echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                            echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                            echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                            echo '</a> ';  
-                                        }    
-                                        else{
-                                            $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                            $coordonneesProd=latLongGps($urlProd);
-                                            $latitudeProd=$coordonneesProd[0];
-                                            $longitudeProd=$coordonneesProd[1];
-                                            $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                            if ($distance<$rayon){
-                                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Uti"] . '" class="square"  >';
-                                                echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                                echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                                echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                                echo '</a> ';  
-                                            }    
-                                        }
-                                    }
-                                } else {
-                                    echo "Aucun résultat ne correspond à ces critères";
-                                }
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                    }
-                                }
-                                $stmt->close();
-                                $connexion->close();
+            <div class="gallery-container">
+               <?php 
+               
+               
+               if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                if (isset($_GET["categorie"])) {
+                    $categorie = htmlspecialchars($_GET["categorie"]);
+                    // Connexion à la base de données 
+                    $utilisateur = "inf2pj02";
+                    $serveur = "localhost";
+                    $motdepasse = "ahV4saerae";
+                    $basededonnees = "inf2pj_02";
+                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+                    // Vérifiez la connexion
+                    if ($connexion->connect_error) {
+                        die("Erreur de connexion : " . $connexion->connect_error);
+                    }
+                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                    if ($_GET["categorie"]=="Tout"){
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod LIKE \'%\'';
+                    }else{
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
+                        //$stmt->bind_param("s", $categorie);
+                    }
+                    if ($rechercheVille!=""){
+                        $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
+                    }
+                    $stmt = $connexion->prepare($requete);
+                     // "s" indique que la valeur est une chaîne de caractères
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    // récupère les coordonnées de l'utiliasteur
+                    // URL vers l'API Nominatim
+                    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                    $coordonneesUti=latLongGps($urlUti);
+                    $latitudeUti=$coordonneesUti[0];
+                    $longitudeUti=$coordonneesUti[1];
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if ($rayon>=100){
+                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
+                                echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                echo '</a> ';  
+                            }    
+                            else{
+                                $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                $coordonneesProd=latLongGps($urlProd);
+                                $latitudeProd=$coordonneesProd[0];
+                                $longitudeProd=$coordonneesProd[1];
+                                $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                if ($distance<$rayon){
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
+                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                    echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '</a> ';  
+                                }    
                             }
                         }
-                        ?>
-                </div>
-
-			</div>
-		</div>
+                    } else {
+                        echo "Aucun résultat ne correspond à ces critères";
+                    }
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                        }
+                    }
+                    $stmt->close();
+                    $connexion->close();
+                }
+            }
+               
+               ?>
+            </div>
+            <div class="basDePage">
+                <form method="post">
+						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+                        <input type="hidden" name="popup" value="contact_admin">
+				</form>
+                <form method="post">
+						<input type="submit" value="CGU" class="lienPopup">
+                        <input type="hidden" name="popup" value="cgu">
+				</form>
+            </div>
+        </div>
     </div>
+    <?php require "popups/gestion_popups.php";?>
 </body>
-</html>

@@ -1,54 +1,69 @@
+<?php
+if (isset($_POST['formClicked'])){
+    if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
+        $_SESSION['debug'][0]=0;
+        require 'traitements/traitement_formulaire_sign_in_admin.php';
+    }else{
+        $_SESSION['debug'][0]=1;
+        require 'traitements/traitement_formulaire_sign_in.php';
+    }
+    unset($_POST['formClicked']);
+    $_SESSION['actualiser'] = true;
+}
+?>
 <div class="popup">
     <div class="contenuPopup">
         <form method="post">
 				<input type="submit" value="" class="boutonQuitPopup">
                 <input type="hidden" name="popup" value="">
 		</form>
-        <p class="titrePopup">Se connecter</p>
+        <p class="titrePopup">Se connecter <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
+                                            {echo '(Admin)';}?></p>
         <div>
-            <form class="formPopup" action="traitement_formulaire_sign_in.php" method="post"> <!--      -->
+            <form class="formPopup" method="post">
+                <input type="hidden" name="popup" value=
+                <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){echo '"sign_in_admin"';}else{echo '"sign_in_client"';}?>>
                 <div>
                     <label for="mail">Mail :</label>
-                    <input class="zoneDeTextePopup" type="text" name="mail" required>
+                    <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
                 </div>
                 <div>
                     <label for="pwd">Mot de passe :</label>
-                    <input class="zoneDeTextePopup" type="text" name="pwd" required>
+                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." name="pwd" required>
                 </div>
-
-                <input class="boutonPopup" type="submit" value="Envoyer">
-
-                <?php
-                if (isset($_GET['mail'])) {
-                    $mail = $_GET['mail'];
-                    echo '<p class="erreur"> $mail </p>';
-                }
-
-                if (isset($_GET['pwd'])) {
-                    $pwd = $_GET['pwd'];
-                    echo '<p class="erreur"> $pwd </p>';
-                }
-                ?>
+                <div>
+                    <?php
+                    if (isset($_SESSION['erreur'])) {
+                        $erreur = $_SESSION['erreur'];
+                        echo '<p class="erreur">'.$erreur.'</p>';
+                    }
+                    ?>
+                </div>
+                <input class="boutonPopup" name="formClicked" type="submit" value="se connecter">
             </form>
             <div>
                 <form method="post">
-						<input type="submit" value="Se connecter en tant que administrateur" class="lienPopup">
+					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>
+                        <input type="submit" value="Se connecter en tant qu'utilisateur lambda" class="lienPopup">
+                        <input type="hidden" name="popup" value="sign_in_client">
+                    <?php }else{ ?> 
+                        <input type="submit" value="Se connecter en tant qu'administrateur" class="lienPopup">
                         <input type="hidden" name="popup" value="sign_in_admin">
+                    <?php } ?>
 			    </form>
-                <!-- <input type="button" onclick="window.location.href='form_sign_up_admin.php'" id="btn-admin" action="form_sign_up_amdin.php" value="administrateur"> -->
             </div>
         </div>
         <div>
             <form method="post">
 				<input type="submit" value="Mot de passe oublié ?" class="lienPopup">
-                <input type="hidden" name="popup" value="reset_mdp">
+                <input type="hidden" name="popup" value="mdp_oublie/mail">
 			</form>
         </div>
         <div class="alignementCentreCoteACote">
             <p class="text">Vous n'avez pas de compte ?</p>
             <form method="post">
-				<input type="submit" value="S'incrire" class="lienPopup">
-                <input type="hidden" name="popup" value="sign_up">
+				<input type="submit" value="S'inscrire" class="lienPopup">
+                <input type="hidden" name="popup" value="pre_sign_up">
 			</form>
         </div>
     </div>

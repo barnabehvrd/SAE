@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
+    <title>L'étal en ligne</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
-	<?php
+
+    <?php
+        if(!isset($_SESSION)){
+            session_start();
+        }
     	function dbConnect(){
             $host = 'localhost';
             $dbname = 'inf2pj_02';
@@ -17,7 +21,6 @@
       }
 
 	  $bdd=dbConnect();
-	  session_start();
 	  $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
       if (isset($_POST["typeCategorie"])==true){
         $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
@@ -26,9 +29,15 @@
         $filtreCategorie=0;
       }
     ?>
+
+
     <div class="container">
-        <div class="left-column">
-			<img class="logo" src="img/logo.png">
+        <div class="leftColumn">
+			<img class="logo" href="index.php" src="img/logo.png">
+            <div class="contenuBarre">
+                
+            
+
             <center>
                 <p><strong>Filtrer par :</strong></p>
                 <br>
@@ -63,42 +72,45 @@
                     <input type="submit" value="Filtrer">
                 </center>
             </form>
-            
-        </div>
-        <div class="right-column">
-		<div class="fixed-banner">
-                <!-- Partie gauche du bandeau -->
-                <div class="banner-left">
-                    <div class="button-container">
-					<button class="button"><a href="index.php">Accueil</a></button>
-                        <button class="button"><a href="message.php">Messagerie</a></button>                 
-						<button class="button"><a href="commandes.php">Achats</a></button>
-                        <?php
-                            if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                                echo '<button class="button"><a href="mes_produits.php">Mes produits</a></button>';
-                                echo '<button class="button"><a href="delivery.php">Préparation des commandes</a></button>';
-                            }
-                        ?>
-                    </div>
-                </div>
-                <!-- Partie droite du bandeau -->
-                <div class="banner-right">
-					<?php 
-                    if (isset($_SESSION['Mail_Uti'])) {  
-                    echo '<a class="fixed-size-button" href="user_informations.php" >';
-					echo $_SESSION['Mail_Uti']; 
-					}
-					else {
-                    echo '<a class="fixed-size-button" href="form_sign_in.php" >';
-					echo "connection";
-					}
-					?>
-					</a>
-                </div>
+
+
             </div>
-			<div class="contenu">
-            <!-- Contenu de la partie droite (sous le bandeau) -->
-			<?php
+        </div>
+        <div class="rightColumn">
+            <div class="topBanner">
+                <div class="divNavigation">
+                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <?php
+                        if (isset($_SESSION["Id_Uti"])){
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                        }
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                        }
+                    ?>
+                </div>
+                <form method="post">
+                    <?php
+                    if(!isset($_SESSION)){
+                    session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    ?>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+				</form>
+            </div>
+            <div class="contenuPage">
+
+
+
+            
+            <?php
                 if ($filtreCategorie!=0){
                     $query = 'SELECT Desc_Statut, Id_Commande, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut 
                     FROM COMMANDE 
@@ -198,16 +210,23 @@
                     }
                 }
             ?>
-			</div>
-			<form class="formulaire" action="bug_report.php" method="post">
-					<p class= "centered">report a bug</p>
-					<label for="mail">mail :</label>
-					<input type="text" name="mail" id="mail" required><br><br>
-					<label for="pwd">message : </label>
-					<input type="text" name="message" id="message" required><br><br>
-					<input type="submit" value="Envoyer">
-			</form>
-		</div>
+
+
+
+
+
+            </div>
+            <div class="basDePage">
+                <form method="post">
+						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+                        <input type="hidden" name="popup" value="contact_admin">
+				</form>
+                <form method="post">
+						<input type="submit" value="CGU" class="lienPopup">
+                        <input type="hidden" name="popup" value="cgu">
+				</form>
+            </div>
+        </div>
     </div>
+    <?php require "popups/gestion_popups.php";?>
 </body>
-</html>

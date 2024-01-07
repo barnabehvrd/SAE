@@ -47,5 +47,5 @@
         $i++;}
     }
     
-    header('Location: commandes.php');
+    header('Location: achats.php');
 ?>
