@@ -19,7 +19,7 @@
 			<img class="logo" src="img/logo.png">
             <p>Contacts récents :</p>
 			<?php
-			require 'traitement/afficheContacts.php';
+			require 'traitements/afficheContacts.php';
 			?>
         </div>
         <div class="rightColumn">
@@ -56,20 +56,20 @@
 				<?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
 				>
 				<?php 
-				require "traitement/afficherInterlocuteur.php";
+				require "traitements/afficherInterlocuteur.php";
 				?>
 				</div>
 				<div class="contenuMessagerie">
             	
             		<?php
-					require 'traitement/afficheMessages.php';
+					require 'traitements/afficheMessages.php';
 					?>
 					<form method="post" id="zoneDEnvoi">
 						<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
 						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
 					</form>
 					<?php
-					require 'traitement/envoyerMessage.php';
+					require 'traitements/envoyerMessage.php';
 					?>
 				</div>
             </div>
