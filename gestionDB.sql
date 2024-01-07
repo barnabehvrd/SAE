@@ -702,8 +702,8 @@ INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
     (1, '1', 'Pépiniériste'),
     (2, '2', 'Agriculteur'),
-    (3, '3', 'Vigneron'),
-    (4, '4', 'Éleveur de volaille'),
+    (3, '3', 'Agriculteur'),
+    (4, '4', 'Maraîcher'),
     (5, '5', 'Maraîcher'),
     (6, '6', 'Agriculteur'),
     (7, '7', 'Viticulteur'),
