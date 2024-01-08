@@ -11,24 +11,21 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     session_start();
 
-    // Vérifiez d'abord si l'adresse e-mail existe déjà dans la table UTILISATEUR
+    // Vérif d'abord si l'adr mail existe bien dans la table utilisateur
     $checkEmailQuery = "SELECT COUNT(*) AS count FROM UTILISATEUR WHERE Mail_Uti = :mail";
     $checkEmailStmt = $bdd->prepare($checkEmailQuery);
-    $checkEmailStmt->bindParam(':mail', $_SESSION["Mail_Uti"]);
+    $checkEmailStmt->bindParam(':mail', $_SESSION["mailTemp"]);
     $checkEmailStmt->execute();
     $emailCount = $checkEmailStmt->fetch(PDO::FETCH_ASSOC)['count'];
 
     if ($emailCount > 0) {  
-        $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
+        $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["mailTemp"] ."';";
         echo ($update);
         $bdd->exec($update);
-        header('Location: pup_up_pwd.php?message=Le mot de passe a été mis à jour avec succès.');
+        header('Location: pwd.php?message=Le mot de passe a été mis à jour avec succès.');
 
     } else {
-        // Redirigez vers index.php après la mise à jour du mot de passe        
-        header('Location: pup_up_pwd.php?message=Vous avez renseigné une adresse e-mail invalide. Vérifiez que vous n\'avez pas fait d\'erreur de saisie. Si besoin, <a href="message.php">Contactez un administrateur</a>.');//thomas mettra la popup qui envoi un message au admin (bug_report.php)
-        //mettre un lien sur 'contacter un admin' qui pointe vers la popup bug report
-
+        header('Location: pwd.php?message=Vous avez renseigné une adresse e-mail invalide. Vérifiez que vous n\'avez pas fait d\'erreur de saisie. Si besoin, <a href="message.php">Contactez un administrateur.');
     }
 }
 ?>
