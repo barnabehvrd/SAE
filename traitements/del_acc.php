@@ -11,8 +11,6 @@ session_start();
       }
       $bdd=dbConnect();
 
-    // Start session
-    session_start();
 if (isset($_POST["Id_Uti"])){
   $utilisateur=htmlspecialchars($_POST["Id_Uti"]);
 }else{
