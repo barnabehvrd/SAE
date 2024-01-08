@@ -127,6 +127,9 @@
                             echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
                             echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
                         }
+                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                        }
                     ?>
                 </div>
                 <form method="post">
