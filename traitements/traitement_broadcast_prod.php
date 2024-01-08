@@ -10,7 +10,8 @@ $basededonnees = "inf2pj_02";
 $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
-  
+  $message = $bdd->quote($message);
+
   $bdd->query('CALL broadcast_Producteur(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
   header("Location: messagerie.php");
 } else {
