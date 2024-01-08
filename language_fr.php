@@ -1,8 +1,8 @@
 <?php
 $htmlMarque = "L'étal en ligne";
 $htmlRechercherPar = "Rechercher par";
-$htmlParVille = "- Par ville :";
-$htmlParProfession ="- Profession :";
+$htmlParVille = "- Par ville : ";
+$htmlParProfession ="- Profession : ";
 $htmlTout="Tout";
 $htmlAgriculteur="Agriculteur";
 $htmlVigneron="Vigneron";
@@ -11,7 +11,7 @@ $htmlApiculteur="Apiculteur";
 $htmlÉleveurdevolailles="Éleveur de volailles";
 $htmlViticulteur="Viticulteur";
 $htmlPépiniériste="Pépiniériste";
-$htmlAutourDeChezMoi="- Autour de chez moi :";
+$htmlAutourDeChezMoi="- Autour de chez moi : ";
 $htmlRayonDe="Rayon de";
 $htmlKm="Km";
 $htmlTri="- Tri :";
@@ -45,25 +45,20 @@ $htmlModifier="Modifier";
 $htmlSupprimerCompte="Supprimer le compte";
 $htmlAucunResultatCompte="Aucun résultat trouvé pour votre compte, veuillez contacter le support.";
 $htmlContactsRecentsDeuxPoints="Contacts récents :";
+$htmlImgTelecSucces="L'image a été téléchargée avec succès. Nouveau nom du fichier : ";
+$htmlImgTelecRate="Le déplacement du fichier a échoué. Erreur : ";
+$htmlSelecImg="Veuillez sélectionner une image.";
+$htmlProfessionDeuxPoints="Profession : ";
+$htmlMailDeuxPoints="Mail : ";
+$htmlAdresseDeuxPoints="Adresse : ";
+$htmlErrorDevTeam="Erreur, contactez l'équipe de dévelopeurs ";
+$htmlUtilisateurs="- Utilisateurs :";
 $html="";
 $html="";
 $html="";
 $html="";
 $html="";
 $html="";
-$html="";
-$html="";
-$html="";
-$html="";
-$html="";
-$html="";
-$html="";
-$html="";
+?>
 
 
-
-
-/*
-'.$htmlImageUtilisateur.'
-
-<?php echo $htmlContactsRecentsDeuxPoints?>*/?>
