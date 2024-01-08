@@ -9,9 +9,10 @@ $basededonnees = "inf2pj_02";
 $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
-  
-  $bdd->query('CALL broadcast_Utilisateur(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
-  header("Location: messagerie.php");
+  $message = $bdd->quote($message);
+
+  $bdd->query('CALL broadcast_Producteur(' . $_SESSION["Id_Uti"] . ', ' . $message . ');');
+ header("Location: messagerie.php");
 } else {
   echo "error";
   echo $message;
