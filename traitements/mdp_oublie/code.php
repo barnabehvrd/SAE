@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
     $enteredCode = $_POST["code"];
     $expectedCode = $_SESSION["code"];
 
@@ -9,7 +12,7 @@
         $_POST['popup'] = "mdp_oublie/update";
     } else {
         // Code incorrect, rediriger vers form_code.php
-        $_SESSION['erreur'] = "code incorrect";
+        $_SESSION['erreur'] = $htmlCodeIncorrect;
 
     }
 

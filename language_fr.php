@@ -171,4 +171,12 @@ $htmlEnregistrementUtilisateurReussi="Enregistrement utilisateur réussi.";
 $htmlEnregistrementProducteurReussi="Enregistrement producteur réussi.";
 $htmlAdrMailDejaUtilisee="adresse mail déjà utilisée";
 $htmlVille="Ville";
+$htmlConditionsRue="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères.";
+$htmlConditionsCodePostal="Le code postal doit contenir exactement 5 chiffres.";
+$htmlConditionsVille="La ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés.";
+$htmlConditionsVilleDetails="La ville doit faire entre 0 et 100 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
+$htmlConditionsNomDetails="Le nom doit faire entre 0 et 100 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
+$htmlConditionsPrenomDetails="Le prénom doit faire entre 0 et 100 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
+$htmlConditionsRueDetails="La rue doit faire entre 0 et 120 caractères alphanumériques, espaces autorisés, et les caractères suivants sont autorisés : î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
+$htmlCodeIncorrect="code incorrect";
 ?>

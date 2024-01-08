@@ -1,2 +1,2 @@
 
-<?php echo $htmlVille; ?>
+<?php echo $htmlConditionsVille; ?>

@@ -170,5 +170,13 @@ $htmlMdpCorrespondRedirectionAccueil = "The password matches. You will be redire
 $htmlEnregistrementUtilisateurReussi = "User registration successful.";
 $htmlEnregistrementProducteurReussi = "Producer registration successful.";
 $htmlAdrMailDejaUtilisee = "Email address already in use";
-
+$htmlVille = "City";
+$htmlConditionsRue = "The street must start with a capital letter and have a maximum length of 100 characters.";
+$htmlConditionsCodePostal = "The postal code must contain exactly 5 digits.";
+$htmlConditionsVille = "The city must be between 0 and 100 alphanumeric characters, spaces allowed.";
+$htmlConditionsVilleDetails = "The city must be between 0 and 100 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
+$htmlConditionsNomDetails = "The name must be between 0 and 100 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
+$htmlConditionsPrenomDetails = "The first name must be between 0 and 100 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
+$htmlConditionsRueDetails = "The street must be between 0 and 120 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
+$htmlCodeIncorrect = "Incorrect code";
 ?>
