@@ -230,8 +230,22 @@
                         unset($_SESSION['tempPopup']);
                     }
                     ?>
-					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?>" class="boutonDeConnection">
-                    <input type="hidden" name="popup" value="<?php if(isset($_SESSION['Mail_Uti'])){echo ($htmlSeConnecter);}else{echo '"sign_in"';}?>">
+					<input type="submit" value="
+                    <?php 
+                        if (!isset($_SESSION['Mail_Uti'])){
+                            /*$_SESSION = array()*/; 
+                            echo($htmlSeConnecter);
+                            }
+                            else {
+                                echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
+                    <input type="hidden" name="popup" value="
+                    <?php 
+                    if(isset($_SESSION['Mail_Uti'])){
+                        echo ("info_perso");
+                        }else{
+                            echo 'sign_in';
+                            }
+                            ?>">
 				</form>
             </div>
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
