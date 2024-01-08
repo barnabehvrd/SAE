@@ -145,7 +145,7 @@
                             echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
                             echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
                             echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
-                            echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br>";
+                            echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br></form>";
                         }
                         echo '</div>'; 
                     } else {
