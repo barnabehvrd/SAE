@@ -14,6 +14,8 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   //header messagerie
 } else {
     echo "error";
+    echo $message;
+
   }
   
   ?>
