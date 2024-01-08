@@ -97,9 +97,10 @@ $html="";
 ?>
 
 
-
+<?php/*
 '.$htmlSupprimer.'
 
 ".$htmlPiece."
 
 <?php echo $htmlImageNonFournie?>
+*/?>
