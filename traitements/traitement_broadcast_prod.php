@@ -12,7 +12,7 @@ $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   
   $bdd->query('CALL broadcast_Producteur(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
-  //header messagerie
+  header("Location: messagerie.php");
 } else {
     echo "error";
     echo $message;
