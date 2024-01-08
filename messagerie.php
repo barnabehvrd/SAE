@@ -18,7 +18,7 @@
     }
     ?>
     <div class="container">
-    <div class="LeftColumn">
+    <div class="leftColumn">
 			<img class="logo" src="img/logo.png">
             <p><?php echo $htmlContactsRecentsDeuxPoints?></p>
 			<?php
