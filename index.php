@@ -185,11 +185,11 @@
 			<label>- Nombre de produits :</label>
             <br>
             <select name="tri" required>
-                <option value="nombreDeProduits" <?php if($_GET["tri"]=="nombreDeProduits") echo 'selected="selected"';?>>Nombre de produits</option>
-                <option value="ordreNomAlphabétique" <?php if($_GET["tri"]=="ordreNomAlphabétique") echo 'selected="selected"';?>>par nom (alphabétique)</option>
-                <option value="ordreNomAntiAlphabétique" <?php if($_GET["tri"]=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>>par nom (anti alphabétique)</option>
-                <option value="ordrePrenomAlphabétique" <?php if($_GET["tri"]=="ordrePrenomAlphabétique") echo 'selected="selected"';?>>par prénom (alphabétique)</option>
-                <option value="ordrePrenomAntiAlphabétique" <?php if($_GET["tri"]=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>>par prénom (anti alphabétique)</option>
+                <option value="nombreDeProduits" <?php if($tri=="nombreDeProduits") echo 'selected="selected"';?>>Nombre de produits</option>
+                <option value="ordreNomAlphabétique" <?php if($tri=="ordreNomAlphabétique") echo 'selected="selected"';?>>par nom (alphabétique)</option>
+                <option value="ordreNomAntiAlphabétique" <?php if($tri=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>>par nom (anti alphabétique)</option>
+                <option value="ordrePrenomAlphabétique" <?php if($tri=="ordrePrenomAlphabétique") echo 'selected="selected"';?>>par prénom (alphabétique)</option>
+                <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>>par prénom (anti alphabétique)</option>
             </select>
             <br>
 
