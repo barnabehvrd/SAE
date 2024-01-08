@@ -15,6 +15,9 @@ if (isset($_SESSION["Id_Uti"]) && isset($message)) {
 } else {
   echo "error";
   echo $message;
+  var_dump(isset($_SESSION["Id_Uti"]));
+  var_dump(isset($message));
+
 }
 
 ?>
