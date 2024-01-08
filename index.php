@@ -4,7 +4,7 @@
 <?php
     require "language_fr.php" ; 
 ?>
-    <title> <?php echo $index_title; ?> </title>
+    <title> <?php echo $htmlMarque; ?> </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
@@ -124,22 +124,22 @@
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
                 
-            <center><strong><p><?php echo $search_by; ?></p></strong></center>
+            <center><strong><p><?php echo $htmlRechercherPar; ?></p></strong></center>
 			<form method="get" action="index.php"> 
-			<label>- Profession :</label>
+			<label><?php echo $htmlParProfession?></label>
             <br>
 			<select name="categorie" id="categories">
-                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>>Tout</option>
-				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>>Agriculteur</option>
-				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>>Vigneron</option>
-				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>>Maraîcher</option>
-				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>>Apiculteur</option>
-				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>>Éleveur de volaille</option>
-				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>>Viticulteur</option>
-				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>>Pépiniériste</option>
+                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>><?php echo $htmlTout?></option>
+				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>><?php echo $htmlAgriculteur?></option>
+				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>><?php echo $htmlVigneron?></option>
+				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>><?php echo $htmlMaraîcher?></option>
+				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>><?php echo $htmlApiculteur?></option>
+				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>><?php echo $htmlÉleveurdevolailles?></option>
+				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>><?php echo $htmlViticulteur?></option>
+				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>><?php echo $htmlPépiniériste?></option>
 			</select>
             <br>
-            <br>- Par ville :
+            <br><?php echo $htmlParVille?>
             <br>
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="Ville">
             <br>
@@ -154,11 +154,11 @@
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
             ?>
                 <br>
-                <br>- Autour de chez moi : <?php echo '('.$Adr_Uti_En_Cours.')';?>
+                <br><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?>
                 <br>
                 <br>
                 <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-                <span id="monCurseurKm">Rayon de <?php echo $rayon; if($rayon>=100) echo '+';?></span>
+                <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
                 <script>
                     function AfficheRange2(newVal) {
                         var monCurseurKm = document.getElementById("monCurseurKm");
@@ -169,7 +169,7 @@
                         }
                     }
                 </script>
-                Km
+                <?php echo $htmlKm?>
                 <br>
                 <br>
             <?php
@@ -182,21 +182,21 @@
             <br>
 
 
-			<label>- Tri :</label>
+			<label><?php echo $htmlTri?></label>
             <br>
             <select name="tri" required>
-                <option value="nombreDeProduits" <?php if($tri=="nombreDeProduits") echo 'selected="selected"';?>>Nombre de produits</option>
-                <option value="ordreNomAlphabétique" <?php if($tri=="ordreNomAlphabétique") echo 'selected="selected"';?>>par nom (alphabétique)</option>
-                <option value="ordreNomAntiAlphabétique" <?php if($tri=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>>par nom (anti-alphabétique)</option>
-                <option value="ordrePrenomAlphabétique" <?php if($tri=="ordrePrenomAlphabétique") echo 'selected="selected"';?>>par prénom (alphabétique)</option>
-                <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>>par prénom (anti-alphabétique)</option>
+                <option value="nombreDeProduits" <?php if($tri=="nombreDeProduits") echo 'selected="selected"';?>><?php echo $htmlNombreDeProduits?></option>
+                <option value="ordreNomAlphabétique" <?php if($tri=="ordreNomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAl?></option>
+                <option value="ordreNomAntiAlphabétique" <?php if($tri=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAntiAl?></option>
+                <option value="ordrePrenomAlphabétique" <?php if($tri=="ordrePrenomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAl?></option>
+                <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAntiAl?></option>
             </select>
             <br>
             <br>
             <br>
 
 
-			<center><input type="submit" value="Rechercher"></center>
+			<center><input type="submit" value="<?php echo $htmlRechercher?>"></center>
 			</form>
 
 
@@ -205,25 +205,19 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
                     <?php
                         if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                            echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
                         }
-
-                        /*
-                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Admin</a>';
-                        }
-                        */
                     ?>
                 </div>
                 <form method="post">
@@ -236,11 +230,11 @@
                         unset($_SESSION['tempPopup']);
                     }
                     ?>
-					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
-                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo $htmlSeConnecter;}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo $htmlSeConnecter;}else{echo '"sign_in"';}?>>
 				</form>
             </div>
-            <h1> PRODUCTEURS : </h1>
+            <h1> <?php echo $htmlProducteursEnMaj?>l </h1>
             <div class="gallery-container">
                <?php 
                
@@ -316,7 +310,7 @@
                                 echo $row["Prof_Prod"]. "<br>";
                                 echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
                                 echo $row["Adr_Uti"] . "<br>";
-                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
                             else{
@@ -336,7 +330,7 @@
                             }
                         }
                     } else {
-                        echo "Aucun résultat ne correspond à ces critères";
+                        echo $htmlAucunResultat;
                     }
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -352,11 +346,11 @@
             <br>
             <div class="basDePage">
                 <form method="post">
-						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+						<input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
                         <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-						<input type="submit" value="CGU" class="lienPopup">
+						<input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
                         <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>

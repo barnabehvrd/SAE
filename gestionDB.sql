@@ -707,7 +707,7 @@ VALUES
     (6, '6', 'Agriculteur'),
     (7, '7', 'Viticulteur'),
     (8, '8', 'Apiculteur'),
-    (9, '9', 'Éleveur de volaille'),
+    (9, '9', 'Éleveur de volailles'),
     (10, '10', 'Viticulteur');
 
 INSERT INTO ADMINISTRATEUR (Id_Admin, Id_Uti)
