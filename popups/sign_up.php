@@ -49,10 +49,16 @@ if (isset($_POST['formClicked'])){
 			<!--  <input class="zoneDeTextePopup" type="profession" name="profession" required> -->
 
             <select class="zoneDeTextePopup" name="profession" required>
-                <option value="agriculteur" selected>Agriculteur</option>
-                <option value="viticulteur">Viticulteur</option>
-                <option value="eleveur">Eleveur</option>
+                <option value="Agriculteur" selected>Agriculteur</option>
+                <option value="Vigneron">Vigneron</option>
+                <option value="Maraîcher">Maraîcher</option>
+                <option value="Apiculteur">Apiculteur</option>
+                <option value="Éleveur de volaille">Éleveur de volaille</option>
+                <option value="Viticulteur">Viticulteur</option>
+                <option value="Pépiniériste">Pépiniériste</option>
             </select>
+
+
         </div>
         <?php } ?>
         <div>
