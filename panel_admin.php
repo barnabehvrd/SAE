@@ -44,7 +44,7 @@
                             $result = $stmt->get_result();
 
                             if ($result->num_rows > 0) {
-                                echo"<h2>- producteurs :</h2><br>";
+                                echo"<label>- producteurs :</label><br>";
 
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
@@ -83,7 +83,7 @@
                     $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
-                        echo"<label><h2>- utilisateurs :</h2></label><br>";
+                        echo"<label>- utilisateurs :</label><br>";
 
                         while ($row = $result->fetch_assoc()) {
                             
