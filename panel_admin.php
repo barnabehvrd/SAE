@@ -160,8 +160,7 @@
             </div>
             <div class="basDePage">
                 <form method="post">
-                    <input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
-                        <input type="hidden" name="popup" value="contact">
+                <input type="submit" value="Contactez nous !" class="boutonBasDePage">                        <input type="hidden" name="popup" value="contact">
 				</form>
                 <form method="post">
                     <input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
