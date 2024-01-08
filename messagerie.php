@@ -15,7 +15,7 @@
     }
     ?>
     <div class="container">
-    <div class="LeftColumnS">
+    <div class="LeftColumn">
 			<img class="logo" src="img/logo.png">
             <p>Contacts récents :</p>
 			<?php
