@@ -192,9 +192,11 @@
                 <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>>par prénom (anti-alphabétique)</option>
             </select>
             <br>
+            <br>
+            <br>
 
 
-			<input type="submit" value="Rechercher">
+			<center><input type="submit" value="Rechercher"></center>
 			</form>
 
 
