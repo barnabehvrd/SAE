@@ -101,7 +101,6 @@
                                     echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                         <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                                        echo $htmlNomDeuxPoints, $row["Id_Uti"] . "<br>";
                                     echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
                                     echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
                                     echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
