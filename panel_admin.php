@@ -19,9 +19,20 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">accueil</a>
-                    <a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>
-                    <a class="bontonDeNavigation" href="achats.php">Achats</a>
+                <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <?php
+                        if (isset($_SESSION["Id_Uti"])){
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                        }
+                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
+                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                        }
+                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                        }
+                        ?>
                 </div>
             </div>
             <div class="gallery-container">
