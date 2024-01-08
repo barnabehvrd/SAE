@@ -635,7 +635,7 @@ DELETE FROM UTILISATEUR;
 
 
 
-INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
+INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', '', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
     ('1', 'John', 'Doe', 'johndoe1@gmail.com', '16 sentier des ravins, 93100 MONTREUIL', 'password123'),
@@ -695,8 +695,7 @@ VALUES
     ('56', 'Killian', 'Lehénaff', 'killian.lehenaff@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'k123LH'),
     ('57', 'Thomas ', 'Glet', 'tglet100@gmail.com', '2 Rue des Crias, 18290 CIVRAY', 'test'),
     ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234'),
-    ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567'),
-    ('60', 'test', 'test', 'test', 'test', 'test');
+    ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567');
 
 INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
