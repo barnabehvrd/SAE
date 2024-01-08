@@ -82,9 +82,10 @@ if (isset($_POST["Id_Uti"])){
 
 
 
-        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;'));
+        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd OR Id_Uti=:Id_Uti;'));
         
         $queryGetProduitCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
+        $queryGetProduitCommande->bindParam(":Id_Uti", $utilisateur, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
         $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
         $iterateurProduit=0;
