@@ -1,3 +1,6 @@
+<?php
+    require "language.php" ; 
+?>
 <div class="popup">
     <div class="contenuPopup">
         <div>
@@ -5,12 +8,12 @@
                     <input type="submit" value="" class="boutonQuitPopup">
                     <input type="hidden" name="popup" value="">
             </form>
-            <p class="titrePopup">Nouveau mot de passe</p>
+            <p class="titrePopup"><?php echo $htmlNouveauMdp; ?></p>
         </div>
         <form class="formPopup" method="post">
-            <label for="pwd1">Nouveau mot de passe :</label>
+            <label for="pwd1"><?php echo $htmlNouveauMdpDeuxPoints; ?></label>
             <input type="text" name="pwd1">
-            <label for="pwd2">Ressaisissez le nouveau mot de passe :</label>
+            <label for="pwd2"><?php echo $htmlResaisiMdp; ?></label>
             <input type="text" name="pwd2">
             
             <input type="hidden" value="mdp_oublie/update" name="popup" >
@@ -20,7 +23,7 @@
                 echo '<p class="erreur">'.$erreur.'</p>';
             }
             ?>
-            <input name="formClicked" type="submit" value="Changer le mot de passe" class="boutonPopup">
+            <input name="formClicked" type="submit" value="<?php echo $htmlChangerMdp; ?>" class="boutonPopup">
         </form>
     </div>
 </div>
