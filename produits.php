@@ -28,8 +28,6 @@
       $queryIdProd->execute();
       $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
       $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
-      var_dump($_SESSION);
-  
     ?>
 
     <div class="container">
