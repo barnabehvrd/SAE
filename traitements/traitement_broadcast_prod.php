@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Database connection
 $utilisateur = "inf2pj02";
