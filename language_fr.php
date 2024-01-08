@@ -144,13 +144,5 @@ $htmlChez="Chez";
 $htmlAnnulerCommande="Annuler commande";
 $htmlVotreMessage="Votre message :";
 $htmlEnvoyerMessageATousUti="Envoyer le message a tout les utilisateurs";
-$html="";
-$html="";
-$html="";
-$html="";
-$html="";
+$htmlEnvoyerMessageATousProducteurs="Envoyer le message a tout les producteurs";
 ?>
-
-
-
-
