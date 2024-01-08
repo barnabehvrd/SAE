@@ -14,7 +14,7 @@
     <div class="contenuPopup">
         <div style="display:flex;justify-content:space-between;">
             <form method="post">
-				<input class="lienPopup" type="submit" value="Se deconnecter" name="formClicked">
+				<input class="lienPopup" type="submit" value="<?php echo $htmlSeDeconnecter?>" name="formClicked">
                 <input type="hidden" value='info_perso' name="popup">
                 <input type="hidden" name="deconnexion">
 		    </form>
@@ -23,7 +23,7 @@
                 <input type="hidden" name="popup" value="">
 		    </form>
         </div>
-        <p class="titrePopup">Informations personelles</p>
+        <p class="titrePopup"><?php echo $htmlInformationsPersonelles?></p>
         <div>
         <?php
         require 'traitements/chargement_info_perso.php';
