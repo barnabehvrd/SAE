@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>L'étal en ligne</title>
+<?php
+    require "language.php" ; 
+?>
+    <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
@@ -49,63 +52,63 @@
                 <!-- some code -->
 
                 <center>
-                <p><strong>Rechercher par :</strong></p>
+                <p><strong><?php echo $htmlRechercherPar; ?></strong></p>
             </center>
             <br>
             <form action="producteur.php" method="get">
-                - Nom :
-                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="Nom">
+            <?php echo $htmlTiretNom; ?>
+                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="<?php echo $htmlNom; ?>">
                 <br>
                 <br>
                 - Type de produit :
                 <br>
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
                 <label>
-                    <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> TOUT
+                    <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> <?php echo $htmlTout; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'checked="true"';?>> ANIMAUX
+                    <input type="radio" name="filtreType" value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'checked="true"';?>> <?php echo $htmlAnimaux; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="FRUITS" <?php if($filtreType=="FRUITS") echo 'checked="true"';?>> FRUITS
+                    <input type="radio" name="filtreType" value="FRUITS" <?php if($filtreType=="FRUITS") echo 'checked="true"';?>> <?php echo $htmlFruits; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="GRAINS"<?php if($filtreType=="GRAINS") echo 'checked="true"';?>> GRAINS
+                    <input type="radio" name="filtreType" value="GRAINS"<?php if($filtreType=="GRAINS") echo 'checked="true"';?>> <?php echo $htmlGraines; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'checked="true"';?>> LÉGUMES
+                    <input type="radio" name="filtreType" value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'checked="true"';?>> <?php echo $htmlLégumes; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> PLANCHES
+                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> <?php echo $htmlPlanches; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="VIANDE" <?php if($filtreType=="VIANDE") echo 'checked="true"';?>> VIANDE
+                    <input type="radio" name="filtreType" value="VIANDE" <?php if($filtreType=="VIANDE") echo 'checked="true"';?>> <?php echo $htmlViande; ?>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="filtreType" value="VIN" <?php if($filtreType=="VIN") echo 'checked="true"';?>> VIN
+                    <input type="radio" name="filtreType" value="VIN" <?php if($filtreType=="VIN") echo 'checked="true"';?>> <?php echo $htmlVin; ?>
                 </label>
                 <br>
                 <br>
                 <br>
-                - Tri :
+                <?php echo $htmlTri; ?>
                 <select name="tri">
-                    <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>>Aucun tri</option>
-                    <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>>Par prix croissant</option>
-                    <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>>Par prix décroissant</option>
-                    <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>>Par ordre alphabétique</option>
-                    <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>>Par ordre anti-alphabétique</option>
+                    <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>><?php echo $htmlAucunTri; ?></option>
+                    <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>><?php echo $htmlPrixCroissant; ?></option>
+                    <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>><?php echo $htmlPrixDecroissant; ?></option>
+                    <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAlpha; ?></option>
+                    <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAntiAlpha; ?></option>
 			    </select>
                 <br>
                 <br>
                 <center>
-                    <input type="submit" value="Rechercher">
+                    <input type="submit" value="<?php echo $htmlRechercher; ?>">
                 </center>
             </form>
             <br>
@@ -117,18 +120,18 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
                     <?php
                         if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                            echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
                         }
                     ?>
                 </div>
@@ -142,9 +145,11 @@
                         unset($_SESSION['tempPopup']);
                     }
                     ?>
-					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+
+                    <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-				</form>
+                
+                </form>
             </div>
 
 
@@ -155,7 +160,7 @@
             <div class="content-container">
                 <div class="product">
                     <!-- partie de gauche avec les produits -->
-                    <p><center><U>Produits proposés :</U></center></p>
+                    <p><center><U><?php echo $htmlProduitsProposesDeuxPoints; ?></U></center></p>
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
@@ -207,7 +212,7 @@
 
                             $i=0;
                             if(count($returnQueryGetProducts)==0){
-                                echo "Aucun produit en stock";
+                                echo $htmlAucunProduitEnStock;
                             }
                             else{
                                 while ($i<count($returnQueryGetProducts)){
@@ -220,10 +225,10 @@
 
                                     if ($QteProduit>0){
                                         echo '<div class="squareProduct" >';
-                                        echo "Produit : " . $nomProduit . "<br>";
-                                        echo "Type : " . $typeProduit . "<br>";
-                                        echo "Prix : " . $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+                                        echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
+                                        echo $htmlTypeDeuxPoints, $typeProduit . "<br>";
+                                        echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
+                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 100%; height: 85%;" ><br>';
                                         echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                         echo '</div> '; 
                                     }
@@ -251,7 +256,7 @@
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
-                        	<img class="img-test" src="/~inf2pj02/img_producteur/<?php echo $Id_Prod; ?>.png" alt="Image utilisateur" style="width: 99%; height: 99%;">
+                        	<img class="img-test" src="/~inf2pj02/img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
 						</div>
 						<div class="text-info">
                             <?php
@@ -265,7 +270,7 @@
                     //bloquer les 2 boutons pour les visiteurs non connectés
                     if (isset($_SESSION["Id_Uti"])  and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
-                    <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="Envoyer un message">
+                    <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
                     <?php 
                     }?>
 
@@ -281,7 +286,7 @@
 
                     if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
-                <button type="submit">Passer commande</button>
+                <button type="submit"><?php echo $htmlPasserCommande; ?></button>
                 <?php }?>
             </form>
                 </div>
@@ -291,11 +296,11 @@
 
             <div class="basDePage">
                 <form method="post">
-						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
-                        <input type="hidden" name="popup" value="contact_admin">
+                    <input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
+                    <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-						<input type="submit" value="CGU" class="lienPopup">
+                        <input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
                         <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>
