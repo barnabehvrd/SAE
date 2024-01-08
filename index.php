@@ -4,7 +4,7 @@
 <?php
     require "language_fr.php" ; 
 ?>
-    <title> <?php $index_title ?> </title>
+    <title> <?php echo $index_title; ?> </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
@@ -118,7 +118,7 @@
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
                 
-            <center><strong><p><?php $search_by?></p></strong></center>
+            <center><strong><p><?php echo $search_by; ?></p></strong></center>
 			<form method="get" action="index.php"> 
 			<label>- Profession :</label>
             <br>
