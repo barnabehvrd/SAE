@@ -153,21 +153,21 @@
                     }
                     $stmt->close();
                     $connexion->close();
-                ?>
-                </div>
-                <!-- some code -->
-
+               
+               ?>
             </div>
+            <br>
             <div class="basDePage">
                 <form method="post">
-                <input type="submit" value="Contactez nous !" class="boutonBasDePage">                        <input type="hidden" name="popup" value="contact">
+						<input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
+                        <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-                    <input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
-                        <input type="hidden" name="popup" value="CGU">
+						<input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
+                        <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>
         </div>
     </div>
-    <?php require "popups/gestion_popups.php" ?>
+    <?php require "popups/gestion_popups.php";?>
 </body>
