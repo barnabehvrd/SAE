@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
      function dbConnect(){
         $utilisateur = "inf2pj02";
         $serveur = "localhost";
@@ -60,19 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Vérifier si le fichier existe avant de le supprimer
             if (file_exists($targetPath)) {
                 unlink($targetPath);
-                echo "L'ancienne image a été supprimée avec succès.<br>";
+                echo $htmlSuppImgSucces.".<br>";
             }
 
             // Déplacer le fichier téléchargé vers le dossier de destination
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
-                echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
+                echo "<br>".$htmlImgTelecSucces, $newFileName."<br>";
             } else {
-                echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
+                echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
                 header('Location: mes_produits.php?erreur='. error_get_last()['message']);
             }
 
     } else {
-        echo "Veuillez sélectionner une image.<br>";
+        echo $htmlSelecImg."<br>";
     }
     
 }
