@@ -68,6 +68,8 @@
                     </div>
                     <input class="boutonPopup" type="submit" name="formClicked" value="Modifier">
                 </form>
+                <a href="traitements/del_acc.php"><button>Supprimer le compte</button></a>
+
                 <?php
             }
         } else {

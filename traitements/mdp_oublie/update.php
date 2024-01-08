@@ -25,7 +25,7 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
         header('Location: pwd.php?message=Le mot de passe a été mis à jour avec succès.');
 
     } else {
-        header('Location: pwd.php?message=Vous avez renseigné une adresse e-mail invalide. Vérifiez que vous n\'avez pas fait d\'erreur de saisie. Si besoin, <a href="message.php">Contactez un administrateur.');
+        header('Location: pwd.php?message=Vous avez renseigné une adresse e-mail invalide. Vérifiez que vous n\'avez pas fait d\'erreur de saisie. Si besoin');
     }
 }
 ?>
