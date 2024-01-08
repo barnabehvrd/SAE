@@ -17,6 +17,7 @@ if (isset($_POST["Id_Uti"])){
   $utilisateur=htmlspecialchars($_POST["Id_Uti"]);
 }else{
   $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
+  $msg="?msg=compte supprimer";
 }
 
   $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
@@ -107,6 +108,6 @@ if (isset($_POST["Id_Uti"])){
 
     }
 
-    header('Location: log_out.php');
+    header('Location: log_out.php'.$msg);
     
 ?>
