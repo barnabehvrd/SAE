@@ -48,7 +48,7 @@
 
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
-                                        <input type="submit" name="submit" id="submit"><br><br>
+                                        <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br><br>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                     echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
@@ -88,7 +88,7 @@
                         while ($row = $result->fetch_assoc()) {
                             
                             echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
-                                <input type="submit" name="submit" id="submit" value="Supprimer"><br><br>
+                                <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
                                 <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
                             echo "Nom : " . $row["Nom_Uti"] . "<br>";
                             echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
