@@ -84,6 +84,10 @@ $htmlAccesRefuse="Accès refusé";
 $htmlValidationCode="Validation du Code";
 $htmlCodeReinDeuxPoints="Code de réinitialisation :";
 $htmlVerifierCode="Vérifier le code";
+$htmlReinMdp="Réinitialisation de mot de passe";
+$htmlEntrerAdrMail="Veuillez entrer votre mail ";
+$htmlCodeEnvoyePourRecupMdp="un code vous sera envoyé sur votre adresse mail afin de changer votre mot de passe";
+$htmlEnvoiCode="Envoyer le code";
 $html="";
 $html="";
 $html="";
@@ -92,10 +96,9 @@ $html="";
 $html="";
 $html="";
 $html="";
-$html="";
-$html="";
-$html="";
-$html="";
+/*
+<?php echo $htmlEnvoiCode; ?>
+*/
 ?>
 
 

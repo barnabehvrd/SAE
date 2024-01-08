@@ -1,3 +1,6 @@
+<?php
+    require "language.php" ; 
+?>
 <div class="popup">
     <div class="contenuPopup">
         <div>
@@ -5,20 +8,20 @@
                     <input type="submit" value="" class="boutonQuitPopup">
                     <input type="hidden" name="popup" value="">
             </form>
-            <p class="titrePopup">Réinitialisation de mot de passe</p>
+            <p class="titrePopup"><?php echo $htmlReinMdp; ?></p>
         </div>
         <form class="formPopup" method="post">
             <input type="hidden" name="popup" value="mdp_oublie/mail">
-            <label>Veuillez entrer votre mail</label>
+            <label><?php echo $htmlEntrerAdrMail; ?></label>
             <input type="email" id="email" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}" name="email" required>
-            <label>un code vous sera envoyer sur votre adresse mail afin de changer votre mot de passe</label>
+            <label><?php echo $htmlCodeEnvoyePourRecupMdp; ?></label>
             <?php
             if (isset($_SESSION['erreur'])) {
                 $erreur = $_SESSION['erreur'];
                 echo '<p class="erreur">'.$erreur.'</p>';
             }
             ?>
-            <input name="formClicked" type="submit" value="Envoyer le code" class="boutonPopup">
+            <input name="formClicked" type="submit" value="<?php echo $htmlEnvoiCode; ?>" class="boutonPopup">
         </form>
     </div>
 </div>
