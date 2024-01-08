@@ -155,7 +155,6 @@
                     $connexion->close();
                
                ?>
-            </div>
             <br>
             <div class="basDePage">
                 <form method="post">
