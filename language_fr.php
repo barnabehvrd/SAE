@@ -81,9 +81,9 @@ $htmlStockDeuxPoints="Stock : ";
 $htmlModification="Modification";
 $htmlSupprimer="Supprimer";
 $htmlAccesRefuse="Accès refusé";
-$html="";
-$html="";
-$html="";
+$htmlValidationCode="Validation du Code";
+$htmlCodeReinDeuxPoints="Code de réinitialisation :";
+$htmlVerifierCode="Vérifier le code";
 $html="";
 $html="";
 $html="";
@@ -97,5 +97,7 @@ $html="";
 $html="";
 $html="";
 ?>
+
+
 
 
