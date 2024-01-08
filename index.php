@@ -184,7 +184,7 @@
 
 			<label>- Nombre de produits :</label>
             <br>
-            <select class="zoneDeTextePopup" name="tri" required>
+            <select name="tri" required>
                 <option value="nombreDeProduits" <?php if($_GET["tri"]=="nombreDeProduits") echo 'selected="selected"';?>>Nombre de produits</option>
                 <option value="ordreNomAlphabétique" <?php if($_GET["tri"]=="ordreNomAlphabétique") echo 'selected="selected"';?>>par nom (alphabétique)</option>
                 <option value="ordreNomAntiAlphabétique" <?php if($_GET["tri"]=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>>par nom (anti alphabétique)</option>
@@ -274,26 +274,26 @@
                     if ($rechercheVille!=""){
                         $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
                     }
-                    $requete=$requete.' ORDER BY COUNT(PRODUIT.Id_Produit) ';
+                    $requete=$requete.' ORDER BY ';
 
 
                     if ($tri==="nombreDeProduits"){
-                        $requete=$requete.' DESC ;';
+                        $requete=$requete.' COUNT(PRODUIT.Id_Produit) DESC ;';
                     }
                     else if ($tri==="ordreNomAlphabétique"){
-                        $requete=$requete.', Nom_Uti ASC ;';
+                        $requete=$requete.' Nom_Uti ASC ;';
                     }
                     else if ($tri==="ordreNomAntiAlphabétique"){
-                        $requete=$requete.' ASC, Nom_Uti DESC ;';
+                        $requete=$requete.' Nom_Uti DESC ;';
                     }
                     else if ($tri==="ordrePrenomAlphabétique"){
-                        $requete=$requete.', Prenom_Uti ASC ;';
+                        $requete=$requete.' Prenom_Uti ASC ;';
                     }
                     else if ($tri==="ordrePrenomAntiAlphabétique"){
-                        $requete=$requete.' ASC, Prenom_Uti DESC ;';
+                        $requete=$requete.' Prenom_Uti DESC ;';
                     }
                     else{
-                        $requete=$requete.' ASC ;';
+                        $requete=$requete.' COUNT(PRODUIT.Id_Produit) ASC ;';
                     }
 
 
