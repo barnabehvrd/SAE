@@ -19,7 +19,7 @@
         <div class="rightColumn">
             <div class="contenuPage">
 
-                <form action="traitement_broadcast_user.php" method="post">
+                <form action="traitements/traitement_broadcast_user.php" method="post">
                     <label for="message">Votre message :</label>
                     <textarea id="message" name="message" rows="5" maxlength="5000" required></textarea>
 
