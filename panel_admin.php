@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>L'étal en ligne</title>
+<?php
+    require "language.php" ; 
+?>
+    <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
@@ -42,18 +45,18 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
+                    <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
                     <?php
                         if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
+                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
+                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
+                            echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
+                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
+                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
                         }
                     ?>
                 </div>
@@ -67,8 +70,9 @@
                         unset($_SESSION['tempPopup']);
                     }
                     ?>
-					<input type="submit" value=<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo '"Se Connecter"';}else {echo '"'.$_SESSION['Mail_Uti'].'"';}?> class="boutonDeConnection">
+					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                
 				</form>
             </div>
             <div class="gallery-container">
@@ -94,18 +98,18 @@
                                 echo"<label>- producteurs :</label><br>";
 
                                 while ($row = $result->fetch_assoc()) {
-                                    echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
-                                        <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
+                                    echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
+                                        <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                    echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
-                                    echo "Mail : " . $row["Mail_Uti"] . "<br>";
-                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo "Profession : " . $row["Prof_Prod"] . "<br></form>";
+                                    echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
+                                    echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
+                                    echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
+                                    echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br>";
+                                    echo $htmlProfessionDeuxPoints, $row["Prof_Prod"] . "<br></form>";
                                 }
                                 echo '</div>'; 
                             } else {
-                                echo "erreur contacté l'équipe de déveloper ";
+                                echo $htmlErrorDevTeam;
                             }
                             $stmt->close();
                             $connexion->close();
@@ -130,40 +134,39 @@
                     $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
-                        echo"<label>- utilisateurs :</label><br>";
+                        echo"<label>".$htmlUtilisateurs."</label><br>";
 
                         while ($row = $result->fetch_assoc()) {
-                            
+            
                             echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                 <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
                                 <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                            echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                            echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
-                            echo "Mail : " . $row["Mail_Uti"] . "<br>";
-                            echo "Adresse : " . $row["Adr_Uti"] . "<br></form>";
+
+                            echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
+                            echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
+                            echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
+                            echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br></form>";
                         }
                         echo '</div>'; 
                     } else {
-                        echo "erreur contacté l'équipe de déveloper ";
+                        echo $htmlErrorDevTeam;
                     }
                     $stmt->close();
                     $connexion->close();
-                ?>
-                </div>
-                <!-- some code -->
-
-            </div>
+               
+               ?>
+            <br>
             <div class="basDePage">
                 <form method="post">
-						<input type="submit" value="Contactez nous !" class="boutonBasDePage">
-                        <input type="hidden" name="popup" value="contact">
+						<input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
+                        <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-						<input type="submit" value="CGU" class="boutonBasDePage">
-                        <input type="hidden" name="popup" value="CGU">
+						<input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
+                        <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>
         </div>
     </div>
-    <?php require "popups/gestion_popups.php" ?>
+    <?php require "popups/gestion_popups.php";?>
 </body>
