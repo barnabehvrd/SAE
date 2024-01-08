@@ -57,6 +57,16 @@ try {
                 $_SESSION["isProd"]=false;
             }
             $_SESSION['erreur'] = '';
+            $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+            $isAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE Id_Uti='.$_SESSION["Id_Uti"]);
+            $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+            
+            if (count($returnIsAdmin)>0){
+                $_SESSION["isAdmin"]=true;
+            }else {
+                $_SESSION["isAdmin"]=false;
+            }
+            $_SESSION['erreur'] = '';
         } else {
             $_SESSION['test_pwd']--;
             $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
