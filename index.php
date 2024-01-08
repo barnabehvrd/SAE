@@ -241,7 +241,7 @@
                     <input type="hidden" name="popup" value="
                     <?php 
                     if(isset($_SESSION['Mail_Uti'])){
-                        echo ($htmlSeConnecter);
+                        echo ("info_perso");
                         }else{
                             echo 'sign_in';
                             }
