@@ -1,5 +1,5 @@
 <?php
-$htmlMarque = "The Stall Online";
+$htmlMarque = "L'étal en ligne";
 $htmlRechercherPar = "Search by:";
 $htmlParVille = "- By city:";
 $htmlParProfession = "- Profession:";
@@ -145,5 +145,30 @@ $htmlAnnulerCommande = "Cancel order";
 $htmlVotreMessage = "Your message:";
 $htmlEnvoyerMessageATousUti = "Send the message to all users";
 $htmlEnvoyerMessageATousProducteurs = "Send the message to all producers";
+$htmlContactAdminReportBug = "Contact an administrator or report a bug";
+$htmlMessageDeuxPoints = "Message:";
+$htmlRespectFormat = "Respect the format!";
+$htmlEnvoyer = "Send";
+$htmlErreur403 = "Access Denied - Error 403";
+$htmlPasAcces = "Sorry, you do not have permission to access this page.";
+$htmlTentatives = " attempt(s)";
+$htmlMauvaisMdp = "Incorrect password, you have ";
+$htmlErreurMaxReponsesAtteintes = "You have exhausted all your login attempts";
+$htmlPasDeConversation = "You have no ongoing conversations at the moment 😓";
+$htmlReinVotreMdp = "Password Reset";
+$htmlTonMdpEst = "Your password reset code is:";
+$htmlErreurMailIncorrect = "Code not sent, check if your email is correct";
+$htmlPasMailDansBDD = "Your email address is not in our database";
+$htmlMdpDeuxPoints = "Password:";
+$htmlMessageUrlMdpMajOk = "The password has been successfully updated.";
+$htmlMessageUrlAdrInvalide = "You entered an invalid email address. Check for any input errors. If necessary,";
+$htmlSelectConversation = "Please select a conversation.";
+$htmlPasAccesPageContactAdmin = "You are not logged in, you should not have access to this page. Please contact an administrator as soon as possible.";
+$htmlDeconnectionReussie = "Logout successful";
+$htmlAdresseMailInvalide = "Invalid email address";
+$htmlMdpCorrespondRedirectionAccueil = "The password matches. You will be redirected to the homepage";
+$htmlEnregistrementUtilisateurReussi = "User registration successful.";
+$htmlEnregistrementProducteurReussi = "Producer registration successful.";
+$htmlAdrMailDejaUtilisee = "Email address already in use";
 
 ?>
