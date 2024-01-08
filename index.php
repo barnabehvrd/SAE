@@ -174,6 +174,20 @@
                 }
             ?>
             <br>
+
+
+			<label>- Nombre de produits :</label>
+            <br>
+            <select class="zoneDeTextePopup" name="tri" required>
+                <option value="nombreDeProduits" selected>Nombre de produits</option>
+                <option value="ordreNomAlphabétique">par nom (alphabétique)</option>
+                <option value="ordreNomAntiAlphabétique">par nom (anti alphabétique)</option>
+                <option value="ordrePrenomAlphabétique">par prénom (alphabétique)</option>
+                <option value="ordrePrenomAntiAlphabétique">par prénom (anti alphabétique)</option>
+            </select>
+            <br>
+
+
 			<input type="submit" value="Rechercher">
 			</form>
 
@@ -254,7 +268,29 @@
                     if ($rechercheVille!=""){
                         $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
                     }
-                    $requete=$requete.' ORDER BY COUNT(PRODUIT.Id_Produit) DESC; ';
+                    $requete=$requete.' ORDER BY COUNT(PRODUIT.Id_Produit) ';
+
+
+                    if ($tri==="nombreDeProduits"){
+                        $requete=$requete.' DESC ;';
+                    }
+                    else if ($tri==="ordreNomAlphabétique"){
+                        $requete=$requete.', Nom_Uti ASC ;';
+                    }
+                    else if ($tri==="ordreNomAntiAlphabétique"){
+                        $requete=$requete.' ASC, Nom_Uti DESC ;';
+                    }
+                    else if ($tri==="ordrePrenomAlphabétique"){
+                        $requete=$requete.', Prenom_Uti ASC ;';
+                    }
+                    else if ($tri==="ordrePrenomAntiAlphabétique"){
+                        $requete=$requete.' ASC, Prenom_Uti DESC ;';
+                    }
+                    else{
+                        $requete=$requete.' ASC ;';
+                    }
+
+
                     $stmt = $connexion->prepare($requete);
                      // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
