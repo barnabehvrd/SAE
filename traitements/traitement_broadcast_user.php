@@ -10,7 +10,7 @@ $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisat
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   
-  $bdd->query('CALL broadcast_admin(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
+  $bdd->query('CALL broadcast_Utilisateur(' . $_SESSION["Id_Uti"] . ', \'' . $message . '\');');
   //header messagerie
 } else {
   echo "error";
