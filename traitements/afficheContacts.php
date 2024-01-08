@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -17,7 +20,7 @@ function afficheContacts($id_user){
     $query = $bdd->query(('CALL listeContact('.$id_user.');'));
     $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
     if (count($contacts)==0){
-        echo('Vous n\'avez pas de conversation engagée pour le moment 😓');
+        echo($htmlPasDeConversation);
     }else{
         foreach($contacts as $contact){
             afficherContact($contact);

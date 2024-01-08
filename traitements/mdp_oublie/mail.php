@@ -1,5 +1,7 @@
 <?php
-
+    require "language.php" ; 
+?>
+<?php
 
 $email = $_POST["email"];
 $_SESSION["mailTemp"]=$email;
@@ -22,9 +24,9 @@ if ($emailCount > 0) {
     $code = rand(100000, 999999);
     $_SESSION["code"]=$code;
     // Envoi du code par e-mail
-    $subject = "Réinitialisation de mot de passe";
-    $message = "Votre code de réinitialisation de mot de passe est : $code";
-    $headers = "From: no-reply@letalenligne.com"; // Remplacez par votre adresse e-mail
+    $subject = $htmlReinVotreMdp;
+    $message = $htmlTonMdpEst.$code;
+    $headers = "From: no-reply@letalenligne.com";
 
     // Envoi de l'e-mail
     $mailSent = mail($email, $subject, $message, $headers);
@@ -33,9 +35,9 @@ if ($emailCount > 0) {
     if ($mailSent) {
         $_POST['popup'] = 'mdp_oublie/code';
     } else {
-        $_SESSION['erreur'] = 'Code non envoyer, vérifier si votre mail est correct';
+        $_SESSION['erreur'] = $htmlErreurMailIncorrect;
     }
 }else {
-    $_SESSION['erreur'] = 'Votre adresse mail n\'est pas dans notre base de donnée';
+    $_SESSION['erreur'] = $htmlPasMailDansBDD;
 }
 ?>

@@ -48,9 +48,9 @@ try {
             $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
             if(($returnQueryIdAdmin)==null){
                 echo ("
-                <title>Accès refusé - Erreur 403</title>
-                <h1>Accès refusé - Erreur 403</h1>
-                <p>Désolé, vous n'avez pas l'autorisation d'accéder à cette page.</p>
+                <title>".$htmlErreur403."</title>
+                <h1>".$htmlErreur403."</h1>
+                <p>".$htmlPasAcces."</p>
                 " );
             }else {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
@@ -60,10 +60,10 @@ try {
             }
         } else {
             $_SESSION['test_pwd']--;
-            $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
+            $_SESSION['erreur'] = $htmlMauvaisMdp.  $_SESSION['test_pwd'] .$htmlTentatives;
         }
     }else {
-        $_SESSION['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
+        $_SESSION['erreur'] = $htmlErreurMaxReponsesAtteintes;
     }
     }
 } catch (Exception $e) {
