@@ -35,17 +35,37 @@ $htmlSignalerDys="Signaler un dysfonctionnement";
 $htmlCGU="CGU";
 $htmlSeDeconnecter="Se deconnecter";
 $htmlInformationsPersonelles="Informations personelles";
+$htmlNomDeuxPoints="Nom :";
+$htmlPrénomDeuxPoints="Prénom :";
+$htmlAdrPostDeuxPoints="Adresse postale actuelle :";
+$htmlRueDeuxPoints="Rue :";
+$htmlCodePostDeuxPoints="Code postal :";
+$htmlVilleDeuxPoints="Ville :";
+$htmlModifier="Modifier";
+$htmlSupprimerCompte="Supprimer le compte";
+$htmlAucunResultatCompte="Aucun résultat trouvé pour votre compte, veuillez contacter le support.";
 $html="";
 $html="";
 $html="";
 $html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+
+
+
 
 /*
-
-
-
-<?php 
-
 '.$htmlImageUtilisateur.'
 
-<?php echo $htmlInformationsPersonelles?>*/?>
+<?php echo $htmlAucunResultatCompte?>
+
+*/?>

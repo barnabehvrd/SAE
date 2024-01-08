@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <?php
-    require "language_fr.php" ; 
+    require "language.php" ; 
 ?>
     <title> <?php echo $htmlMarque; ?> </title>
     <meta charset="UTF-8">

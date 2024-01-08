@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
         if (isset($_POST['formClicked'])){
             unset($_POST['formClicked']);
             require 'traitements/update_user_info.php';
@@ -35,27 +38,27 @@
                     
                     <!--  Set default values to current user information -->
                     <div>
-                        <label for="new_nom">Nom :</label>
+                        <label for="new_nom"><?php echo $htmlNomDeuxPoints?></label>
                         <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value=<?php echo ($row["Nom_Uti"]) ?>>
                     </div>
                     <div>
-                        <label for="new_prenom">Prénom :</label>
+                        <label for="new_prenom"><?php echo $htmlPrénomDeuxPoints?></label>
                         <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value=<?php echo ($row["Prenom_Uti"]) ?>>
                     </div>
                     <div>
-                        <label>Adresse postale actuelle :</label>
+                        <label><?php echo $htmlAdrPostDeuxPoints?></label>
                         <label><?php echo ($row["Adr_Uti"])?></label>
                     </div>
                     <div>
-                        <label for="rue">Rue :</label>
+                        <label for="rue"><?php echo $htmlRueDeuxPoints?></label>
                         <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}"  title="La rue doit commencer par une majuscule et avoir une longueur maximale de 100 caractères." required>
                     </div>
                     <div>
-                            <label for="code">Code postale :</label>
+                            <label for="code"><?php echo $htmlCodePostDeuxPoints?></label>
                             <input class="zoneDeTextePopup" type="text" name="code" pattern="^\d{5}$" title="Le code postal doit contenir exactement 5 chiffres." required>
                     </div>
                     <div>
-                        <label for="ville">Ville :</label>
+                        <label for="ville"><?php echo $htmlVilleDeuxPoints?></label>
                         <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="la ville doit faire  entre 0 et 100 caractères alphanumériques, espaces autorisés." required>
                     </div>
                     <div>
@@ -66,14 +69,14 @@
                         }
                         ?>
                     </div>
-                    <input class="boutonPopup" type="submit" name="formClicked" value="Modifier">
+                    <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
-                <a href="traitements/del_acc.php"><button>Supprimer le compte</button></a>
+                <a href="traitements/del_acc.php"><button><?php echo $htmlSupprimerCompte?></button></a>
 
                 <?php
             }
         } else {
-            ?><p>Aucun résultat trouvé pour votre compte, veuillez contacter le support.</p><?php
+            ?><p><?php echo $htmlAucunResultatCompte?></p><?php
         }
         ?>
         </div>
