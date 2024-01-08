@@ -33,19 +33,19 @@ $htmlImageUtilisateur="Image utilisateur";
 $htmlAucunResultat="Aucun résultat ne correspond à ces critères";
 $htmlSignalerDys="Signaler un dysfonctionnement";
 $htmlCGU="CGU";
+$htmlSeDeconnecter="Se deconnecter";
+$htmlInformationsPersonelles="Informations personelles";
 $html="";
 $html="";
 $html="";
 $html="";
-$html="";
-$html="";
-?>
+
+/*
 
 
-<?php /*
 
-<?php echo $htmlCGU?> 
+<?php 
 
 '.$htmlImageUtilisateur.'
 
-*/?>
+<?php echo $htmlInformationsPersonelles?>*/?>
