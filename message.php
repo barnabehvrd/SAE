@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- page non temporaire ne doit pas etre accessible -->
 <html>
 <head>
 

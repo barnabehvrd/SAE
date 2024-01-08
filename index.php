@@ -238,15 +238,9 @@
                             }
                             else {
                                 echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
-                    <input type="hidden" name="popup" value="
-                    <?php 
-                    if(isset($_SESSION['Mail_Uti'])){
-                        echo ("info_perso");
-                        }else{
-                            echo 'sign_in';
-                            }
-                            ?>">
-				</form>
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                
+                </form>
             </div>
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
             <div class="gallery-container">
