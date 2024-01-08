@@ -39,11 +39,13 @@ $html="";
 $html="";
 $html="";
 $html="";
-?>
+
+/*
 
 
-<?php /*
+
+<?php 
 
 '.$htmlImageUtilisateur.'
 
-<?php echo $htmlInformationsPersonelles?>
+<?php echo $htmlInformationsPersonelles?>*/?>
