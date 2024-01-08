@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 
 // Error handling with try-catch block
 try {
@@ -27,7 +30,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        $_SESSION['erreur'] = 'adresse mail invalide';
+        $_SESSION['erreur'] = $htmlAdresseMailInvalide;
     } else {
 
     // Extract user ID
@@ -43,7 +46,7 @@ try {
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
         if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
-            echo "Le mot de passe correspond. vous allez etre redirigé vers la page d'accueil";
+            echo $htmlMdpCorrespondRedirectionAccueil;
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
 
@@ -69,10 +72,10 @@ try {
             $_SESSION['erreur'] = '';
         } else {
             $_SESSION['test_pwd']--;
-            $_SESSION['erreur'] = 'mauvais mot de passe il vous restes ' . $_SESSION['test_pwd'] . ' tentative(s)';
+            $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
         }
     }else {
-        $_SESSION['erreur'] = 'vous avez épuisé toutes vos tentatives de connection';
+        $_SESSION['erreur'] = $htmlErreurMaxReponsesAtteintes;
     }
     }
 } catch (Exception $e) {

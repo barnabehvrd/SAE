@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 // Détruisez toutes les variables de session
 if (!isset($_SESSION["Id_Uti"])) {
     // Démarrer la session
@@ -6,7 +9,7 @@ if (!isset($_SESSION["Id_Uti"])) {
 }
 $_SESSION = array();
 // Effacez le cookie de session
-$_SESSION['erreur'] = 'Déconnexion réussie';
+$_SESSION['erreur'] = $htmlDeconnectionReussie;
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     @setcookie(

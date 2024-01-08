@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -32,12 +35,11 @@ if (isset($_SESSION['Id_Uti'])){
         afficheMessages($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur']);
         $formDisabled=false;
     }else {
-        echo('Veuillez selectionner une conversation.');
+        echo($htmlSelectConversation);
         $formDisabled=true;
     }
 }else{
-    echo('Vous n\'êtes pas connecté, vous ne devriez pas avoir accès à cette page.</br>
-            Veuillez contacter un administrateur au plus tôt.');
+    echo($htmlPasAccesPageContactAdmin);
     $formDisabled=true;
 }
 ?>

@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 // Récupération des données du formulaire
 
 $_SESSION['test_pwd'] = 5;
@@ -41,7 +44,7 @@ if ($nb == 0) {
     $insertionUtilisateur = $connexion->prepare("INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES (?, ?, ?, ?, ?, ?)");
     $insertionUtilisateur->execute([$iduti, $prenom, $nom, $adresse, $pwd, $Mail_Uti]);
 
-    echo "Enregistrement utilisateur réussi.";
+    echo $htmlEnregistrementUtilisateurReussi;
 
     // Création du producteur si la profession est définie
     if (isset($_POST['profession'])) {
@@ -56,7 +59,7 @@ if ($nb == 0) {
         $insertionProducteur = $connexion->prepare("INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES (?, ?, ?)");
         $insertionProducteur->execute([$iduti, $id_max_prod, $profession]);
 
-        echo "Enregistrement producteur réussi.";
+        echo $htmlEnregistrementProducteurReussi;
     }
 
     // Fermeture de la connexion
@@ -82,7 +85,7 @@ if ($nb == 0) {
                 $_POST['popup'] = '';
             }
 } else {
-    $_SESSION['erreur'] = 'adresse mail déjà utilisé'; 
+    $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
 }
 
 

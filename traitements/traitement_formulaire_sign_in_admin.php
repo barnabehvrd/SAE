@@ -28,7 +28,7 @@ try {
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
-        $_SESSION['erreur'] = 'adresse mail invalide';
+        $_SESSION['erreur'] = $htmlAdresseMailInvalide;
     } else {
 
     // Extract user ID

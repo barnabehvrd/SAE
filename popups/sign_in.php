@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
@@ -28,7 +31,7 @@ if (isset($_POST['formClicked'])){
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
                 </div>
                 <div>
-                    <label for="pwd"><?php echo $htmlNouveauMdpDeuxPoints; ?></label>
+                    <label for="pwd"><?php echo $htmlMdpDeuxPoints; ?></label>
                     <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="<?php echo $htmlConditionsMdp; ?>" name="pwd" required>
                 </div>
                 <div>

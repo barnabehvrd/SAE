@@ -1,4 +1,7 @@
 <?php
+    require "language.php" ; 
+?>
+<?php
 $pwd1 = $_POST['pwd1'];
 $pwd2 = $_POST['pwd2'];
 
@@ -22,10 +25,10 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
         $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["mailTemp"] ."';";
         echo ($update);
         $bdd->exec($update);
-        header('Location: pwd.php?message=Le mot de passe a été mis à jour avec succès.');
+        header('Location: pwd.php?message==$'.$htmlMessageUrlMdpMajOk);
 
     } else {
-        header('Location: pwd.php?message=Vous avez renseigné une adresse e-mail invalide. Vérifiez que vous n\'avez pas fait d\'erreur de saisie. Si besoin');
+        header('Location: pwd.php?message='.$htmlMessageUrlAdrInvalide);
     }
 }
 ?>
