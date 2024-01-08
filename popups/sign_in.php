@@ -17,19 +17,19 @@ if (isset($_POST['formClicked'])){
 				<input type="submit" value="" class="boutonQuitPopup">
                 <input type="hidden" name="popup" value="">
 		</form>
-        <p class="titrePopup">Se connecter <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
+        <p class="titrePopup"><?php echo $htmlSeConnecter; ?> <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin']))
                                             {echo '(Admin)';}?></p>
         <div>
             <form class="formPopup" method="post">
                 <input type="hidden" name="popup" value=
                 <?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){echo '"sign_in_admin"';}else{echo '"sign_in_client"';}?>>
                 <div>
-                    <label for="mail">Mail :</label>
+                    <label for="mail"><?php echo $htmlMailDeuxPoints; ?></label>
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
                 </div>
                 <div>
-                    <label for="pwd">Mot de passe :</label>
-                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="Le mot de passe doit avoir entre 8 et 50 caractères." name="pwd" required>
+                    <label for="pwd"><?php echo $htmlNouveauMdpDeuxPoints; ?></label>
+                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="<?php echo $htmlConditionsMdp; ?>" name="pwd" required>
                 </div>
                 <div>
                     <?php
@@ -39,19 +39,19 @@ if (isset($_POST['formClicked'])){
                     }
                     ?>
                 </div>
-                <input class="boutonPopup" name="formClicked" type="submit" value="se connecter">
+                <input class="boutonPopup" name="formClicked" type="submit" value="<?php echo $htmlSeConnecter; ?>">
             </form>
         </div>
         <div>
             <form method="post">
-				<input type="submit" value="Mot de passe oublié ?" class="lienPopup">
+				<input type="submit" value="<?php echo $htmlMDPOubliePointInt; ?>" class="lienPopup">
                 <input type="hidden" name="popup" value="mdp_oublie/mail">
 			</form>
         </div>
         <div class="alignementCentreCoteACote">
-            <p class="text">Vous n'avez pas de compte ?</p>
+            <p class="text"><?php echo $htmlPasDeComptePointInt; ?></p>
             <form method="post">
-				<input type="submit" value="S'inscrire" class="lienPopup">
+				<input type="submit" value="<?php echo $htmlSInscrire; ?>" class="lienPopup">
                 <input type="hidden" name="popup" value="pre_sign_up">
 			</form>
         </div>
