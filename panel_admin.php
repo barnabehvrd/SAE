@@ -137,9 +137,9 @@
                         echo"<label>".$htmlUtilisateurs."</label><br>";
 
                         while ($row = $result->fetch_assoc()) {
-                            
-                            echo '<form method="post" action="del_acc.php" class="squarePanelAdmin">
-                                <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+            
+                            echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
+                                <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
                                 <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
 
                             echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
