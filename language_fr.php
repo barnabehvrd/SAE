@@ -88,16 +88,17 @@ $htmlReinMdp="Réinitialisation de mot de passe";
 $htmlEntrerAdrMail="Veuillez entrer votre mail ";
 $htmlCodeEnvoyePourRecupMdp="un code vous sera envoyé sur votre adresse mail afin de changer votre mot de passe";
 $htmlEnvoiCode="Envoyer le code";
-$html="";
-$html="";
-$html="";
+$htmlNouveauMdp="Nouveau mot de passe";
+$htmlNouveauMdpDeuxPoints="Nouveau mot de passe : ";
+$htmlResaisiMdp="Ressaisissez le nouveau mot de passe :";
+$htmlChangerMdp="Changer le mot de passe";
 $html="";
 $html="";
 $html="";
 $html="";
 $html="";
 /*
-<?php echo $htmlEnvoiCode; ?>
+<?php echo $htmlChangerMdp; ?>
 */
 ?>
 
