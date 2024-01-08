@@ -107,8 +107,8 @@ if (isset($_POST["Id_Uti"])){
         $delCommande->execute();
 
 
-        $delCommande=$bdd->prepare(('DELETE FROM COMMANDE WHERE Id_Prod= :Id_Prod;'));
-        $delCommande->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
+        $delCommande=$bdd->prepare(('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd;'));
+        $delCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
         $delCommande->execute();
 
 
