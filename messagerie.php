@@ -55,7 +55,10 @@
                     ?>
 					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-                
+                    <?php 
+                    echo'<a class="bontonDeNavigation" href="broadcastuser.php">'.$htmlPanelAdmin.'</a>';
+                    echo'<a class="bontonDeNavigation" href="broadcast.php">'.$htmlPanelAdmin.'</a>';
+                    ?>
                 </form>
             </div>
             <div class="contenuPage">
