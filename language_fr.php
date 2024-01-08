@@ -101,6 +101,7 @@ $htmlConditionsMdp="Le mot de passe doit avoir entre 8 et 50 caractères.";
 $htmlMDPOubliePointInt="Mot de passe oublié ?";
 $htmlPasDeComptePointInt="Vous n'avez pas de compte ?";
 $htmlSInscrire="S'inscrire";
+$htmlDejaUnCompte="J'ai déjà un compte";
 $html="";
 $html="";
 $html="";
@@ -109,10 +110,6 @@ $html="";
 $html="";
 $html="";
 $html="";
-$html="";
-/*
-<?php echo $htmlSInscrire; ?>
-*/
 ?>
 
 
