@@ -170,4 +170,5 @@ $htmlMdpCorrespondRedirectionAccueil="Le mot de passe correspond. vous allez êt
 $htmlEnregistrementUtilisateurReussi="Enregistrement utilisateur réussi.";
 $htmlEnregistrementProducteurReussi="Enregistrement producteur réussi.";
 $htmlAdrMailDejaUtilisee="adresse mail déjà utilisée";
+$htmlVille="Ville";
 ?>

@@ -1,2 +1,2 @@
 
-<?php echo $htmlMesProduitsEnStock; ?>
+<?php echo $htmlVille; ?>
