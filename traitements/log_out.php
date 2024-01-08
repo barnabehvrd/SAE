@@ -1,5 +1,9 @@
 <?php
 // Détruisez toutes les variables de session
+if (!isset($_SESSION["Id_Uti"])) {
+    // Démarrer la session
+    session_start();
+}
 $_SESSION = array();
 // Effacez le cookie de session
 $_SESSION['erreur'] = 'Déconnexion réussie';
