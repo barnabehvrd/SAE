@@ -86,6 +86,20 @@ $html="";
 $html="";
 $html="";
 $html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
+$html="";
 ?>
 
 
+
+'.$htmlSupprimer.'
+
+".$htmlPiece."
+
+<?php echo $htmlImageNonFournie?>
