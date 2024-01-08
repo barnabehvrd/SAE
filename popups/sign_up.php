@@ -45,7 +45,14 @@ if (isset($_POST['formClicked'])){
         <?php if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){?> 
         <div>
             <label for="profession">Profession :</label>
-			<input class="zoneDeTextePopup" type="profession" name="profession" required>
+
+			<!--  <input class="zoneDeTextePopup" type="profession" name="profession" required> -->
+
+            <select class="zoneDeTextePopup" name="profession" required>
+                <option value="agriculteur" selected>Agriculteur</option>
+                <option value="viticulteur">Viticulteur</option>
+                <option value="eleveur">Eleveur</option>
+            </select>
         </div>
         <?php } ?>
         <div>
