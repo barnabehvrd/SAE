@@ -41,17 +41,6 @@ if (isset($_POST['formClicked'])){
                 </div>
                 <input class="boutonPopup" name="formClicked" type="submit" value="se connecter">
             </form>
-            <div>
-                <form method="post">
-					<?php if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){?>
-                        <input type="submit" value="Se connecter en tant qu'utilisateur lambda" class="lienPopup">
-                        <input type="hidden" name="popup" value="sign_in_client">
-                    <?php }else{ ?> 
-                        <input type="submit" value="Se connecter en tant qu'administrateur" class="lienPopup">
-                        <input type="hidden" name="popup" value="sign_in_admin">
-                    <?php } ?>
-			    </form>
-            </div>
         </div>
         <div>
             <form method="post">
