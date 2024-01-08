@@ -635,7 +635,7 @@ DELETE FROM UTILISATEUR;
 
 
 
-INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
+INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', '', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
 VALUES 
     ('1', 'John', 'Doe', 'johndoe1@gmail.com', '16 sentier des ravins, 93100 MONTREUIL', 'password123'),
