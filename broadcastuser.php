@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>L'étal en ligne</title>
+<?php
+    require "language.php" ; 
+?>
+    <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
@@ -20,24 +23,23 @@
             <div class="contenuPage">
 
                 <form action="traitements/traitement_broadcast_user.php" method="post">
-                    <label for="message">Votre message :</label>
+                    <label for="message"><?php echo $htmlVotreMessage; ?></label>
                     <textarea id="message" name="message" rows="5" maxlength="5000" required></textarea>
 
                     <br>
 
-                    <input type="submit" value="Envoyer le message a tout les utilisateurs">
+                    <input type="submit" value="<?php echo $htmlEnvoyerMessageATousUti; ?>">
                 </form>
-               <!-- some code -->
 
             </div>
             <div class="basDePage">
                 <form method="post">
-						<input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
-                        <input type="hidden" name="popup" value="contact_admin">
+                    <input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
+                    <input type="hidden" name="popup" value="contact_admin">
 				</form>
                 <form method="post">
-						<input type="submit" value="CGU" class="lienPopup">
-                        <input type="hidden" name="popup" value="cgu">
+                    <input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
+                    <input type="hidden" name="popup" value="cgu">
 				</form>
             </div>
         </div>
