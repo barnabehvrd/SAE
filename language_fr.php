@@ -44,7 +44,7 @@ $htmlVilleDeuxPoints="Ville :";
 $htmlModifier="Modifier";
 $htmlSupprimerCompte="Supprimer le compte";
 $htmlAucunResultatCompte="Aucun résultat trouvé pour votre compte, veuillez contacter le support.";
-$html="";
+$htmlContactsRecentsDeuxPoints="Contacts récents :";
 $html="";
 $html="";
 $html="";
@@ -66,6 +66,4 @@ $html="";
 /*
 '.$htmlImageUtilisateur.'
 
-<?php echo $htmlAucunResultatCompte?>
-
-*/?>
+<?php echo $htmlContactsRecentsDeuxPoints?>*/?>
