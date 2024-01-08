@@ -196,7 +196,8 @@
 						}
 
 						if ($nbProduit>0){
-                            echo '<input type="button" onclick="window.location.href=\'message.php?Id_Interlocuteur='.$Id_Uti.'\'" value="Envoyer un message"><br>';
+                            echo '<input type="button" onclick="window.location.href=messagerie.php?Id_Interlocuteur='.$Id_Uti.'" value="Envoyer un message"><br>';
+                            // onclick="window.location.href='messagerie.php?Id_Interlocuteur=
                             ?>
                             <form action="download_pdf.php" method="post">
                                 <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">
