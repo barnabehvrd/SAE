@@ -47,6 +47,9 @@
         else{
             $tri="nombreDeProduits";
         }
+        if (isset($_SESSION["language"])==true){
+            $_SESSION["language"]="fr";
+        }
 
         // récupération adresse du client
         function dbConnect(){
@@ -226,9 +229,10 @@
                         }
                     ?>
                 </div>
+                
                 <form action="language.php" method="post" id="languageForm">
                     <select name="language" id="languagePicker" onchange="submitForm()">
-                        <option value="fr" <?php if(!(isset($_SESSION["language"]))OR($_SESSION["language"]=="fr")) echo 'selected';?>>Français</option>
+                        <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
                         <option value="en" <?php if($_SESSION["language"]=="en") echo 'selected';?>>English</option>
                         <option value="es" <?php if($_SESSION["language"]=="es") echo 'selected';?>>Español</option>
                         <option value="al" <?php if($_SESSION["language"]=="al") echo 'selected';?>>Deutsch</option>
