@@ -47,7 +47,7 @@
         else{
             $tri="nombreDeProduits";
         }
-        if (isset($_SESSION["language"])==true){
+        if (isset($_SESSION["language"])==false){
             $_SESSION["language"]="fr";
         }
 
