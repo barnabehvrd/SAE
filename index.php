@@ -227,12 +227,13 @@
                     ?>
                 </div>
                 <form action="language.php" method="post" id="languageForm">
-                    <select name="language" id="languagePicker" onchange="submitForm()"><option value="fr" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
-                        <option value="en" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="en") echo 'selected';?>>English</option>
-                        <option value="es" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="es") echo 'selected';?>>Español</option>
-                        <option value="al" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="al") echo 'selected';?>>Deutsch</option>
-                        <option value="ru" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="ru") echo 'selected';?>>русский</option>
-                        <option value="ch" <?php if(isset($_SESSION["language"]) && $_SESSION["language"]=="ch") echo 'selected';?>>中國人</option>
+                    <select name="language" id="languagePicker" onchange="submitForm()">
+                        <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
+                        <option value="en" <?php if($_SESSION["language"]=="en") echo 'selected';?>>English</option>
+                        <option value="es" <?php if($_SESSION["language"]=="es") echo 'selected';?>>Español</option>
+                        <option value="al" <?php if($_SESSION["language"]=="al") echo 'selected';?>>Deutsch</option>
+                        <option value="ru" <?php if($_SESSION["language"]=="ru") echo 'selected';?>>русский</option>
+                        <option value="ch" <?php if($_SESSION["language"]=="ch") echo 'selected';?>>中國人</option>
                     </select>
                     </form>
                 <form method="post">
@@ -334,9 +335,9 @@
                         while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
                                 echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                echo '<p>'.$row["Prof_Prod"]. "<br>";
+                                echo ''.$row["Prof_Prod"]. "<br>";
                                 echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                echo $row["Adr_Uti"] . "</p><br>";
+                                echo $row["Adr_Uti"] . "<br>";
                                 echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
