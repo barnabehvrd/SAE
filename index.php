@@ -335,9 +335,9 @@
                         while ($row = $result->fetch_assoc()) {
                             if ($rayon>=100){
                                 echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                echo $row["Prof_Prod"]. "<br>";
+                                echo '<p>'.$row["Prof_Prod"]. "<br>";
                                 echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                echo $row["Adr_Uti"] . "<br>";
+                                echo $row["Adr_Uti"] . "</p><br>";
                                 echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
