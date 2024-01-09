@@ -227,7 +227,6 @@
                     ?>
                 </div>
                 <form action="language.php" method="post">
-                    <label for="languagePicker">Choose a language:</label>
                     <select name="language" id="languagePicker">
                         <option value="fr">Français</option>
                         <option value="en">English</option>
