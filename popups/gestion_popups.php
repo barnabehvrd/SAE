@@ -29,13 +29,10 @@ if (isset($_POST['popup'])){
             }
             break;
 
-            case 'sign_in_admin':
-                $_SESSION['tempIsAdmin'] = true;
-                require "sign_in.php";
-                break;
-            case 'info_perso':
-                require "info_perso.php";
-                break;
+        case 'sign_in_admin':
+            $_SESSION['tempIsAdmin'] = true;
+            require "sign_in.php";
+            break;
         
         default:
             require $_POST['popup'].".php";
