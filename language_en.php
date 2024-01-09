@@ -179,12 +179,6 @@ $htmlConditionsNomDetails = "The name must be between 0 and 100 alphanumeric cha
 $htmlConditionsPrenomDetails = "The first name must be between 0 and 100 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
 $htmlConditionsRueDetails = "The street must be between 0 and 120 alphanumeric characters, spaces allowed, and the following characters are allowed: î, ç, ô, â, ê, œ, î, â, ô, ë, ç, â, ÿ, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, ô, ê, â, ç, ô, â, ê, à, ô, î, â, ç, â, œ, ç, ç, œ, â, ô, ê, ë, â, ô, è";
 $htmlCodeIncorrect = "Incorrect code";
-$htmlFrançais="Français";
-$htmlAnglais="English";
-$htmlEspagnol="Español";
-$htmlAllemand="Deutch";
-$htmlRusse="русский";
-$htmlChinois="中國人";
 $htmlChooseLanguage = "Choose a language";
 $htmlValidate = "Validate";
 ?>

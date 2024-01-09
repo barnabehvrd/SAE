@@ -179,12 +179,6 @@ $htmlConditionsNomDetails="Der Name muss zwischen 0 und 100 alphanumerische Zeic
 $htmlConditionsPrenomDetails="Der Vorname muss zwischen 0 und 100 alphanumerische Zeichen enthalten, Leerzeichen sind erlaubt, und die folgenden Zeichen sind erlaubt: î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
 $htmlConditionsRueDetails="Die Straße muss zwischen 0 und 120 alphanumerische Zeichen enthalten, Leerzeichen sind erlaubt, und die folgenden Zeichen sind erlaubt: î, ç, ô, â, â, ê, œ, î, â, ô, ë, ç, â, â, ÿ, â, â, œ, ç, ê, ô, ï, ë, œ, œ, ô, â, â, ô, ê, â, ç, ô, â, ê, à, ô, â, â, î, â, â, ç, â, œ, ç, ç, œ, â, ô, œ, ê, ë, â, ô, è";
 $htmlCodeIncorrect="falscher Code";
-$htmlFrançais="Français";
-$htmlAnglais="English";
-$htmlEspagnol="Español";
-$htmlAllemand="Deutch";
-$htmlRusse="русский";
-$htmlChinois="中國人";
 $htmlChoisirLangue="Sprache wählen";
 $htmlValider="Bestätigen";
 ?>
