@@ -235,7 +235,7 @@
                         <option value="ru">русский</option>
                         <option value="ch">中國人</option>
                     </select>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="" id="boutonLangue">
                     </form>
                 <form method="post">
                     <?php
