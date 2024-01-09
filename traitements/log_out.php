@@ -1,6 +1,6 @@
 <?php
-    require "language.php" ; 
-?>
+    require "./language.php" ; 
+    ?>
 <?php
 // Détruisez toutes les variables de session
 if (!isset($_SESSION["Id_Uti"])) {
