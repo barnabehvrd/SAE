@@ -3,7 +3,7 @@
 if (!isset($_SESSION["Id_Uti"])) {
     session_start();
 }
-require "../language.php" ; 
+//require "../language.php" ; 
 
 $_SESSION = array();
 // Effacez le cookie de session
