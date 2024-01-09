@@ -237,7 +237,8 @@
                         <option value="fr">Français</option>
                         <option value="en">English</option>
                         <option value="es">Español</option>
-                        <option value="de">Deutsch</option>
+                        <option value="ru">русский</option>
+                        <option value="ch">中國人</option>
                     </select>
                     <input type="submit" value="Submit">
                     </form>
