@@ -127,7 +127,7 @@ if (isset($_POST["Id_Uti"])){
 
     }
 
-    if ($delParAdmin=false){
+    if ($delParAdmin==false){
       header('Location: log_out.php'.$msg);
     }
     else{
