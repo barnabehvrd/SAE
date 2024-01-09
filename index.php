@@ -3,6 +3,12 @@
 <head>
 <?php
     require "language.php" ; 
+    $htmlFrançais="Français";
+    $htmlAnglais="English";
+    $htmlEspagnol="Español";
+    $htmlAllemand="Deutch";
+    $htmlRusse="русский";
+    $htmlChinois="中國人";
 ?>
     <title> <?php echo $htmlMarque; ?> </title>
     <meta charset="UTF-8">
