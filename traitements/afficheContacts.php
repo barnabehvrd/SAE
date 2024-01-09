@@ -20,7 +20,8 @@ function afficheContacts($id_user){
     $query = $bdd->query(('CALL listeContact('.$id_user.');'));
     $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
     if (count($contacts)==0){
-        echo($$htmlPasDeConversation);
+        $test = $htmlPasDeConversation;
+        echo($test);
     }else{
         foreach($contacts as $contact){
             afficherContact($contact);
