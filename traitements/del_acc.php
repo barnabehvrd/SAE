@@ -14,9 +14,11 @@ if(!isset($_SESSION)){
 
 if (isset($_POST["Id_Uti"])){
   $utilisateur=htmlspecialchars($_POST["Id_Uti"]);// l'admin supprime
+  $delParAdmin=true;
 }else{
   $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
   $msg="?msg=compte supprimer";
+  $delParAdmin=false;
 }
 
   $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
@@ -125,6 +127,13 @@ if (isset($_POST["Id_Uti"])){
 
     }
 
-    header('Location: log_out.php'.$msg);
+    if ($delParAdmin=false){
+      header('Location: log_out.php'.$msg);
+    }
+    else{
+      header('Location: panel_admin.php');
+    }
+
+    
     
 ?>
