@@ -4,7 +4,7 @@
 <?php
         if (isset($_POST['formClicked'])){
             unset($_POST['formClicked']);
-            require 'traitements/update_user_info.php';
+            header('Location: traitements/update_user_info.php');
             $_SESSION['actualiser'] = true;
         }
         if(isset($_POST['deconnexion'])){
@@ -33,9 +33,7 @@
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {?>
                 <form class="formPopup"  method="post">
-                    
                     <input type="hidden" value='info_perso' name="popup">
-                    
                     <!--  Set default values to current user information -->
                     <div>
                         <label for="new_nom"><?php echo $htmlNomDeuxPoints?></label>
@@ -76,8 +74,6 @@
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
                 <a href="traitements/del_acc.php"><button><?php echo $htmlSupprimerCompte?></button></a>
-
-
                 <?php
             }
         } else {
