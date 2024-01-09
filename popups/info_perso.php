@@ -32,7 +32,7 @@
         require 'traitements/chargement_info_perso.php';
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {?>
-                <form class="formPopup" action='update_user_info.php' method="post">
+                <form class="formPopup" action='traitements/update_user_info.php' method="post">
                     <input type="hidden" value='info_perso' name="popup">
                     <!--  Set default values to current user information -->
                     <div>
