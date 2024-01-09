@@ -1,7 +1,8 @@
 <?php
 
-// Start session
-session_start();
+if(!isset($_SESSION)){
+  session_start();
+  }
      function dbConnect(){
         $host = 'localhost';
         $dbname = 'inf2pj_02';

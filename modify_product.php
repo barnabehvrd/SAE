@@ -41,7 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $serveur = "localhost";
         $motdepasse = "ahV4saerae";
         $basededonnees = "inf2pj_02";
-        session_start();
+        if(!isset($_SESSION)){
+            session_start();
+            }
 
 
         // Obtenir l'extension du fichie

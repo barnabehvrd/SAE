@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+        session_start();
+        }
 // Database connection
 $utilisateur = "inf2pj02";
 $serveur = "localhost";

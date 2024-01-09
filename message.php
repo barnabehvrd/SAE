@@ -34,8 +34,9 @@
 					<?php 
 					$_SESSION['Id_Uti']=2;
 					if (!isset($_SESSION)) {
-						
-					session_start();
+						if(!isset($_SESSION)){
+							session_start();
+							}
 					echo "connection";
 					}
 					else {
