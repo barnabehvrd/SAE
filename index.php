@@ -232,15 +232,16 @@
                     echo ('
 
                     <form action="language.php" method="post">
-                    <label for="languagePicker">Choose a language:</label>
+                    <label for="languagePicker">'.$htmlChoisirLangue.'</label>
                     <select name="language" id="languagePicker">
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="ru">русский</option>
-                        <option value="ch">中國人</option>
+                        <option value="fr">'.$htmlFrancais.'</option>
+                        <option value="en">'.$htmlAnglais.'</option>
+                        <option value="es">'.$htmlEspagnol.'</option>
+                        <option value="al">'.$htmlAllemand.'</option>
+                        <option value="ru">'.$htmlRusse.'</option>
+                        <option value="ch">'.$htmlChinois.'</option>
                     </select>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="'.$htmlValider.'">
                     </form>
 
                     ')
