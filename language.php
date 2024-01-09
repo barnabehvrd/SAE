@@ -2,9 +2,9 @@
    
  
 // Récupère la langue sélectionnée depuis le formulaire
-if (isset($_POST['language']) || isset($_SESSION["language"])) {
+if (isset($_POST['language'])) {
     $_SESSION["language"] = $_POST['language'];
-
+} else {
     // Utilisez une structure de commutation pour gérer différentes langues
     switch ($_SESSION["language"]) {
         case 'fr':
@@ -26,7 +26,7 @@ if (isset($_POST['language']) || isset($_SESSION["language"])) {
         default:
         require "language_fr.php" ; 
             break;
-    }
-} else {
-    require "language_fr.php" ; }
+        }
+}
+
 ?>
