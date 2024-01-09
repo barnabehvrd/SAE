@@ -38,7 +38,7 @@ if (isset($_POST['formClicked'])){
             <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôâêàôââîââçéâœççœâôœêëâôè ]{0,120}" title="<?php echo $htmlConditionsVille; ?>" required>
         </div>
         <div>
-            <label for="pwd"><?php echo $htmlNouveauMdpDeuxPoints; ?></label>
+            <label for="pwd"><?php echo $htmlMdpDeuxPoints; ?></label>
             <input class="zoneDeTextePopup" type="password" name="pwd" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="<?php echo $htmlConditionsMdp; ?>" required>
         </div>
         <div>
