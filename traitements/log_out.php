@@ -1,12 +1,10 @@
 <?php
-    require "../language.php" ; 
-    ?>
-<?php
 // Détruisez toutes les variables de session
 if (!isset($_SESSION["Id_Uti"])) {
-
     session_start();
 }
+require "../language.php" ; 
+
 $_SESSION = array();
 // Effacez le cookie de session
 $_SESSION['erreur'] = $htmlDeconnectionReussie;
