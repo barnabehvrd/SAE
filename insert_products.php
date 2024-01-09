@@ -9,8 +9,9 @@
         $basededonnees = "inf2pj_02";
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
-
-    session_start();
+        if(!isset($_SESSION)){
+            session_start();
+            }
     $Id_Uti=htmlspecialchars($_SESSION["Id_Uti"]);
 
     $bdd=dbConnect();

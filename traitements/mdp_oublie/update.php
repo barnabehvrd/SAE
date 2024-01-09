@@ -12,8 +12,10 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
     $motdepasse = "ahV4saerae";
     $basededonnees = "inf2pj_02";
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    session_start();
 
+    if(!isset($_SESSION)){
+        session_start();
+        }
     // Vérif d'abord si l'adr mail existe bien dans la table utilisateur
     $checkEmailQuery = "SELECT COUNT(*) AS count FROM UTILISATEUR WHERE Mail_Uti = :mail";
     $checkEmailStmt = $bdd->prepare($checkEmailQuery);
