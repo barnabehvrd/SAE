@@ -3,6 +3,7 @@
 <head>
 <?php
     require "language.php" ; 
+    var_dump($_SESSION);
 ?>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
