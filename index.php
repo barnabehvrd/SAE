@@ -229,6 +229,20 @@
                         $_POST['popup'] = $_SESSION['tempPopup'];
                         unset($_SESSION['tempPopup']);
                     }
+                    echo ('
+
+                    <form action="language.php" method="post">
+                    <label for="languagePicker">Choose a language:</label>
+                    <select name="language" id="languagePicker">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                    </form>
+
+                    ')
                     ?>
 
 					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
@@ -236,7 +250,9 @@
                 
                 </form>
             </div>
+            
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
+
             <div class="gallery-container">
                <?php 
                
