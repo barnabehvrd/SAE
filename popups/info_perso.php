@@ -62,6 +62,10 @@
                         <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="<?php echo $htmlConditionsVille; ?>" required>
                     </div>
                     <div>
+                        <label for="ville"> mot de passe actuel </label>
+                        <input class="zoneDeTextePopup" type="password" name="pwd" required>
+                    </div>
+                    <div>
                         <?php
                         if (isset($_SESSION['erreur'])) {
                             $erreur = $_SESSION['erreur'];
@@ -72,7 +76,7 @@
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
                 <a href="traitements/del_acc.php"><button><?php echo $htmlSupprimerCompte?></button></a>
-                <a href="traitements/log_out.php"><button><?php echo $htmlSupprimerCompte?></button></a>
+
 
                 <?php
             }
