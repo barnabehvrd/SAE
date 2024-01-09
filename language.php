@@ -22,7 +22,7 @@ if (isset($_POST['language'])) {
             require "language_es.php" ;
             break;
 
-        case 'de':
+        case 'al':
             require "language_al.php" ;
             break;
 
