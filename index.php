@@ -227,7 +227,7 @@
                     ?>
                 </div>
                 <form action="language.php" method="post">
-                    <select name="language" id="languagePicker">
+                    <select name="language" id="languagePicker" onchange="submitForm()">
                         <option value="fr">Français</option>
                         <option value="en">English</option>
                         <option value="es">Español</option>
@@ -235,9 +235,14 @@
                         <option value="ru">русский</option>
                         <option value="ch">中國人</option>
                     </select>
-                    <input type="submit" value="" id="boutonLangue">
                     </form>
                 <form method="post">
+
+                <script>
+                    function submitForm() {
+                        document.getElementById("languageForm").submit();
+                    }
+                </script>
                     <?php
                     if(!isset($_SESSION)){
                         session_start();
