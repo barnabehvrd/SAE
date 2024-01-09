@@ -226,7 +226,7 @@
                         }
                     ?>
                 </div>
-                <form action="language.php" method="post">
+                <form action="language.php" method="post" id="languageForm">
                     <select name="language" id="languagePicker" onchange="submitForm()">
                         <option value="fr">Français</option>
                         <option value="en">English</option>
