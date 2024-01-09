@@ -3,7 +3,6 @@
 <head>
 <?php
     require "language.php" ; 
-    var_dump($_SESSION);
 ?>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
@@ -95,7 +94,7 @@
                             $stmt->execute();
                             $result = $stmt->get_result();
 
-                            if ($result->num_rows > 0) {
+                            if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
                                 echo"<label>- producteurs :</label><br>";
 
                                 while ($row = $result->fetch_assoc()) {
@@ -128,13 +127,13 @@
                         die("Erreur de connexion : " . $connexion->connect_error);
                     }
                     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                    $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti<>0;';
+                    $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
                     $stmt = $connexion->prepare($requete);
                         // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
 
-                    if ($result->num_rows > 0) {
+                    if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
                         echo"<label>".$htmlUtilisateurs."</label><br>";
 
                         while ($row = $result->fetch_assoc()) {
