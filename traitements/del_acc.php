@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
       $bdd=dbConnect();
 
 if (isset($_POST["Id_Uti"])){
-  $utilisateur=htmlspecialchars($_POST["Id_Uti"]);
+  $utilisateur=htmlspecialchars($_POST["Id_Uti"]);// l'admin supprime
 }else{
   $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
   $msg="?msg=compte supprimer";
