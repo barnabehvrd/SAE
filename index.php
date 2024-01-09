@@ -220,6 +220,18 @@
                         }
                     ?>
                 </div>
+                <form action="language.php" method="post">
+                    <label for="languagePicker">Choose a language:</label>
+                    <select name="language" id="languagePicker">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="al">Deutsch</option>
+                        <option value="ru">русский</option>
+                        <option value="ch">中國人</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                    </form>
                 <form method="post">
                     <?php
                     if(!isset($_SESSION)){
@@ -229,27 +241,14 @@
                         $_POST['popup'] = $_SESSION['tempPopup'];
                         unset($_SESSION['tempPopup']);
                     }
-                    echo ('
-
-                    <form action="language.php" method="post">
-                    <label for="languagePicker">Choose a language:</label>
-                    <select name="language" id="languagePicker">
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="ru">русский</option>
-                        <option value="ch">中國人</option>
-                    </select>
-                    <input type="submit" value="Submit">
-                    </form>
-
-                    ')
+                    
                     ?>
 
 					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
                 
                 </form>
+
             </div>
             
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
