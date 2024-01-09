@@ -9,7 +9,9 @@ if (isset($_POST['new_nom'], $_POST['new_prenom'], $_POST['rue'], $_POST['code']
     $basededonnees = "inf2pj_02";
     $bdd = new PDO('mysql:host='.$serveur.';dbname='.$basededonnees,$utilisateur,$motdepasse);
 
-    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+    if(!isset($_SESSION)){
+        session_start();
+    }
 
     $update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$adr."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
 
