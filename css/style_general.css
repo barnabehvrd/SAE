@@ -223,9 +223,9 @@ body{
     padding: 12px;
     background: url('../img/paper plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
     fill: #FFF;
     stroke-width: 1px;
     stroke: #575757;
