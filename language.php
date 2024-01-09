@@ -1,32 +1,45 @@
 <?php
-   
+   session_start();
  
-// Récupère la langue sélectionnée depuis le formulaire
 if (isset($_POST['language'])) {
     $_SESSION["language"] = $_POST['language'];
-} else {
-    // Utilisez une structure de commutation pour gérer différentes langues
+} 
+    if (isset($_SESSION["language"])) {
     switch ($_SESSION["language"]) {
         case 'fr':
-            require "language_fr.php" ; 
+            require "language_fr.php" ;
+            header("Location: index.php");
+ 
             break;
 
         case 'en':
-            require "language_en.php" ;             
+            require "language_en.php" ;
+            header("Location: index.php");
+          
             break;
 
         case 'es':
-            require "language_es.php" ;         
+            require "language_es.php" ;
+            header("Location: index.php");
+    
             break;
 
         case 'de':
-            require "language_al.php" ; 
+            require "language_al.php" ;
+            header("Location: index.php");
+
             break;
 
         default:
-        require "language_fr.php" ; 
+        require "language_fr.php" ;
+        header("Location: index.php");
+
             break;
         }
-}
+    }else {
+        require "language_fr.php" ;
+        header("Location: index.php");
+ 
+    }
 
 ?>
