@@ -23,5 +23,5 @@ if (ini_get("session.use_cookies")) {
 echo $_GET["msg"];
 // Détruisez la session
 session_destroy();
-header('Location: ../index.php');
+//header('Location: ../index.php');
 ?>
