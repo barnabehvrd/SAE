@@ -39,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Déplacer le fichier téléchargé vers le dossier de destination
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
+            
+        header('Location: ../index.php');  
         } else {
             echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
         }
@@ -47,12 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Veuillez sélectionner une image.<br>";
     }
     
-    if(isset($_SESSION["Mail_Uti"])){
-    header('Location: user_informations.php');    
-    }else{
-        header('Location: form_sign_in.php');    
-
-    }
+      
 
 }
 
