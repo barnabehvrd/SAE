@@ -12,10 +12,6 @@
 <body>
     <?php
 
-    if(!isset($_SESSION)){
-        header('Location: ./index.php');
-    }
-
      function dbConnect(){
         $utilisateur = "inf2pj02";
         $serveur = "localhost";
