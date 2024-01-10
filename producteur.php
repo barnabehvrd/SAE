@@ -261,7 +261,7 @@
 						</div>
 						<div class="text-info">
                             <?php
-                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address;
+                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address.'</br></br>';
                             ?>
                         </div>
                     </div>
