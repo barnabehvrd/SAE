@@ -20,7 +20,9 @@ if (ini_get("session.use_cookies")) {
         $params["httponly"]
     );
 }
-echo $_GET["msg"];
+if (isset($_GET["msg"])){
+    echo $_GET["msg"];
+}
 // Détruisez la session
 session_destroy();
 //header('Location: ../index.php');
