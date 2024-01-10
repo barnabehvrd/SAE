@@ -45,7 +45,7 @@ if (isset($_POST['formClicked'])){
             <label for="mail"><?php echo $htmlMailDeuxPoints; ?></label>
             <input class="zoneDeTextePopup" type="mail"  name="mail" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" size="40" required >
         </div>
-        <?php if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){ ?> 
+        <?php if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){?> 
         <div>
             <label for="profession"><?php echo $htmlParProfession; ?></label>
 

@@ -58,16 +58,32 @@ if ($nb == 0) {
         // Préparation de la requête d'insertion pour le producteur
         $insertionProducteur = $connexion->prepare("INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES (?, ?, ?)");
         $insertionProducteur->execute([$iduti, $id_max_prod, $profession]);
-        $_POST['popup'] = 'addProfilPicture';
-        $_SESSION["isProd"]=true;
+
         echo $htmlEnregistrementProducteurReussi;
     }
 
     // Fermeture de la connexion
     $connexion = null;
-    if(!(isset($_SESSION["isProd"]))){                 
+
+    $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+            $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
+            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            $reponse=$returnIsProducteur[0]["result"];
+            if ($reponse!=NULL){
+                $_SESSION["isProd"]=true;
+                //var_dump($_SESSION);
+            }else {
+                $_SESSION["isProd"]=false;
+            }
+            $_SESSION['Mail_Uti'] = $Mail_Uti;
+            $_SESSION['Id_Uti'] = $iduti;
+            $_SESSION['erreur'] = '';
+            if($_SESSION["isProd"]==true){
+                $_POST['popup'] = 'addProfilPicture';
+            }else {
+                
                 $_POST['popup'] = '';
-    }
+            }
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
 }
