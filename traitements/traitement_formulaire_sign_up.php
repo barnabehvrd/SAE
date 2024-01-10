@@ -58,18 +58,16 @@ if ($nb == 0) {
         // Préparation de la requête d'insertion pour le producteur
         $insertionProducteur = $connexion->prepare("INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES (?, ?, ?)");
         $insertionProducteur->execute([$iduti, $id_max_prod, $profession]);
-
+        $_POST['popup'] = 'addProfilPicture';
+        $_SESSION["isProd"]=true;
         echo $htmlEnregistrementProducteurReussi;
     }
 
     // Fermeture de la connexion
     $connexion = null;
-    if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){ 
-                $_POST['popup'] = 'addProfilPicture';
-            }else {
-                
+    if(!(isset($_SESSION["isProd"]))){                 
                 $_POST['popup'] = '';
-            }
+    }
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
 }
