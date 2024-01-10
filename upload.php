@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
             
-        header('Location: ../index.php');  
+        header('Location: ./index.php');  
         } else {
             echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
         }
