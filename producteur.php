@@ -14,7 +14,6 @@
 
     if(!isset($_SESSION)){
         header('Location: ../index.php');
-        session_start();
     }
 
      function dbConnect(){
