@@ -82,7 +82,7 @@ if ($nb == 0) {
                 $_POST['popup'] = 'addProfilPicture';
             }else {
                 
-                $_POST['popup'] = '';
+                //$_POST['popup'] = '';
             }
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
