@@ -1,6 +1,6 @@
 <?php
 // Détruisez toutes les variables de session
-if (!isset($_SESSION["Id_Uti"])) {
+if (!isset($_SESSION)) {
     session_start();
 }
 //require "../language.php" ; 
