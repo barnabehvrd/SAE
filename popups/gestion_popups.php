@@ -15,10 +15,13 @@ if (isset($_POST['popup'])){
 
         case 'sign_up_prod':
             $_SESSION['tempIsProd'] = true;
-            $_POST['popup'] = 'sign_up';
+            $_POST['popup'] = 'addProfilPicture';           
             require $_POST['popup'].".php";
             break;
-
+        case 'addProfilPicture':
+            require $_POST['popup'].".php";
+            break;
+    
         case 'sign_in_client':
             if(isset($_SESSION['Mail_Uti'])){
                 $_POST['popup'] = 'info_perso';
