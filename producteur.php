@@ -272,6 +272,7 @@
                     if (isset($_SESSION["Id_Uti"])  and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
                     <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $Id_Prod; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                    <br>
                     <?php 
                     }?>
 
@@ -287,6 +288,7 @@
 
                     if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
+                <br>
                 <button type="submit"><?php echo $htmlPasserCommande; ?></button>
                 <?php }?>
             </form>
