@@ -64,25 +64,11 @@ if ($nb == 0) {
 
     // Fermeture de la connexion
     $connexion = null;
-
-    $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
-            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            $reponse=$returnIsProducteur[0]["result"];
-            if ($reponse!=NULL){
-                $_SESSION["isProd"]=true;
-                //var_dump($_SESSION);
-            }else {
-                $_SESSION["isProd"]=false;
-            }
-            $_SESSION['Mail_Uti'] = $Mail_Uti;
-            $_SESSION['Id_Uti'] = $iduti;
-            $_SESSION['erreur'] = '';
-            if($_SESSION["isProd"]==true){
+    if((isset($_SESSION['tempIsProd']) and $_SESSION['tempIsProd'])){ 
                 $_POST['popup'] = 'addProfilPicture';
             }else {
                 
-                //$_POST['popup'] = '';
+                $_POST['popup'] = '';
             }
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
