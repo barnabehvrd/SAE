@@ -212,7 +212,7 @@
                             </form>
                             <?php
                             echo '<div class="aDroite"'.$htmlTotalDeuxPoints, $total.'€</div>';
-							echo '</div> '; 
+							echo '</div><br> '; 
 						}
                         $iterateurCommande++;
                     }
