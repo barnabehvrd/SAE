@@ -178,6 +178,7 @@
 
                         ?>
                         <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                        <br>
                         <?php
 
 						while ($iterateurProduit<$nbProduit){
