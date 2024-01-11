@@ -150,7 +150,7 @@
 						$Desc_Statut = $returnQueryGetCommande[$iterateurCommande]["Desc_Statut"];
 						$Desc_Statut = mb_strtoupper($Desc_Statut);
 						$Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
-                        $idUti = $returnQueryGetCommande[$iterateurCommande]["Id_Prod"];
+                        $idUti = $returnQueryGetCommande[$iterateurCommande]["Id_Uti"];
 
 
 						$total=0;
