@@ -163,7 +163,7 @@
                                         echo '<div class="square1" >';
                                         echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
                                         echo $htmlTypeDeuxPoints, $typeProduit . "<br><br>";
-                                        echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
+                                        echo '<img class="img-produit" src="img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
                                         echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo $htmlStockDeuxPoints, $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         echo '<form action="product_modification.php" method="post">';

@@ -71,7 +71,7 @@
             $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
             curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
             // Ajout du Referrer
-            $customReferrer = "https://la-projets.univ-lemans.fr/~inf2pj02/index.php"; // Remplacez par l'URL de votre application
+            $customReferrer = "https://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
             curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
             // Exécution de la requête
             $response = curl_exec($ch);
@@ -343,7 +343,7 @@
                                 echo ''.$row["Prof_Prod"]. "<br>";
                                 echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
                                 echo $row["Adr_Uti"] . "<br>";
-                                echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
+                                echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
                             else{
@@ -357,7 +357,7 @@
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                     echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="/~inf2pj02/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                     echo '</a> ';  
                                 }    
                             }
