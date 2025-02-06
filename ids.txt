@@ -1,0 +1,11 @@
+utilisateur    = MOI
+serveur        = ICI
+motdepasse     = CMOI
+basededonnees  = SAE
+
+# IDENTIFIANTS D'ORIGINE
+utilisateur    = inf2pj02
+serveur        = localhost
+motdepasse     = ahV4saerae
+basededonnees  = inf2pj_02
+
