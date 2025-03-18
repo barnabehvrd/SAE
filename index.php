@@ -2,7 +2,12 @@
 <html lang="fr">
 <head>
 <?php
-    require "language.php" ; 
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
+
+    require "language.php" ;
     $htmlFrançais="Français";
     $htmlAnglais="English";
     $htmlEspagnol="Español";
@@ -81,7 +86,7 @@
             } else {
                 // Analyser la réponse JSON
                 $data = json_decode($response);
-            
+
                 // Vérifier si la réponse a été correctement analysée
                 if (!empty($data) && is_array($data) && isset($data[0])) {
                     // Récupérer la latitude et la longitude
@@ -98,18 +103,18 @@
 
         /*---------------------------------------------------------------*/
         /*
-            Titre : Calcul la distance entre 2 points en km                                                                       
-                                                                                                                                
+            Titre : Calcul la distance entre 2 points en km
+
             URL   : https://phpsources.net/code_s.php?id=1091
-            Auteur           : sheppy1                                                                                            
-            Website auteur   : https://lejournalabrasif.fr/qwanturank-concours-seo-qwant/                                         
-            Date édition     : 05 Aout 2019                                                                                       
-            Date mise à jour : 16 Aout 2019                                                                                      
-            Rapport de la maj:                                                                                                    
-            - fonctionnement du code vérifié                                                                                    
+            Auteur           : sheppy1
+            Website auteur   : https://lejournalabrasif.fr/qwanturank-concours-seo-qwant/
+            Date édition     : 05 Aout 2019
+            Date mise à jour : 16 Aout 2019
+            Rapport de la maj:
+            - fonctionnement du code vérifié
         */
         /*---------------------------------------------------------------*/
-        
+
             function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
             {
                 $pi80 = M_PI / 180;
@@ -117,7 +122,7 @@
                 $lng1 *= $pi80;
                 $lat2 *= $pi80;
                 $lng2 *= $pi80;
-        
+
                 $r = 6372.797; // rayon moyen de la Terre en km
                 $dlat = $lat2 - $lat1;
                 $dlng = $lng2 - $lng1;
@@ -125,7 +130,7 @@
         $dlng / 2) * sin($dlng / 2);
                 $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
                 $km = $r * $c;
-            
+
                 return ($miles ? ($km * 0.621371192) : $km);
         }
     ?>
@@ -133,9 +138,9 @@
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">
             <div class="contenuBarre">
-                
+
             <center><strong><p><?php echo $htmlRechercherPar; ?></p></strong></center>
-			<form method="get" action="index.php"> 
+			<form method="get" action="index.php">
 			<label><?php echo $htmlParProfession?></label>
             <br>
 			<select name="categorie" id="categories">
@@ -154,11 +159,7 @@
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
             <br>
             <?php
-                $mabdd=dbConnect();           
-                $queryAdrUti = $mabdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
-                $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-                $queryAdrUti->execute();
-                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+                $returnQueryAdrUti = $db->select('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;', [':utilisateur' => $utilisateur]);
 
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
@@ -183,7 +184,7 @@
                 <br>
                 <br>
             <?php
-            
+
                 }
                 else{
                     $Adr_Uti_En_Cours='France';
@@ -230,7 +231,7 @@
                         }
                     ?>
                 </div>
-                
+
                 <form action="language.php" method="post" id="languageForm">
                     <select name="language" id="languagePicker" onchange="submitForm()">
                         <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
@@ -256,124 +257,103 @@
                         $_POST['popup'] = $_SESSION['tempPopup'];
                         unset($_SESSION['tempPopup']);
                     }
-                    
+
                     ?>
 
 					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-                
+
                 </form>
 
             </div>
-            
+
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
 
             <div class="gallery-container">
-               <?php 
-               
-               
+               <?php
+
+
                if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if (isset($_GET["categorie"])) {
-                    $categorie = htmlspecialchars($_GET["categorie"]);
-                    // Connexion à la base de données 
-                    $utilisateur = "inf2pj02";
-                    $serveur = "localhost";
-                    $motdepasse = "ahV4saerae";
-                    $basededonnees = "inf2pj_02";
-                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                    // Vérifiez la connexion
-                    if ($connexion->connect_error) {
-                        die("Erreur de connexion : " . $connexion->connect_error);
-                    }
-                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                    if ($_GET["categorie"]=="Tout"){
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) 
-                        FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti 
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
-                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
-                        HAVING PRODUCTEUR.Prof_Prod LIKE \'%\'';
-                    }else{
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) 
-                        FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti 
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
-                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
-                        HAVING PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
-                        //$stmt->bind_param("s", $categorie);
-                    }
-                    if ($rechercheVille!=""){
-                        $requete=$requete.' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
-                    }
-                    $requete=$requete.' ORDER BY ';
+                    $categorie = $_GET["categorie"];
 
+
+                    $req = "SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) 
+                        FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti 
+                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
+                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
+                        HAVING PRODUCTEUR.Prof_Prod LIKE :categorie AND Adr_Uti LIKE :adr ORDER BY ";
+
+                    if ($_GET["categorie"]=="Tout"){
+                        $categorie = '%';
+                    }else{
+                        $categorie = $_GET["categorie"];
+                    }
+
+                    if ($rechercheVille!=""){
+                        $adr = '%, _____ %'.$rechercheVille.'%';
+                    } else {
+                        $adr = '%';
+                    }
 
                     if ($tri==="nombreDeProduits"){
-                        $requete=$requete.' COUNT(PRODUIT.Id_Produit) DESC ;';
+                        $req=$req.' COUNT(PRODUIT.Id_Produit) DESC ;';
                     }
                     else if ($tri==="ordreNomAlphabétique"){
-                        $requete=$requete.' Nom_Uti ASC ;';
+                        $req=$req.' Nom_Uti ASC ;';
                     }
                     else if ($tri==="ordreNomAntiAlphabétique"){
-                        $requete=$requete.' Nom_Uti DESC ;';
+                        $req=$req.' Nom_Uti DESC ;';
                     }
                     else if ($tri==="ordrePrenomAlphabétique"){
-                        $requete=$requete.' Prenom_Uti ASC ;';
+                        $req=$req.' Prenom_Uti ASC ;';
                     }
                     else if ($tri==="ordrePrenomAntiAlphabétique"){
-                        $requete=$requete.' Prenom_Uti DESC ;';
+                        $req=$req.' Prenom_Uti DESC ;';
                     }
                     else{
-                        $requete=$requete.' COUNT(PRODUIT.Id_Produit) ASC ;';
+                        $req=$req.' COUNT(PRODUIT.Id_Produit) ASC ;';
                     }
 
 
-                    $stmt = $connexion->prepare($requete);
-                     // "s" indique que la valeur est une chaîne de caractères
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    $result = $db->select($req, [':categorie' => $categorie, ':adr' => $adr]);
                     // récupère les coordonnées de l'utiliasteur
                     // URL vers l'API Nominatim
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                     $coordonneesUti=latLongGps($urlUti);
                     $latitudeUti=$coordonneesUti[0];
                     $longitudeUti=$coordonneesUti[1];
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            if ($rayon>=100){
-                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                echo ''.$row["Prof_Prod"]. "<br>";
-                                echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                echo $row["Adr_Uti"] . "<br>";
-                                echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
-                                echo '</a> ';  
-                            }    
-                            else{
-                                $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                $coordonneesProd=latLongGps($urlProd);
-                                $latitudeProd=$coordonneesProd[0];
-                                $longitudeProd=$coordonneesProd[1];
-                                $distance=distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                if ($distance<$rayon){
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                    echo '</a> ';  
-                                }    
+                    if (count($result) > 0) {
+                            foreach ($result as $row) {
+                                if ($rayon >= 100) {
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1">';
+                                    echo ''.$row["Prof_Prod"]. "<br>";
+                                    echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
+                                    echo $row["Adr_Uti"] . "<br>";
+                                    echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;"><br>';
+                                    echo '</a>';
+                                } else {
+                                    $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                    $coordonneesProd = latLongGps($urlProd);
+                                    $latitudeProd = $coordonneesProd[0];
+                                    $longitudeProd = $coordonneesProd[1];
+                                    $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                    if ($distance < $rayon) {
+                                        echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1">';
+                                        echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                        echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                        echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;"><br>';
+                                        echo '</a>';
+                                    }
+                                }
                             }
-                        }
-                    } else {
-                        echo $htmlAucunResultat;
-                    }
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                        } else {
+                            echo $htmlAucunResultat;
                         }
                     }
-                    $stmt->close();
-                    $connexion->close();
-                }
             }
-               
+
                ?>
             </div>
             <br>

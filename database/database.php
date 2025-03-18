@@ -35,7 +35,8 @@ class database
     {
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
-            $stmt->bindParam($key, $val);
+            $htmlspecialchars = htmlspecialchars($val);
+            $stmt->bindParam($key, $htmlspecialchars);
         }
         $stmt->execute();
         return $stmt->fetchAll();
@@ -50,7 +51,8 @@ class database
     {
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
-            $stmt->bindParam($key, $val);
+            $htmlspecialchars = htmlspecialchars($val);
+            $stmt->bindParam($key, $htmlspecialchars);
         }
         return $stmt->execute();
     }
