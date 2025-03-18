@@ -2,8 +2,6 @@
 <html lang="fr">
 <head>
 <?php
-// on affiche les erreurs PHP
-ini_set('display_errors', 1);
 
     require_once 'database/database.php';
     use database\database;
@@ -58,16 +56,6 @@ ini_set('display_errors', 1);
         }
         if (isset($_SESSION["language"])==false){
             $_SESSION["language"]="fr";
-        }
-
-        // récupération adresse du client
-        function dbConnect(){
-            $utilisateur = "etu";
-            $serveur = "localhost";
-            $motdepasse = "Z0wKTwTqtfeUCxrMnnsRT1CbDbwz8SkfPkC0pGA5FUfvzeJz4a7b14Gp9mp3PSph";
-            $basededonnees = "sae";
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
 
         function latLongGps($url){
