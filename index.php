@@ -2,6 +2,9 @@
 <html lang="fr">
 <head>
 <?php
+// on affiche les erreurs PHP
+ini_set('display_errors', 1);
+
     require_once 'database/database.php';
     use database\database;
 
