@@ -2,6 +2,11 @@
 <html lang="fr">
 <head>
 <?php
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
+
     require "language.php" ; 
 ?>
     <title><?php echo $htmlMarque; ?></title>
@@ -11,16 +16,6 @@
 </head>
 <body>
     <?php
-
-     function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-    
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-      }
       if(!isset($_SESSION)){
         session_start();
         }
@@ -165,18 +160,9 @@
                     <div class="gallery-container">
                         <?php
                             $bdd=dbConnect();
-                            //filtre type
-                            if ($filtreType=="TOUT"){
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod';
-                            }
-                            else{
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit= :filtreType';
+                            $req = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
+                                    WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
-                            }
-                            // filtre nom
-                            if ($rechercheNom!=""){
-                                $query=$query.' AND Nom_Produit LIKE :rechercheNom ';
-                            }
 
                             //tri
                             if ($tri=="No"){
@@ -242,11 +228,7 @@
                 <div class="producteur">
                     <!-- partie de droite avec les infos producteur -->
                     <?php
-                        $bdd=dbConnect();
-                        $queryInfoProd = $bdd->prepare(('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;'));
-                        $queryInfoProd->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
-                        $queryInfoProd->execute();   
-                        $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
+                        $returnQueryInfoProd = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;', [':Id_Prod' => $Id_Prod]);
 
                         // recupération des paramètres de la requête qui contient 1 élément
                         $idUti = $returnQueryInfoProd[0]["Id_Uti"];
