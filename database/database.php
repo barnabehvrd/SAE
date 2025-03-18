@@ -46,7 +46,7 @@ class database
     // $request = "INSERT INTO PRODUIT (nom, description) VALUES (:nom, :description)";
     // $params = [':nom' => 'Product Name', ':description' => 'Product Description'];
     // $result = $db->insert($request, $params);
-    public function insert($request, $params = [])
+    public function query($request, $params = [])
     {
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {

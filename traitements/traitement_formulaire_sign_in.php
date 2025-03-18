@@ -35,12 +35,7 @@ try {
     $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
     
     // Verify password using stored procedure
-    //echo('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\');');
-    $query = $bdd->query('CALL verifMotDePasse(' . $Id_Uti . ', \'' . $pwd . '\')');
-    
-    
-
-    $test = $query->fetchAll(PDO::FETCH_ASSOC);
+    $test = $db->select('CALL verifMotDePasse(:Id_Uti, :pwd)', [':Id_Uti' => $Id_Uti, ':pwd' => $pwd]);
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
         if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
@@ -48,9 +43,8 @@ try {
             $_SESSION['Mail_Uti'] = $Mail_Uti;
             $_SESSION['Id_Uti'] = $Id_Uti;
 
-            $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
-            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+            $returnIsProducteur = $db->select('CALL isProducteur(:Id_Uti)', [':Id_Uti' => $Id_Uti]);
+
             $reponse=$returnIsProducteur[0]["result"];
             if ($reponse!=NULL){
                 $_SESSION["isProd"]=true;
@@ -58,9 +52,8 @@ try {
                 $_SESSION["isProd"]=false;
             }
             $_SESSION['erreur'] = '';
-            $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE Id_Uti='.$_SESSION["Id_Uti"]);
-            $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+
+            $returnIsAdmin = $db->select('SELECT Id_Uti FROM ADMINISTRATEUR WHERE Id_Uti=:Id_Uti', [':Id_Uti' => $Id_Uti]);
             
             if (count($returnIsAdmin)>0){
                 $_SESSION["isAdmin"]=true;
