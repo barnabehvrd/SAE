@@ -3,6 +3,8 @@ namespace database;
 
 
 require_once 'utils/EnvLoader.php';
+
+use PDO;
 use utils\EnvLoader;
 
 EnvLoader::loadEnv();
@@ -24,7 +26,11 @@ class database
         $this->database = getenv('DB_NAME');
 
 
-        $this->pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->password);
+        $this->pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->password,
+            array(
+                PDO::ATTR_TIMEOUT => 5, // in seconds
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ));
     }
 
 
