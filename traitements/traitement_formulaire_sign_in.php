@@ -1,7 +1,12 @@
 <?php
-    require "language.php" ; 
-?>
-<?php
+
+require_once 'database/database.php';
+use database\database;
+
+
+
+require "language.php" ;
+
 
 // Error handling with try-catch block
 try {
@@ -14,18 +19,11 @@ try {
         $_SESSION['test_pwd'] = 5;
     }
 
-    // Database connection
-    $utilisateur = "inf2pj02";
-    $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
-
     // Connect to database
-    $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    $db = new database();
 
     // Check if user email exists
-    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
-    $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
+    $returnQueryIdUti = $db->select('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=:mail', [':mail' => $Mail_Uti]);
     
     // Handle invalid email
     if ($returnQueryIdUti == NULL) {
