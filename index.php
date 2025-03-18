@@ -54,10 +54,10 @@
 
         // récupération adresse du client
         function dbConnect(){
-            $utilisateur = "inf2pj02";
+            $utilisateur = "etu";
             $serveur = "localhost";
-            $motdepasse = "ahV4saerae";
-            $basededonnees = "inf2pj_02";
+            $motdepasse = "Z0wKTwTqtfeUCxrMnnsRT1CbDbwz8SkfPkC0pGA5FUfvzeJz4a7b14Gp9mp3PSph";
+            $basededonnees = "sae";
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
