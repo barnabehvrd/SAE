@@ -92,7 +92,7 @@
                             $stmt = $connexion->prepare($requete);
                                 // "s" indique que la valeur est une chaîne de caractères
                             $stmt->execute();
-                            $result = $stmt->get_result();
+                            $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
 
                             if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
                                 echo"<label>- producteurs :</label><br>";
