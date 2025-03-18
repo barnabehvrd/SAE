@@ -1,17 +1,13 @@
-html{
-    margin: 0px;
-    padding: 0px;
+html,body{
+    margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
 }
 
-body{
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    width: 100%;
+footer{
+    height: 150px;
 }
-
 
 .squarePanelAdmin{
     width: 100%;
@@ -52,7 +48,11 @@ body{
 .logo{
     width: 100%;
 
-    box-shadow: 1px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    border-bottom: white solid 1.5px;
+}
+.logo-mini{
+    height: 50px;
+    width: auto;
 }
 
 .contenuBarre{
@@ -185,7 +185,6 @@ body{
     flex: 1;
     /* Partie droite occupe 50% de la largeur */
     background-color: #c0c0c0;
-    padding: 20px;
     display: flex;
     flex-direction: column;
 }
