@@ -117,13 +117,13 @@
 				if ($filtreCategorie!=0){
 					$query=$query.' AND COMMANDE.Id_Statut= :filtreCategorie ;';
 
-                    $returnQueryGetCommande = $db->query($query, [
+                    $returnQueryGetCommande = $db->select($query, [
                         'utilisateur' => $utilisateur,
                         'filtreCategorie' => $filtreCategorie
                     ]);
 
 				} else {
-                    $returnQueryGetCommande = $db->query($query, [
+                    $returnQueryGetCommande = $db->select($query, [
                         'utilisateur' => $utilisateur
                     ]);
                 }
