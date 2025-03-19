@@ -4,7 +4,7 @@
 require_once 'database/database.php';
 use database\database;
 
-$db = new database();
+
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -14,6 +14,7 @@ if(!isset($_SESSION)){
 }
 
 function afficheMessages($id_user, $id_other_people){
+    $db = new database();
 
     $messages = $db->query('CALL conversation( :id_user, :id_other_people);', array('id_user' => $id_user, 'id_other_people' => $id_other_people));
 
