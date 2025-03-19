@@ -1,4 +1,10 @@
 <?php
+
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
@@ -6,24 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_producteur/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
         session_start();
         // Connect to database
-        $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
         if (isset($_SESSION["Mail_Uti"])) {
             $mailUti = $_SESSION["Mail_Uti"];
         } else {
             $mailUti = $_SESSION["Mail_Temp"];
         }
-        $requete = 'SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti = :mail';
-        $queryIdProd = $bdd->prepare($requete);
-        $queryIdProd->bindParam(':mail', $mailUti, PDO::PARAM_STR);
-        $queryIdProd->execute();
-        $returnqueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+
+        $returnqueryIdProd = $db->select('SELECT PRODUCTEUR.Id_Prod FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti WHERE UTILISATEUR.Mail_Uti = :mail', [':mail' => $mailUti]);
         $Id_Prod=$returnqueryIdProd[0]["Id_Prod"];
 
         // Obtenir l'extension du fichie

@@ -2,6 +2,10 @@
 <html lang="fr">
 <head>
 <?php
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
     require "language.php" ; 
 ?>
     <title><?php echo $htmlMarque; ?></title>
@@ -14,23 +18,12 @@
         if(!isset($_SESSION)){
             session_start();
         }
-        function dbConnect(){
-            $utilisateur = "inf2pj02";
-            $serveur = "localhost";
-            $motdepasse = "ahV4saerae";
-            $basededonnees = "inf2pj_02";
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        }
+
           $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
           $Id_Produit_Update=htmlspecialchars($_POST["modifyIdProduct"]);
           $_SESSION["Id_Produit"]=$Id_Produit_Update;
-          
-          $bdd=dbConnect();
-          $queryGetProducts = $bdd->prepare('SELECT * FROM PRODUIT WHERE Id_Produit = :Id_Produit_Update');
-          $queryGetProducts->bindParam(':Id_Produit_Update', $Id_Produit_Update, PDO::PARAM_INT);
-          $queryGetProducts->execute();
-          $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+
+          $returnQueryGetProducts = $db->select('SELECT * FROM PRODUIT WHERE Id_Produit = :Id_Produit_Update', [':Id_Produit_Update' => $Id_Produit_Update]);
           //var_dump($returnQueryGetProducts);
           $IdProd = $returnQueryGetProducts[0]["Id_Prod"];
           $Nom_Produit = $returnQueryGetProducts[0]["Nom_Produit"];
@@ -276,24 +269,17 @@
                     <p><center><U><?php echo $htmlMesProduitsEnStock?></U></center></p>
                     <div class="gallery-container">
                         <?php
-                            $bdd=dbConnect();
-                            $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
-                            $queryIdProd->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
-                            $queryIdProd->execute();
-                            $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+                            $returnQueryIdProd = $db->select('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur', [':utilisateur' => $utilisateur]);
                             $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
 
-                            $bdd=dbConnect();
-                            $queryGetProducts = $bdd->prepare('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd');
-                            $queryGetProducts->bindParam(':idProd', $Id_Prod, PDO::PARAM_INT);
-                            $queryGetProducts->execute();                            
-                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+                            $returnQueryGetProducts = $db->select('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd', [':idProd' => $Id_Prod]);
 
-                            $i=0;
+
                             if(count($returnQueryGetProducts)==0){
                                 echo $htmlAucunProduitEnStock;
                             }
                             else{
+                                $i=0;
                                 while ($i<count($returnQueryGetProducts)){
                                     $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
                                     $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];

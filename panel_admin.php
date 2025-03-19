@@ -2,7 +2,15 @@
 <html lang="fr">
 <head>
 <?php
-    require "language.php" ; 
+if(!isset($_SESSION)){
+    session_start();
+}
+    require "language.php" ;
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
+
 ?>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
@@ -16,16 +24,7 @@
         session_start();
         }
 
-        function dbConnect(){
-            $utilisateur = "inf2pj02";
-            $serveur = "localhost";
-            $motdepasse = "ahV4saerae";
-            $basededonnees = "inf2pj_02";
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        }
 
-        $bdd=dbConnect();
         $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
         
         $filtreCategorie=0;
@@ -77,27 +76,12 @@
             </div>
             <div class="gallery-container">
                         <?php
-                            // Connexion à la base de données 
-                            $utilisateur = "inf2pj02";
-                            $serveur = "localhost";
-                            $motdepasse = "ahV4saerae";
-                            $basededonnees = "inf2pj_02";
-                            $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                            // Vérifiez la connexion
-                            if ($connexion->connect_error) {
-                                die("Erreur de connexion : " . $connexion->connect_error);
-                            }
-                            // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                            $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
-                            $stmt = $connexion->prepare($requete);
-                                // "s" indique que la valeur est une chaîne de caractères
-                            $stmt->execute();
-                            $result = $stmt->get_result();
+                            $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
 
-                            if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
+                            if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
                                 echo"<label>- producteurs :</label><br>";
 
-                                while ($row = $result->fetch_assoc()) {
+                                foreach ($result as $row) {
                                     echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                         <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
@@ -111,32 +95,15 @@
                             } else {
                                 echo $htmlErrorDevTeam;
                             }
-                            $stmt->close();
-                            $connexion->close();
                         ?>
                 <div class="gallery-container">
                 <?php
-                    // Connexion à la base de données 
-                    $utilisateur = "inf2pj02";
-                    $serveur = "localhost";
-                    $motdepasse = "ahV4saerae";
-                    $basededonnees = "inf2pj_02";
-                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                    // Vérifiez la connexion
-                    if ($connexion->connect_error) {
-                        die("Erreur de connexion : " . $connexion->connect_error);
-                    }
-                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                    $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
-                    $stmt = $connexion->prepare($requete);
-                        // "s" indique que la valeur est une chaîne de caractères
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    $result = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;');
 
-                    if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
+                    if ((count($result) > 0) AND ($_SESSION["isAdmin"]==true)) {
                         echo"<label>".$htmlUtilisateurs."</label><br>";
 
-                        while ($row = $result->fetch_assoc()) {
+                        foreach ($result as $row) {
             
                             echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                 <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
@@ -151,9 +118,6 @@
                     } else {
                         echo $htmlErrorDevTeam;
                     }
-                    $stmt->close();
-                    $connexion->close();
-               
                ?>
             <br>
             <div class="basDePage">
