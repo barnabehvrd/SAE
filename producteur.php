@@ -163,7 +163,7 @@
                                     WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
                             echo $tri."<br>";
                             echo $filtreType."<br>";
-                            echo $rechercheNom."<br>";
+                            echo "|".$rechercheNom."|"."<br>";
 
                             //tri
                             if ($tri=="No"){
