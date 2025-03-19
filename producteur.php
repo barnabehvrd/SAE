@@ -161,9 +161,6 @@
                         <?php
                             $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
                                     WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
-                            echo $tri."<br>";
-                            echo $filtreType."<br>";
-                            echo "|".$rechercheNom."|"."<br>";
 
                             //tri
                             if ($tri=="No"){
@@ -189,7 +186,7 @@
                                 $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => '%', ':rechercheNom' => '%'.$rechercheNom.'%']);
 
                             }
-                            else{
+                            else {
                                 $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%']);
                             }
 
