@@ -31,7 +31,7 @@ class database
         $this->pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->password,
             array(
                 PDO::ATTR_TIMEOUT => 5, // in seconds
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                //PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ));
     }
 
@@ -47,8 +47,8 @@ class database
             echo "key : $key, val : $val";
             $stmt->bindParam($key, $htmlspecialchars);
         }
-        echo $stmt->queryString;
         $stmt->execute();
+
         return $stmt->fetchAll();
     }
 
