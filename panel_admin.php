@@ -75,10 +75,10 @@
                         <?php
                             $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
 
-                            if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
+                            if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
                                 echo"<label>- producteurs :</label><br>";
 
-                                while ($row = $result->fetch_assoc()) {
+                                foreach ($result as $row) {
                                     echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                         <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
@@ -92,8 +92,6 @@
                             } else {
                                 echo $htmlErrorDevTeam;
                             }
-                            $stmt->close();
-                            $connexion->close();
                         ?>
                 <div class="gallery-container">
                 <?php
