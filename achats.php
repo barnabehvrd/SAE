@@ -154,7 +154,7 @@
 
 						$total=0;
 
-                        $returnQueryGetProduitCommande = $db->query('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande = :Id_Commande', [
+                        $returnQueryGetProduitCommande = $db->select('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande = :Id_Commande', [
                             'Id_Commande' => $Id_Commande
                         ]);
 
