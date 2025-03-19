@@ -181,20 +181,15 @@
                             }
 
                             //preparation paramètres
-                            $queryGetProducts = $bdd->prepare(($query));
+
+
                             if ($filtreType=="TOUT"){
-                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);                            
+                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => '%', ':rechercheNom' => '%'.$rechercheNom.'%']);
+
                             }
                             else{
-                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);   
-                                $queryGetProducts->bindParam(":filtreType", $filtreType, PDO::PARAM_STR);
+                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%']);
                             }
-                            if ($rechercheNom!=""){
-                                $queryGetProducts->bindParam(":rechercheNom", $rechercheNom, PDO::PARAM_STR);  
-                            }
-
-                            $queryGetProducts->execute();
-                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
                             $i=0;
                             if(count($returnQueryGetProducts)==0){
