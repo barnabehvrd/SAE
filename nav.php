@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a href="index.php"><img class="logo-mini d-block d-md-none" href="index.php" src="img/logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +7,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item">
+      <li class="nav-item">
           <a class="nav-link" href="index.php"><?php echo $htmlAccueil?></a> 
         </li>
         <?php if (isset($_SESSION["Id_Uti"])): ?>
@@ -33,7 +33,7 @@
         <?php endif; ?>
           <li>
             <form method="post" id="languageForm">
-              <div class="input-group ms-2">
+              <div class="input-group">
                 <div class="input-group-text"><i class="bi bi-translate"></i></div>
                 <select name="language" id="languagePicker" class="form-select" onchange="submitForm()">
                   <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
@@ -62,7 +62,7 @@
             unset($_SESSION['tempPopup']);
           }
           ?>
-					<input type="submit" class="btn btn-success" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
+					<input type="submit" class="btn btn-success mt-2 mt-lg-0" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
           <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>> 
         </form>
     </div>
