@@ -20,7 +20,7 @@
         session_start();
         }
       // variable utilisée plusieurs fois par la suite
-      $Id_Prod = htmlspecialchars($_GET["Id_Prod"]);
+      $Id_Prod = $_GET["Id_Prod"];
 
       if (isset($_GET["filtreType"])==true){
         $filtreType=htmlspecialchars($_GET["filtreType"]);
@@ -181,8 +181,6 @@
                             }
 
                             //preparation paramètres
-
-                            echo $filtreType;
 
 
                             if ($filtreType=="TOUT"){
