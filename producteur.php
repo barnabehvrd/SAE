@@ -40,7 +40,7 @@
         $tri="No";
       }
       if (isset($_GET["rechercheNom"])==true){
-        $rechercheNom=$_GET["rechercheNom"];
+        $rechercheNom='%'.$_GET["rechercheNom"].'%';
       }
       else{
         $rechercheNom="";
@@ -194,15 +194,16 @@
                                 if ($filtreType=="TOUT"){
                                 $returnQueryGetProducts=$db->select($query, [
 
-                                        ':filtreType' => '%',
-                                        ':rechercheNom' => '%'.$rechercheNom.'%',
+
+                                        ':rechercheNom' =>$rechercheNom,
+                                    ':filtreType' => '%',
                                     ':idprod' => 4,
 
                                 ]);
 
                             }
                             else {
-                                $returnQueryGetProducts=$db->select($query, [':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%', ':idprod' => 4]);
+                                $returnQueryGetProducts=$db->select($query, [':filtreType' => $filtreType, ':rechercheNom' =>$rechercheNom, ':idprod' => 4]);
                             }
 
                             $db->select("SELECT 2");
