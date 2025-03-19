@@ -13,7 +13,8 @@ if (isset($_POST['new_nom'], $_POST['new_prenom'], $_POST['rue'], $_POST['code']
         session_start();
     }
 
-    $update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$adr."',". "Pwd_Uti = '".$_POST['pwd']."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
+    $mdp = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+    $update="UPDATE UTILISATEUR SET Nom_Uti = '".$_POST["new_nom"]."',". "Prenom_Uti = '".$_POST["new_prenom"]."',". "Adr_Uti = '".$adr."',". "Pwd_Uti = '".$mdp."' WHERE Mail_Uti = '".$_SESSION["Mail_Uti"] ."';";
 
     echo ($update);
     $bdd->exec($update);
