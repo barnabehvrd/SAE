@@ -185,25 +185,20 @@
                                 $query=$query.' ORDER BY Nom_Produit DESC;';
                             }
 
-                            //preparation paramètres
-
-                            echo "===================";
-                            echo $Id_Prod;
-                            echo "===================";
-
                                 if ($filtreType=="TOUT"){
                                 $returnQueryGetProducts=$db->select($query, [
-
-
-                                        ':rechercheNom' =>$rechercheNom,
+                                    ':rechercheNom' =>$rechercheNom,
                                     ':filtreType' => '%',
-                                    ':idprod' => 4,
+                                    ':idprod' => $Id_Prod,
 
                                 ]);
 
                             }
                             else {
-                                $returnQueryGetProducts=$db->select($query, [':filtreType' => $filtreType, ':rechercheNom' =>$rechercheNom, ':idprod' => 4]);
+                                $returnQueryGetProducts=$db->select($query, [
+                                     ':filtreType' => $filtreType,
+                                    ':rechercheNom' =>$rechercheNom,
+                                    ':idprod' => $Id_Prod]);
                             }
 
                             $db->select("SELECT 2");
