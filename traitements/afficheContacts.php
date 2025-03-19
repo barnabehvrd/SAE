@@ -12,7 +12,7 @@ ini_set("display_errors", 1);
 function afficheContacts($id_user){
     $db = new database();
 
-    $contacts = $db->query('CALL listeContact( :id_user);', array('id_user' => $id_user));
+    $contacts = $db->select('CALL listeContact( :id_user);', array('id_user' => $id_user));
 
     if (count($contacts)==0){
         $test = $htmlPasDeConversation;
