@@ -1,25 +1,19 @@
 <?php
-    require "./language.php" ; 
-?>
-<?php
+    require "./language.php" ;
+
+require_once 'database/database.php';
+use database\database;
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-function dbConnect(){
-    $host = 'localhost';
-    $dbname = 'inf2pj_02';
-    $user = 'inf2pj02';
-    $password = 'ahV4saerae';
 
-    
-    return new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
-}
 
 function afficheContacts($id_user){
-    require "./language.php" ; 
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL listeContact('.$id_user.');'));
-    $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
+    $db = new database();
+
+    $contacts = $db->query('CALL listeContact( :id_user);', array('id_user' => $id_user));
+
     if (count($contacts)==0){
         $test = $htmlPasDeConversation;
         echo($test);

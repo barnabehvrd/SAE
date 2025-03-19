@@ -1,7 +1,11 @@
 <?php
-    require "language.php" ; 
-?>
-<?php
+    require "language.php" ;
+
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -10,9 +14,9 @@ if(!isset($_SESSION)){
 }
 
 function afficheMessages($id_user, $id_other_people){
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL conversation('.$id_user.', '.$id_other_people.');'));
-    $messages = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $messages = $db->query('CALL conversation( :id_user, :id_other_people);', array('id_user' => $id_user, 'id_other_people' => $id_other_people));
+
     foreach($messages as $message){
         afficheMessage($message);
     }

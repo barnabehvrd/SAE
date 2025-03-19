@@ -1,21 +1,13 @@
 <?php
-$utilisateur = "inf2pj02";
-$serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
-$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 
-// Vérifiez la connexion
-if ($connexion->connect_error) {
-    die("Erreur de connexion : " . $connexion->connect_error);  
-}
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
+
 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
 $requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
-$stmt = $connexion->prepare($requete);
-$stmt->bind_param("s", $_SESSION['Mail_Uti']); // "s" indique que la valeur est une chaîne de caractères
-$stmt->execute();
-$result = $stmt->get_result();
 
-$stmt->close();
-$connexion->close();
+
+$result = $db->select('SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=:Mail_Uti', array('Mail_Uti' => $_SESSION['Mail_Uti']));
 ?>

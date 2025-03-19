@@ -1,11 +1,16 @@
 <?php
+
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 function envoyerMessage($id_user, $id_other_people, $content){
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL envoyerMessage('.$id_user.', '.$id_other_people.", '".htmlspecialchars($content)."');"));
-    
+
+    $db->query('CALL envoyerMessage(:id_user, :id_other_people, :content);', array('id_user' => $id_user, 'id_other_people' => $id_other_people, 'content' => $content));
     
 }
 
