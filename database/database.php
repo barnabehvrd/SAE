@@ -47,6 +47,7 @@ class database
             echo "key : $key, val : $val";
             $stmt->bindParam($key, $htmlspecialchars);
         }
+        echo $stmt->queryString;
         $stmt->execute();
         return $stmt->fetchAll();
     }
