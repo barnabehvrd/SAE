@@ -1,12 +1,24 @@
-html,body{
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Fait en sorte que le main prenne tout l'espace restant */
+}
+
+
 
 footer{
     height: 150px;
+    flex-shrink: 0;
 }
 
 .squarePanelAdmin{
