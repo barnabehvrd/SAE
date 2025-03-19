@@ -7,7 +7,6 @@ use database\database;
 
 $db = new database();
 
-$bdd = dbConnect();
 $Id_Commande = htmlspecialchars($_POST["idCommande"]);
 
 $returnQueryGetCommande = $db->select('

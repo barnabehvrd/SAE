@@ -48,8 +48,6 @@ if (isset($_POST["Id_Uti"])){
         $test = $db->query('DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur', array('utilisateur' => $utilisateur));
     }
     else{
-        //echo ' producteur';
-        $bdd=dbConnect();
 
 
       $returnQueryIdProd = $db->select('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti', array('Id_Uti' => $utilisateur));

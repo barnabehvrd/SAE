@@ -21,7 +21,7 @@
         session_start();
         }
 
-        $bdd=dbConnect();
+
         $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
         
         $filtreCategorie=0;

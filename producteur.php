@@ -159,7 +159,6 @@
                     <p><center><U><?php echo $htmlProduitsProposesDeuxPoints; ?></U></center></p>
                     <div class="gallery-container">
                         <?php
-                            $bdd=dbConnect();
                             $req = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
                                     WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
