@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+
 
 function afficheMessages($id_user, $id_other_people){
     $bdd = dbConnect();
