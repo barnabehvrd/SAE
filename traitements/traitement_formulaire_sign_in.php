@@ -38,7 +38,7 @@ try {
 
     // On génére une erreur pour voir le contenu de $test
 
-    error_log('Contenu de $test : ' . print_r(var_dump($test), true));
+        echo var_dump($test);
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
