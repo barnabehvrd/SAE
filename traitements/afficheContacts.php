@@ -12,14 +12,18 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 
+$msgPasConv = $htmlPasDeConversation;
 
 function afficheContacts($id_user){
+    global $msgPasConv;
+    require "language.php" ;
+
     $db = new database();
 
     $contacts = $db->select('CALL listeContact( :id_user);', array('id_user' => $id_user));
 
     if (count($contacts)==0){
-        echo $htmlPasDeConversation;
+        echo $msgPasConv;
     }else{
         foreach($contacts as $contact){
             afficherContact($contact);
