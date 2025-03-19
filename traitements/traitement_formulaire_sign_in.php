@@ -34,9 +34,6 @@ try {
 
     // Extract user ID
     $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
-
-    // On transforme Id_Uti en entier
-    $Id_Uti = (int)$Id_Uti;
     
     // Verify password using stored procedure
     $test = $db->select('CALL verifMotDePasse(:Id_Uti, :pwd)', [':Id_Uti' => $Id_Uti, ':pwd' => $pwd]);
