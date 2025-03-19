@@ -30,14 +30,13 @@ try {
         $_SESSION['erreur'] = $htmlAdresseMailInvalide;
     } else {
 
+    echo var_dump($returnQueryIdUti);
+
     // Extract user ID
     $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
     
     // Verify password using stored procedure
     $test = $db->select('CALL verifMotDePasse(:Id_Uti, :pwd)', [':Id_Uti' => $Id_Uti, ':pwd' => $pwd]);
-
-    echo '$ test :';
-    echo $test;
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
