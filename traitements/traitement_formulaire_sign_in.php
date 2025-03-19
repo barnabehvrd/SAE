@@ -3,9 +3,8 @@
 require_once 'database/database.php';
 use database\database;
 
-
-
 require "language.php" ;
+
 
 
 // Error handling with try-catch block
