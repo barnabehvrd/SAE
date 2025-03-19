@@ -2,6 +2,9 @@
 <html lang="fr">
 <head>
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
     require "language.php" ;
     require_once 'database/database.php';
     use database\database;
