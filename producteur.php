@@ -182,6 +182,8 @@
 
                             //preparation paramètres
 
+                            echo $filtreType;
+
 
                             if ($filtreType=="TOUT"){
                                 $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => '%', ':rechercheNom' => '%'.$rechercheNom.'%']);
