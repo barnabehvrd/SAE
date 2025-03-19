@@ -43,12 +43,10 @@ class database
     {
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
-            $htmlspecialchars = htmlspecialchars($val);
             if (is_int($val)) {
-                echo $key . ' is int : ' . $val . "\n";
-                $stmt->bindParam($key, $htmlspecialchars, PDO::PARAM_INT);
+                $stmt->bindParam($key, $val, PDO::PARAM_INT);
             } else {
-                echo $key . ' is string : ' . $val . "\n";
+                $htmlspecialchars = htmlspecialchars($val);
                 $stmt->bindParam($key, $htmlspecialchars, PDO::PARAM_STR);
             }
         }
