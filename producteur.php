@@ -24,7 +24,7 @@
       // id_prod to int
 
       $filtreType = "";
-      if (isset($_GET["filtreType"])==true){
+      if (isset($_GET["filtreType"])==true && $_GET["filtreType"]!=""){
 
           $filtreType==$_GET["filtreType"];
       }
