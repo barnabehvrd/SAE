@@ -44,6 +44,7 @@ class database
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
             $htmlspecialchars = htmlspecialchars($val);
+            echo "key : $key, val : $val";
             $stmt->bindParam($key, $htmlspecialchars);
         }
         $stmt->execute();
