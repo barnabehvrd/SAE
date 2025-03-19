@@ -50,7 +50,8 @@ class database
                 $stmt->bindParam($key, $val, PDO::PARAM_INT);
             } else {
                 $htmlspecialchars = htmlspecialchars($val);
-                $stmt->bindParam($key, $htmlspecialchars, PDO::PARAM_STR);
+                $val = &$htmlspecialchars;
+                $stmt->bindParam($key, $val, PDO::PARAM_STR);
             }
         }
         $stmt->execute();
