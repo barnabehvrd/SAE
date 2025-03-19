@@ -36,9 +36,8 @@ try {
     // Verify password using stored procedure
     $test = $db->select('CALL verifMotDePasse(:Id_Uti, :pwd)', [':Id_Uti' => $Id_Uti, ':pwd' => $pwd]);
 
-    // On génére une erreur pour voir le contenu de $test
-
-        echo var_dump($test);
+    echo '$ test :';
+    echo $test;
 
     // Handle password verification
     if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
