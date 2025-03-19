@@ -15,8 +15,7 @@ function afficheContacts($id_user){
     $contacts = $db->select('CALL listeContact( :id_user);', array('id_user' => $id_user));
 
     if (count($contacts)==0){
-        $test = $htmlPasDeConversation;
-        echo($test);
+        echo $htmlPasDeConversation;
     }else{
         foreach($contacts as $contact){
             afficherContact($contact);
