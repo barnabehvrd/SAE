@@ -1,94 +1,104 @@
+<?php require "language.php" ; ?>
 <?php
-    require "language.php" ; 
-?>
-<?php
-// Récupération des données du formulaire
+// Error handling with try-catch block
+try {
+    // Retrieve form data
+    $pwd = $_POST['pwd'];
+    $Mail_Uti = $_POST['mail'];
 
-$_SESSION['test_pwd'] = 5;
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$adresse = $_POST['rue'] .", ". $_POST['code']. " ".mb_strtoupper($_POST['ville']);
-$pwd = $_POST['pwd'];
-$Mail_Uti = $_POST['mail'];
+    // Database connection
+    $utilisateur = "inf2pj02";
+    $serveur = "localhost";
+    $motdepasse = "ahV4saerae";
+    $basededonnees = "inf2pj_02";
 
-$_SESSION['Mail_Temp']=$Mail_Uti;
+    // Connect to database
+    $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
-// Connexion à la base de données 
-$utilisateur = "inf2pj02";
-$serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
-$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+    // Check if user email exists
+    $queryIdUti = $bdd->query('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=\'' . $Mail_Uti . '\'');
+    $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
 
-// Récupération de la valeur maximum de Id_Uti
-$requete = "SELECT MAX(Id_Uti) AS id_max FROM UTILISATEUR";
-$resultat = $connexion->query($requete);
-$id_max = $resultat->fetch_assoc()['id_max'];
+    // Handle invalid email
+    if ($returnQueryIdUti == NULL) {
+        unset($Id_Uti);
+        $_SESSION['erreur'] = $htmlAdresseMailInvalide;
+    } else {
+        // Extract user ID
+        $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
 
-// Incrémentation de la valeur de $iduti
-$iduti = $id_max + 1;
-// Vérification de l'existence de l'adresse mail
-$requete2 = "SELECT COUNT(*) AS nb FROM UTILISATEUR WHERE Mail_Uti = '$Mail_Uti'";
-$resultat2 = $connexion->query($requete2);
-$nb = $resultat2->fetch_assoc()['nb'];
-// Exécution de la requête d'insertion si l'adresse mail n'est pas déjà utilisée
-echo($nb);
-if ($nb == 0) {
-    // Connexion à la base de données avec PDO
-    $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees", $utilisateur, $motdepasse);
-    
-    // Définir le mode d'erreur sur Exception
-    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Vérifier si la dernière tentative date de plus de 30 minutes
+        $resetTimeQuery = $bdd->query('SELECT date_derniere_tentative, nb_tentatives_echec FROM UTILISATEUR WHERE Id_Uti = ' . $Id_Uti);
+        $userData = $resetTimeQuery->fetch(PDO::FETCH_ASSOC);
 
-    // Préparation de la requête d'insertion pour l'utilisateur
-    $insertionUtilisateur = $connexion->prepare("INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Adr_Uti, Pwd_Uti, Mail_Uti) VALUES (?, ?, ?, ?, ?, ?)");
-    $insertionUtilisateur->execute([$iduti, $prenom, $nom, $adresse, $pwd, $Mail_Uti]);
+        // Réinitialiser le compteur si plus de 30 minutes se sont écoulées
+        if ($userData['date_derniere_tentative'] != NULL) {
+            $derniereTentative = strtotime($userData['date_derniere_tentative']);
+            $tempsEcoule = time() - $derniereTentative;
 
-    echo $htmlEnregistrementUtilisateurReussi;
+            // Si plus de 30 minutes se sont écoulées (1800 secondes)
+            if ($tempsEcoule > 1800) {
+                $bdd->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = ' . $Id_Uti);
+                $userData['nb_tentatives_echec'] = 0;
+            }
+        }
 
-    // Création du producteur si la profession est définie
-    if (isset($_POST['profession'])) {
-        $profession = $_POST['profession'];
+        // Vérifier si le nombre de tentatives est inférieur à 5
+        if ($userData['nb_tentatives_echec'] < 5) {
+            // MODIFICATION: Récupération du mot de passe hashé dans la base de données
+            $queryPassword = $bdd->query('SELECT MotDePasse_Uti FROM UTILISATEUR WHERE Id_Uti = ' . $Id_Uti);
+            $passwordData = $queryPassword->fetch(PDO::FETCH_ASSOC);
 
-        // Récupérer le dernier Id_Prod
-        $requeteIdProd = $connexion->query("SELECT MAX(Id_Prod) AS id_max1 FROM PRODUCTEUR");
-        $id_max_prod = $requeteIdProd->fetch(PDO::FETCH_ASSOC)['id_max1'];
-        $id_max_prod++;
+            // MODIFICATION: Vérification du mot de passe avec password_verify
+            if ($passwordData && password_verify($pwd, $passwordData['MotDePasse_Uti'])) {
+                // Mot de passe correct, réinitialiser le compteur
+                $resetQuery = $bdd->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = ' . $Id_Uti);
 
-        // Préparation de la requête d'insertion pour le producteur
-        $insertionProducteur = $connexion->prepare("INSERT INTO PRODUCTEUR (Id_Uti, Id_Prod, Prof_Prod) VALUES (?, ?, ?)");
-        $insertionProducteur->execute([$iduti, $id_max_prod, $profession]);
+                echo $htmlMdpCorrespondRedirectionAccueil;
+                $_SESSION['Mail_Uti'] = $Mail_Uti;
+                $_SESSION['Id_Uti'] = $Id_Uti;
 
-        echo $htmlEnregistrementProducteurReussi;
+                $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
+                $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                $reponse = $returnIsProducteur[0]["result"];
+
+                if ($reponse != NULL) {
+                    $_SESSION["isProd"] = true;
+                } else {
+                    $_SESSION["isProd"] = false;
+                }
+
+                $_SESSION['erreur'] = '';
+
+                $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                $isAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE Id_Uti='.$_SESSION["Id_Uti"]);
+                $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+
+                if (count($returnIsAdmin) > 0) {
+                    $_SESSION["isAdmin"] = true;
+                } else {
+                    $_SESSION["isAdmin"] = false;
+                }
+
+                $_SESSION['erreur'] = '';
+            } else {
+                // Mot de passe incorrect, incrémenter le compteur
+                $updateQuery = $bdd->query('UPDATE UTILISATEUR SET 
+                    nb_tentatives_echec = nb_tentatives_echec + 1,
+                    date_derniere_tentative = NOW() 
+                    WHERE Id_Uti = ' . $Id_Uti);
+
+                // Récupérer le nombre de tentatives restantes
+                $tentativesRestantes = 5 - ($userData['nb_tentatives_echec'] + 1);
+                $_SESSION['erreur'] = $htmlMauvaisMdp . $tentativesRestantes . $htmlTentatives;
+            }
+        } else {
+            $_SESSION['erreur'] = $htmlErreurMaxReponsesAtteintes;
+        }
     }
-
-    // Fermeture de la connexion
-    $connexion = null;
-
-    $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
-            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            $reponse=$returnIsProducteur[0]["result"];
-            if ($reponse!=NULL){
-                $_SESSION["isProd"]=true;
-                //var_dump($_SESSION);
-            }else {
-                $_SESSION["isProd"]=false;
-            }
-            $_SESSION['Mail_Uti'] = $Mail_Uti;
-            $_SESSION['Id_Uti'] = $iduti;
-            $_SESSION['erreur'] = '';
-            if($_SESSION["isProd"]==true){
-                $_POST['popup'] = 'addProfilPicture';
-            }else {
-                
-                $_POST['popup'] = '';
-            }
-} else {
-    $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
+} catch (Exception $e) {
+    // Handle any exceptions
+    echo "An error occurred: " . $e->getMessage();
 }
-
-
-// Fermeture de la connexion
-$connexion->close();
 ?>
