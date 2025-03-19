@@ -21,13 +21,18 @@
         }
       // variable utilisée plusieurs fois par la suite
       $Id_Prod = $_GET["Id_Prod"];
+      // id_prod to int
 
+      $filtreType = "";
       if (isset($_GET["filtreType"])==true){
-        $filtreType==$_GET["filtreType"];
+
+          $filtreType==$_GET["filtreType"];
       }
       else{
         $filtreType="TOUT";
       }
+
+      $tri = "";
       if (isset($_GET["tri"])==true){
         $tri=$_GET["tri"];
       }
@@ -186,7 +191,7 @@
                             echo $Id_Prod;
                             echo "===================";
 
-                            if ($filtreType=="TOUT"){
+                                if ($filtreType=="TOUT"){
                                 $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => '%', ':rechercheNom' => '%'.$rechercheNom.'%']);
 
                             }
