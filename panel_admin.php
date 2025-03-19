@@ -97,10 +97,10 @@
                 <?php
                     $result = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;');
 
-                    if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
+                    if ((count($result) > 0) AND ($_SESSION["isAdmin"]==true)) {
                         echo"<label>".$htmlUtilisateurs."</label><br>";
 
-                        while ($row = $result->fetch_assoc()) {
+                        foreach ($result as $row) {
             
                             echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                 <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
@@ -115,9 +115,6 @@
                     } else {
                         echo $htmlErrorDevTeam;
                     }
-                    $stmt->close();
-                    $connexion->close();
-               
                ?>
             <br>
             <div class="basDePage">
