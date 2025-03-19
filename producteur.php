@@ -23,19 +23,19 @@
       $Id_Prod = $_GET["Id_Prod"];
 
       if (isset($_GET["filtreType"])==true){
-        $filtreType=htmlspecialchars($_GET["filtreType"]);
+        $filtreType==$_GET["filtreType"];
       }
       else{
         $filtreType="TOUT";
       }
       if (isset($_GET["tri"])==true){
-        $tri=htmlspecialchars($_GET["tri"]);
+        $tri=$_GET["tri"];
       }
       else{
         $tri="No";
       }
       if (isset($_GET["rechercheNom"])==true){
-        $rechercheNom=htmlspecialchars($_GET["rechercheNom"]);
+        $rechercheNom=$_GET["rechercheNom"];
       }
       else{
         $rechercheNom="";
@@ -161,7 +161,9 @@
                         <?php
                             $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
                                     WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
-
+                            echo $tri."<br>";
+                            echo $filtreType."<br>";
+                            echo $rechercheNom."<br>";
 
                             //tri
                             if ($tri=="No"){
