@@ -28,8 +28,6 @@
             session_start();
         }
 
-        echo var_dump($_SESSION);
-
         if (isset($_GET["rechercheVille"])==true){
             $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
         }
