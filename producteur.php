@@ -192,11 +192,14 @@
                             echo "===================";
 
                                 if ($filtreType=="TOUT"){
-                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => '%', ':rechercheNom' => '%'.$rechercheNom.'%']);
+                                $returnQueryGetProducts=$db->select($query, [
+                                        ':Id_Prod' => 4,
+                                        ':filtreType' => '%',
+                                        ':rechercheNom' => '%'.$rechercheNom.'%']);
 
                             }
                             else {
-                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => $Id_Prod, ':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%']);
+                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => 4, ':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%']);
                             }
 
                             $db->select("SELECT 2");
