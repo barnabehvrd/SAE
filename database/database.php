@@ -47,10 +47,8 @@ class database
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
             if (is_int($val)) {
-                echo 'Val :' . $val . ' key :' . $key;
                 $stmt->bindParam($key, $val, PDO::PARAM_INT);
             } else {
-                echo 'Val :' . $val . ' key :' . $key;
                 $htmlspecialchars = htmlspecialchars($val);
                 $stmt->bindParam($key, $htmlspecialchars, PDO::PARAM_STR);
             }

@@ -166,7 +166,7 @@
                         <?php
                         $db->select("SELECT 1");
                             $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
-                                    WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
+                                    WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
                             //tri
                             if ($tri=="No"){
@@ -193,13 +193,16 @@
 
                                 if ($filtreType=="TOUT"){
                                 $returnQueryGetProducts=$db->select($query, [
-                                        ':Id_Prod' => 4,
+
                                         ':filtreType' => '%',
-                                        ':rechercheNom' => '%'.$rechercheNom.'%']);
+                                        ':rechercheNom' => '%'.$rechercheNom.'%',
+                                    ':idprod' => 4,
+
+                                ]);
 
                             }
                             else {
-                                $returnQueryGetProducts=$db->select($query, [':Id_Prod' => 4, ':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%']);
+                                $returnQueryGetProducts=$db->select($query, [':filtreType' => $filtreType, ':rechercheNom' => '%'.$rechercheNom.'%', ':idprod' => 4]);
                             }
 
                             $db->select("SELECT 2");
