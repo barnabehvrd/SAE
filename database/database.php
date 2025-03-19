@@ -16,6 +16,9 @@ class database
 {
 
     private $user;
+    private $password;
+    private $host;
+    private $database;
     private $pdo;
 
 
