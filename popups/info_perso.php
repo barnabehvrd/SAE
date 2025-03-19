@@ -31,7 +31,7 @@
         <?php
         require 'traitements/chargement_info_perso.php';
         if (count($result) > 0) {
-            foreach ($result as $row) ?>
+            foreach ($result as $row) {?>
                 <form class="formPopup" action='traitements/update_user_info.php' method="post">
                     <input type="hidden" value='info_perso' name="popup">
                     <!--  Set default values to current user information -->
