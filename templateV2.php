@@ -82,7 +82,7 @@
                                             <p class="card-text"><i class="bi bi-box-seam-fill text-success me-2"></i>Type</p>
                                             <p class="card-text"><i class="bi bi-tag-fill text-success me-2"></i>XX.XX €/Kg</p>
                                             
-                                            <div class="input-group mb-3">
+                                            <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-basket2-fill text-success"></i></span>
                                                 <input type="number" class="form-control">
                                                 <span class="input-group-text">Kg</span>
