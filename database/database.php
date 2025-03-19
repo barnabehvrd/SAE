@@ -45,13 +45,11 @@ class database
     public function select($request, $params = [])
     {
         $stmt = $this->pdo->prepare($request);
-        foreach ($params as $key => &$val) {
+        foreach ($params as $key => $val) {
             if (is_int($val)) {
                 $stmt->bindValue($key, $val, PDO::PARAM_INT);
             } else {
-                $htmlspecialchars = htmlspecialchars($val);
-                $val = &$htmlspecialchars;
-                $stmt->bindValue($key, $val, PDO::PARAM_STR);
+                $stmt->bindValue($key, htmlspecialchars($val), PDO::PARAM_STR);
             }
         }
         $stmt->execute();
@@ -69,10 +67,8 @@ class database
         $stmt = $this->pdo->prepare($request);
         foreach ($params as $key => &$val) {
             $htmlspecialchars = htmlspecialchars($val);
-            $stmt->bindParam($key, $htmlspecialchars);
+            $stmt->bindValue($key, $htmlspecialchars);
         }
         return $stmt->execute();
     }
-
-
 }
