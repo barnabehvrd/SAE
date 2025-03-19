@@ -11,7 +11,7 @@ body {
 }
 
 main {
-    flex: 1; /* Fait en sorte que le main prenne tout l'espace restant */
+    flex: 1;
 }
 
 
@@ -19,6 +19,11 @@ main {
 footer{
     height: 150px;
     flex-shrink: 0;
+}
+.scrollbox{
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
 }
 
 .squarePanelAdmin{
