@@ -57,10 +57,10 @@ try {
             
             if (count($returnIsAdmin)>0){
                 $_SESSION["isAdmin"]=true;
-                header('Location: panel_admin.php');
+                header('Location: ../panel_admin.php');
             }else {
                 $_SESSION["isAdmin"]=false;
-                header('Location: index.php');
+                header('Location: ../index.php');
             }
 
             $_SESSION['erreur'] = '';
