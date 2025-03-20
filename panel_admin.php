@@ -85,7 +85,7 @@ if(!isset($_SESSION)){
                                 echo '<h2 class="text-center"> Producteurs : </h2>';
 
                                 foreach ($result as $row) {
-
+                                    echo '<div class="squarePanelAdmin">';
                                     echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
                                     echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
                                     echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
@@ -93,11 +93,11 @@ if(!isset($_SESSION)){
                                     echo $htmlProfessionDeuxPoints, $row["Prof_Prod"] . "<br></form>";
 
                                     echo '
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-'.$row["Id_Uti"].'">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-'.$row["Id_Uti"].'">
                                           Supprimer le compte
-                                    </button> <br>
-                                    
-                                    <!-- Modal -->
+                                        </button> <br>
+                                        
+                                        <!-- Modal -->
                                         
                                         <div class="modal fade" id="modal-delete-user-'.$row["Id_Uti"].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
@@ -112,15 +112,15 @@ if(!isset($_SESSION)){
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
                                                 <form method="post" action="traitements/del_acc.php">
-                                                    <input class="btn btn-danger" type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+                                                    <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                                     <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">
+                                                </form>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                         
                                         <!-- Fin du Modal -->
-                                    
                                     ';
                                 }
                                 echo '</div>'; 
