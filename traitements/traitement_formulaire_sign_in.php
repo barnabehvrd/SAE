@@ -1,7 +1,13 @@
+
+
+
 <?php require "language.php" ; ?>
 <?php
 require_once 'database/database.php';
 use database\database;
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // Error handling with try-catch block
 try {
