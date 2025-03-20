@@ -172,9 +172,10 @@ if(!isset($_SESSION)){
                                         $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
                                 ?>
 
-                                <p class="text-light"><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?></p>
-
-                                <input name="rayon" class="form-range" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-radar text-success"></i></span>
+                                    <input name="rayon" class="form-range" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                                </div>
                                 <span class="text-light" id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?><?php echo $htmlKm?></span>
                                 <script>
                                     function AfficheRange2(newVal) {
