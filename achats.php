@@ -166,7 +166,7 @@ if(!isset($_SESSION)){
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
-						if ($nbProduit>0){
+						if ($nbProduit>0 && $Id_Statut!=3){
 							echo '<div class="commande" >';
 							echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
 							echo '</br>';
