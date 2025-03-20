@@ -93,7 +93,7 @@ if(!isset($_SESSION)){
                                         
                                         <!-- Modal -->
                                         
-                                        <div class="modal fade" id="#modal-delete-user-'.$row["Id_Uti"].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modal-delete-user-'.$row["Id_Uti"].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
                                             <div class="modal-content">
                                               <div class="modal-header">
