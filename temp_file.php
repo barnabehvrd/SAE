@@ -139,6 +139,7 @@ $utilisateur=$_SESSION["Id_Uti"];
                                     $iterateurProduit++;
                                     } ?>
                                 </tbody>
+                            </table>
 
                 <?php
 						}
