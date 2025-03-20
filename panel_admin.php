@@ -151,7 +151,7 @@ if(!isset($_SESSION)){
 
                 <!-- Producteurs -->
                 <div class="d-flex flex-column">
-                    <h2 class="text-center"><?php Producteurs : ?></h2>
+                    <h2 class="text-center">Producteurs :</h2>
                     <div class="row g-3">
 
                             <?php
@@ -206,8 +206,8 @@ if(!isset($_SESSION)){
 
 
                 <!-- Utilisateurs -->
-                <div class="d-flex flex-column">
-                    <h2 class="text-center"><?php echo $htmlUtilisateurs?></h2>
+                <div class="d-flex flex-column mt-5">
+                    <h2 class="text-center"> Utilisateurs </h2>
                     <div class="row g-3">
 
                         <?php
