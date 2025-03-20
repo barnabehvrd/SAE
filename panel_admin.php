@@ -185,8 +185,8 @@ if(!isset($_SESSION)){
                                                                   <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                                                         <form method="post" action="traitements/del_acc.php">
-                                                                                <input type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
-                                                                                <input class="btn btn-danger" type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
+                                                                                <input class="btn btn-danger" type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
+                                                                                <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
                                                                             </form>
                                                                       </div>
                                                                 </div>
@@ -207,7 +207,7 @@ if(!isset($_SESSION)){
 
                 <!-- Utilisateurs -->
                 <div class="d-flex flex-column mt-5">
-                    <h2 class="text-center"> Utilisateurs </h2>
+                    <h2 class="text-center"> Utilisateurs :</h2>
                     <div class="row g-3">
 
                         <?php
@@ -240,8 +240,8 @@ if(!isset($_SESSION)){
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                                             <form method="post" action="traitements/del_acc.php">
-                                                                <input type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
-                                                                <input class="btn btn-danger" type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
+                                                                <input class="btn btn-danger" type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
+                                                                <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
                                                             </form>
                                                         </div>
                                                     </div>
