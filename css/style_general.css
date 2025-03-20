@@ -20,7 +20,9 @@ main {
     padding: 10px;
     border-radius: 5px 5px 0 5px;
     justify-self: end;
-    background-color: #4caf50;
+    background-color: #198754;
+    color: white;
+
 }
 .messageRecu{
     margin: 5px 0;
@@ -29,7 +31,6 @@ main {
     border-radius: 5px 5px 5px 0;
     justify-self: start;
     border: solid 2px #198754;
-    color: white;
 }
 
 footer{
