@@ -6,10 +6,15 @@ use database\database;
 
 $db = new database();
 
+if(!isset($_SESSION)){
+    session_start();
+}
+
 $filtreCategorie=0;
 if (isset($_POST["typeCategorie"])==true){
     $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
 }
+$utilisateur=$_SESSION["Id_Uti"];
 ?>
 
 <!DOCTYPE html>
