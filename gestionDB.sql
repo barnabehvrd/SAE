@@ -238,7 +238,7 @@ SELECT * FROM Produits_d_un_producteur;
 
 -- 1) Procédure qui envoie un message à tous les utilisateurs
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE broadcast_Utilisateur(
+CREATE PROCEDURE broadcast_Utilisateur(
   IN emetteur INT,
   IN contenuMsg VARCHAR(4096)
 )
@@ -282,7 +282,7 @@ DELIMITER ;
 -- 2) Procédure qui envoie un message à tous les producteurs
 
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE broadcast_Producteur(
+CREATE PROCEDURE broadcast_Producteur(
   IN emetteur INT,
   IN contenuMsg VARCHAR(4096)
 )
@@ -327,7 +327,7 @@ DELIMITER ;
 -- 3) Procedure prenant en paramètre un identifiant d'utilisateur et qui affiche tous les autres utilisateurs avec qui il est en contact
 
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE listeContact(IN id_uti INT)
+CREATE PROCEDURE listeContact(IN id_uti INT)
 BEGIN
 SELECT UTILISATEUR.Id_Uti, Nom_Uti, Prenom_Uti, MAX(Date_Msg) as Date_Msg
 FROM UTILISATEUR
@@ -353,7 +353,7 @@ DELIMITER ;
 
 DELIMITER $$
 -- conversation prend en paramètre deux identifiants d'utilisateurs
-CREATE OR REPLACE PROCEDURE conversation(IN moi INT, IN autrePersonne INT)
+CREATE  PROCEDURE conversation(IN moi INT, IN autrePersonne INT)
 BEGIN
 SELECT Contenu_Msg, Date_Msg, Emetteur
 FROM MESSAGE
@@ -375,7 +375,7 @@ DELIMITER ;
 
 DELIMITER $$
 -- deleteMsg ne prend pas de paramètres
-CREATE OR REPLACE PROCEDURE deleteMsg()
+CREATE  PROCEDURE deleteMsg()
 BEGIN
   -- Il faut supprimer tous les messages dont la date d'expiration est passée.
   -- Pour ce faire, nous comparons la différence entre la date d'expiration et l'heure actuelle. Si la différence est négative, le délai est dépassé.
@@ -418,7 +418,7 @@ END $$
 -- procedure pour envoyer un message 👍😁
 
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE envoyerMessage(
+CREATE   PROCEDURE envoyerMessage(
   IN emetteur INT,
   IN destinataire INT,
   IN contenuMsg VARCHAR(4096)
@@ -436,7 +436,7 @@ END $$
 
 DELIMITER $$
 
-CREATE OR REPLACE PROCEDURE isProducteur(
+CREATE PROCEDURE isProducteur(
 	IN Id_Uti INT
 )
 BEGIN
@@ -456,7 +456,7 @@ DELIMITER ;
 
 -- Procédure qui envoie un report de bug à tous les administrateurs
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE broadcast_Admin(
+CREATE  PROCEDURE broadcast_Admin(
   IN emetteur INT,
   IN contenuMsg VARCHAR(4096)
 )
