@@ -52,7 +52,7 @@
                         </h1>
                         <hr>
                     </div>
-                    <div class="scrollbox">
+                    <div class="scrollbox d-flex flex-column">
                         <?php
                         require 'traitements/afficheMessages.php';
                         ?>
