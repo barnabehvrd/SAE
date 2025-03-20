@@ -88,7 +88,4 @@ if ($nb == 0) {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
 }
 
-
-// Fermeture de la connexion
-$connexion->close();
 ?>

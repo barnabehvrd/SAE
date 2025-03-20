@@ -66,9 +66,12 @@ try {
             
             if (count($returnIsAdmin)>0){
                 $_SESSION["isAdmin"]=true;
+                header('Location: panel_admin.php');
             }else {
                 $_SESSION["isAdmin"]=false;
+                header('Location: index.php');
             }
+
             $_SESSION['erreur'] = '';
         } else {
             $_SESSION['test_pwd']--;
