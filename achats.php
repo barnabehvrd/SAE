@@ -177,12 +177,16 @@ if(!isset($_SESSION)){
 							
 							echo '<button type="submit">'.$htmlAnnulerCommande.'</button>';
 							echo '</form>';
+                            ?>
+                                <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                                <br>
+                                <?php
+
 							}
+
 						}
 
                         ?>
-                        <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                        <br>
                         <?php
 
 						while ($iterateurProduit<$nbProduit){
