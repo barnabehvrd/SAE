@@ -11,12 +11,10 @@ if(!isset($_SESSION)){
 }
 
 $filtreCategorie=0;
-if (isset($_POST["typeCategorie"])==true){
-    $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
+if (isset($_POST["categorie"])==true){
+    $filtreCategorie=htmlspecialchars($_POST["categorie"]);
 }
 
-echo "======================";
-echo $filtreCategorie;
 
 $utilisateur=$_SESSION["Id_Uti"];
 ?>
