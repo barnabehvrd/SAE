@@ -14,7 +14,10 @@ main {
     flex: 1;
 }
 
-
+.messageEnvoye{
+    margin-left: auto;
+    background-color: #4caf50;
+}
 
 footer{
     height: 150px;
