@@ -9,6 +9,8 @@ if (isset($_POST['formClicked'])){
     }else{
         $_SESSION['debug'][0]=1;
         require 'traitements/traitement_formulaire_sign_in.php';
+        header("Location: index.php");
+        exit(0); // mais quitte la pop up pitié
     }
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
