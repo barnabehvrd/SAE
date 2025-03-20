@@ -86,9 +86,10 @@ if ($nb == 0) {
     $_SESSION['erreur'] = '';
 
     if($_SESSION["isProd"]==true){
-        $_POST['popup'] = 'addProfilPicture';
+        // on renvoi vers la page d'acceuil
+        header('Location: /');
     }else {
-        $_POST['popup'] = '';
+        echo ("Erreur lors de l'enregistrement du producteur");
     }
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee;

@@ -33,11 +33,10 @@ try {
 
             // Si plus de 30 minutes se sont écoulées (1800 secondes)
             if ($tempsEcoule > 1800) {
-                $db->execute('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', [':id' => $Id_Uti]);
+                $db->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', [':id' => $Id_Uti]);
                 $userData[0]['nb_tentatives_echec'] = 0;
             }
         }
-
         // Vérifier si le nombre de tentatives est inférieur à 5
         if (!isset($userData[0]['nb_tentatives_echec']) || $userData[0]['nb_tentatives_echec'] < 5) {
             // Récupération du mot de passe hashé dans la base de données
@@ -46,7 +45,7 @@ try {
             // Vérification du mot de passe avec password_verify
             if (!empty($passwordData) && password_verify($pwd, $passwordData[0]['MotDePasse_Uti'])) {
                 // Mot de passe correct, réinitialiser le compteur
-                $db->execute('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', [':id' => $Id_Uti]);
+                $db->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', [':id' => $Id_Uti]);
 
                 echo $htmlMdpCorrespondRedirectionAccueil;
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
@@ -76,7 +75,7 @@ try {
                 $_SESSION['erreur'] = '';
             } else {
                 // Mot de passe incorrect, incrémenter le compteur
-                $db->execute('UPDATE UTILISATEUR SET 
+                $db->select('UPDATE UTILISATEUR SET 
                     nb_tentatives_echec = COALESCE(nb_tentatives_echec, 0) + 1,
                     date_derniere_tentative = NOW() 
                     WHERE Id_Uti = :id', [':id' => $Id_Uti]);
