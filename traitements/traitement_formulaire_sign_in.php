@@ -70,7 +70,7 @@ try {
                 }
 
                 $_SESSION['erreur'] = '';
-                header('Location: ../index.php');
+                header('Location: index.php');
                 exit(0); // pk ca quitte pas la pop up ? ils ont fait quoi avec leur code ?
             } else {
                 // Mot de passe incorrect, incrémenter le compteur
