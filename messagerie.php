@@ -29,7 +29,7 @@
                 <div class="container-fluid">
                     <div class="d-flex flex-column my-2">
                         <p class="text-light"><?php echo $htmlContactsRecentsDeuxPoints?></p>
-                        <div class="scrollbox">
+                        <div class="scrollbox d-flex flex-column gap-2">
                             <?php
                             require 'traitements/afficheContacts.php';
                             ?>
