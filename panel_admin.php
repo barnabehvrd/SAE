@@ -160,13 +160,11 @@ if(!isset($_SESSION)){
                                 foreach ($result as $row) {
                                 ?>
                                 <div class="card">
-                                    <div class="row g-0">
-                                            <div class="card-body">
-                                                <h2 class="card-title"><?php  echo $row['Prenom_Uti'] . ' ' . $row['Nom_Uti'] ?></h2>
-                                                <span class="badge rounded-pill text-bg-success mb-3">Métier</span>
-                                                <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
-                                                <a href="#" class="btn btn-success">Consulter</a>
-                                        </div>
+                                    <div class="card-body">
+                                        <h2 class="card-title"><?php  echo $row['Prenom_Uti'] . ' ' . $row['Nom_Uti'] ?></h2>
+                                        <span class="badge rounded-pill text-bg-success mb-3">Métier</span>
+                                        <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
+                                        <a href="#" class="btn btn-success">Consulter</a>
                                     </div>
                                 </div>
                             </div>
