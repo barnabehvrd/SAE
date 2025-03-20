@@ -71,7 +71,7 @@ require "language.php" ;
                 elseif(count($returnQueryGetCommande)==0){
                     echo $htmlAucuneCommandeCorrespondCriteres;
                 }
-                else{
+                else {
                     while ($iterateurCommande<count($returnQueryGetCommande)){
 						$Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
 						$Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
@@ -126,7 +126,7 @@ require "language.php" ;
                                 </tbody>
 
                 <?php
-						} } ?>
+						} } }; ?>
 
 
 
