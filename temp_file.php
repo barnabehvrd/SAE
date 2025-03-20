@@ -14,6 +14,7 @@ $filtreCategorie=0;
 if (isset($_POST["typeCategorie"])==true){
     $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
 }
+
 $utilisateur=$_SESSION["Id_Uti"];
 ?>
 
@@ -42,10 +43,10 @@ $utilisateur=$_SESSION["Id_Uti"];
                             <div class="input-group">
                                 <label class="input-group-text" for="categories"><i class="bi bi-person-fill text-success"></i></label>
                                 <select class="form-select" name="categorie" id="categories">
-                                    <option value="0" <?php if($filtreCategorie=="0") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlTOUT)) ?></option>
-                                    <option value="1" <?php if($filtreCategorie=="1") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlENCOURS)) ?></option>
-                                    <option value="2" <?php if($filtreCategorie=="2") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlPRETE)) ?></option>
-                                    <option value="4" <?php if($filtreCategorie=="4") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlLIVREE))?></option>
+                                    <option value="0" <?php if($filtreCategorie==0) echo 'selected="selected"';?>>Tout</option>
+                                    <option value="1" <?php if($filtreCategorie==1) echo 'selected="selected"';?>>En cours</option>
+                                    <option value="2" <?php if($filtreCategorie==2) echo 'selected="selected"';?>>Prête</option>
+                                    <option value="4" <?php if($filtreCategorie==4) echo 'selected="selected"';?>>Livrée</option>
                                 </select>
                             </div>
 
@@ -136,10 +137,22 @@ $utilisateur=$_SESSION["Id_Uti"];
                                             <td><?php echo $Nom_Produit;?></td>
                                             <td><?php echo $Qte_Produit_Commande.' '.$Nom_Unite_Prix;?></td>
                                             <td><?php echo number_format($Prix_Produit_Unitaire, 2, ',', ' ').' €';?></td>
-                                        </tr>
                                     <?php
                                     $iterateurProduit++;
                                     } ?>
+
+                                        <td><strong>Total</strong></td>
+                                            <td></td>
+                                            <td><strong><?php echo number_format($total, 2, ',', ' ').' €';?></strong></td>
+                                        </tr>
+
+                                    <input class="btn btn-success" type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                                    <form action="delete_commande.php" method="post">
+                                        <input type="hidden" name="deleteValeur" value="<?php echo $Id_Commande;?>">
+
+                                        <button type="submit" class="btn btn-warning">Annuler la commande</button>
+                                    </form>
+
                                 </tbody>
                             </table>
                         </div>
