@@ -86,9 +86,37 @@ if(!isset($_SESSION)){
                                 foreach ($result as $row) {
                                     echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                         <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-'.$row["Id_Uti"].'">
                                           Supprimer le compte
-                                        </button>
+                                        </button> <br>
+                                        
+                                        <!-- Modal -->
+                                        
+                                        <div class="modal fade" id="#modal-delete-user-'.$row["Id_Uti"].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Supression</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Voulez-vous vraiment supprimer le compte de '.$row["Prenom_Uti"].' '.$row["Nom_Uti"].' ?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
+                                                <form method="post" action="traitements/del_acc.php">
+                                                    <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+                                                    <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <!-- Fin du Modal -->
+
+
+                                        
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
                                     echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
                                     echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
