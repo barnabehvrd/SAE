@@ -1,5 +1,10 @@
 <?php
 require "language.php" ;
+
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
 ?>
 
 <!DOCTYPE html>
