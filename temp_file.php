@@ -140,6 +140,9 @@ $utilisateur=$_SESSION["Id_Uti"];
                                     } ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
 
                 <?php
 						}
