@@ -4,56 +4,48 @@ use database\database;
 
 $db = new database();
 
-// Error handling with try-catch block
+// Définir les variables manquantes
+$htmlAdresseMailInvalide = "Adresse e-mail invalide.";
+$htmlErreur403 = "Erreur 403 - Accès refusé.";
+$htmlPasAcces = "Vous n'avez pas accès à cette section.";
+$htmlMauvaisMdp = "Mot de passe incorrect. Tentatives restantes : ";
+$htmlTentatives = " tentatives.";
+$htmlErreurMaxReponsesAtteintes = "Nombre maximum de tentatives atteint. Veuillez réessayer plus tard.";
+
 try {
-    // Retrieve form data
+    // Récupérer les données du formulaire
     $pwd = $_POST['pwd'];
     $Mail_Uti = $_POST['mail'];
 
-    // Check if user email exists
-    $returnQueryIdUti = $db->select('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=:Mail_Uti',
-        array('Mail_Uti' => $Mail_Uti));
+    // Vérifier si l'email de l'utilisateur existe
+    $returnQueryIdUti = $db->select('SELECT Id_Uti FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=:Mail_Uti', array('Mail_Uti' => $Mail_Uti));
 
-    // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
         $_SESSION['erreur'] = $htmlAdresseMailInvalide;
     } else {
-        // Extract user ID
         $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
 
         // Vérifier si la dernière tentative date de plus de 30 minutes
-        $userData = $db->select('SELECT date_derniere_tentative, nb_tentatives_echec FROM UTILISATEUR WHERE Id_Uti = :id',
-            array(':id' => $Id_Uti));
+        $userData = $db->select('SELECT date_derniere_tentative, nb_tentatives_echec FROM UTILISATEUR WHERE Id_Uti = :id', array(':id' => $Id_Uti));
 
-        // Réinitialiser le compteur si plus de 30 minutes se sont écoulées
         if (isset($userData[0]['date_derniere_tentative']) && $userData[0]['date_derniere_tentative'] != NULL) {
             $derniereTentative = strtotime($userData[0]['date_derniere_tentative']);
             $tempsEcoule = time() - $derniereTentative;
 
-            // Si plus de 30 minutes se sont écoulées (1800 secondes)
             if ($tempsEcoule > 1800) {
-                $db->execute('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id',
-                    array(':id' => $Id_Uti));
+                $db->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', array(':id' => $Id_Uti));
                 $userData[0]['nb_tentatives_echec'] = 0;
             }
         }
 
-        // Vérifier si le nombre de tentatives est inférieur à 5
         if (!isset($userData[0]['nb_tentatives_echec']) || $userData[0]['nb_tentatives_echec'] < 5) {
-            // Récupération du mot de passe hashé dans la base de données
-            $passwordData = $db->select('SELECT MotDePasse_Uti FROM UTILISATEUR WHERE Id_Uti = :id',
-                array(':id' => $Id_Uti));
+            $passwordData = $db->select('SELECT MotDePasse_Uti FROM UTILISATEUR WHERE Id_Uti = :id', array(':id' => $Id_Uti));
 
-            // Vérification du mot de passe avec password_verify
             if (!empty($passwordData) && password_verify($pwd, $passwordData[0]['MotDePasse_Uti'])) {
-                // Mot de passe correct, réinitialiser le compteur
-                $db->execute('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id',
-                    array(':id' => $Id_Uti));
+                $db->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', array(':id' => $Id_Uti));
 
-                // Vérification si l'utilisateur est un administrateur
-                $returnQueryIdAdmin = $db->select('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=:Id_Uti',
-                    array('Id_Uti' => $Id_Uti));
+                $returnQueryIdAdmin = $db->select('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=:Id_Uti', array('Id_Uti' => $Id_Uti));
 
                 if (($returnQueryIdAdmin) == null) {
                     echo ("
@@ -68,14 +60,11 @@ try {
                     header('Location: ../panel_admin.php');
                 }
             } else {
-                // Mot de passe incorrect, incrémenter le compteur
-                $db->execute('UPDATE UTILISATEUR SET 
+                $db->query('UPDATE UTILISATEUR SET
                             nb_tentatives_echec = COALESCE(nb_tentatives_echec, 0) + 1,
-                            date_derniere_tentative = NOW() 
-                            WHERE Id_Uti = :id',
-                    array(':id' => $Id_Uti));
+                            date_derniere_tentative = NOW()
+                            WHERE Id_Uti = :id', array(':id' => $Id_Uti));
 
-                // Récupérer le nombre de tentatives restantes
                 $tentativesRestantes = 5 - ((isset($userData[0]['nb_tentatives_echec']) ? $userData[0]['nb_tentatives_echec'] : 0) + 1);
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $tentativesRestantes . $htmlTentatives;
             }
@@ -84,9 +73,9 @@ try {
         }
     }
 } catch (Exception $e) {
-    // Handle any exceptions
     echo "An error occurred: " . $e->getMessage();
 }
+
 
 /*
 <<< HEAD
