@@ -13,102 +13,102 @@ DROP TABLE IF EXISTS UTILISATEUR;
 
 
 CREATE TABLE UTILISATEUR(
-   Id_Uti INT,
-   Prenom_Uti VARCHAR(50) NOT NULL,
-   Nom_Uti VARCHAR(50) NOT NULL,
-   Mail_Uti VARCHAR(50) NOT NULL,
-   Adr_Uti VARCHAR(200) NOT NULL,
-   Pwd_Uti VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_Uti),
-   UNIQUE(Mail_Uti)
+                            Id_Uti INT,
+                            Prenom_Uti VARCHAR(50) NOT NULL,
+                            Nom_Uti VARCHAR(50) NOT NULL,
+                            Mail_Uti VARCHAR(50) NOT NULL,
+                            Adr_Uti VARCHAR(200) NOT NULL,
+                            Pwd_Uti VARCHAR(500) NOT NULL,
+                            PRIMARY KEY(Id_Uti),
+                            UNIQUE(Mail_Uti)
 );
 
 CREATE TABLE PRODUCTEUR(
-   Id_Prod INT,
-   Id_Uti INT NOT NULL,
-   Prof_Prod VARCHAR(50),
-   PRIMARY KEY(Id_Prod),
-   UNIQUE(Id_Uti),
-   FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
+                           Id_Prod INT,
+                           Id_Uti INT NOT NULL,
+                           Prof_Prod VARCHAR(50),
+                           PRIMARY KEY(Id_Prod),
+                           UNIQUE(Id_Uti),
+                           FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
 );
 
 CREATE TABLE ADMINISTRATEUR(
-   Id_Admin INT,
-   Id_Uti INT NOT NULL,
-   PRIMARY KEY(Id_Admin),
-   UNIQUE(Id_Uti),
-   FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
+                               Id_Admin INT,
+                               Id_Uti INT NOT NULL,
+                               PRIMARY KEY(Id_Admin),
+                               UNIQUE(Id_Uti),
+                               FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
 );
 
 CREATE TABLE UNITE(
-   Id_Unite INT,
-   Nom_Unite VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_Unite)
+                      Id_Unite INT,
+                      Nom_Unite VARCHAR(50) NOT NULL,
+                      PRIMARY KEY(Id_Unite)
 );
 
 CREATE TABLE STATUT(
-   Id_Statut INT,
-   Desc_Statut VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_Statut)
+                       Id_Statut INT,
+                       Desc_Statut VARCHAR(50) NOT NULL,
+                       PRIMARY KEY(Id_Statut)
 );
 
 CREATE TABLE TYPE_DE_PRODUIT(
-   Id_Type_Produit INT,
-   Desc_Type_Produit VARCHAR(50),
-   PRIMARY KEY(Id_Type_Produit)
+                                Id_Type_Produit INT,
+                                Desc_Type_Produit VARCHAR(50),
+                                PRIMARY KEY(Id_Type_Produit)
 );
 
 CREATE TABLE MESSAGE(
-   Id_Msg INT,
-   Emetteur INT NOT NULL,
-   Destinataire INT NOT NULL,
-   Date_Msg DATETIME NOT NULL,
-   Date_Expi_Msg DATETIME,
-   Contenu_Msg VARCHAR(4096),
-   PRIMARY KEY(Id_Msg),
-   FOREIGN KEY(Emetteur) REFERENCES UTILISATEUR(Id_Uti),
-   FOREIGN KEY(Destinataire) REFERENCES UTILISATEUR(Id_Uti)
+                        Id_Msg INT,
+                        Emetteur INT NOT NULL,
+                        Destinataire INT NOT NULL,
+                        Date_Msg DATETIME NOT NULL,
+                        Date_Expi_Msg DATETIME,
+                        Contenu_Msg VARCHAR(4096),
+                        PRIMARY KEY(Id_Msg),
+                        FOREIGN KEY(Emetteur) REFERENCES UTILISATEUR(Id_Uti),
+                        FOREIGN KEY(Destinataire) REFERENCES UTILISATEUR(Id_Uti)
 );
 
 CREATE TABLE COMMANDE(
-   Id_Commande INT,
-   Id_Statut INT NOT NULL,
-   Id_Prod INT NOT NULL,
-   Id_Uti INT NOT NULL,
-   PRIMARY KEY(Id_Commande),
-   FOREIGN KEY(Id_Prod) REFERENCES PRODUCTEUR(Id_Prod),
-   FOREIGN KEY(Id_Statut) REFERENCES STATUT(Id_Statut),
-   FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
+                         Id_Commande INT,
+                         Id_Statut INT NOT NULL,
+                         Id_Prod INT NOT NULL,
+                         Id_Uti INT NOT NULL,
+                         PRIMARY KEY(Id_Commande),
+                         FOREIGN KEY(Id_Prod) REFERENCES PRODUCTEUR(Id_Prod),
+                         FOREIGN KEY(Id_Statut) REFERENCES STATUT(Id_Statut),
+                         FOREIGN KEY(Id_Uti) REFERENCES UTILISATEUR(Id_Uti)
 );
 
 CREATE TABLE PRODUIT(
-   Id_Produit INT,
-   Id_Prod INT NOT NULL,
-   Nom_Produit VARCHAR(50) NOT NULL,
-   Id_Type_Produit INT NOT NULL,
-   Qte_Produit DECIMAL(15,2) NOT NULL,
-   Id_Unite_Stock INT NOT NULL,
-   Prix_Produit_Unitaire DECIMAL(15,2) NOT NULL,
-   Id_Unite_Prix INT NOT NULL,
-   PRIMARY KEY(Id_Produit),
-   FOREIGN KEY(Id_Prod) REFERENCES PRODUCTEUR(Id_Prod),
-   FOREIGN KEY(Id_Unite_Prix) REFERENCES UNITE(Id_Unite),
-   FOREIGN KEY(Id_Unite_Stock) REFERENCES UNITE(Id_Unite),
-   FOREIGN KEY(Id_Type_Produit) REFERENCES TYPE_DE_PRODUIT(Id_Type_Produit)
+                        Id_Produit INT,
+                        Id_Prod INT NOT NULL,
+                        Nom_Produit VARCHAR(50) NOT NULL,
+                        Id_Type_Produit INT NOT NULL,
+                        Qte_Produit DECIMAL(15,2) NOT NULL,
+                        Id_Unite_Stock INT NOT NULL,
+                        Prix_Produit_Unitaire DECIMAL(15,2) NOT NULL,
+                        Id_Unite_Prix INT NOT NULL,
+                        PRIMARY KEY(Id_Produit),
+                        FOREIGN KEY(Id_Prod) REFERENCES PRODUCTEUR(Id_Prod),
+                        FOREIGN KEY(Id_Unite_Prix) REFERENCES UNITE(Id_Unite),
+                        FOREIGN KEY(Id_Unite_Stock) REFERENCES UNITE(Id_Unite),
+                        FOREIGN KEY(Id_Type_Produit) REFERENCES TYPE_DE_PRODUIT(Id_Type_Produit)
 );
 
 CREATE TABLE CONTENU(
-   Id_Commande INT,
-   Id_Produit INT,
-   Qte_Produit_Commande INT NOT NULL,
-   Num_Produit_Commande INT NOT NULL,
-   PRIMARY KEY(Id_Commande, Id_Produit),
-   FOREIGN KEY(Id_Commande) REFERENCES COMMANDE(Id_Commande),
-   FOREIGN KEY(Id_Produit) REFERENCES PRODUIT(Id_Produit)
+                        Id_Commande INT,
+                        Id_Produit INT,
+                        Qte_Produit_Commande INT NOT NULL,
+                        Num_Produit_Commande INT NOT NULL,
+                        PRIMARY KEY(Id_Commande, Id_Produit),
+                        FOREIGN KEY(Id_Commande) REFERENCES COMMANDE(Id_Commande),
+                        FOREIGN KEY(Id_Produit) REFERENCES PRODUIT(Id_Produit)
 );
 
 
--- Script d'exploitation de la base de données sous MySQL : 
+-- Script d'exploitation de la base de données sous MySQL :
 -- I - Rôles
 -- II - Vues
 -- III - Procédures Stockées
@@ -117,8 +117,8 @@ CREATE TABLE CONTENU(
 
 -- #############################################################################################################################################################
 
- 
--- I - RÔLES : 
+
+-- I - RÔLES :
 
 -- 1) Rôle permettant de modifier ses informations personnelles
 
@@ -131,7 +131,7 @@ GRANT SELECT, UPDATE ON UTILISATEUR TO modif_info_perso;
 -- #############################################################################################################################################################
 */
 
--- II - VUES : 
+-- II - VUES :
 
 -- 1) Vue info_producteur
 DROP VIEW IF EXISTS info_producteur;
@@ -139,10 +139,10 @@ DROP VIEW IF EXISTS info_producteur;
 -- Vue permettant de voir toutes les informations producteur, sauf le mot de passe.
 -- Utilisation lors de l'affichage des informations d'un producteur
 CREATE VIEW info_producteur
-	AS 
-	SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Id_Prod, Prof_Prod
-	FROM UTILISATEUR 
-	JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti=PRODUCTEUR.Id_Uti;
+AS
+SELECT UTILISATEUR.Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Id_Prod, Prof_Prod
+FROM UTILISATEUR
+         JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti=PRODUCTEUR.Id_Uti;
 
 SELECT * FROM info_producteur;
 
@@ -155,8 +155,8 @@ DROP VIEW IF EXISTS info_utilisateur;
 -- Vue permettant de voir toutes les informations utilisateur, sauf le mot de passe
 -- Utilisation lors de l'affichage des informations de l'utilisateur
 CREATE VIEW info_utilisateur
-	AS 
-	SELECT Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti FROM UTILISATEUR;
+AS
+SELECT Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti FROM UTILISATEUR;
 
 SELECT * FROM info_utilisateur;
 
@@ -171,8 +171,8 @@ DROP VIEW IF EXISTS info_connection;
 -- Vue permettant de limiter l'accès des donnée au stict nécessaire pour se connecter
 -- utilisation lors de la connection d'un untilisateur
 CREATE VIEW info_connection
-	AS 
-	SELECT Id_Uti, Mail_Uti, Pwd_Uti FROM UTILISATEUR;
+AS
+SELECT Id_Uti, Mail_Uti, Pwd_Uti FROM UTILISATEUR;
 
 SELECT * FROM info_connection;
 
@@ -187,12 +187,12 @@ DROP VIEW IF EXISTS produits_commandes;
 -- Vue permettant de voir les informations des produits contenus dans les commandes
 -- Utilisation lors de l'affichage des commandes
 CREATE VIEW produits_commandes
-	AS 
-	SELECT PRODUIT.Id_Produit, COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
-	FROM CONTENU JOIN PRODUIT ON CONTENU.Id_Produit=PRODUIT.Id_Produit
-	JOIN COMMANDE ON CONTENU.Id_Commande=COMMANDE.Id_Commande
-	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
-	JOIN UNITE as Unite_Prix ON PRODUIT.Id_Unite_Prix=Unite_Prix.Id_Unite;
+AS
+SELECT PRODUIT.Id_Produit, COMMANDE.Id_Commande, COMMANDE.Id_Prod, Id_Uti, Nom_Produit, Qte_Produit_Commande, Unite_Stock.Nom_Unite as Nom_Unite_Stock, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit_Commande*Prix_Produit_Unitaire as 'Prix_Total'
+FROM CONTENU JOIN PRODUIT ON CONTENU.Id_Produit=PRODUIT.Id_Produit
+             JOIN COMMANDE ON CONTENU.Id_Commande=COMMANDE.Id_Commande
+             JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
+             JOIN UNITE as Unite_Prix ON PRODUIT.Id_Unite_Prix=Unite_Prix.Id_Unite;
 
 SELECT * FROM produits_commandes;
 
@@ -206,8 +206,8 @@ DROP VIEW IF EXISTS tout_les_producteurs;
 -- Vue permettant de voir les informations de tous les producteurs
 -- Utilisation lors de l'affichage et la recherche de producteurs
 CREATE VIEW tout_les_producteurs
-	AS 
-	SELECT PRODUCTEUR.Id_Uti, Nom_Uti, Prenom_Uti, Prof_Prod, Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti;
+AS
+SELECT PRODUCTEUR.Id_Uti, Nom_Uti, Prenom_Uti, Prof_Prod, Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti;
 
 SELECT * FROM tout_les_producteurs;
 
@@ -221,12 +221,12 @@ DROP VIEW IF EXISTS Produits_d_un_producteur;
 -- Vue permettant de voir tous les produits et leur informations.
 -- utilisation lors de l'affichage des differents produits d'un producteur
 CREATE VIEW Produits_d_un_producteur
-	AS 
-	SELECT Id_Prod, Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
-	FROM PRODUIT 
-	JOIN TYPE_DE_PRODUIT ON PRODUIT.Id_Type_Produit=TYPE_DE_PRODUIT.Id_Type_Produit
-	JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
-	JOIN UNITE as Unite_Prix ON PRODUIT.Id_Unite_Prix=Unite_Prix.Id_Unite;
+AS
+SELECT Id_Prod, Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Unite_Prix.Nom_Unite as Nom_Unite_Prix, Qte_Produit, Unite_Stock.Nom_Unite  as Nom_Unite_Stock
+FROM PRODUIT
+         JOIN TYPE_DE_PRODUIT ON PRODUIT.Id_Type_Produit=TYPE_DE_PRODUIT.Id_Type_Produit
+         JOIN UNITE as Unite_Stock ON PRODUIT.Id_Unite_Stock=Unite_Stock.Id_Unite
+         JOIN UNITE as Unite_Prix ON PRODUIT.Id_Unite_Prix=Unite_Prix.Id_Unite;
 
 SELECT * FROM Produits_d_un_producteur;
 
@@ -249,27 +249,27 @@ BEGIN
   -- utilisation d'une boucle pour parcourir tous les utilisateurs, sauf l'émetteur
   DECLARE loop_finished INT DEFAULT 0;
   DECLARE cursor_Broadcast_Utilisateur CURSOR FOR
-    SELECT Id_Uti FROM UTILISATEUR
-    WHERE Id_Uti != emetteur;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
+SELECT Id_Uti FROM UTILISATEUR
+WHERE Id_Uti != emetteur;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
 
   -- la variable @nbMessage va permettre de créer un identifiant unique qui s'incrémente au fur et à mesure
   SET nbMessage = (SELECT MAX(Id_Msg) FROM MESSAGE) + 1;
 
-  OPEN cursor_Broadcast_Utilisateur;
-  FETCH cursor_Broadcast_Utilisateur INTO idUti;
-  
-  WHILE loop_finished=0 DO
+OPEN cursor_Broadcast_Utilisateur;
+FETCH cursor_Broadcast_Utilisateur INTO idUti;
+
+WHILE loop_finished=0 DO
     -- Insertion du message dans la table avec l'identifiant, la date d'envoi, la date d'expiration (date d'envoi + 12 mois par défaut), le contenu du message, l'émetteur et 		le récepteur
     INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
     VALUES (nbMessage, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, idUti);
 
     -- Incrémentation de l'identifiant
     SET nbMessage = nbMessage + 1;
-	FETCH cursor_Broadcast_Utilisateur INTO idUti;
-  END WHILE;
-  CLOSE cursor_Broadcast_Utilisateur;
-  
+FETCH cursor_Broadcast_Utilisateur INTO idUti;
+END WHILE;
+CLOSE cursor_Broadcast_Utilisateur;
+
 END $$
 DELIMITER ;
 
@@ -293,27 +293,27 @@ BEGIN
   -- utilisation d'une boucle pour parcourir tous les producteurs, sauf l'émetteur
   DECLARE loop_finished INT DEFAULT 0;
   DECLARE cursor_Broadcast_Producteur CURSOR FOR
-    SELECT Id_Prod FROM PRODUCTEUR
-    WHERE Id_Prod != emetteur;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
+SELECT Id_Prod FROM PRODUCTEUR
+WHERE Id_Prod != emetteur;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
 
   -- la variable @nbMessage va permettre de créer un identifiant unique qui s'incrémente au fur et à mesure
   SET nbMessage = (SELECT MAX(Id_Msg) FROM MESSAGE) + 1;
 
-  OPEN cursor_Broadcast_Producteur;
-  FETCH cursor_Broadcast_Producteur INTO idProd;
-  
-  WHILE loop_finished=0 DO
+OPEN cursor_Broadcast_Producteur;
+FETCH cursor_Broadcast_Producteur INTO idProd;
+
+WHILE loop_finished=0 DO
     -- Insertion du message dans la table avec l'identifiant, la date d'envoi, la date d'expiration (date d'envoi + 12 mois par défaut), le contenu du message, l'émetteur et le récepteur
     INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
     VALUES (nbMessage, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, idProd);
 
     -- Incrémentation de l'identifiant
     SET nbMessage = nbMessage + 1;
-	FETCH cursor_Broadcast_Producteur INTO idProd;
-  END WHILE;
-  CLOSE cursor_Broadcast_Producteur;
-  
+FETCH cursor_Broadcast_Producteur INTO idProd;
+END WHILE;
+CLOSE cursor_Broadcast_Producteur;
+
 END $$
 DELIMITER ;
 
@@ -329,16 +329,16 @@ DELIMITER ;
 DELIMITER $$
 CREATE OR REPLACE PROCEDURE listeContact(IN id_uti INT)
 BEGIN
-        SELECT UTILISATEUR.Id_Uti, Nom_Uti, Prenom_Uti, MAX(Date_Msg) as Date_Msg
-        FROM UTILISATEUR
-        JOIN MESSAGE 
-            ON UTILISATEUR.Id_Uti=MESSAGE.Emetteur 
-            OR UTILISATEUR.Id_Uti=MESSAGE.Destinataire
-        WHERE 
-            UTILISATEUR.Id_Uti IN (SELECT Destinataire FROM MESSAGE WHERE Emetteur=id_uti)
-            OR UTILISATEUR.Id_Uti in (SELECT Emetteur FROM MESSAGE WHERE Destinataire=id_uti)
-        GROUP BY UTILISATEUR.Id_Uti, Nom_Uti, Prenom_Uti
-        ORDER BY Date_Msg DESC;
+SELECT UTILISATEUR.Id_Uti, Nom_Uti, Prenom_Uti, MAX(Date_Msg) as Date_Msg
+FROM UTILISATEUR
+         JOIN MESSAGE
+              ON UTILISATEUR.Id_Uti=MESSAGE.Emetteur
+                  OR UTILISATEUR.Id_Uti=MESSAGE.Destinataire
+WHERE
+    UTILISATEUR.Id_Uti IN (SELECT Destinataire FROM MESSAGE WHERE Emetteur=id_uti)
+   OR UTILISATEUR.Id_Uti in (SELECT Emetteur FROM MESSAGE WHERE Destinataire=id_uti)
+GROUP BY UTILISATEUR.Id_Uti, Nom_Uti, Prenom_Uti
+ORDER BY Date_Msg DESC;
 END $$
 DELIMITER ;
 
@@ -355,14 +355,14 @@ DELIMITER $$
 -- conversation prend en paramètre deux identifiants d'utilisateurs
 CREATE OR REPLACE PROCEDURE conversation(IN moi INT, IN autrePersonne INT)
 BEGIN
-        SELECT Contenu_Msg, Date_Msg, Emetteur 
-        FROM MESSAGE 
-        WHERE 
-            (Emetteur=moi AND Destinataire=autrePersonne)
-            OR (Destinataire=moi AND Emetteur=autrePersonne) 
-        ORDER BY Date_Msg ASC;
+SELECT Contenu_Msg, Date_Msg, Emetteur
+FROM MESSAGE
+WHERE
+    (Emetteur=moi AND Destinataire=autrePersonne)
+   OR (Destinataire=moi AND Emetteur=autrePersonne)
+ORDER BY Date_Msg ASC;
 END $$
-DELIMITER;
+DELIMITER ;
 
 -- call conversation(2,6);
 
@@ -379,8 +379,8 @@ CREATE OR REPLACE PROCEDURE deleteMsg()
 BEGIN
   -- Il faut supprimer tous les messages dont la date d'expiration est passée.
   -- Pour ce faire, nous comparons la différence entre la date d'expiration et l'heure actuelle. Si la différence est négative, le délai est dépassé.
-  DELETE FROM MESSAGE
-  WHERE TIMESTAMPDIFF(MINUTE, NOW(), Date_Expi_Msg) <= 0;
+DELETE FROM MESSAGE
+WHERE TIMESTAMPDIFF(MINUTE, NOW(), Date_Expi_Msg) <= 0;
 END $$
 
 
@@ -398,41 +398,7 @@ END $$
 -- Il permet ainsi de chiffrer de manière différente le même mot ou la même lettre en fonction de la clé.
 
 -- La procédure prend en paramètre un mot de passe et un utilisateur
-DELIMITER $$
-CREATE OR REPLACE PROCEDURE chiffrementV(IN id_Uti INT, INOUT monMdp VARCHAR(50))
-BEGIN
-  -- Itérateur qui va parcourir le mot de passe
-  DECLARE iterator INT DEFAULT 1;
 
-  -- Clef de chiffrement
-  DECLARE clef VARCHAR(50) DEFAULT 'conceptiondelabasededonnees';
-
-  -- Lettres temporaires
-  DECLARE lettreMdp INT;
-  DECLARE lettreClef INT;
-
-  -- Nouveau mot de passe crypté
-  DECLARE mdpCrypte VARCHAR(50) DEFAULT '';
-
-  -- Tant que le mot de passe n'est pas totalement parcouru
-  WHILE (iterator <= LENGTH(monMdp)) DO
-    -- On récupère le code ACSII de la lettre du mot de passe à l'emplacement i
-    SET lettreMdp = ASCII(SUBSTRING(monMdp, iterator, 1));
-    -- On récupère le code ACSII de la lettre de la clef à l'emplacement i, modulo[taille de la clef] si cette dernière est trop petite par rapport au mot de passe.
-    SET lettreClef = ASCII(SUBSTRING(clef, (iterator - 1) % LENGTH(clef) + 1, 1));
-
-
-    -- On concatène au mot de passe crypté la somme des codes ACSII pour obtenir une nouvelle lettre codée 
-    SET mdpCrypte = CONCAT(mdpCrypte, CHAR((((lettreMdp - 33) + (lettreClef - 33))%93)+33));
-
-    -- On incrémente l'itérateur
-    SET iterator = iterator + 1;
-  END WHILE;
-
-	SET monMdp = mdpCrypte;
-END $$
-
-DELIMITER ;
 
 
 -- CALL chiffrementV(1, 'password123?!@!');
@@ -441,47 +407,7 @@ DELIMITER ;
 -- Procédure de vérification du mot de passe
 
 -- La procédure prend en paramètre un mot de passe et un utilisateur
-DELIMITER $$
-CREATE OR REPLACE PROCEDURE verifMotDePasse(IN id_Uti INT, IN mdpAVerifier VARCHAR(50))
-BEGIN
-  -- Itérateur qui va parcourir le mot de passe
-  DECLARE iterator INT DEFAULT 1;
 
-  -- Clef de chiffrement
-  DECLARE clef VARCHAR(50) DEFAULT 'conceptiondelabasededonnees';
-
-  -- Lettres temporaires
-  DECLARE lettreMdp INT;
-  DECLARE lettreClef INT;
-
-  -- Nouveau mot de passe crypté
-  DECLARE mdpCrypte VARCHAR(50) DEFAULT '';
-
-  -- Tant que le mot de passe n'est pas totalement parcouru
-  WHILE (iterator <= LENGTH(mdpAVerifier)) DO
-    -- On récupère le code ACSII de la lettre du mot de passe à l'emplacement i
-    SET lettreMdp = ASCII(SUBSTRING(mdpAVerifier, iterator, 1));
-    -- On récupère le code ACSII de la lettre de la clef à l'emplacement i, modulo[taille de la clef] si cette dernière est trop petite par rapport au mot de passe.
-    SET lettreClef = ASCII(SUBSTRING(clef, (iterator - 1) % LENGTH(clef) + 1, 1));
-
-
-    -- On concatène au mot de passe crypté la somme des codes ACSII pour obtenir une nouvelle lettre codée 
-    SET mdpCrypte = CONCAT(mdpCrypte, CHAR((((lettreMdp - 33) + (lettreClef - 33))%93)+33));
-
-    -- On incrémente l'itérateur
-    SET iterator = iterator + 1;
-  END WHILE;
-
-	-- Renvoie 1 si correspond ou 0 si ne correspond pas
-	IF (mdpCrypte=(SELECT Pwd_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti=id_Uti)) THEN
-		SELECT 1;
-	ELSE
-		SELECT 0;
-	END IF;
-    
-END $$
-
-DELIMITER ;
 
 
 -- CALL verifMotDePasse(1, 'password123');
@@ -500,10 +426,10 @@ CREATE OR REPLACE PROCEDURE envoyerMessage(
 BEGIN
 	DECLARE nb INT;
 	SET nb = (SELECT MAX(Id_Msg) FROM MESSAGE) + 1;
-    INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
-    VALUES (nb, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, destinataire);
+INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
+VALUES (nb, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, destinataire);
 
-  
+
 END $$
 
 -- procedure pour savoir si l'utilisateur est un producteur et nous renvoie sa profession si oui 👍😁
@@ -515,11 +441,11 @@ CREATE OR REPLACE PROCEDURE isProducteur(
 )
 BEGIN
 	IF Id_Uti IN (SELECT Id_Uti FROM PRODUCTEUR) THEN
-    	SELECT concat(' - ', (SELECT Prof_Prod FROM PRODUCTEUR WHERE PRODUCTEUR.Id_Uti=Id_Uti)) as result;
-    ELSE
-    	SELECT '';
-    END IF;
-    
+SELECT concat(' - ', (SELECT Prof_Prod FROM PRODUCTEUR WHERE PRODUCTEUR.Id_Uti=Id_Uti)) as result;
+ELSE
+SELECT '';
+END IF;
+
 END $$
 
 DELIMITER ;
@@ -541,27 +467,27 @@ BEGIN
   -- utilisation d'une boucle pour parcourir tous les utilisateurs, sauf l'émetteur
   DECLARE loop_finished INT DEFAULT 0;
   DECLARE cursor_Broadcast_Admin CURSOR FOR
-    SELECT Id_Uti FROM ADMINISTRATEUR
-    WHERE Id_Uti != emetteur;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
+SELECT Id_Uti FROM ADMINISTRATEUR
+WHERE Id_Uti != emetteur;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET loop_finished=1;
 
   -- la variable @nbMessage va permettre de créer un identifiant unique qui s'incrémente au fur et à mesure
   SET nbMessage = (SELECT MAX(Id_Msg) FROM MESSAGE) + 1;
 
-  OPEN cursor_Broadcast_Admin;
-  FETCH cursor_Broadcast_Admin INTO idAdmin;
-  
-  WHILE loop_finished=0 DO
+OPEN cursor_Broadcast_Admin;
+FETCH cursor_Broadcast_Admin INTO idAdmin;
+
+WHILE loop_finished=0 DO
     -- Insertion du message dans la table avec l'identifiant, la date d'envoi, la date d'expiration (date d'envoi + 12 mois par défaut), le contenu du message, l'émetteur et 		le récepteur
     INSERT INTO MESSAGE(Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
     VALUES (nbMessage, NOW(), DATE_ADD(NOW(), INTERVAL 12 MONTH), contenuMsg, emetteur, idAdmin);
 
     -- Incrémentation de l'identifiant
     SET nbMessage = nbMessage + 1;
-	FETCH cursor_Broadcast_Admin INTO idAdmin;
-  END WHILE;
-  CLOSE cursor_Broadcast_Admin;
-  
+FETCH cursor_Broadcast_Admin INTO idAdmin;
+END WHILE;
+CLOSE cursor_Broadcast_Admin;
+
 END $$
 DELIMITER ;
 
@@ -574,52 +500,8 @@ CALL broadcast_Admin(7, 'ceci est un bogue');
 
 -- 1) Chiffrement du mot de passe lors de la création (insertion) d'un nouvel utilisateur
 
-DELIMITER $$
-
-CREATE OR REPLACE TRIGGER trigger_insert_verif_cryptage 
-	BEFORE INSERT
-    ON UTILISATEUR
-	FOR EACH ROW
-BEGIN
-  DECLARE Id_Uti_temp INT;
-  DECLARE Pwd_Uti_temp VARCHAR(50);
-
-  -- Récupérer les valeurs insérées dans la table
-  SET Id_Uti_temp = NEW.Id_Uti;
-  SET Pwd_Uti_temp = NEW.Pwd_Uti;
-
-  -- Appeler la procédure de chiffrement
-  CALL chiffrementV(Id_Uti_temp, Pwd_Uti_temp);
-  
-  SET NEW.Pwd_Uti = Pwd_Uti_temp;
-  
-END $$
-
-DELIMITER ;
 
 
-DELIMITER $$
-
-CREATE OR REPLACE TRIGGER trigger_update_verif_cryptage 
-	BEFORE UPDATE
-    ON UTILISATEUR
-	FOR EACH ROW
-BEGIN
-  DECLARE Id_Uti_temp INT;
-  DECLARE Pwd_Uti_temp VARCHAR(50);
-
-  -- Récupérer les valeurs insérées dans la table
-  SET Id_Uti_temp = NEW.Id_Uti;
-  SET Pwd_Uti_temp = NEW.Pwd_Uti;
-
-  -- Appeler la procédure de chiffrement
-  CALL chiffrementV(Id_Uti_temp, Pwd_Uti_temp);
-  
-  SET NEW.Pwd_Uti = Pwd_Uti_temp;
-  
-END $$
-
-DELIMITER ;
 
 
 DELETE FROM ADMINISTRATEUR;
@@ -637,7 +519,7 @@ DELETE FROM UTILISATEUR;
 
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti) VALUES ('0', 'unsigned_bug_reporter', '', 'unsigned_bug_reporter', 'unsigned_bug_reporter', 'unsigned_bug_reporter');
 INSERT INTO UTILISATEUR (Id_Uti, Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Pwd_Uti)
-VALUES 
+VALUES
     ('1', 'John', 'Doe', 'johndoe1@gmail.com', '16 sentier des ravins, 93100 MONTREUIL', 'password123'),
     ('2', 'Alice', 'Smith', 'alicesmith2@gmail.com', '36 rue du Dome, 92100 BOULOGNE BILLANCOURT', 'securepass'),
     ('3', 'Maria', 'Garcia', 'mariagarcia3@gmail.com', '9 Place Comte de Bendern, 78170 LA CELLE ST CLOUD', 'securepassword'),
@@ -697,6 +579,12 @@ VALUES
     ('58', 'Alexandre', 'Grasteau', 'alexandre.grasteau@orange.fr', '2 Rue des Crias, 18290 CIVRAY', '1234'),
     ('59', 'Benjamin', 'Martinez', 'superadressemailbidon', '2 Rue des Crias, 18290 CIVRAY', 'benjaminpass567');
 
+UPDATE UTILISATEUR SET Pwd_Uti='$2y$12$Xg5hFKUiULLrd9ZbL0IJwefE8kLpFCEmihConnKz6mZiyRKke0MDG';
+
+ALTER TABLE UTILISATEUR
+    ADD COLUMN nb_tentatives_echec INT DEFAULT 0,
+ADD COLUMN date_derniere_tentative DATETIME DEFAULT NULL;
+
 INSERT INTO PRODUCTEUR (Id_Prod, Id_Uti, Prof_Prod)
 VALUES
     (1, '1', 'Pépiniériste'),
@@ -714,14 +602,14 @@ INSERT INTO ADMINISTRATEUR (Id_Admin, Id_Uti)
 VALUES (1, '24');
 
 INSERT INTO ADMINISTRATEUR (Id_Admin, Id_Uti)
-VALUES (2, '35'); 
+VALUES (2, '35');
 
 
 INSERT INTO UNITE (Id_Unite, Nom_Unite)
 VALUES (1, 'Kg'),
- (2, 'L'),
- (3, 'm²'),
- (4, 'piece'); 
+       (2, 'L'),
+       (3, 'm²'),
+       (4, 'piece');
 
 
 
@@ -781,17 +669,17 @@ VALUES
     ('434', '2023-10-29 15:05:00', '2024-04-29 15:05:00', "Je suis désolé d'apprendre cela. Nous nous efforçons de fournir des produits de haute qualité. Pouvez-vous me donner plus de détails ?", '8', '3'),
     ('756', '2023-10-29 15:10:00', '2024-04-29 15:10:00', 'Les pommes de terre sont molles et ont un goût étrange. Je souhaite un remboursement.', '3', '8'),
     ('126', '2023-10-29 15:15:00', '2024-04-29 15:15:00', 'Je suis vraiment désolé pour cette expérience. Nous procéderons au remboursement complet.', '8', '3');
-    
+
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
     ('132', '2023-10-30 16:00:00', '2024-04-30 16:00:00', 'Le prix de vos oeufs de poule est trop élevé. Pouvez-vous réduire le prix ?', '2', '7'),
     ('7564', '2023-10-30 16:05:00', '2024-04-30 16:05:00', 'Nous vendons des oeufs de haute qualité. Le prix reflète la qualité de nos produits. Nous ne pouvons pas réduire davantage.', '7', '2');
-    
+
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
     ('37', '2023-10-25 17:00:00', '2024-04-25 17:00:00', "Les carottes que j'ai achetées ne sont pas fraîches et ont un goût étrange. Je veux un remboursement.", '10', '2'),
     ('38', '2023-10-25 17:05:00', '2024-04-25 17:05:00', 'Je suis désolé pour cette expérience. Nous vérifierons la qualité de nos produits et procéderons au remboursement complet.', '2', '10');
-    
+
 INSERT INTO MESSAGE (Id_Msg, Date_Msg, Date_Expi_Msg, Contenu_Msg, Emetteur, Destinataire)
 VALUES
     ('39', '2023-11-01 18:00:00', '2024-05-01 18:00:00', 'Le prix de vos tomates est élevé. Pouvez-vous faire une réduction pour une commande en grande quantité ?', '7', '9'),
@@ -800,61 +688,61 @@ VALUES
 
 INSERT INTO STATUT (Id_Statut, Desc_Statut)
 VALUES (1, 'En cours'),
-(2, 'prête'),
-(3, 'annulée'),
-(4, 'livrée');
+       (2, 'prête'),
+       (3, 'annulée'),
+       (4, 'livrée');
 
 
 INSERT INTO TYPE_DE_PRODUIT (Id_Type_Produit, Desc_Type_Produit)
 VALUES (1, 'Fruits'),
-(2, 'Légumes'),
-(3, 'Grains'),
-(4, 'Viande'),
-(5, 'Vin'),
-(6, 'Animaux'),
-(7, 'Planches');
+       (2, 'Légumes'),
+       (3, 'Grains'),
+       (4, 'Viande'),
+       (5, 'Vin'),
+       (6, 'Animaux'),
+       (7, 'Planches');
 
 -- Pour un agriculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(12, 'Blé', 3, 6, '100', 1, '2.00', 1),
-(13, 'Maïs', 3, 6, '80', 1, '1.50', 1);
+    (12, 'Blé', 3, 6, '100', 1, '2.00', 1),
+    (13, 'Maïs', 3, 6, '80', 1, '1.50', 1);
 
 -- Pour un vigneron
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(14, 'Vin rouge', 5, 7, '10', 4, '15.00', 4),
-(15, 'Vin blanc', 5, 7, '8', 4, '12.00', 4);
+    (14, 'Vin rouge', 5, 7, '10', 4, '15.00', 4),
+    (15, 'Vin blanc', 5, 7, '8', 4, '12.00', 4);
 
 -- Pour un maraîcher
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(5, 'Tomates', 1, 4, '20', 1, '2.00', 1),
-(6, 'Poivrons', 2, 4, '10', 1, '1.50', 1),
-(7, 'Courgettes', 2, 4, '15', 1, '1.75', 4),
-(8, 'Carottes', 2, 4, '18', 1, '1.40', 1),
-(9, 'Aubergines', 2, 4, '12', 1, '2.25', 4);
+    (5, 'Tomates', 1, 4, '20', 1, '2.00', 1),
+    (6, 'Poivrons', 2, 4, '10', 1, '1.50', 1),
+    (7, 'Courgettes', 2, 4, '15', 1, '1.75', 4),
+    (8, 'Carottes', 2, 4, '18', 1, '1.40', 1),
+    (9, 'Aubergines', 2, 4, '12', 1, '2.25', 4);
 
 -- Pour un apiculteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(16, 'Miel', 6, 8, '5', 1, '10.00', 1),
-(17, 'Cire d''abeille', 6, 8, '2', 1, '5.00', 1);
+    (16, 'Miel', 6, 8, '5', 1, '10.00', 1),
+    (17, 'Cire d''abeille', 6, 8, '2', 1, '5.00', 1);
 
 -- Pour un éleveur de volaille
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(18, 'Poulet entier', 6, 9, '5', 4, '6.00', 4),
-(19, 'oeufs de poule', 6, 9, '30', 4, '0.50', 4);
+    (18, 'Poulet entier', 6, 9, '5', 4, '6.00', 4),
+    (19, 'oeufs de poule', 6, 9, '30', 4, '0.50', 4);
 
 -- Pour un viticulteur
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(20, 'Chardonnay', 5, 10, '12', 2, '18.00', 2),
-(21, 'Merlot', 5, 10, '15', 2, '16.00', 2);
+    (20, 'Chardonnay', 5, 10, '12', 2, '18.00', 2),
+    (21, 'Merlot', 5, 10, '15', 2, '16.00', 2);
 
 -- Pour un pépiniériste
 INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix)
 VALUES
-(22, 'Rosiers', 7, 1, '10', 4, '7.50', 4),
-(23, 'Sapins', 7, 1, '8', 1, '9.00', 4);
+    (22, 'Rosiers', 7, 1, '10', 4, '7.50', 4),
+    (23, 'Sapins', 7, 1, '8', 1, '9.00', 4);
