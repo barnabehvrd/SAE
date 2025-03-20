@@ -5,6 +5,11 @@ require_once 'database/database.php';
 use database\database;
 
 $db = new database();
+
+$filtreCategorie=0;
+if (isset($_POST["typeCategorie"])==true){
+    $filtreCategorie=htmlspecialchars($_POST["typeCategorie"]);
+}
 ?>
 
 <!DOCTYPE html>
