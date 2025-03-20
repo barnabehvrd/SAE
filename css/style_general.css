@@ -15,7 +15,8 @@ main {
 }
 
 .messageEnvoye{
-    margin-left: auto;
+    width: 25%;
+    justify-self: end;
     background-color: #4caf50;
 }
 
