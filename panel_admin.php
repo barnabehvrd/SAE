@@ -81,17 +81,23 @@ if(!isset($_SESSION)){
                             $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
 
                             if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
-                                echo"<label>- producteurs :</label><br>";
+
+                                echo '<h2 class="text-center"> Producteurs : </h2>';
 
                                 foreach ($result as $row) {
-                                    echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
-                                        <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
-                                        
+
+                                    echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
+                                    echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
+                                    echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
+                                    echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br>";
+                                    echo $htmlProfessionDeuxPoints, $row["Prof_Prod"] . "<br></form>";
+
+                                    echo '
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-'.$row["Id_Uti"].'">
                                           Supprimer le compte
-                                        </button> <br>
-                                        
-                                        <!-- Modal -->
+                                    </button> <br>
+                                    
+                                    <!-- Modal -->
                                         
                                         <div class="modal fade" id="modal-delete-user-'.$row["Id_Uti"].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
@@ -106,7 +112,7 @@ if(!isset($_SESSION)){
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
                                                 <form method="post" action="traitements/del_acc.php">
-                                                    <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+                                                    <input class="btn btn-danger" type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
                                                     <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">
                                               </div>
                                             </div>
@@ -114,15 +120,8 @@ if(!isset($_SESSION)){
                                         </div>
                                         
                                         <!-- Fin du Modal -->
-
-
-                                        
-                                        <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                                    echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
-                                    echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
-                                    echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
-                                    echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br>";
-                                    echo $htmlProfessionDeuxPoints, $row["Prof_Prod"] . "<br></form>";
+                                    
+                                    ';
                                 }
                                 echo '</div>'; 
                             } else {
