@@ -291,7 +291,7 @@ if(!isset($_SESSION)){
                                      $distance = 0;
                                     } 
                                     else {
-                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($producteur["Adr_Uti"]);
                                         $coordonneesProd = latLongGps($urlProd);
                                         $latitudeProd = $coordonneesProd[0];
                                         $longitudeProd = $coordonneesProd[1];
