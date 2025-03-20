@@ -136,7 +136,7 @@ $utilisateur=$_SESSION["Id_Uti"];
                                         <tr>
                                             <td><?php echo $Nom_Produit;?></td>
                                             <td><?php echo $Qte_Produit_Commande.' '.$Nom_Unite_Prix;?></td>
-                                            <td><?php echo number_format($Prix_Produit_Unitaire, 2, ',', ' ').' €';?></td>
+                                            <td><?php echo number_format($Prix_Produit_Unitaire * $Qte_Produit_Commande, 2, ',', ' ').' €';?></td>
                                         </tr>
                                     <?php
                                     $iterateurProduit++;
