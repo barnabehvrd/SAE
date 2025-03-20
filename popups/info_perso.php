@@ -16,7 +16,7 @@
     <div class="popup">
     <div class="contenuPopup">
         <div style="display:flex;justify-content:space-between;">
-            <form method="post" action="../index.php">
+            <form method="post" >
 				<input class="lienPopup" type="submit" value="<?php echo $htmlSeDeconnecter?>" name="formClicked">
                 <input type="hidden" value='info_perso' name="popup">
                 <input type="hidden" name="deconnexion">
