@@ -11,7 +11,7 @@ if(!isset($_SESSION)){
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
 
-  $db->query('CALL broadcast_Utilisateur( :id_uti, :message);', array('id_uti' => $_SESSION["Id_Uti"], 'message' => $message));
+  $db->query('CALL broadcast_Producteur( :id_uti, :message);', array('id_uti' => $_SESSION["Id_Uti"], 'message' => $message));
 
   header("Location: ../messagerie.php");
 } else {
