@@ -11,8 +11,8 @@ if(!isset($_SESSION)){
 }
 
 $filtreCategorie=0;
-if (isset($_POST["categorie"])==true){
-    $filtreCategorie=htmlspecialchars($_POST["categorie"]);
+if (isset($_GET["categorie"])==true){
+    $filtreCategorie=htmlspecialchars($_GET["categorie"]);
 }
 
 echo "======================";
