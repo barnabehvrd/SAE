@@ -116,9 +116,9 @@ $utilisateur=$_SESSION["Id_Uti"];
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col"><?php echo $htmlProduit;?></th>
-                                        <th scope="col"><?php echo $htmlQuantite;?></th>
-                                        <th scope="col"><?php echo $htmlPrix;?></th>
+                                        <th scope="col">Produit</th>
+                                        <th scope="col">Quantitées</th>
+                                        <th scope="col">Prix</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,7 +141,10 @@ $utilisateur=$_SESSION["Id_Uti"];
                                 </tbody>
 
                 <?php
-						} } }; ?>
+						}
+                    $iterateurCommande++;
+
+                    } }; ?>
 
 
 
