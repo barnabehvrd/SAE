@@ -23,6 +23,8 @@ if(!isset($_SESSION)){
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <?php
@@ -133,143 +135,90 @@ if(!isset($_SESSION)){
                 return ($miles ? ($km * 0.621371192) : $km);
         }
     ?>
-    <div class="container">
-        <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
-            <div class="contenuBarre">
+    
+    <main>
+        <div class="row g-0">
+        
+        <div class="col-12 col-md-3 col-lg-2">
+            <nav id="sidebar" class="h-100 flex-column align-items-stretch bg-success">
+                <img class="logo d-none d-md-block" href="index.php" src="img/logo.png">
+                    <!-- code -->
+                    <div class="container-fluid">
+                        <div class="d-flex flex-column g-3 py-2">
+                            <p class="text-light"><?php echo $htmlRechercherPar?></p>
+                            <form method="get" action="index.php" class="d-flex flex-column gap-3">
+                                <div class="input-group">
+                                    <label class="input-group-text" for="categories"><i class="bi bi-person-fill text-success"></i></label>
+                                    <select class="form-select" name="categorie" id="categories">
+                                        <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>><?php echo $htmlTout?></option>
+                                        <option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>><?php echo $htmlAgriculteur?></option>
+                                        <option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>><?php echo $htmlVigneron?></option>
+                                        <option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>><?php echo $htmlMaraîcher?></option>
+                                        <option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>><?php echo $htmlApiculteur?></option>
+                                        <option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>><?php echo $htmlÉleveurdevolailles?></option>
+                                        <option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>><?php echo $htmlViticulteur?></option>
+                                        <option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>><?php echo $htmlPépiniériste?></option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-geo-alt-fill text-success"></i></span>
+                                    <input type="text" class="form-control" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
+                                </div>
+                            
+                                <?php
+                                    $returnQueryAdrUti = $db->select('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;', [':utilisateur' => $utilisateur]);
 
-            <center><strong><p><?php echo $htmlRechercherPar; ?></p></strong></center>
-			<form method="get" action="index.php">
-			<label><?php echo $htmlParProfession?></label>
-            <br>
-			<select name="categorie" id="categories">
-                <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>><?php echo $htmlTout?></option>
-				<option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>><?php echo $htmlAgriculteur?></option>
-				<option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>><?php echo $htmlVigneron?></option>
-				<option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>><?php echo $htmlMaraîcher?></option>
-				<option value="Apiculteur" <?php if($_GET["categorie"]=="Apiculteur") echo 'selected="selected"';?>><?php echo $htmlApiculteur?></option>
-				<option value="Éleveur de volaille" <?php if($_GET["categorie"]=="Éleveur de volaille") echo 'selected="selected"';?>><?php echo $htmlÉleveurdevolailles?></option>
-				<option value="Viticulteur" <?php if($_GET["categorie"]=="Viticulteur") echo 'selected="selected"';?>><?php echo $htmlViticulteur?></option>
-				<option value="Pépiniériste" <?php if($_GET["categorie"]=="Pépiniériste") echo 'selected="selected"';?>><?php echo $htmlPépiniériste?></option>
-			</select>
-            <br>
-            <br><?php echo $htmlParVille?>
-            <br>
-            <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
-            <br>
-            <?php
-                $returnQueryAdrUti = $db->select('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;', [':utilisateur' => $utilisateur]);
+                                    if (count($returnQueryAdrUti)>0){
+                                        $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
+                                ?>
 
-                if (count($returnQueryAdrUti)>0){
-                    $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
-            ?>
-                <br>
-                <br><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?>
-                <br>
-                <br>
-                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-                <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-                <script>
-                    function AfficheRange2(newVal) {
-                        var monCurseurKm = document.getElementById("monCurseurKm");
-                        if ((newVal >= 100)) {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
-                        } else {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
-                        }
-                    }
-                </script>
-                <?php echo $htmlKm?>
-                <br>
-                <br>
-            <?php
+                                <p class="text-light"><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?></p>
+                                
+                                <input name="rayon" class="form-range" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                                <span class="text-light" id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?><?php echo $htmlKm?></span>
+                                <script>
+                                    function AfficheRange2(newVal) {
+                                        var monCurseurKm = document.getElementById("monCurseurKm");
+                                        if ((newVal >= 100)) {
+                                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                                        } else {
+                                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                                        }
+                                    }
+                                </script>
+                                
+                                <?php
 
-                }
-                else{
-                    $Adr_Uti_En_Cours='France';
-                }
-            ?>
-            <br>
+                                    }
+                                    else{
+                                        $Adr_Uti_En_Cours='France';
+                                    }
+                                ?>                                
 
+                                <div class="input-group">
+                                    <label class="input-group-text"><i class="bi bi-funnel-fill text-success"></i></label>
+                                    <select name="tri" class="form-select" required>
+                                        <option value="nombreDeProduits" <?php if($tri=="nombreDeProduits") echo 'selected="selected"';?>><?php echo $htmlNombreDeProduits?></option>
+                                        <option value="ordreNomAlphabétique" <?php if($tri=="ordreNomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAl?></option>
+                                        <option value="ordreNomAntiAlphabétique" <?php if($tri=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAntiAl?></option>
+                                        <option value="ordrePrenomAlphabétique" <?php if($tri=="ordrePrenomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAl?></option>
+                                        <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAntiAl?></option>
+                                    </select>
+                                </div>
 
-			<label><?php echo $htmlTri?></label>
-            <br>
-            <select name="tri" required>
-                <option value="nombreDeProduits" <?php if($tri=="nombreDeProduits") echo 'selected="selected"';?>><?php echo $htmlNombreDeProduits?></option>
-                <option value="ordreNomAlphabétique" <?php if($tri=="ordreNomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAl?></option>
-                <option value="ordreNomAntiAlphabétique" <?php if($tri=="ordreNomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParNomAntiAl?></option>
-                <option value="ordrePrenomAlphabétique" <?php if($tri=="ordrePrenomAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAl?></option>
-                <option value="ordrePrenomAntiAlphabétique" <?php if($tri=="ordrePrenomAntiAlphabétique") echo 'selected="selected"';?>><?php echo $htmlParPrenomAntiAl?></option>
-            </select>
-            <br>
-            <br>
-            <br>
+                                <input class="btn btn-light" type="submit" value="<?php echo $htmlRechercher?>">
+                            </form>
+                        </div>
+                    </div>
+                    
 
-
-			<center><input type="submit" value="<?php echo $htmlRechercher?>"></center>
-			</form>
-
-
-            </div>
+            </nav>
         </div>
-        <div class="rightColumn">
-            <div class="topBanner">
-                <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
-                    <?php
-                        if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
-                        }
-                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
-                        }
-                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
-                        }
-                    ?>
-                </div>
+        <div class="col-12 col-md-9 col-lg-10">
+            <?php require "nav.php";?>
+            <div class="container-fluid my-3">
 
-                <form action="language.php" method="post" id="languageForm">
-                    <select name="language" id="languagePicker" onchange="submitForm()">
-                        <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
-                        <option value="en" <?php if($_SESSION["language"]=="en") echo 'selected';?>>English</option>
-                        <option value="es" <?php if($_SESSION["language"]=="es") echo 'selected';?>>Español</option>
-                        <option value="al" <?php if($_SESSION["language"]=="al") echo 'selected';?>>Deutsch</option>
-                        <option value="ru" <?php if($_SESSION["language"]=="ru") echo 'selected';?>>русский</option>
-                        <option value="ch" <?php if($_SESSION["language"]=="ch") echo 'selected';?>>中國人</option>
-                    </select>
-                    </form>
-                <form method="post">
-
-                <script>
-                    function submitForm() {
-                        document.getElementById("languageForm").submit();
-                    }
-                </script>
-                    <?php
-                    if(!isset($_SESSION)){
-                        session_start();
-                    }
-                    if(isset($_SESSION, $_SESSION['tempPopup'])){
-                        $_POST['popup'] = $_SESSION['tempPopup'];
-                        unset($_SESSION['tempPopup']);
-                    }
-
-                    ?>
-
-					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
-                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-
-                </form>
-
-            </div>
-
-            <h1> <?php echo $htmlProducteursEnMaj?> </h1>
-
-            <div class="gallery-container">
-               <?php
+                <?php
 
 
                if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -316,57 +265,82 @@ if(!isset($_SESSION)){
 
 
                     $result = $db->select($req, [':categorie' => $categorie, ':adr' => $adr]);
-                    // récupère les coordonnées de l'utiliasteur
-                    // URL vers l'API Nominatim
-                    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                    $coordonneesUti=latLongGps($urlUti);
-                    $latitudeUti=$coordonneesUti[0];
-                    $longitudeUti=$coordonneesUti[1];
-                    if (count($result) > 0) {
-                            foreach ($result as $row) {
-                                if ($rayon >= 100) {
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1">';
-                                    echo ''.$row["Prof_Prod"]. "<br>";
-                                    echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                    echo $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;"><br>';
-                                    echo '</a>';
-                                } else {
-                                    $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                    $coordonneesProd = latLongGps($urlProd);
-                                    $latitudeProd = $coordonneesProd[0];
-                                    $longitudeProd = $coordonneesProd[1];
-                                    $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
-                                    if ($distance < $rayon) {
-                                        echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1">';
-                                        echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                        echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                        echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;"><br>';
-                                        echo '</a>';
-                                    }
-                                }
-                            }
-                        } else {
-                            echo $htmlAucunResultat;
+                        // récupère les coordonnées de l'utiliasteur
+                        // URL vers l'API Nominatim
+                        if (isset($Adr_Uti_En_Cours)){
+                            $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                            $coordonneesUti=latLongGps($urlUti);
+                            $latitudeUti=$coordonneesUti[0];
+                            $longitudeUti=$coordonneesUti[1];
                         }
                     }
-            }
+                } 
+                ?>
 
-               ?>
-            </div>
-            <br>
-            <div class="basDePage">
-                <form method="post">
-						<input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
-                        <input type="hidden" name="popup" value="contact_admin">
-				</form>
-                <form method="post">
-						<input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
-                        <input type="hidden" name="popup" value="cgu">
-				</form>
+                
+
+
+                <!-- exemple de page liste producteurs -->
+                
+                <div class="d-flex flex-column">
+                    <h1><?php echo $htmlProducteursEnMaj?></h1>
+                    <?php if (isset($result) && count($result) > 0) : ?>
+                        <div class="row g-3">
+                            <?php foreach ($result as $producteur) : ?>
+                                <?php if ($rayon >= 100) {
+                                     $distance = 0;
+                                    } 
+                                    else {
+                                        $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($producteur["Adr_Uti"]);
+                                        $coordonneesProd = latLongGps($urlProd);
+                                        $latitudeProd = $coordonneesProd[0];
+                                        $longitudeProd = $coordonneesProd[1];
+                                        $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                    }
+                                    if ($distance <= $rayon) :
+                                ?>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card">
+                                            <div class="row g-0">
+                                                <div class="col-5">
+                                                    <img src="/img_producteur/<?php echo $producteur["Id_Prod"] ?>.png" class="w-100 h-100 object-fit-cover rounded-start" alt="<?php echo $htmlImageUtilisateur ?>">
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="card-body">
+                                                        <h2 class="card-title"><?php echo $producteur["Prenom_Uti"] ." ".mb_strtoupper($producteur["Nom_Uti"]) ?></h2>
+                                                        <span class="badge rounded-pill text-bg-success mb-3"><?php echo $producteur["Prof_Prod"] ?></span>
+                                                        <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i><?php echo $producteur["Adr_Uti"] ?></p>
+                                                        <a <?php echo 'href="producteur.php?Id_Prod='. $producteur["Id_Prod"] . '"' ?> class="btn btn-success"><?php echo $htmlConsulter ?></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else : ?>
+                        <p><?php echo $htmlAucunResultat?></p>
+                    <?php endif; ?>
+                </div>
+
+                
             </div>
         </div>
+        
     </div>
+    </main>
+    <footer class="bg-light d-flex justify-content-center align-items-center">
+        <form method="post">
+            <input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+            <input type="hidden" name="popup" value="contact_admin">
+        </form>
+        <form method="post">
+            <input type="submit" value="CGU" class="lienPopup">
+            <input type="hidden" name="popup" value="cgu">
+        </form>
+    </footer>
+    
     <?php require "popups/gestion_popups.php";?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

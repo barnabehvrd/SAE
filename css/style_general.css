@@ -1,22 +1,52 @@
-html{
-    margin: 0px;
-    padding: 0px;
+html, body {
+    margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
 }
-
-body{
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    width: 100%;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
+main {
+    flex: 1;
+}
+
+.messageEnvoye{
+    margin: 5px 0;
+    width: 35%;
+    padding: 10px;
+    border-radius: 5px 5px 0 5px;
+    justify-self: end;
+    background-color: #198754;
+    color: white;
+
+}
+.messageRecu{
+    margin: 5px 0;
+    width: 35%;
+    padding: 10px;
+    border-radius: 5px 5px 5px 0;
+    justify-self: start;
+    border: solid 2px #198754;
+}
+
+footer{
+    height: 150px;
+    flex-shrink: 0;
+}
+.scrollbox{
+    overflow-y: auto;
+    height: 50vh;
+    width: 100%;
+}
 
 .squarePanelAdmin{
     width: 100%;
     height: 100%;
-    background-color: #4caf50;
+    background-color: #198754;
     margin: 5px;
     max-width: 300px;
     max-height: 300px;
@@ -52,7 +82,11 @@ body{
 .logo{
     width: 100%;
 
-    box-shadow: 1px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    border-bottom: white solid 1.5px;
+}
+.logo-mini{
+    height: 50px;
+    width: auto;
 }
 
 .contenuBarre{
@@ -185,7 +219,6 @@ body{
     flex: 1;
     /* Partie droite occupe 50% de la largeur */
     background-color: #c0c0c0;
-    padding: 20px;
     display: flex;
     flex-direction: column;
 }

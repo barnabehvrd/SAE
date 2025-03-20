@@ -63,10 +63,6 @@ if(!isset($_SESSION)){
                 <label>
                     <input type="radio" name="typeCategorie" value="4" <?php if($filtreCategorie==4) echo 'checked="true"';?>> <?php echo $htmlLIVREE; ?>
                 </label>
-                <br>
-                <label>
-                    <input type="radio" name="typeCategorie" value="3" <?php if($filtreCategorie==3) echo 'checked="true"';?>> <?php echo $htmlANNULEE; ?>
-                </label>
 
                 <br>
                 <br>
@@ -165,7 +161,7 @@ if(!isset($_SESSION)){
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
-						if ($nbProduit>0){
+						if ($nbProduit>0 ){
 							echo '<div class="commande" >';
 							echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
 							echo '</br>';
@@ -177,12 +173,16 @@ if(!isset($_SESSION)){
 							
 							echo '<button type="submit">'.$htmlAnnulerCommande.'</button>';
 							echo '</form>';
+                            ?>
+                                <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                                <br>
+                                <?php
+
 							}
+
 						}
 
                         ?>
-                        <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                        <br>
                         <?php
 
 						while ($iterateurProduit<$nbProduit){
