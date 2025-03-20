@@ -162,8 +162,8 @@
                             <?php if(isset($returnQueryGetProducts)): ?>
                                 <?php if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]): ?>
                                     <input type="button" class="btn btn-outline-success" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                                        <input type="hidden" name="Id_Prod" value="<?php echo $idUti ?>">
-                                        <buitton type="submit" class="btn btn-success w-100"><?php echo $htmlPasserCommande; ?></button>
+                                    <input type="hidden" name="Id_Prod" value="<?php echo $idUti ?>">
+                                    <buitton type="submit" class="btn btn-success w-100"><?php echo $htmlPasserCommande; ?></button>
                                     
                                 <?php endif; ?>
                             <?php endif; ?>
