@@ -50,6 +50,46 @@
         $rechercheNom="";
       }
     ?>
+    <?php
+        $db->select("SELECT 1");
+            $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
+
+        //tri
+        if ($tri=="No"){
+            $query=$query.';';
+        }
+        else if ($tri=="PrixAsc"){
+            $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
+        }
+        else if ($tri=="PrixDesc"){
+            $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
+        }
+        else if ($tri=="Alpha"){
+            $query=$query.' ORDER BY Nom_Produit ASC;';
+        }
+        else if ($tri=="AntiAlpha"){
+            $query=$query.' ORDER BY Nom_Produit DESC;';
+        }
+
+            if ($filtreType=="TOUT"){
+            $returnQueryGetProducts=$db->select($query, [
+                ':rechercheNom' =>'%'.$rechercheNom.'%',
+                ':filtreType' => '%',
+                ':idprod' => $Id_Prod,
+
+            ]);
+
+        }
+        else {
+            $returnQueryGetProducts=$db->select($query, [
+                ':filtreType' => $filtreType,
+                ':rechercheNom' =>'%'.$rechercheNom.'%',
+                ':idprod' => $Id_Prod
+            ]);
+        }
+
+        $db->select("SELECT 2");
+    ?>
     <main>
         <div class="row g-0">
         
@@ -132,46 +172,7 @@
                     <div class="col-12 col-md-6 col-lg-8">
                         <div class="d-flex flex-column">
                             <h2><?php echo $htmlProduitsProposesDeuxPoints; ?></h2>
-                            <?php
-                                $db->select("SELECT 1");
-                                    $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
-
-                                //tri
-                                if ($tri=="No"){
-                                    $query=$query.';';
-                                }
-                                else if ($tri=="PrixAsc"){
-                                    $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
-                                }
-                                else if ($tri=="PrixDesc"){
-                                    $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
-                                }
-                                else if ($tri=="Alpha"){
-                                    $query=$query.' ORDER BY Nom_Produit ASC;';
-                                }
-                                else if ($tri=="AntiAlpha"){
-                                    $query=$query.' ORDER BY Nom_Produit DESC;';
-                                }
-
-                                    if ($filtreType=="TOUT"){
-                                    $returnQueryGetProducts=$db->select($query, [
-                                        ':rechercheNom' =>'%'.$rechercheNom.'%',
-                                        ':filtreType' => '%',
-                                        ':idprod' => $Id_Prod,
-
-                                    ]);
-
-                                }
-                                else {
-                                    $returnQueryGetProducts=$db->select($query, [
-                                        ':filtreType' => $filtreType,
-                                        ':rechercheNom' =>'%'.$rechercheNom.'%',
-                                        ':idprod' => $Id_Prod
-                                    ]);
-                                }
-
-                                $db->select("SELECT 2");
-                            ?>
+                            
                             <?php if (isset($returnQueryGetProducts) && count($returnQueryGetProducts) > 0): ?>
                                 <div class="row g-3">
                                     <?php foreach ($returnQueryGetProducts as $produit): ?>
