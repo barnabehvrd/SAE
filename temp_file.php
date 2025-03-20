@@ -27,10 +27,10 @@ require "language.php" ;
                             <div class="input-group">
                                 <label class="input-group-text" for="categories"><i class="bi bi-person-fill text-success"></i></label>
                                 <select class="form-select" name="categorie" id="categories">
-                                    <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>><?php echo $htmlTOUT?></option>
-                                    <option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>><?php echo $htmlENCOURS?></option>
-                                    <option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>><?php echo $htmlPRETE?></option>
-                                    <option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>><?php echo $htmlLIVREE?></option>
+                                    <option value="Tout" <?php if($_GET["categorie"]=="Tout") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlTOUT)) ?></option>
+                                    <option value="Agriculteur" <?php if($_GET["categorie"]=="Agriculteur") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlENCOURS)) ?></option>
+                                    <option value="Vigneron" <?php if($_GET["categorie"]=="Vigneron") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlPRETE)) ?></option>
+                                    <option value="Maraîcher" <?php if($_GET["categorie"]=="Maraîcher") echo 'selected="selected"';?>><?php echo ucfirst(strtolower($htmlLIVREE))?></option>
                                 </select>
                             </div>
 
@@ -44,73 +44,62 @@ require "language.php" ;
             <div class="container-fluid my-3">
                 <!-- code -->
 
-                <!-- exemple de page liste producteurs -->
+                <?php
+                $query='SELECT PRODUCTEUR.Id_Uti, Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN PRODUCTEUR ON COMMANDE.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti= :utilisateur';
+                if ($filtreCategorie!=0){
+                    $query=$query.' AND COMMANDE.Id_Statut= :filtreCategorie ;';
 
-                <div class="d-flex flex-column">
-                    <h1><?php echo $htmlProducteursEnMaj?></h1>
-                    <div class="row g-3">
-                        <div class="col-12 col-lg-6">
-                            <div class="card">
-                                <div class="row g-0">
-                                    <div class="col-5">
-                                        <img src="/img_producteur/1.png" class="w-100 h-100 object-fit-cover rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-7">
-                                        <div class="card-body">
-                                            <h2 class="card-title">Producteur</h2>
-                                            <span class="badge rounded-pill text-bg-success mb-3">Métier</span>
-                                            <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
-                                            <a href="#" class="btn btn-success">Consulter</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    $returnQueryGetCommande = $db->select($query, [
+                        'utilisateur' => $utilisateur,
+                        'filtreCategorie' => $filtreCategorie
+                    ]);
 
-                <!-- exemple de page producteur -->
-                <div class="row g-3">
-                    <div class="col-12 col-md-6 col-lg-4 order-md-2">
-                        <div class="d-flex flex-column bg-light rounded p-3 gap-2">
-                            <img src="img_producteur/1.png" class="w-100" alt="">
-                            <h1>Nom du producteur</h1>
-                            <span class="badge rounded-pill text-bg-success">Métier</span>
-                            <p><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
-                            <input type="button" class="btn btn-outline-success" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                            <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed "
-                                    width="100%" height="100%">
-                            </iframe>
-                            <form method="get" action="insert_commande.php">
-                                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-                                <buitton type="submit" class="btn btn-success w-100"><?php echo $htmlPasserCommande; ?></button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-8">
-                        <div class="d-flex flex-column">
-                            <h2><?php echo $htmlProduitsProposesDeuxPoints; ?></h2>
-                            <div class="row g-3">
-                                <div class="col-12 col-lg-6 col-xl-4">
-                                    <div class="card">
-                                        <img src="img_produit/5.png" class="card-img-top" alt="image produit">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nom produit</h5>
-                                            <p class="card-text"><i class="bi bi-box-seam-fill text-success me-2"></i>Type</p>
-                                            <p class="card-text"><i class="bi bi-tag-fill text-success me-2"></i>XX.XX €/Kg</p>
+                } else {
+                    $returnQueryGetCommande = $db->select($query, [
+                        'utilisateur' => $utilisateur
+                    ]);
+                }
 
-                                            <div class="input-group">
-                                                <span class="input-group-text"><i class="bi bi-basket2-fill text-success"></i></span>
-                                                <input type="number" class="form-control">
-                                                <span class="input-group-text">Kg</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                $iterateurCommande=0;
+                if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
+                echo $htmlAucuneCommande;
+                ?>
+                <br>
+                <input type="button" onclick="window.location.href='index.php'" value="<?php echo $htmlDecouverteProducteurs; ?>">
+                <?php
+                }
+                elseif(count($returnQueryGetCommande)==0){
+                    echo $htmlAucuneCommandeCorrespondCriteres;
+                }
+                else{
+                    while ($iterateurCommande<count($returnQueryGetCommande)){
+						$Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
+						$Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
+						$Nom_Prod = mb_strtoupper($Nom_Prod);
+						$Prenom_Prod = $returnQueryGetCommande[$iterateurCommande]["Prenom_Uti"];
+						$Adr_Uti = $returnQueryGetCommande[$iterateurCommande]["Adr_Uti"];
+						$Desc_Statut = $returnQueryGetCommande[$iterateurCommande]["Desc_Statut"];
+						$Desc_Statut = mb_strtoupper($Desc_Statut);
+						$Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
+                        $idUti = $returnQueryGetCommande[$iterateurCommande]["Id_Uti"];
+
+                        $total=0;
+
+                        $returnQueryGetProduitCommande = $db->select('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande = :Id_Commande', [
+                            'Id_Commande' => $Id_Commande
+                        ]);
+
+						$iterateurProduit=0;
+						$nbProduit=count($returnQueryGetProduitCommande);
+
+						if ($nbProduit>0 ){ ?>
+
+                            <
+
+                <?php
+						} ?>
+
+
 
             </div>
         </div>
