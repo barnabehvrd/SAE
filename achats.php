@@ -83,8 +83,6 @@ $utilisateur=$_SESSION["Id_Uti"];
                 if(count($returnQueryGetCommande)==0 and ($filtreCategorie==0)){
                 echo $htmlAucuneCommande;
                 ?>
-                <br>
-                <input type="button" onclick="window.location.href='index.php'" value="<?php echo $htmlDecouverteProducteurs; ?>">
                 <?php
                 }
                 elseif(count($returnQueryGetCommande)==0){
