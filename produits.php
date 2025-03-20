@@ -55,13 +55,16 @@ $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
 
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-tag-fill text-success"></i></span>
-                                <input type="number" min="0" name="prix" class="form-control" required>
+                                <input type="number" min="0" name="prix" class="form-control" step="0.01" value="1.50" required
+                                       oninput="this.value = parseFloat(this.value).toFixed(2)"
+                                       onchange="this.value = parseFloat(this.value).toFixed(2)"
+                                >
                                 <span class="input-group-text">€</span>
                             </div>
 
                             <div class="d-flex flex-wrap gap-2 justify-content-center">
                                 <div class="form-check form-check-inline text-light">
-                                    <input class="form-check-input" type="radio" name="unitPrix" value="1" id="kgPrice" checked="true">
+                                    <input class="form-check-input" type="radio" name="unitPrix" value="1" id="kgPrice" checked="checked">
                                     <label class="form-check-label" for="kgPrice"><?php echo $htmlLeKilo; ?></label>
                                 </div>
                                 <div class="form-check form-check-inline text-light">
@@ -72,12 +75,12 @@ $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
 
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-box2-fill text-success"></i></span>
-                                <input type="number" min="0" name="quantite" class="form-control" required>
+                                <input type="number" min="0" name="quantite" class="form-control" value="10" required>
                             </div>
 
                             <div class="d-flex flex-wrap gap-2 justify-content-center">
                                 <div class="form-check form-check-inline text-light">
-                                    <input class="form-check-input" type="radio" name="unitQuantite" value="1" id="kgQuantity" checked="true">
+                                    <input class="form-check-input" type="radio" name="unitQuantite" value="1" id="kgQuantity" checked="checked">
                                     <label class="form-check-label" for="kgQuantity"><?php echo $htmlKg; ?></label>
                                 </div>
                                 <div class="form-check form-check-inline text-light">

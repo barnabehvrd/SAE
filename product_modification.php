@@ -50,7 +50,7 @@ $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
                     <div class="col-12 col-lg-8 mx-auto">
                         <div class="card">
                             <div class="card-header bg-success text-white">
-                                <h2 class="text-center mb-0"><?php echo $htmlAjouterProduit?></h2>
+                                <h2 class="text-center mb-0">Modifier un produit</h2>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -142,7 +142,10 @@ $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
                                             <div class="mb-3">
                                                 <label class="form-label"><?php echo $htmlPrix?></label>
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control" min="0" name="prix" value="<?php echo $Prix_Produit_Unitaire?>" required>
+                                                    <input step="0.01" type="number" class="form-control" min="0" name="prix" value="<?php echo $Prix_Produit_Unitaire?>" required
+                                                           oninput="this.value = parseFloat(this.value).toFixed(2)"
+                                                           onchange="this.value = parseFloat(this.value).toFixed(2)"
+                                                    >
                                                     <span class="input-group-text">€</span>
                                                 </div>
                                             </div>
@@ -160,7 +163,7 @@ $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
 
                                             <div class="mb-3">
                                                 <label class="form-label">Stock</label>
-                                                <input type="number" class="form-control" min="0" name="quantite" value="<?php echo $Qte_Produit?>" required>
+                                                <input type="number" class="form-control" min="0" step="1" name="quantite" value="<?php echo $Qte_Produit?>" required>
                                             </div>
 
                                             <div class="mb-3">

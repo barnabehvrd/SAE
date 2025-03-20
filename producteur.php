@@ -51,7 +51,6 @@
       }
     ?>
     <?php
-        $db->select("SELECT 1");
             $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
         //tri
@@ -87,8 +86,6 @@
                 ':idprod' => $Id_Prod
             ]);
         }
-
-        $db->select("SELECT 2");
     ?>
     <main>
         <div class="row g-0">
@@ -164,7 +161,7 @@
                                 <?php if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]): ?>
                                     <input type="button" class="btn btn-outline-success" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
                                     <input type="hidden" name="Id_Prod" value="<?php echo $idUti ?>">
-                                    <input type="submit" class="btn btn-success"><?php echo $htmlPasserCommande; ?></input>
+                                    <input type="submit" class="btn btn-success" value="Commander">
                                     
                                 <?php endif; ?>
                             <?php endif; ?>
