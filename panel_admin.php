@@ -179,13 +179,13 @@ if(!isset($_SESSION)){
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                       </div>
                                                                   <div class="modal-body">
-                                                                        Voulez-vous vraiment supprimer le compte de '.$row["Prenom_Uti"].' '.$row["Nom_Uti"].' ?
+                                                                        Voulez-vous vraiment supprimer le compte de <?php echo $row["Prenom_Uti"] . ' ' . $row["Nom_Uti"] ?> ?
                                                                       </div>
                                                                   <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                                                         <form method="post" action="traitements/del_acc.php">
-                                                                                <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
-                                                                                <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">
+                                                                                <input type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
+                                                                                <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
                                                                             </form>
                                                                       </div>
                                                                 </div>
