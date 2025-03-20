@@ -60,6 +60,14 @@ try {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
 
+                $admin = $db->select('SELECT * FROM ADMINISTRATEUR WHERE Id_Uti = :id', [':id' => $Id_Uti]);
+
+                if ($admin != NULL) {
+                    $_SESSION["isAdmin"] = true;
+                } else {
+                    $_SESSION["isAdmin"] = false;
+                }
+
                 $returnIsProducteur = $db->select('CALL isProducteur(:Id_Uti)', [':Id_Uti' => $Id_Uti]);
                 $reponse = $returnIsProducteur[0]["result"];
 
