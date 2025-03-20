@@ -1,23 +1,16 @@
 <?php
-    require "language.php" ; 
-?>
-<?php
+    require "language.php" ;
+
+require_once 'database/database.php';
+use database\database;
+
+$db = new database();
 
 $email = $_POST["email"];
 $_SESSION["mailTemp"]=$email;
 
-$utilisateur = "inf2pj02";
-$serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
-$bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
-// Vérifiez d'abord si l'adresse e-mail existe déjà dans la table UTILISATEUR
-$checkEmailQuery = "SELECT COUNT(*) AS count FROM UTILISATEUR WHERE Mail_Uti = :mail";
-$checkEmailStmt = $bdd->prepare($checkEmailQuery);
-$checkEmailStmt->bindParam(':mail', $_SESSION["mailTemp"]);
-$checkEmailStmt->execute();
-$emailCount = $checkEmailStmt->fetch(PDO::FETCH_ASSOC)['count'];
+$emailCount = $db->select('SELECT COUNT(*) AS count FROM UTILISATEUR WHERE Mail_Uti = :mail')[0]['count'];
 
 if ($emailCount > 0) {  
     // Génération d'un code aléatoire à 6 chiffres

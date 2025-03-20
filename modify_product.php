@@ -1,13 +1,10 @@
 <?php
-    function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    }
-    $bdd=dbConnect();
+
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
+
     //var_dump($_POST);
     $Id_Produit = htmlspecialchars($_POST["IdProductAModifier"]);
     $Nom_Produit = htmlspecialchars($_POST["nomProduit"]);
@@ -18,16 +15,15 @@
     $Quantite_Unite = htmlspecialchars($_POST["unitQuantite"]);
 
 
-    $updateProduit = "UPDATE PRODUIT SET Nom_Produit = :Nom_Produit, Id_Type_Produit = :Categorie, Qte_Produit = :Quantite, Id_Unite_Stock = :Quantite_Unite, Prix_Produit_Unitaire = :Prix, Id_unite_Prix = :Prix_Unite WHERE Id_Produit = :Id_Produit";
-    $stmt = $bdd->prepare($updateProduit);
-    $stmt->bindParam(':Nom_Produit', $Nom_Produit);
-    $stmt->bindParam(':Categorie', $Categorie);
-    $stmt->bindParam(':Quantite', $Quantite);
-    $stmt->bindParam(':Quantite_Unite', $Quantite_Unite);
-    $stmt->bindParam(':Prix', $Prix);
-    $stmt->bindParam(':Prix_Unite', $Prix_Unite);
-    $stmt->bindParam(':Id_Produit', $Id_Produit);
-    $stmt->execute();
+    $db->query('UPDATE PRODUIT SET Nom_Produit = :Nom_Produit, Id_Type_Produit = :Categorie, Qte_Produit = :Quantite, Id_Unite_Stock = :Quantite_Unite, Prix_Produit_Unitaire = :Prix, Id_unite_Prix = :Prix_Unite WHERE Id_Produit = :Id_Produit', [
+        'Nom_Produit' => $Nom_Produit,
+        'Categorie' => $Categorie,
+        'Quantite' => $Quantite,
+        'Quantite_Unite' => $Quantite_Unite,
+        'Prix' => $Prix,
+        'Prix_Unite' => $Prix_Unite,
+        'Id_Produit' => $Id_Produit
+    ]);
 
     //modification de l'image
 // Vérifier si le formulaire a été soumis
