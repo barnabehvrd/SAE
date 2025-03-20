@@ -15,6 +15,8 @@ if (isset($_POST["categorie"])==true){
     $filtreCategorie=htmlspecialchars($_POST["categorie"]);
 }
 
+echo "======================";
+echo $filtreCategorie;
 
 $utilisateur=$_SESSION["Id_Uti"];
 ?>
