@@ -1,27 +1,27 @@
 <?php
-    require "./language.php" ; 
+if(!isset($_SESSION)){
+    session_start();
+}
+    require "language.php" ;
 ?>
 <?php
 
+require_once 'database/database.php';
+use database\database;
 
-function dbConnect(){
-    $host = 'localhost';
-    $dbname = 'inf2pj_02';
-    $user = 'inf2pj02';
-    $password = 'ahV4saerae';
 
-    
-    return new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
-}
+$msgPasConv = $htmlPasDeConversation;
 
 function afficheContacts($id_user){
-    require "./language.php" ; 
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL listeContact('.$id_user.');'));
-    $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
+    global $msgPasConv;
+    require "language.php" ;
+
+    $db = new database();
+
+    $contacts = $db->select('CALL listeContact( :id_user);', array('id_user' => $id_user));
+
     if (count($contacts)==0){
-        $test = $htmlPasDeConversation;
-        echo($test);
+        echo $msgPasConv;
     }else{
         foreach($contacts as $contact){
             afficherContact($contact);

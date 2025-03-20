@@ -2,6 +2,11 @@
 <html lang="fr">
 <head>
 <?php
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
+
     require "language.php" ; 
 ?>
     <title><?php echo $htmlMarque; ?></title>
@@ -11,36 +16,31 @@
 </head>
 <body>
     <?php
-
-     function dbConnect(){
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
-    
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-      }
       if(!isset($_SESSION)){
         session_start();
         }
       // variable utilisée plusieurs fois par la suite
-      $Id_Prod = htmlspecialchars($_GET["Id_Prod"]);
+      $Id_Prod = $_GET["Id_Prod"];
+      // id_prod to int
 
-      if (isset($_GET["filtreType"])==true){
-        $filtreType=htmlspecialchars($_GET["filtreType"]);
+      $filtreType = "";
+      if (isset($_GET["filtreType"])){
+
+          $filtreType=$_GET["filtreType"];
       }
       else{
         $filtreType="TOUT";
       }
+
+      $tri = "";
       if (isset($_GET["tri"])==true){
-        $tri=htmlspecialchars($_GET["tri"]);
+        $tri=$_GET["tri"];
       }
       else{
         $tri="No";
       }
       if (isset($_GET["rechercheNom"])==true){
-        $rechercheNom=htmlspecialchars($_GET["rechercheNom"]);
+        $rechercheNom=$_GET["rechercheNom"];
       }
       else{
         $rechercheNom="";
@@ -164,19 +164,9 @@
                     <p><center><U><?php echo $htmlProduitsProposesDeuxPoints; ?></U></center></p>
                     <div class="gallery-container">
                         <?php
-                            $bdd=dbConnect();
-                            //filtre type
-                            if ($filtreType=="TOUT"){
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod';
-                            }
-                            else{
-                                $query='SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur  WHERE Id_Prod= :Id_Prod AND Desc_Type_Produit= :filtreType';
-
-                            }
-                            // filtre nom
-                            if ($rechercheNom!=""){
-                                $query=$query.' AND Nom_Produit LIKE :rechercheNom ';
-                            }
+                        $db->select("SELECT 1");
+                            $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
+                                    WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
                             //tri
                             if ($tri=="No"){
@@ -195,21 +185,24 @@
                                 $query=$query.' ORDER BY Nom_Produit DESC;';
                             }
 
-                            //preparation paramètres
-                            $queryGetProducts = $bdd->prepare(($query));
-                            if ($filtreType=="TOUT"){
-                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);                            
+                                if ($filtreType=="TOUT"){
+                                $returnQueryGetProducts=$db->select($query, [
+                                    ':rechercheNom' =>'%'.$rechercheNom.'%',
+                                    ':filtreType' => '%',
+                                    ':idprod' => $Id_Prod,
+
+                                ]);
+
                             }
-                            else{
-                                $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);   
-                                $queryGetProducts->bindParam(":filtreType", $filtreType, PDO::PARAM_STR);
-                            }
-                            if ($rechercheNom!=""){
-                                $queryGetProducts->bindParam(":rechercheNom", $rechercheNom, PDO::PARAM_STR);  
+                            else {
+                                $returnQueryGetProducts=$db->select($query, [
+                                     ':filtreType' => $filtreType,
+                                    ':rechercheNom' =>'%'.$rechercheNom.'%',
+                                    ':idprod' => $Id_Prod
+                                ]);
                             }
 
-                            $queryGetProducts->execute();
-                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+                            $db->select("SELECT 2");
 
                             $i=0;
                             if(count($returnQueryGetProducts)==0){
@@ -242,11 +235,7 @@
                 <div class="producteur">
                     <!-- partie de droite avec les infos producteur -->
                     <?php
-                        $bdd=dbConnect();
-                        $queryInfoProd = $bdd->prepare(('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;'));
-                        $queryInfoProd->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
-                        $queryInfoProd->execute();   
-                        $returnQueryInfoProd = $queryInfoProd->fetchAll(PDO::FETCH_ASSOC);
+                        $returnQueryInfoProd = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;', [':Id_Prod' => $Id_Prod]);
 
                         // recupération des paramètres de la requête qui contient 1 élément
                         $idUti = $returnQueryInfoProd[0]["Id_Uti"];

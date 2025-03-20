@@ -1,13 +1,18 @@
 <?php
 
 
+require_once 'database/database.php';
+use database\database;
+
 function afficheMessages($id_user, $id_other_people){
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL conversation('.$id_user.', '.$id_other_people.');'));
-    $messages = $query->fetchAll(PDO::FETCH_ASSOC);
-    foreach($messages as $message){
-        afficheMessage($message);
-    }
+    $db = new database();
+
+    $db->select('CALL conversation(:id_user, :id_other_people);', [
+            'id_user' => $id_user,
+            'id_other_people' => $id_other_people
+    ]);
+
+
 }
 
 function afficheMessage($message){

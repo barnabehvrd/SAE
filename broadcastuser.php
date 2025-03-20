@@ -2,6 +2,9 @@
 <html lang="fr">
 <head>
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
     require "language.php" ; 
 ?>
     <title><?php echo $htmlMarque; ?></title>
@@ -10,11 +13,6 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
-    <?php
-        if(!isset($_SESSION)){
-            session_start();
-        }
-    ?>
     <div class="container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="img/logo.png">

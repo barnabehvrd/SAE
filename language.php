@@ -19,6 +19,5 @@ $selectedLanguage = $_SESSION["language"] ?? 'fr'; // version php 5.6 $selectedL
 $languageFile = $languageFiles[$selectedLanguage] ?? "language_fr.php"; // version php 5.6 $languageFile = isset($languageFiles[$selectedLanguage]) ? $languageFiles[$selectedLanguage] : "language_fr.php";
 
 
-
 require $languageFile;
 ?>

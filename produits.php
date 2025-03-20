@@ -1,5 +1,10 @@
 <?php
-    require "language.php" ; 
+    require "language.php" ;
+
+    require_once 'database/database.php';
+    use database\database;
+
+    $db = new database();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,24 +17,12 @@
 <body>
 
 <?php
-     function dbConnect(){
-        $host = 'localhost';
-        $dbname = 'inf2pj_02';
-        $user = 'inf2pj02';
-        $password = 'ahV4saerae';
-        return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-      }
       if(!isset($_SESSION)){
         session_start();
     }
-      $utilisateur=$_SESSION["Id_Uti"];
-      htmlspecialchars($utilisateur);
 
-      $bdd=dbConnect();
-      $queryIdProd = $bdd->prepare(('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti= :Id_Uti ;'));
-      $queryIdProd->bindParam(":Id_Uti", $utilisateur, PDO::PARAM_STR);
-      $queryIdProd->execute();
-      $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+
+      $returnQueryIdProd = $db->select('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti= :Id_Uti ;', [':Id_Uti' => $_SESSION["Id_Uti"]]);
       $Id_Prod=$returnQueryIdProd[0]["Id_Prod"];
     ?>
 
@@ -136,11 +129,7 @@
                     <p><center><U><?php echo $htmlMesProduitsEnStock; ?></U></center></p>
                     <div class="gallery-container">
                         <?php
-                            $bdd=dbConnect();
-                            $queryGetProducts = $bdd->prepare(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod= :Id_Prod ;'));
-                            $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
-                            $queryGetProducts->execute();
-                            $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+                            $returnQueryGetProducts = $db->select('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod= :Id_Prod ;', [':Id_Prod' => $Id_Prod]);
 
                             $i=0;
                             if(count($returnQueryGetProducts)==0){
