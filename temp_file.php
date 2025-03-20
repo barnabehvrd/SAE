@@ -111,7 +111,7 @@ $utilisateur=$_SESSION["Id_Uti"];
 						$nbProduit=count($returnQueryGetProduitCommande);
 
 						if ($nbProduit>0 ){ ?>
-                <div class="col-3 gt-3">
+                <div class="col-4 gt-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;?></h5>
