@@ -1,21 +1,15 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-
-function dbConnect(){
-    $host = 'localhost';
-    $dbname = 'inf2pj_02';
-    $user = 'inf2pj02';
-    $password = 'ahV4saerae';
-
-    
-    return new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user,$password);
-}
+require_once 'database/database.php';
+use database\database;
 
 function afficheContacts($id_user){
-    $bdd = dbConnect();
-    $query = $bdd->query(('CALL listeContact('.$id_user.');'));
-    $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
+    $db = new database();
+    $contacts = $db->select('CALL listeContact(:id_user);', ['id_user' => $id_user]);
+
+
+
     if (count($contacts)==0){
         echo($htmlPasDeConversation);
     }else{

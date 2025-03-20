@@ -2,28 +2,22 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-function dbConnect(){
-    $host = 'localhost';
-    $dbname = 'inf2pj_02';
-    $user = 'inf2pj02';
-    $password = 'ahV4saerae';
-    return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
-}
+require_once 'database/database.php';
+use database\database;
 
-$bdd = dbConnect();
+$db = new database();
+
 $Id_Commande = htmlspecialchars($_POST["idCommande"]);
 
-$query = 'SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti 
-          FROM COMMANDE 
-          INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod 
-          INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut 
-          INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti 
-          WHERE COMMANDE.Id_Commande = :idCommande';
-$queryGetCommande = $bdd->prepare($query);
-$queryGetCommande->bindParam(':idCommande', $Id_Commande, PDO::PARAM_INT);
-$queryGetCommande->execute();
+$returnQueryGetCommande = $db->select('
+        SELECT Desc_Statut, COMMANDE.Id_Prod, COMMANDE.Id_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti, COMMANDE.Id_Statut, UTILISATEUR.Adr_Uti, UTILISATEUR.Mail_Uti
+        FROM COMMANDE 
+        INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod 
+        INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut 
+        INNER JOIN UTILISATEUR ON COMMANDE.Id_Uti=UTILISATEUR.Id_Uti 
+        WHERE COMMANDE.Id_Commande = :idCommande',
+    ['idCommande' => $Id_Commande]);
 
-$returnQueryGetCommande = $queryGetCommande->fetchAll(PDO::FETCH_ASSOC);
 
 $Id_Prod = $returnQueryGetCommande[0]["Id_Prod"];
 $Desc_Statut = $returnQueryGetCommande[0]["Desc_Statut"];
@@ -34,14 +28,13 @@ $Id_Statut = $returnQueryGetCommande[0]["Id_Statut"];
 $Mail_Uti = $returnQueryGetCommande[0]["Mail_Uti"];
 $Adr_Uti = $returnQueryGetCommande[0]["Adr_Uti"];
 
-$bdd = dbConnect();
-$query = 'SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod 
-          FROM info_producteur 
-          WHERE Id_Prod = :idProducteur';
-$queryGetProducteur = $bdd->prepare($query);
-$queryGetProducteur->bindParam(':idProducteur', $Id_Prod, PDO::PARAM_INT);
-$queryGetProducteur->execute();
-$returnQueryGetProducteur = $queryGetProducteur->fetchAll(PDO::FETCH_ASSOC);
+
+$returnQueryGetProducteur = $db->select('
+        SELECT Prenom_Uti, Nom_Uti, Mail_Uti, Adr_Uti, Prof_Prod 
+        FROM info_producteur 
+        WHERE Id_Prod = :idProducteur',
+    ['idProducteur' => $Id_Prod]);
+
 
 $Nom_Prod = $returnQueryGetProducteur[0]["Nom_Uti"];
 $Nom_Prod = mb_strtoupper($Nom_Prod);
@@ -116,14 +109,13 @@ $pdf->Ln();
 
 
 $total=0;
-$query = 'SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix 
-          FROM produits_commandes  
-          WHERE Id_Commande = :idCommande';
 
-$queryGetProduitCommande = $bdd->prepare($query);
-$queryGetProduitCommande->bindParam(':idCommande', $Id_Commande, PDO::PARAM_INT);
-$queryGetProduitCommande->execute();
-$returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+$returnQueryGetProduitCommande = $db->select('
+        SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix 
+        FROM produits_commandes  
+        WHERE Id_Commande = :idCommande',
+    ['idCommande' => $Id_Commande]);
+
 $iterateurProduit=0;
 $nbProduit=count($returnQueryGetProduitCommande);
 

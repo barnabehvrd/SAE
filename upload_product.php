@@ -8,11 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_produit/";
-        // Obtenir le nom du fichier téléchargé
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
         session_start();
 
 
