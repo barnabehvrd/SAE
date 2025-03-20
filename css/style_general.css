@@ -37,7 +37,7 @@ footer{
 }
 .scrollbox{
     overflow-y: auto;
-    flex: 1;
+    height: min-content;
     width: 100%;
 }
 
