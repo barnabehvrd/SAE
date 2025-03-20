@@ -58,11 +58,11 @@ try {
         // Vérifier si le nombre de tentatives est inférieur à 5
         if (!isset($userData[0]['nb_tentatives_echec']) || $userData[0]['nb_tentatives_echec'] < 5) {
             // Récupération du mot de passe hashé dans la base de données
-            $passwordData = $db->select('SELECT MotDePasse_Uti FROM UTILISATEUR WHERE Id_Uti = :id', [':id' => $Id_Uti]);
+            $passwordData = $db->select('SELECT Pwd_Uti FROM UTILISATEUR WHERE Id_Uti = :id', [':id' => $Id_Uti]);
             echo "Password data retrieved: " . print_r($passwordData, true) . "<br>";
 
             // Vérification du mot de passe avec password_verify
-            if (!empty($passwordData) && password_verify($pwd, $passwordData[0]['MotDePasse_Uti'])) {
+            if (!empty($passwordData) && password_verify($pwd, $passwordData[0]['Pwd_Uti'])) {
                 // Mot de passe correct, réinitialiser le compteur
                 $db->query('UPDATE UTILISATEUR SET nb_tentatives_echec = 0 WHERE Id_Uti = :id', [':id' => $Id_Uti]);
                 echo "Password correct<br>";
