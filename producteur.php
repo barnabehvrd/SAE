@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
 <?php
+  require "language.php" ; 
+
     require_once 'database/database.php';
     use database\database;
 
     $db = new database();
-
-    require "language.php" ; 
 ?>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <?php
+<?php
       if(!isset($_SESSION)){
         session_start();
         }
@@ -46,258 +50,173 @@
         $rechercheNom="";
       }
     ?>
-    <div class="container">
-        <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
-            <div class="contenuBarre">
-                <!-- some code -->
+    <?php
+        $db->select("SELECT 1");
+            $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
 
-                <center>
-                <p><strong><?php echo $htmlRechercherPar; ?></strong></p>
-            </center>
-            <br>
-            <form action="producteur.php" method="get">
-            <?php echo $htmlTiretNom; ?>
-                <input type="text" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="<?php echo $htmlNom; ?>">
-                <br>
-                <br>
-                - Type de produit :
-                <br>
-                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-                <label>
-                    <input type="radio" name="filtreType" value="TOUT" <?php if($filtreType=="TOUT") echo 'checked="true"';?>> <?php echo $htmlTout; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'checked="true"';?>> <?php echo $htmlAnimaux; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="FRUITS" <?php if($filtreType=="FRUITS") echo 'checked="true"';?>> <?php echo $htmlFruits; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="GRAINS"<?php if($filtreType=="GRAINS") echo 'checked="true"';?>> <?php echo $htmlGraines; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'checked="true"';?>> <?php echo $htmlLégumes; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'checked="true"';?>> <?php echo $htmlPlanches; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="VIANDE" <?php if($filtreType=="VIANDE") echo 'checked="true"';?>> <?php echo $htmlViande; ?>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="filtreType" value="VIN" <?php if($filtreType=="VIN") echo 'checked="true"';?>> <?php echo $htmlVin; ?>
-                </label>
-                <br>
-                <br>
-                <br>
-                <?php echo $htmlTri; ?>
-                <select name="tri">
-                    <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>><?php echo $htmlAucunTri; ?></option>
-                    <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>><?php echo $htmlPrixCroissant; ?></option>
-                    <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>><?php echo $htmlPrixDecroissant; ?></option>
-                    <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAlpha; ?></option>
-                    <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAntiAlpha; ?></option>
-			    </select>
-                <br>
-                <br>
-                <center>
-                    <input type="submit" value="<?php echo $htmlRechercher; ?>">
-                </center>
-            </form>
-            <br>
-            <br>  
+        //tri
+        if ($tri=="No"){
+            $query=$query.';';
+        }
+        else if ($tri=="PrixAsc"){
+            $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
+        }
+        else if ($tri=="PrixDesc"){
+            $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
+        }
+        else if ($tri=="Alpha"){
+            $query=$query.' ORDER BY Nom_Produit ASC;';
+        }
+        else if ($tri=="AntiAlpha"){
+            $query=$query.' ORDER BY Nom_Produit DESC;';
+        }
 
+            if ($filtreType=="TOUT"){
+            $returnQueryGetProducts=$db->select($query, [
+                ':rechercheNom' =>'%'.$rechercheNom.'%',
+                ':filtreType' => '%',
+                ':idprod' => $Id_Prod,
 
-            </div>
-        </div>
-        <div class="rightColumn">
-            <div class="topBanner">
-                <div class="divNavigation">
-                <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
-                    <?php
-                        if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
-                        }
-                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
-                        }
-                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
-                        }
-                    ?>
-                </div>
-                <form method="post">
-                    <?php
-                    if(!isset($_SESSION)){
-                    session_start();
-                    }
-                    if(isset($_SESSION, $_SESSION['tempPopup'])){
-                        $_POST['popup'] = $_SESSION['tempPopup'];
-                        unset($_SESSION['tempPopup']);
-                    }
-                    ?>
+            ]);
 
-                    <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
-                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
-                
-                </form>
-            </div>
+        }
+        else {
+            $returnQueryGetProducts=$db->select($query, [
+                ':filtreType' => $filtreType,
+                ':rechercheNom' =>'%'.$rechercheNom.'%',
+                ':idprod' => $Id_Prod
+            ]);
+        }
 
+        $db->select("SELECT 2");
+    ?>
+    <main>
+        <div class="row g-0">
+        
+        <div class="col-12 col-md-3 col-lg-2">
+            <nav id="sidebar" class="h-100 flex-column align-items-stretch bg-success">
+                <img class="logo d-none d-md-block" href="index.php" src="img/logo.png">
+                    <!-- code -->
+                    <div class="container-fluid">
+                        <div class="d-flex flex-column g-3 py-2">
+                            <p class="text-light"><?php echo $htmlRechercherPar?></p>
+                            <form method="get" class="d-flex flex-column gap-3">
+                                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
+                                <input type="text" class="form-control" name="rechercheNom" value="<?php echo $rechercheNom?>" placeholder="<?php echo $htmlNom; ?>">
 
+                                <div class="input-group">
+                                    <label class="input-group-text" for="categories"><i class="bi bi-box-seam-fill text-success me-2"></i></label>
+                                    <select class="form-select" name="filtreType" id="categories">
+                                        <option value="TOUT" <?php if($filtreType=="TOUT") echo 'selected="selected"';?>><?php echo $htmlTout?></option>
+                                        <option value="ANIMAUX" <?php if($filtreType=="ANIMAUX") echo 'selected="selected"';?>><?php echo $htmlAnimaux?></option>
+                                        <option value="FRUITS" <?php if($filtreType=="FRUITS") echo 'selected="selected"';?>><?php echo $htmlFruits?></option>
+                                        <option value="GRAINS" <?php if($filtreType=="GRAINS") echo 'selected="selected"';?>><?php echo $htmlGraines?></option>
+                                        <option value="LÉGUMES" <?php if($filtreType=="LÉGUMES") echo 'selected="selected"';?>><?php echo $htmlLégumes?></option>
+                                        <option value="PLANCHES" <?php if($filtreType=="PLANCHES") echo 'selected="selected"';?>><?php echo $htmlPlanches?></option>
+                                        <option value="VIANDE" <?php if($filtreType=="VIANDE") echo 'selected="selected"';?>><?php echo $htmlViande?></option>
+                                        <option value="VIN" <?php if($filtreType=="VIN") echo 'selected="selected"';?>><?php echo $htmlVin?></option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-group-text"><i class="bi bi-funnel-fill text-success"></i></label>
+                                    <select name="tri" class="form-select" required>
+                                        <option value="No" <?php if($tri=="No") echo 'selected="selected"';?>><?php echo $htmlAucunTri; ?></option>
+                                        <option value="PrixAsc" <?php if($tri=="PrixAsc") echo 'selected="selected"';?>><?php echo $htmlPrixCroissant; ?></option>
+                                        <option value="PrixDesc" <?php if($tri=="PrixDesc") echo 'selected="selected"';?>><?php echo $htmlPrixDecroissant; ?></option>
+                                        <option value="Alpha" <?php if($tri=="Alpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAlpha; ?></option>
+                                        <option value="AntiAlpha" <?php if($tri=="AntiAlpha") echo 'selected="selected"';?>><?php echo $htmlOrdreAntiAlpha; ?></option>
+                                    </select>
+                                </div>
 
-            <form method="get" action="insert_commande.php">
-                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
-            
-            <div class="content-container">
-                <div class="product">
-                    <!-- partie de gauche avec les produits -->
-                    <p><center><U><?php echo $htmlProduitsProposesDeuxPoints; ?></U></center></p>
-                    <div class="gallery-container">
-                        <?php
-                        $db->select("SELECT 1");
-                            $query = 'SELECT Id_Produit, Id_Prod, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit FROM Produits_d_un_producteur 
-                                    WHERE Id_Prod= :idprod AND Desc_Type_Produit LIKE :filtreType AND Nom_Produit LIKE :rechercheNom';
-
-                            //tri
-                            if ($tri=="No"){
-                                $query=$query.';';
-                            }
-                            else if ($tri=="PrixAsc"){
-                                $query=$query.' ORDER BY Prix_Produit_Unitaire ASC;';
-                            }
-                            else if ($tri=="PrixDesc"){
-                                $query=$query.' ORDER BY Prix_Produit_Unitaire DESC;';
-                            }
-                            else if ($tri=="Alpha"){
-                                $query=$query.' ORDER BY Nom_Produit ASC;';
-                            }
-                            else if ($tri=="AntiAlpha"){
-                                $query=$query.' ORDER BY Nom_Produit DESC;';
-                            }
-
-                                if ($filtreType=="TOUT"){
-                                $returnQueryGetProducts=$db->select($query, [
-                                    ':rechercheNom' =>'%'.$rechercheNom.'%',
-                                    ':filtreType' => '%',
-                                    ':idprod' => $Id_Prod,
-
-                                ]);
-
-                            }
-                            else {
-                                $returnQueryGetProducts=$db->select($query, [
-                                     ':filtreType' => $filtreType,
-                                    ':rechercheNom' =>'%'.$rechercheNom.'%',
-                                    ':idprod' => $Id_Prod
-                                ]);
-                            }
-
-                            $db->select("SELECT 2");
-
-                            $i=0;
-                            if(count($returnQueryGetProducts)==0){
-                                echo $htmlAucunProduitEnStock;
-                            }
-                            else{
-                                while ($i<count($returnQueryGetProducts)){
-                                    $Id_Produit = $returnQueryGetProducts[$i]["Id_Produit"];
-                                    $nomProduit = $returnQueryGetProducts[$i]["Nom_Produit"];
-                                    $typeProduit = $returnQueryGetProducts[$i]["Desc_Type_Produit"];
-                                    $prixProduit = $returnQueryGetProducts[$i]["Prix_Produit_Unitaire"];
-                                    $QteProduit = $returnQueryGetProducts[$i]["Qte_Produit"];
-                                    $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
-
-                                    if ($QteProduit>0){
-                                        echo '<div class="squareProduct" >';
-                                        echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
-                                        echo $htmlTypeDeuxPoints, $typeProduit . "<br>";
-                                        echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 100%; height: 85%;" ><br>';
-                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
-                                        echo '</div> '; 
-                                    }
-                                    $i++;
-                                }
-                            }
-                        ?>
-                    </div>
-                </div>
-                <div class="producteur">
-                    <!-- partie de droite avec les infos producteur -->
-                    <?php
-                        $returnQueryInfoProd = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;', [':Id_Prod' => $Id_Prod]);
-
-                        // recupération des paramètres de la requête qui contient 1 élément
-                        $idUti = $returnQueryInfoProd[0]["Id_Uti"];
-                        $address = $returnQueryInfoProd[0]["Adr_Uti"];
-                        $nom = $returnQueryInfoProd[0]["Nom_Uti"];
-                        $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
-                        $profession = $returnQueryInfoProd[0]["Prof_Prod"];
-                    ?>
-                    <div class="info-container">
-						<div class="img-prod">
-                        	<img class="img-test" src="img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
-						</div>
-						<div class="text-info">
-                            <?php
-                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address.'</br></br>';
-                            ?>
+                                <input class="btn btn-light" type="submit" value="<?php echo $htmlRechercher?>">
+                            </form>
                         </div>
                     </div>
-                    
-                    
-                    <?php
-                    //bloquer les 2 boutons pour les visiteurs non connectés
-                    if (isset($_SESSION["Id_Uti"])  and $idUti!=$_SESSION["Id_Uti"]){
-                    ?>
-                    <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                    <br>
-                    <?php 
-                    }?>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-lg-10">
+            <?php require "nav.php";?>
+            <div class="container-fluid my-3">
+                
+            <form method="get" action="insert_commande.php">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
 
-
-                    <?php
-                        if (isset($address)) {
-                            $address = str_replace(" ", "+", $address);
-                    ?>
-                    <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
-                        width="100%" height="100%" 
-                    ></iframe>
-                    <?php } 
-
-                    if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]){
-                    ?>
-                <br>
-                <button type="submit"><?php echo $htmlPasserCommande; ?></button>
-                <?php }?>
-            </form>
-                </div>
-            </div>
-
-
-
-            <div class="basDePage">
-                <form method="post">
-                    <input type="submit" value="<?php echo $htmlSignalerDys?>" class="lienPopup">
-                    <input type="hidden" name="popup" value="contact_admin">
-				</form>
-                <form method="post">
-                        <input type="submit" value="<?php echo $htmlCGU?>" class="lienPopup">
-                        <input type="hidden" name="popup" value="cgu">
-				</form>
+                <!-- exemple de page producteur -->
+                 <div class="row g-3">
+                    <div class="col-12 col-md-6 col-lg-4 order-md-2">
+                        <div class="d-flex flex-column bg-light rounded p-3 gap-2">
+                            <?php 
+                                $returnQueryInfoProd = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Adr_Uti, Prenom_Uti, Nom_Uti, Prof_Prod FROM UTILISATEUR INNER JOIN PRODUCTEUR ON UTILISATEUR.Id_Uti = PRODUCTEUR.Id_Uti WHERE PRODUCTEUR.Id_Prod= :Id_Prod ;', [':Id_Prod' => $Id_Prod]); 
+                                // recupération des paramètres de la requête qui contient 1 élément
+                                $idUti = $returnQueryInfoProd[0]["Id_Uti"];
+                                $address = $returnQueryInfoProd[0]["Adr_Uti"];
+                                $nom = $returnQueryInfoProd[0]["Nom_Uti"];
+                                $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
+                                $profession = $returnQueryInfoProd[0]["Prof_Prod"];
+                            ?>
+                            <img src="img_producteur/<?php echo $idUti ?>.png" class="w-100" alt="">
+                            <h1><?php echo $prenom.' '.mb_strtoupper($nom) ?></h1>
+                            <span class="badge rounded-pill text-bg-success"><?php echo $profession ?></span>
+                            <p><i class="bi bi-geo-alt-fill text-success me-2"></i><?php echo $address ?></p>
+                            <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address ?>&output=embed" width="100%" height="100%">
+                            </iframe>
+                            <?php if(isset($returnQueryGetProducts)): ?>
+                                <?php if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]): ?>
+                                    <input type="button" class="btn btn-outline-success" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                                    <input type="hidden" name="Id_Prod" value="<?php echo $idUti ?>">
+                                    <input type="submit" class="btn btn-success"><?php echo $htmlPasserCommande; ?></input>
+                                    
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-8">
+                        <div class="d-flex flex-column">
+                            <h2><?php echo $htmlProduitsProposesDeuxPoints; ?></h2>
+                            
+                            <?php if (isset($returnQueryGetProducts) && count($returnQueryGetProducts) > 0): ?>
+                                <div class="row g-3">
+                                    <?php foreach ($returnQueryGetProducts as $produit): ?>
+                                        <div class="col-12 col-lg-6 col-xl-4">
+                                            <div class="card h-100">
+                                                <img src="img_produit/<?php echo $produit["Id_Produit"] ?>.png" class="card-img-top object-fit-cover" style="height: 25vh; min-height: 250px;" alt="image produit">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $produit["Nom_Produit"] ?></h5>
+                                                    <p class="card-text"><i class="bi bi-box-seam-fill text-success me-2"></i><?php echo $produit["Desc_Type_Produit"] ?></p>
+                                                    <p class="card-text"><i class="bi bi-tag-fill text-success me-2"></i><?php echo $produit["Prix_Produit_Unitaire"] ?> €/Kg</p>
+                                                    
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="bi bi-basket2-fill text-success"></i></span>
+                                                        <input type="number" name="<?php echo $produit['Id_Produit'] ?>" placeholder="max : <?php echo $produit["Qte_Produit"] ?>" min="1" max="<?php echo $produit["Qte_Produit"] ?>" class="form-control" <?php if($produit["Qte_Produit"]==0) echo 'disabled'; ?> >
+                                                        <span class="input-group-text">Kg</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php else: ?>
+                                    <p><?php echo $htmlAucunProduitEnStock; ?></p>
+                            <?php endif; ?>
+                        </div>
+                        
+                    </div>
+                 </div>
+            </form>     
             </div>
         </div>
     </div>
+    </main>
+    <footer class="bg-light d-flex justify-content-center align-items-center">
+        <form method="post">
+            <input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
+            <input type="hidden" name="popup" value="contact_admin">
+        </form>
+        <form method="post">
+            <input type="submit" value="CGU" class="lienPopup">
+            <input type="hidden" name="popup" value="cgu">
+        </form>
+    </footer>
     <?php require "popups/gestion_popups.php";?>
     <script>
         document.querySelector('form[action="insert_commande.php"]').addEventListener('submit', function(event) {
@@ -313,5 +232,7 @@
             }
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
