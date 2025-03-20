@@ -139,6 +139,7 @@
             <div class="container-fluid my-3">
                 
             <form method="get" action="insert_commande.php">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
 
                 <!-- exemple de page producteur -->
                  <div class="row g-3">
@@ -186,7 +187,7 @@
                                                     
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="bi bi-basket2-fill text-success"></i></span>
-                                                        <input type="number" placeholder="max : <?php echo $produit["Qte_Produit"] ?>" min="1" max="<?php echo $produit["Qte_Produit"] ?>" class="form-control">
+                                                        <input type="number" placeholder="max : <?php echo $produit["Qte_Produit"] ?>" min="1" max="<?php echo $produit["Qte_Produit"] ?>" class="form-control" <?php if($produit["Qte_Produit"]==0) echo 'disabled'; ?> >
                                                         <span class="input-group-text">Kg</span>
                                                     </div>
                                                 </div>
