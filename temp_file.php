@@ -126,7 +126,7 @@ require "language.php" ;
                                 </tbody>
 
                 <?php
-						} ?>
+						} } ?>
 
 
 
