@@ -84,6 +84,7 @@ if(!isset($_SESSION)){
 
                                 echo '<h2 class="text-center"> Producteurs : </h2>';
 
+
                                 foreach ($result as $row) {
                                     echo '<div class="squarePanelAdmin">';
                                     echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
