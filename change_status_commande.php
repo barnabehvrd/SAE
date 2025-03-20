@@ -22,7 +22,7 @@ $db = new database();
             'Id_Commande' => $Id_Commande
           ]);
 
-        $returnQueryGetProduitCommande = $db->query('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes  WHERE Id_Commande = :Id_Commande', [
+        $returnQueryGetProduitCommande = $db->select('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes  WHERE Id_Commande = :Id_Commande', [
           'Id_Commande' => $Id_Commande
         ]);
 
@@ -50,12 +50,6 @@ $db = new database();
           'Id_Commande' => $Id_Commande
         ]);
 
-        /*echo '<br>';
-        echo $updateCommande;
-        echo '<br>';
-        echo $Id_Statut;
-        echo '<br>';
-        echo $Id_Commande;*/
       }
     header('Location: delivery.php?');
 ?>

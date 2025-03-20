@@ -47,6 +47,7 @@ $utilisateur=$_SESSION["Id_Uti"];
                                     <option value="0" <?php if($filtreCategorie==0) echo 'selected="selected"';?>>Tout</option>
                                     <option value="1" <?php if($filtreCategorie==1) echo 'selected="selected"';?>>En cours</option>
                                     <option value="2" <?php if($filtreCategorie==2) echo 'selected="selected"';?>>Prête</option>
+                                    <option value="3" <?php if($filtreCategorie==3) echo 'selected="selected"';?>>Annulée</option>
                                     <option value="4" <?php if($filtreCategorie==4) echo 'selected="selected"';?>>Livrée</option>
                                 </select>
                             </div>
@@ -114,7 +115,13 @@ $utilisateur=$_SESSION["Id_Uti"];
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;?></h5>
-                            <p class="card-text"><?php echo $Desc_Statut;?></p>
+                            <p class="card-text">
+                            <p class="card-text"><span class="badge rounded-pill text-bg-<?php
+                                if($Id_Statut == 1) echo 'primary';
+                                elseif($Id_Statut == 2) echo 'warning';
+                                elseif($Id_Statut == 3) echo 'danger';
+                                elseif($Id_Statut == 4) echo 'success';
+                                ?>"><?php echo $Desc_Statut; ?></span></p>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -153,7 +160,7 @@ $utilisateur=$_SESSION["Id_Uti"];
                                 <input class="btn btn-success" type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
                                 <form action="delete_commande.php" method="post">
                                     <input type="hidden" name="deleteValeur" value="<?php echo $Id_Commande;?>">
-                                    <button type="submit" class="btn btn-danger">Annuler la commande</button>
+                                    <button type="submit" class="btn btn-danger" <?php if ($Id_Statut != 1) echo "disabled" ?> >Annuler la commande</button>
                                 </form>
                             </div>
                         </div>

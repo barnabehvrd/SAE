@@ -9,8 +9,8 @@ if(!isset($_SESSION)){
     $db = new database();
 
     $recherche = "";
-    if (isset($_POST['recherche'])) {
-        $recherche = $_POST['recherche'];
+    if (isset($_GET['recherche'])) {
+        $recherche = $_GET['recherche'];
     }
 
 ?>
@@ -33,10 +33,10 @@ if(!isset($_SESSION)){
             <nav id="sidebar" class="h-100 flex-column align-items-stretch bg-success">
                 <img class="logo d-none d-md-block" href="index.php" src="img/logo.png">
                 <!-- code -->
-                <form method="post">
+                <form method="get" action="panel_admin.php">
                     <!-- Recherche -->
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="button-addon2" value="<?php echo $recherche ?>" name="recherche">
                         <button class="btn btn-outline-light" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
                 </form>
             </nav>
@@ -51,7 +51,11 @@ if(!isset($_SESSION)){
                     <div class="row g-3">
 
                             <?php
-                            $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
+                            // On remplace les espaces par des % pour la recherche
+                            $searchString = '%' . str_replace(' ', '%', $recherche) . '%';
+
+                            $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti AND (CONCAT(UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti) LIKE :search OR CONCAT(UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti) LIKE :search);',
+                                ['search' => $searchString]);
 
                             if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
                                 foreach ($result as $row) {
@@ -95,6 +99,8 @@ if(!isset($_SESSION)){
                                     </div>
                         <?php
                                 }
+                            } elseif ($recherche != "") {
+                                echo "<p class='text-center'>Aucun résultat n'a été trouvé</p>";
                             }
                             ?>
                     </div>
@@ -107,7 +113,9 @@ if(!isset($_SESSION)){
                     <div class="row g-3">
 
                         <?php
-                        $result = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;');
+
+                        $result = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0 AND (CONCAT(UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti) LIKE :search OR CONCAT(UTILISATEUR.Nom_Uti, UTILISATEUR.Prenom_Uti) LIKE :search);',
+                            ['search' => $searchString]);
 
                         if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
                             foreach ($result as $row) {
@@ -150,6 +158,8 @@ if(!isset($_SESSION)){
                                 </div>
                                 <?php
                             }
+                        } elseif ($recherche != "") {
+                            echo "<p class='text-center'>Aucun résultat n'a été trouvé</p>";
                         }
                         ?>
                     </div>
