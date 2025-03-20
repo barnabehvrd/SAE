@@ -172,10 +172,11 @@ if(!isset($_SESSION)){
                                         $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
                                 ?>
 
-                                <?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?>
+                                <p class="text-light"><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?></p>
 
                                 <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
                                 <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
+                                <p class="text-light">
                                 <script>
                                     function AfficheRange2(newVal) {
                                         var monCurseurKm = document.getElementById("monCurseurKm");
@@ -186,7 +187,7 @@ if(!isset($_SESSION)){
                                         }
                                     }
                                 </script>
-                                <?php echo $htmlKm?>
+                                <?php echo $htmlKm?> </p>
                                 <?php
 
                                     }
