@@ -146,15 +146,16 @@ $utilisateur=$_SESSION["Id_Uti"];
                                             <td><strong><?php echo number_format($total, 2, ',', ' ').' €';?></strong></td>
                                         </tr>
 
-                                    <input class="btn btn-success" type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                                    <form action="delete_commande.php" method="post">
-                                        <input type="hidden" name="deleteValeur" value="<?php echo $Id_Commande;?>">
-
-                                        <button type="submit" class="btn btn-warning">Annuler la commande</button>
-                                    </form>
-
                                 </tbody>
                             </table>
+
+                            <div class="d-flex gap-2">
+                                <input class="btn btn-success" type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                                <form action="delete_commande.php" method="post">
+                                    <input type="hidden" name="deleteValeur" value="<?php echo $Id_Commande;?>">
+                                    <button type="submit" class="btn btn-danger">Annuler la commande</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
