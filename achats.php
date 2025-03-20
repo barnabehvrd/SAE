@@ -119,10 +119,6 @@ if(!isset($_SESSION)){
             <?php
 				$query='SELECT PRODUCTEUR.Id_Uti, Desc_Statut, Id_Commande, Nom_Uti, Prenom_Uti, Adr_Uti, COMMANDE.Id_Statut FROM COMMANDE INNER JOIN PRODUCTEUR ON COMMANDE.Id_Prod=PRODUCTEUR.Id_Prod INNER JOIN info_producteur ON COMMANDE.Id_Prod=info_producteur.Id_Prod INNER JOIN STATUT ON COMMANDE.Id_Statut=STATUT.Id_Statut WHERE COMMANDE.Id_Uti= :utilisateur';
 
-                echo "======================";
-                echo $filtreCategorie;
-                echo "======================";
-
                 if ($filtreCategorie!=0){
 					$query=$query.' AND COMMANDE.Id_Statut= :filtreCategorie ;';
 
@@ -170,7 +166,7 @@ if(!isset($_SESSION)){
 						$iterateurProduit=0;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
-						if ($nbProduit>0 && $Id_Statut != 3){
+						if ($nbProduit>0){
 							echo '<div class="commande" >';
 							echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
 							echo '</br>';
@@ -205,7 +201,7 @@ if(!isset($_SESSION)){
 							$iterateurProduit++;
 						}
                         $iterateurCommande++;
-						if ($nbProduit>0 && $Id_Statut != 3) {
+						if ($nbProduit>0) {
 							echo '<div class="aDroite">'.$htmlTotalDeuxPoints, $total.'€</div>';
                             echo '<br> '; 
 							echo '</div> '; 
