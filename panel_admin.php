@@ -163,9 +163,36 @@ if(!isset($_SESSION)){
                                         <div class="card">
                                             <div class="card-body">
                                                 <h2 class="card-title"><?php  echo $row['Prenom_Uti'] . ' ' . $row['Nom_Uti'] ?></h2>
-                                                <span class="badge rounded-pill text-bg-success mb-3">Métier</span>
-                                                <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
-                                                <a href="#" class="btn btn-success">Consulter</a>
+                                                <span class="badge rounded-pill text-bg-success mb-3"><?php echo $row['Prof_Prod'] ?> </span>
+                                                <p class="card-text"><i class="bi bi-at text-success me-2"></i><?php echo $row['Mail_Uti'] ?></p>
+                                                <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i><?php echo $row['Adr_Uti'] ?></p>
+                                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-<?php echo $row["Id_Uti"] ?>">
+                                                      Supprimer le compte
+                                                    </button> <br>
+
+                                                    <!-- Modal -->
+                                                   <div class="modal fade" id="modal-delete-user-<?php echo $row["Id_Uti"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                      <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                 <div class="modal-header">
+                                                                       <h1 class="modal-title fs-5" id="exampleModalLabel">Supression</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                      </div>
+                                                                  <div class="modal-body">
+                                                                        Voulez-vous vraiment supprimer le compte de '.$row["Prenom_Uti"].' '.$row["Nom_Uti"].' ?
+                                                                      </div>
+                                                                  <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
+                                                                        <form method="post" action="traitements/del_acc.php">
+                                                                                <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+                                                                                <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">
+                                                                            </form>
+                                                                      </div>
+                                                                </div>
+                                                          </div>
+                                                    </div>
+                                                <!-- Fin du Modal -->
+
                                             </div>
                                         </div>
                                     </div>
