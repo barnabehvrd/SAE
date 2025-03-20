@@ -2,7 +2,7 @@
 namespace database;
 
 
-require_once 'utils/EnvLoader.php';
+require_once __DIR__ . '/../utils/EnvLoader.php';
 
 use PDO;
 use utils\EnvLoader;

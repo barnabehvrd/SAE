@@ -1,5 +1,5 @@
 <?php
-require_once '../database/database.php';
+require_once __DIR__ . '/../database/database.php';
 use database\database;
 
 $db = new database();
