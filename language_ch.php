@@ -253,4 +253,6 @@ $htmlConditionsRueDetails="街道名称必须包含0到120个字母数字字符�
 $htmlCodeIncorrect="错误的代码";
 $htmlChoisirLangue="选择一种语言";
 $htmlValider="确认";
+$htmlConsulter="查看";
+
 ?>
