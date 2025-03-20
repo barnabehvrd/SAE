@@ -11,6 +11,8 @@
             unset($_POST['deconnexion']);
             require 'traitements/log_out.php';
             $_SESSION['actualiser'] = true;
+            header("Location: index.php");
+            exit(0);
         }
         ?>
     <div class="popup">

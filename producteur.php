@@ -299,4 +299,19 @@
         </div>
     </div>
     <?php require "popups/gestion_popups.php";?>
+    <script>
+        document.querySelector('form[action="insert_commande.php"]').addEventListener('submit', function(event) {
+            let valid = false;
+            document.querySelectorAll('input[type="number"]').forEach(function(input) {
+                if (parseInt(input.value) > 0) {
+                    valid = true;
+                }
+            });
+            if (!valid) {
+                event.preventDefault();
+                alert('Veuillez sélectionner au moins un produit avec une quantité supérieure à 0.');
+            }
+        });
+    </script>
 </body>
+</html>

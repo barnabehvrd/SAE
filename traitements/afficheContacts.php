@@ -5,11 +5,9 @@ if(!isset($_SESSION)){
     require "language.php" ;
 ?>
 <?php
+
 require_once 'database/database.php';
 use database\database;
-
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 
 $msgPasConv = $htmlPasDeConversation;
