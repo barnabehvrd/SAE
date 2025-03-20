@@ -14,8 +14,10 @@ if(!isset($_SESSION)){
 ?>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+
 </head>
 <body>
 
@@ -84,6 +86,9 @@ if(!isset($_SESSION)){
                                 foreach ($result as $row) {
                                     echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
                                         <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                          Supprimer le compte
+                                        </button>
                                         <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
                                     echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
                                     echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
@@ -133,4 +138,5 @@ if(!isset($_SESSION)){
         </div>
     </div>
     <?php require "popups/gestion_popups.php";?>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
