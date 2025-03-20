@@ -93,8 +93,37 @@ require "language.php" ;
 						$nbProduit=count($returnQueryGetProduitCommande);
 
 						if ($nbProduit>0 ){ ?>
-
-                            <
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;?></h5>
+                            <p class="card-text"><?php echo $Desc_Statut;?></p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"><?php echo $htmlProduit;?></th>
+                                        <th scope="col"><?php echo $htmlQuantite;?></th>
+                                        <th scope="col"><?php echo $htmlPrix;?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($iterateurProduit<$nbProduit){
+                                        $Nom_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
+                                        $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+                                        $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
+                                        $Nom_Unite_Prix = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
+                                        $total=$total+$Prix_Produit_Unitaire*$Qte_Produit_Commande;
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $Nom_Produit;?></td>
+                                            <td><?php echo $Qte_Produit_Commande.' '.$Nom_Unite_Prix;?></td>
+                                            <td><?php echo number_format($Prix_Produit_Unitaire, 2, ',', ' ').' €';?></td>
+                                        </tr>
+                                    <?php
+                                    $iterateurProduit++;
+                                    } ?>
+                                </tbody>
 
                 <?php
 						} ?>
