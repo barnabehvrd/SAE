@@ -5,7 +5,7 @@
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
-        require 'traitements/traitement_formulaire_sign_in_admin.php';
+        require 'traitements/traitement_formulaire_sign_in_admin.php'; // il sert a quoi celui la ? on est toujours dans le else ...                Ducoup j'ai supprimé le fichier voir les commit si pb un jour
     }else{
         $_SESSION['debug'][0]=1;
         require 'traitements/traitement_formulaire_sign_in.php';
