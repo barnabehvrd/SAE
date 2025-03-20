@@ -27,9 +27,9 @@ function afficheMessage($message){
     $contenu = $message['Contenu_Msg'];
     $date = $message['Date_Msg'];
     if ($message['Emetteur']==$_SESSION['Id_Uti']){
-        echo('<div><div class="bg-success p-3 rounded justify-self-rigth"><a>'.$contenu.'</a></div></div>');
+        echo('<div><div class="bg-success w-25 p-3 rounded justify-self-rigth"><a>'.$contenu.'</a></div></div>');
     }else {
-        echo('<div><div class="bg-light p-3 rounded justify-self-left"><a>'.$contenu.'</a></div></div>');
+        echo('<div><div class="bg-light w-25 p-3 rounded justify-self-left"><a>'.$contenu.'</a></div></div>');
     }
     
 }
