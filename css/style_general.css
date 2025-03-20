@@ -17,7 +17,7 @@ main {
 .messageEnvoye{
     margin: 5px 0;
     width: 35%;
-    padding: 3px;
+    padding: 10px;
     border-radius: 5px 5px 0 5px;
     justify-self: end;
     background-color: #4caf50;
@@ -25,7 +25,7 @@ main {
 .messageRecu{
     margin: 5px 0;
     width: 35%;
-    padding: 3px;
+    padding: 10px;
     border-radius: 5px 5px 5px 0;
     justify-self: start;
     border: solid 2px #4caf50;
@@ -37,7 +37,7 @@ footer{
 }
 .scrollbox{
     overflow-y: auto;
-    height: 100%;
+    flex: 1;
     width: 100%;
 }
 
