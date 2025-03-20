@@ -149,8 +149,9 @@ if(!isset($_SESSION)){
 
                 <!-- exemple de page liste producteurs -->
 
+                <!-- Producteurs -->
                 <div class="d-flex flex-column">
-                    <h2><?php echo $htmlProducteursEnMaj?></h2>
+                    <h2 class="text-center"><?php Producteurs : ?></h2>
                     <div class="row g-3">
 
                             <?php
@@ -185,7 +186,7 @@ if(!isset($_SESSION)){
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                                                         <form method="post" action="traitements/del_acc.php">
                                                                                 <input type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
-                                                                                <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
+                                                                                <input class="btn btn-danger" type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
                                                                             </form>
                                                                       </div>
                                                                 </div>
@@ -202,6 +203,64 @@ if(!isset($_SESSION)){
                             ?>
                     </div>
                 </div>
+
+
+                <!-- Utilisateurs -->
+                <div class="d-flex flex-column">
+                    <h2 class="text-center"><?php echo $htmlUtilisateurs?></h2>
+                    <div class="row g-3">
+
+                        <?php
+                        $result = $db->select('SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;');
+
+                        if ((count($result)> 0) AND ($_SESSION["isAdmin"]==true)) {
+                            foreach ($result as $row) {
+                                ?>
+                                <div class="col-12 col-lg-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title"><?php  echo $row['Prenom_Uti'] . ' ' . $row['Nom_Uti'] ?></h3>
+                                            <p class="card-text"><i class="bi bi-at text-success me-2"></i><?php echo $row['Mail_Uti'] ?></p>
+                                            <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i><?php echo $row['Adr_Uti'] ?></p>
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-delete-user-<?php echo $row["Id_Uti"] ?>">
+                                                Supprimer le compte
+                                            </button> <br>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modal-delete-user-<?php echo $row["Id_Uti"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Supression</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Voulez-vous vraiment supprimer le compte de <?php echo $row["Prenom_Uti"] . ' ' . $row["Nom_Uti"] ?> ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                            <form method="post" action="traitements/del_acc.php">
+                                                                <input type="submit" name="submit" id="submit" value="<?php echo $htmlSupprimerCompte ?>"><br>
+                                                                <input class="btn btn-danger" type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]?>">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin du Modal -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <!-- Fin de la page liste producteurs -->
+
 
             </div>
         </div>
