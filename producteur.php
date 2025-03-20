@@ -139,6 +139,7 @@
             <div class="container-fluid my-3">
                 
             <form method="get" action="insert_commande.php">
+                <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
 
                 <!-- exemple de page producteur -->
                  <div class="row g-3">
@@ -163,7 +164,7 @@
                                 <?php if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]): ?>
                                     <input type="button" class="btn btn-outline-success" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
                                     <input type="hidden" name="Id_Prod" value="<?php echo $idUti ?>">
-                                    <button type="submit" class="btn btn-success"><?php echo $htmlPasserCommande; ?></button>
+                                    <input type="submit" class="btn btn-success"><?php echo $htmlPasserCommande; ?></input>
                                     
                                 <?php endif; ?>
                             <?php endif; ?>
@@ -186,7 +187,7 @@
                                                     
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="bi bi-basket2-fill text-success"></i></span>
-                                                        <input type="number" placeholder="max : <?php echo $produit["Qte_Produit"] ?>" min="1" max="<?php echo $produit["Qte_Produit"] ?>" class="form-control">
+                                                        <input type="number" name="<?php echo $produit['Id_Produit'] ?>" placeholder="max : <?php echo $produit["Qte_Produit"] ?>" min="1" max="<?php echo $produit["Qte_Produit"] ?>" class="form-control" <?php if($produit["Qte_Produit"]==0) echo 'disabled'; ?> >
                                                         <span class="input-group-text">Kg</span>
                                                     </div>
                                                 </div>
@@ -217,5 +218,21 @@
         </form>
     </footer>
     <?php require "popups/gestion_popups.php";?>
+    <script>
+        document.querySelector('form[action="insert_commande.php"]').addEventListener('submit', function(event) {
+            let valid = false;
+            document.querySelectorAll('input[type="number"]').forEach(function(input) {
+                if (parseInt(input.value) > 0) {
+                    valid = true;
+                }
+            });
+            if (!valid) {
+                event.preventDefault();
+                alert('Veuillez sélectionner au moins un produit avec une quantité supérieure à 0.');
+            }
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>

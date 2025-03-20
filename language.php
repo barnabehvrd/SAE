@@ -1,41 +1,26 @@
 <?php
 if(!isset($_SESSION)){
-        session_start();
-        }
- 
+    session_start();
+}
+
+$languageFiles = [
+    'en' => "language_en.php",
+    'es' => "language_es.php",
+    'al' => "language_al.php",
+    'ru' => "language_ru.php",
+    'ch' => "language_ch.php"
+];
+
 if (isset($_POST['language'])) {
     $_SESSION["language"] = $_POST['language'];
 
-} 
-    if (isset($_SESSION["language"])) {
-    switch ($_SESSION["language"]) {
+    header("Location: index.php");
+    exit;
+}
 
-        case 'en':
-            require "language_en.php" ;
-            break;
+$selectedLanguage = $_SESSION["language"] ?? 'fr'; // version php 5.6 $selectedLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : 'fr';
+$languageFile = $languageFiles[$selectedLanguage] ?? "language_fr.php"; // version php 5.6 $languageFile = isset($languageFiles[$selectedLanguage]) ? $languageFiles[$selectedLanguage] : "language_fr.php";
 
-        case 'es':
-            require "language_es.php" ;
-            break;
 
-        case 'al':
-            require "language_al.php" ;
-            break;
-    
-        case 'ru':
-            require "language_ru.php" ;
-            break;
-        case 'ch':
-            require "language_ch.php" ;
-            break;
-        
-        default:
-        require "language_fr.php" ;
-            break;
-        }
-    }else {
-        require "language_fr.php" ;
- 
-    }
-
+require $languageFile;
 ?>

@@ -45,7 +45,7 @@
                 <div class="d-flex flex-column justify-content-between flex-grow-1">
                     <div>
                         <h1>
-                            <?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
+                            <?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'Veuillez sélectionner une conversation';} ?>
                             <?php 
                             require "traitements/afficherInterlocuteur.php";
                             ?>

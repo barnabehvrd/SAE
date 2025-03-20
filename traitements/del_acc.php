@@ -1,6 +1,6 @@
 <?php
 
-require_once 'database/database.php';
+require_once __DIR__ . '/../database/database.php';
 use database\database;
 
 $db = new database();
@@ -70,7 +70,7 @@ if (isset($_POST["Id_Uti"])){
           $iterateurProduit++;
       }
 
-        $delCommande = $db->query('DELETE FROM COMMANDES WHERE Id_Uti = :utilisateur', array('utilisateur' => $utilisateur));
+        $delCommande = $db->query('DELETE FROM COMMANDE WHERE Id_Uti = :utilisateur', array('utilisateur' => $utilisateur));
 
 
         $delCommande=$db->query('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd', array('IdProd' => $IdProd));
