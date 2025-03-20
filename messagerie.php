@@ -58,7 +58,7 @@
                         ?>
                     </div>
                     <div class="d-flex w-100 ">
-                        <form method="post" class="w-100" id="zoneDEnvoi">
+                        <form method="post" class="w-100">
                             <div class="input-group">
                                 <input type="text" name="content" id="zoneDeTexte" class="form-control <?php if ($formDisabled) { echo 'disabled';} ?>" placeholder="Message..." <?php if ($formDisabled) { echo 'disabled';} ?>>
                                 <button class="btn btn-success" type="submit" value="" id="boutonEnvoyerMessage"><i class="bi bi-send-fill"></i></button>
