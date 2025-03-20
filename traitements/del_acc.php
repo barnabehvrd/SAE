@@ -70,7 +70,7 @@ if (isset($_POST["Id_Uti"])){
           $iterateurProduit++;
       }
 
-        $delCommande = $db->query('DELETE FROM COMMANDES WHERE Id_Uti = :utilisateur', array('utilisateur' => $utilisateur));
+        $delCommande = $db->query('DELETE FROM COMMANDE WHERE Id_Uti = :utilisateur', array('utilisateur' => $utilisateur));
 
 
         $delCommande=$db->query('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd', array('IdProd' => $IdProd));
