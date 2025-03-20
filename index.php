@@ -174,7 +174,7 @@ if(!isset($_SESSION)){
 
                                 <p class="text-light"><?php echo $htmlAutourDeChezMoi.' ('.$Adr_Uti_En_Cours.')';?></p>
 
-                                <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                                <input name="rayon" class="form-range" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
                                 <span class="text-light" id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?><?php echo $htmlKm?></span>
                                 <script>
                                     function AfficheRange2(newVal) {
