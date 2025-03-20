@@ -15,8 +15,6 @@ if (isset($_GET["categorie"])==true){
     $filtreCategorie=htmlspecialchars($_GET["categorie"]);
 }
 
-echo "======================";
-echo $filtreCategorie;
 
 $utilisateur=$_SESSION["Id_Uti"];
 ?>
