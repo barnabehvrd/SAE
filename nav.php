@@ -23,7 +23,7 @@
             <a class="nav-link" href="produits.php"><?php echo $htmlProduits?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="commandes.php"><?php echo $htmlCommandes?></a>
+            <a class="nav-link" href="delivery.php"><?php echo $htmlCommandes?></a>
           </li>
         <?php endif; ?>
         <?php if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)): ?>
