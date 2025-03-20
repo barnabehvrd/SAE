@@ -152,7 +152,7 @@ if(!isset($_SESSION)){
                 <div class="d-flex flex-column">
                     <h2><?php echo $htmlProducteursEnMaj?></h2>
                     <div class="row g-3">
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-3">
                             <?php
                             $result = $db->select('SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti');
 
@@ -161,13 +161,11 @@ if(!isset($_SESSION)){
                                 ?>
                                 <div class="card">
                                     <div class="row g-0">
-                                        <div class="col-2">
                                             <div class="card-body">
                                                 <h2 class="card-title"><?php  echo $row['Prenom_Uti'] . ' ' . $row['Nom_Uti'] ?></h2>
                                                 <span class="badge rounded-pill text-bg-success mb-3">Métier</span>
                                                 <p class="card-text"><i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse du producteur, XXXXX</p>
                                                 <a href="#" class="btn btn-success">Consulter</a>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
