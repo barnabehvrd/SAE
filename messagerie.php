@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" type="text/css" href="css/messagerie.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -57,9 +58,9 @@
                         ?>
                     </div>
                     <div class="d-flex w-100 ">
-                        <form method="post" class="w-100">
+                        <form method="post" class="w-100" id="zoneDEnvoi">
                             <div class="input-group">
-                                <input type="text" name="content" id="zoneDeTexte" class="form-control" placeholder="Message...">
+                                <input type="text" name="content" id="zoneDeTexte" class="form-control <?php if ($formDisabled) { echo 'disabled';} ?>" placeholder="Message..." <?php if ($formDisabled) { echo 'disabled';} ?>>
                                 <button class="btn btn-success" type="submit" value="" id="boutonEnvoyerMessage"><i class="bi bi-send-fill"></i></button>
                             </div>
                         </form>
