@@ -139,7 +139,7 @@ foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
     $pdf->Cell(40, 8, $produit[1].' euros', 1); 
     $pdf->Cell(30, 8, $produit[2], 1);
-    $pdf->Cell(40, 8, number_format(floatval($produit[1]),2) * number_format(floatval($produit[2]),2).' euros', 1);
+    $pdf->Cell(40, 8, number_format(floatval($produit[1]) * number_format(floatval($produit[2])),2).' euros', 1);
     $pdf->Ln();
 }
 
