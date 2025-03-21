@@ -19,7 +19,7 @@
 
 
 
-    $returnQueryIdProd = $db->query('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;', [
+    $returnQueryIdProd = $db->select('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;', [
         'Id_Uti' => $Id_Uti
     ]);
 
