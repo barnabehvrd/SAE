@@ -128,7 +128,7 @@ while ($iterateurProduit<$nbProduit){
     $Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
     $Prix_Produit_Unitaire=$returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
     array_push($produits, [$Nom_Produit, $Prix_Produit_Unitaire, $Qte_Produit_Commande.' '.$Nom_Unite_Prix]);
-    $total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
+    $total=number_format($total+floatval($Prix_Produit_Unitaire)*floatval($Qte_Produit_Commande),2);
     $iterateurProduit++;
 }
 
@@ -139,7 +139,7 @@ foreach ($produits as $produit) {
     $pdf->Cell(40, 8, $produit[0], 1);
     $pdf->Cell(40, 8, $produit[1].' euros', 1); 
     $pdf->Cell(30, 8, $produit[2], 1);
-    $pdf->Cell(40, 8, intval($produit[1]) * intval($produit[2]).' euros', 1); 
+    $pdf->Cell(40, 8, number_format(floatval($produit[1]) * number_format(floatval($produit[2])),2).' euros', 1);
     $pdf->Ln();
 }
 

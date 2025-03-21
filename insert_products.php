@@ -19,7 +19,7 @@
 
 
 
-    $returnQueryIdProd = $db->query('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;', [
+    $returnQueryIdProd = $db->select('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;', [
         'Id_Uti' => $Id_Uti
     ]);
 
@@ -39,10 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_produit/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "inf2pj02";
-        $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
 
         // Obtenir l'extension du fichie
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
@@ -50,8 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Utiliser l'extension dans le nouveau nom du fichier
         $newFileName = $nbProduits . '.' . $extension;
 
-            // Créer le chemin complet du fichier de destination
-            $newFileName = $nbProduits . '.' . $extension;
             $targetPath = $targetDir . $newFileName;
 
             // Vérifier si le fichier existe avant de le supprimer
