@@ -3,8 +3,7 @@
 require_once 'database/database.php';
 use database\database;
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 
 // Définir les variables manquantes
 $htmlAdresseMailInvalide = "Adresse e-mail invalide.";
@@ -78,7 +77,7 @@ try {
                 }
 
                 $_SESSION['erreur'] = '';
-                header('Location: index.php');
+                echo '<script>window.location.href = "index.php";</script>';
                 exit(0); // pk ca quitte pas la pop up ? ils ont fait quoi avec leur code ?
             } else {
                 // Mot de passe incorrect, incrémenter le compteur

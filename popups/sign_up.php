@@ -6,9 +6,7 @@ if (isset($_POST['formClicked'])){
     require 'traitements/traitement_formulaire_sign_up.php';
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
-    header("Location: index.php");
-    exit(0);
-}
+    echo '<script type="text/javascript">window.location.href="index.php";</script>';}
 ?>
 <div class="popup">
 <div class="contenuPopup">

@@ -18,9 +18,5 @@ if (isset($_POST['new_nom'], $_POST['new_prenom'], $_POST['rue'], $_POST['code']
             'pwd' => $hashed_password, // Utilisation du mot de passe hashé
             'mail' => $_SESSION['Mail_Uti']
         ));
-
-    header('Location: ../index.php');
-} else {
-    header('Location: ../index.php');
-}
+    } header('Location: ../index.php');
 ?>

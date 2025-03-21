@@ -11,15 +11,13 @@
             unset($_POST['deconnexion']);
             require 'traitements/log_out.php';
             $_SESSION['actualiser'] = true;
-            header("Location: index.php");
-            exit(0);
-        }
+            echo '<script type="text/javascript">window.location.href="index.php";</script>';        }
         ?>
     <div class="popup">
     <div class="contenuPopup">
         <div style="display:flex;justify-content:space-between;">
             <form method="post" >
-				<input class="lienPopup" type="submit" value="<?php echo $htmlSeDeconnecter?>" name="formClicked">
+                <input class="lienPopup" type="submit" value="<?php echo $htmlSeDeconnecter?>" name="formClicked" onclick="window.location.href='index.php';">
                 <input type="hidden" value='info_perso' name="popup">
                 <input type="hidden" name="deconnexion">
 		    </form>
@@ -75,10 +73,10 @@
                     </div>
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
-                <a href="traitements/del_acc.php"><button><?php echo $htmlSupprimerCompte?></button></a>
+                <a href="traitements/del_acc.php"><button class="btn btn-danger"><?php echo $htmlSupprimerCompte?></button></a>
                 
                 <?php if((isset($_SESSION['isProd']) and $_SESSION['isProd'])){?> 
-                <a href="./addProfilPicture.php"><button><?php echo 'ajouter une photo de profil'?></button></a>
+                <a href="./addProfilPicture.php"><button class="btn btn-success"><?php echo 'ajouter une photo de profil'?></button></a>
                 <?php } ?>
                 <?php
             }
